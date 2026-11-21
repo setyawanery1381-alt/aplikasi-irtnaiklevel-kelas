@@ -1,0 +1,8 @@
+node_modules/
+.vercel
+scratch/
+scratch_backup_animasi/
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db

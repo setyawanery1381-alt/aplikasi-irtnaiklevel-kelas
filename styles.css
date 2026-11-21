@@ -1,0 +1,950 @@
+
+/* =========================================================================
+   EXACT FONT MATCH (PLUS JAKARTA SANS ACROSS ALL WEBSITE & LOGIN MODAL)
+   ========================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Fraunces:wght@600;700;800&family=Fredoka:wght@600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lato:wght@400;700&family=Manrope:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Poppins:wght@500;600;700&family=Raleway:wght@600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:wght@400;600&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&display=swap');
+
+html, body, button, input, select, textarea, p, a, span, label, div {
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+}
+
+.font-heading, h1, h2, h3, .dynamic-brand-name {
+  font-family: var(--font-heading, 'Fraunces', Georgia, serif);
+}
+
+.login-exact-card {
+  background-color: #111216;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.login-input-exact {
+  background-color: #17181f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.login-input-exact:focus {
+  border-color: #f59e0b;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Fraunces:wght@600;700;800&family=Fredoka:wght@600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lato:wght@400;700&family=Manrope:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Poppins:wght@500;600;700&family=Raleway:wght@600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:wght@400;600&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&display=swap');
+
+:root {
+  /* Clean Animato.id Palette (Light Mode) */
+  --bg-page: #ffffff;
+  --bg-surface: #fafafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-lilac: #f5effe;
+  --bg-lilac-subtle: #faf5ff;
+  
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --primary-active: #5b21b6;
+  --primary-glow: rgba(124, 58, 237, 0.22);
+  
+  --text-main: #18181b;
+  --text-muted: #334155;
+  --text-subtle: #475569;
+  
+  --border-light: rgba(124, 58, 237, 0.12);
+  --border-subtle: #e4e4e7;
+  --border-hairline: rgba(0, 0, 0, 0.08);
+
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html.dark {
+  /* Clean Dark Mode (Animato Pro Dark) */
+  --bg-page: #0c0c0e;
+  --bg-surface: #121216;
+  --bg-card: #17171c;
+  --bg-card-hover: #1e1e24;
+  --bg-lilac: rgba(124, 58, 237, 0.15);
+  --bg-lilac-subtle: rgba(124, 58, 237, 0.08);
+  
+  --primary: #8b5cf6;
+  --primary-hover: #7c3aed;
+  --primary-active: #6d28d9;
+  --primary-glow: rgba(139, 92, 246, 0.3);
+  
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --text-subtle: #475569;
+  
+  --border-light: rgba(139, 92, 246, 0.22);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hairline: rgba(255, 255, 255, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Headings: Clean, Proportional, Professional */
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+h1 {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+}
+
+/* Blue to Pink Gradient Text with Descender Protection (Mencegah Huruf 'g' Terpotong) */
+.blue-pink-gradient-text {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 25%, #7c3aed 55%, #ec4899 90%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  padding-bottom: 0.18em;
+  line-height: 1.22;
+}
+
+html.dark .blue-pink-gradient-text {
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 25%, #a855f7 55%, #f472b6 90%, #fb7185 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Hairline Clean Cards */
+.hairline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hairline-card:hover {
+  border-color: var(--border-light);
+  box-shadow: 0 12px 32px -4px rgba(124, 58, 237, 0.1), 0 4px 12px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
+}
+
+/* Category Photo Card (Persis Animato.id) */
+.category-photo-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  aspect-ratio: 4 / 5;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+}
+
+.category-photo-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 16px 36px -6px rgba(124, 58, 237, 0.18), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.category-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-photo-card:hover img {
+  transform: scale(1.06);
+}
+
+.category-photo-card .card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.88) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+  z-index: 2;
+}
+
+.category-plus-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.category-plus-btn:hover {
+  background: #ffffff;
+  color: #7c3aed;
+  transform: rotate(90deg) scale(1.08);
+}
+
+/* Modern Rectangular Floating Navigation Bar */
+.floating-pill-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.06), 0 2px 6px -2px rgba(0, 0, 0, 0.04);
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.dark .floating-pill-nav {
+  background: rgba(20, 21, 28, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons */
+.animato-btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animato-btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--primary-glow);
+}
+
+.animato-btn-secondary {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animato-btn-secondary:hover {
+  background-color: var(--bg-lilac);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Ambient Clean Glow */
+.hero-glow-animato {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, rgba(216, 180, 254, 0.06) 45%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+html.dark .hero-glow-animato {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, rgba(91, 33, 182, 0.08) 50%, transparent 75%);
+}
+
+/* Category Filter Active Pill */
+.filter-pill {
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+.filter-pill.active {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 10px var(--primary-glow);
+}
+.filter-pill:not(.active) {
+  background-color: var(--bg-card);
+  color: var(--text-muted);
+  border-color: var(--border-subtle);
+}
+.filter-pill:not(.active):hover {
+  background-color: var(--bg-lilac);
+  color: var(--primary);
+  border-color: var(--border-light);
+}
+
+/* Accordion */
+details summary::-webkit-details-marker {
+  display: none;
+}
+details[open] summary svg {
+  transform: rotate(180deg);
+}
+details summary svg {
+  transition: transform 0.25s ease;
+}
+
+/* Video Preview Screen Mockup */
+.video-preview-screen {
+  background: linear-gradient(135deg, #0e0e14 0%, #151520 50%, #1e1932 100%);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.35);
+}
+
+/* Audio wave pulse */
+@keyframes waveAnim {
+  0%, 100% { height: 6px; }
+  50% { height: 24px; }
+}
+.wave-bar {
+  animation: waveAnim 1.2s ease-in-out infinite;
+}
+.wave-bar:nth-child(2) { animation-delay: 0.15s; }
+.wave-bar:nth-child(3) { animation-delay: 0.3s; }
+.wave-bar:nth-child(4) { animation-delay: 0.45s; }
+.wave-bar:nth-child(5) { animation-delay: 0.2s; }
+.wave-bar:nth-child(6) { animation-delay: 0.35s; }
+
+/* Modals */
+.modal-overlay {
+  display: none !important;
+  background: rgba(12, 12, 14, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+}
+.modal-overlay.active {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.modal-container {
+  transform: scale(0.96) translateY(15px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.active .modal-container {
+  transform: scale(1) translateY(0);
+}
+
+/* Floating Edit Button (Hidden by default as requested) */
+.floating-editor-btn {
+  display: none !important;
+}
+
+/* Video Responsive Wrapper */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: #000000;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Member Material Card */
+.member-tool-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.member-tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px -10px var(--primary-glow);
+  border-color: var(--primary);
+}
+
+/* Portal Admin Dashboard Styles (Matching sangcreator.web.id/portal) */
+.portal-admin-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #0f1015;
+  color: #e2e8f0;
+  overflow: hidden;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.portal-admin-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.portal-tab-pane.hidden {
+  display: none !important;
+}
+
+.portal-sidebar {
+  width: 260px;
+  background: #15171e;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.portal-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #94a3b8;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.portal-nav-item:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+.portal-nav-item.active {
+  color: #ffffff;
+  background: #251b38;
+  border: 1px solid #7c3aed;
+  font-weight: 600;
+}
+
+.portal-main-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #0e0f14;
+}
+
+/* Custom Switch for Status */
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #334155;
+  transition: .3s;
+  border-radius: 24px;
+}
+.switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+input:checked + .switch-slider {
+  background-color: #2563eb;
+}
+input:checked + .switch-slider:before {
+  transform: translateX(20px);
+}
+
+/* Toast */
+#toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10000;
+}
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Mobile Responsive 2-Columns for Category Cards */
+@media (max-width: 639px) {
+  .category-photo-card {
+    border-radius: 18px;
+    aspect-ratio: 1 / 1.18;
+  }
+  .category-photo-card .card-overlay {
+    padding: 10px;
+  }
+  .category-plus-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+  }
+}
+
+/* Ratio 9:16 & 1:1 Styling (Persis Animato.id) */
+.masonry-categories-container {
+  column-count: 2;
+  column-gap: 12px;
+}
+@media (min-width: 640px) {
+  .masonry-categories-container {
+    column-count: 2;
+    column-gap: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  .masonry-categories-container {
+    column-count: 3;
+    column-gap: 20px;
+  }
+}
+
+.category-photo-card {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  display: block;
+  width: 100%;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+}
+@media (min-width: 768px) {
+  .category-photo-card {
+    border-radius: 24px;
+    margin-bottom: 20px;
+  }
+}
+@media (min-width: 1280px) {
+  .category-photo-card {
+    margin-bottom: 24px;
+  }
+}
+
+/* Aspect Ratios */
+.category-photo-card.ratio-9-16 {
+  aspect-ratio: 9 / 16;
+}
+.category-photo-card.ratio-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 639px) {
+  .masonry-categories-container {
+    column-count: 2;
+    column-gap: 10px;
+  }
+  .category-photo-card {
+    margin-bottom: 10px;
+    border-radius: 16px;
+  }
+  .category-photo-card.ratio-9-16 {
+    aspect-ratio: 9 / 15;
+  }
+  .category-photo-card.ratio-1-1 {
+    aspect-ratio: 1 / 1;
+  }
+  .category-photo-card .card-overlay {
+    padding: 10px !important;
+  }
+  .category-plus-btn {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 13px !important;
+  }
+}
+
+
+/* =========================================================================
+   PORTAL ADMIN RESPONSIVE (MOBILE & IPAD / TABLET OPTIMIZATION)
+   Fix for squished sidebar & tiny content on mobile / iPad (Foto 2)
+   ========================================================================= */
+@media (max-width: 1023px) {
+  .portal-admin-overlay {
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .portal-sidebar {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 12px 16px !important;
+    flex-shrink: 0 !important;
+    background: #14151c !important;
+  }
+
+  .portal-sidebar-brand {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 10px !important;
+  }
+
+  .portal-sidebar-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 8px !important;
+    padding-bottom: 4px !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .portal-sidebar-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portal-nav-item {
+    white-space: nowrap !important;
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    border-radius: 12px !important;
+    flex-shrink: 0 !important;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .portal-nav-item.active {
+    background: #7c3aed !important;
+    border-color: #9333ea !important;
+    color: #ffffff !important;
+  }
+
+  .portal-sidebar-footer {
+    display: none !important;
+  }
+
+  .portal-main-content {
+    width: 100% !important;
+    flex: 1 !important;
+    padding: 16px 14px !important;
+    overflow-x: hidden !important;
+    min-width: 0 !important;
+  }
+
+  /* Table Horizontal Scrolling on Mobile & iPad */
+  .portal-table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* iPad / Tablet */
+  .portal-nav-item {
+    font-size: 13px !important;
+    padding: 10px 16px !important;
+  }
+  .portal-main-content {
+    padding: 24px 20px !important;
+  }
+}
+
+/* Amber/Orange Button Theme matching Foto 3 (AIGO Academy / Member Login) */
+.btn-amber-orange {
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #d97706 100%);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 8px 24px -4px rgba(234, 88, 12, 0.4);
+  transition: all 0.25s ease;
+}
+.btn-amber-orange:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #ea580c 100%);
+  box-shadow: 0 12px 28px -4px rgba(234, 88, 12, 0.5);
+  transform: translateY(-1px);
+}
+.btn-amber-orange:active {
+  transform: scale(0.98);
+}
+
+/* Clean Brand Logo Presentation (Anti Blue Line & Seamless Responsive Display) */
+/* Clean Circular Brand Logo Presentation (Full Box & Circle Shape) */
+#navBrandLogoContainer,
+#mobileDrawerLogoContainer,
+#footerBrandLogoContainer,
+#settLogoPreviewBox,
+#loginModalLogoContainer,
+#settLoginLogoPreviewBox {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  border-radius: 9999px !important;
+  overflow: hidden !important;
+}
+
+#navBrandLogoContainer img,
+#mobileDrawerLogoContainer img,
+#footerBrandLogoContainer img,
+#settLogoPreviewBox img,
+#loginModalLogoContainer img,
+#settLoginLogoPreviewBox img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 9999px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+
+/* =========================================================================
+   COMPREHENSIVE HIGH CONTRAST & WCAG AA ENFORCEMENTS (DARK & CLEAN MODES)
+   ========================================================================= */
+
+/* 1. CLEAN / LIGHT MODE (html:not(.dark)) */
+html:not(.dark) {
+  color-scheme: light;
+}
+
+html:not(.dark) body {
+  background-color: var(--bg-page, #ffffff) !important;
+  color: var(--text-main, #0f172a) !important;
+}
+
+/* Headings in Clean Mode: Jet Black & Crisp */
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) h4,
+html:not(.dark) .font-heading {
+  color: #0f172a;
+}
+
+/* Paragraphs & Descriptions in Clean Mode: Deep High-Contrast Slate */
+html:not(.dark) p:not(.text-white):not([class*="bg-"]) {
+  color: #334155;
+}
+
+/* Cards & Modals in Clean Mode */
+html:not(.dark) .hairline-card {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+}
+
+html:not(.dark) .modal-container {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Inputs & Form Controls in Clean Mode */
+html:not(.dark) input:not([type="checkbox"]):not([type="radio"]),
+html:not(.dark) select,
+html:not(.dark) textarea {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #64748b !important;
+}
+
+html:not(.dark) select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* 2. DARK MODE (html.dark) */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: var(--bg-page, #0c0c0e) !important;
+  color: var(--text-main, #f8fafc) !important;
+}
+
+/* Headings in Dark Mode: Crisp White */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark .font-heading {
+  color: #f8fafc;
+}
+
+/* Paragraphs & Descriptions in Dark Mode: High-Contrast Light Slate */
+html.dark p:not(.text-slate-900):not([class*="bg-"]) {
+  color: #cbd5e1;
+}
+
+/* Cards & Modals in Dark Mode */
+html.dark .hairline-card {
+  background-color: var(--bg-card, #16161b) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f8fafc !important;
+}
+
+html.dark .modal-container {
+  background-color: var(--bg-card, #161826) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f8fafc !important;
+}
+
+/* Inputs & Form Controls in Dark Mode */
+html.dark input:not([type="checkbox"]):not([type="radio"]),
+html.dark select,
+html.dark textarea {
+  background-color: #111219 !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #f8fafc !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.dark select option {
+  background-color: #16161b !important;
+  color: #f8fafc !important;
+}
+
+/* 3. ADAPTIVE HIGH-CONTRAST UTILITIES */
+.text-main-adaptive {
+  color: #0f172a;
+}
+html.dark .text-main-adaptive {
+  color: #f8fafc !important;
+}
+
+.text-muted-adaptive {
+  color: #334155;
+}
+html.dark .text-muted-adaptive {
+  color: #cbd5e1 !important;
+}
+
+.text-subtle-adaptive {
+  color: #475569;
+}
+html.dark .text-subtle-adaptive {
+  color: #94a3b8 !important;
+}
+
+/* Preserve White Text on Solid Colored Buttons & Badges */
+.animato-btn-primary,
+.bg-purple-600,
+.bg-emerald-600,
+.bg-rose-600,
+.bg-gradient-to-r,
+.bg-gradient-to-tr,
+.bg-gradient-to-br,
+button.text-white,
+span.text-white {
+  /* Retain high-contrast white text when over colored buttons */
+}
+
+
+/* ==========================================================================
+   DEDICATED MEMBER PORTAL MODE (HANYA MATERI SAJA)
+   Ketika member login, dashboard murni menampilkan Materi & Tools AI saja.
+   Semua seksi landing page marketing disembunyikan agar member fokus belajar.
+   ========================================================================== */
+body.member-portal-mode section:not(#materi),
+body.member-portal-mode > section:not(#materi),
+body.member-portal-mode footer:not(.member-portal-footer),
+body.member-portal-mode #checkoutModal,
+body.member-portal-mode .landing-only,
+body.member-portal-mode #navLinksContainer,
+body.member-portal-mode #navPublicActions,
+body.member-portal-mode #mobilePublicNav {
+  display: none !important;
+}
+
+body.member-portal-mode #navMemberActions,
+body.member-portal-mode #memberNavBadge,
+body.member-portal-mode #mobileMemberNav {
+  display: flex !important;
+}
+
+body.member-portal-mode #materi {
+  padding-top: 1.5rem !important;
+  padding-bottom: 5rem !important;
+  min-height: 85vh;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+#notionEmbedWrapper {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}

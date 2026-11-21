@@ -1,0 +1,18 @@
+{
+  "name": "aplikasi-irtnaiklevel-kelas",
+  "version": "1.0.0",
+  "description": "CREATOR CLASS by IRT NAIK LEVEL - Webhook Lynk.id & Automated Email Activation",
+  "main": "index.html",
+  "scripts": {
+    "test": "node scratch/test_all_scenarios.js"
+  },
+  "keywords": [
+    "irtnaiklevel",
+    "creator-class",
+    "lynk-webhook",
+    "google-apps-script"
+  ],
+  "author": "IRT NAIK LEVEL",
+  "license": "ISC"
+}
+
