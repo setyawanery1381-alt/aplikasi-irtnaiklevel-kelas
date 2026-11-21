@@ -1208,18 +1208,31 @@ const DEFAULT_COURSE_DATA = {
     "levelNum": 20,
     "name": "LEVEL 20 - CHEF ANIMASI",
     "category": "Animasi Kreatif",
-    "desc": "cara buat videonya sama dengan seperti tutorial lainnya  Tools resep1 ...",
-    "instructions": [],
+    "desc": "cara buat videonya sama dengan seperti tutorial lainnya. Dilengkapi 2 Tools AI Resep (Chef Animasi & Dapur Pintar).",
+    "instructions": [
+      "cara buat videonya sama dengan seperti tutorial lainnya",
+      "Gunakan Tools Resep 1 (Chef Animasi) untuk membuat karakter dan storyboard video masak.",
+      "Gunakan Tools Resep 2 (Dapur Pintar) untuk variasi ide resep makanan dan kue kekinian."
+    ],
     "prompts": [],
     "fullTexts": [
       "cara buat videonya sama dengan seperti tutorial lainnya ",
       "Tools resep1 ",
       "Tools resep 2"
     ],
-    "markdownPrompt": "cara buat videonya sama dengan seperti tutorial lainnya \n\nTools resep1 \n\nTools resep 2",
+    "markdownPrompt": "### LEVEL 20 - CHEF ANIMASI\n\ncara buat videonya sama dengan seperti tutorial lainnya\n\n---\n\n### 🍳 Tools Resep 1 (Chef Animasi):\nLink: https://chatgpt.com/g/g-69f2cb993cbc819191089de38b740a03-chef-animasi-irt-naik-level\n\n---\n\n### 🍰 Tools Resep 2 (Dapur Pintar - Resep Makanan & Kue):\nLink: https://chatgpt.com/g/g-69f2c708535c8191be76b709a29ebfb8-dapur-pintar-irt-naik-level-resep-makanan-kue\n\n---\n\n> Buka tools resep di atas untuk generate alur cerita, resep, dan visual chef animasi yang lucu dan menggugah selera!",
     "coverUrl": "assets/covers/lvl-20.jpg",
-    "toolUrl": "",
-    "tools": [],
+    "toolUrl": "https://chatgpt.com/g/g-69f2cb993cbc819191089de38b740a03-chef-animasi-irt-naik-level",
+    "tools": [
+      {
+        "title": "Tools Resep 1 (Chef Animasi)",
+        "url": "https://chatgpt.com/g/g-69f2cb993cbc819191089de38b740a03-chef-animasi-irt-naik-level"
+      },
+      {
+        "title": "Tools Resep 2 (Dapur Pintar)",
+        "url": "https://chatgpt.com/g/g-69f2c708535c8191be76b709a29ebfb8-dapur-pintar-irt-naik-level-resep-makanan-kue"
+      }
+    ],
     "videoUrl": "",
     "videos": []
   },

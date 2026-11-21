@@ -4445,10 +4445,17 @@ function renderMemberTools() {
             <!-- Secondary Actions: Buka Tools & Tonton Video -->
             <div class="flex items-center gap-2">
               ${hasTool ? `
+                ${toolList.length > 1 ? `
+                <button onclick="openToolPickerModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Pilihan Tools AI">
+                  <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                  <span>Buka Tools (${toolList.length})</span>
+                </button>
+              ` : `
                 <a href="${primaryToolUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 active:scale-[0.98] text-amber-300 border border-amber-500/30 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Tool AI / Custom GPT">
                   <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
                   <span>Buka Tools</span>
                 </a>
+              `}
               ` : ''}
 
               ${hasVideo ? `
@@ -6326,4 +6333,55 @@ function openDirectWhatsAppMentor() {
   const adminWa = (courseData && courseData.contact && courseData.contact.adminWaClean) || '6281319894236';
   const text = encodeURIComponent('Halo Mentor Kak Lia! Saya member Kelas Animasi AI IRT Naik Level. Saya ingin konsultasi seputar materi...');
   window.open(`https://wa.me/${adminWa}?text=${text}`, '_blank');
+}
+
+
+// =========================================================================
+// TOOL PICKER MODAL CONTROLLER (JIKA LEVEL MEMILIKI LEBIH DARI 1 TOOL)
+// =========================================================================
+function openToolPickerModal(toolId) {
+  const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA.portalTools || []);
+  const tool = tools.find(t => t.id === toolId);
+  if (!tool || !tool.tools || tool.tools.length === 0) return;
+
+  const modal = document.getElementById('toolPickerModal');
+  const titleEl = document.getElementById('tpModalTitle');
+  const listEl = document.getElementById('tpModalList');
+
+  if (titleEl) titleEl.textContent = tool.name;
+
+  if (listEl) {
+    listEl.innerHTML = tool.tools.map((tl, idx) => {
+      let cleanUrl = tl.url.trim();
+      if (!/^https?:\/\//i.test(cleanUrl)) cleanUrl = 'https://' + cleanUrl;
+      return `
+        <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-white/5 hover:bg-purple-600/20 border border-white/10 hover:border-purple-500/40 flex items-center justify-between gap-3 transition-all group cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 text-base group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-white group-hover:text-amber-300 transition-colors">
+                ${tl.title || 'Tool AI #' + (idx + 1)}
+              </h4>
+              <p class="text-[11px] text-slate-400 font-mono truncate max-w-[240px] sm:max-w-md">
+                ${cleanUrl}
+              </p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center gap-1.5 shrink-0 group-hover:bg-amber-500 group-hover:text-black transition-all">
+            <span>Buka</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </div>
+        </a>
+      `;
+    }).join('');
+  }
+
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeToolPickerModal() {
+  const modal = document.getElementById('toolPickerModal');
+  if (modal) modal.classList.add('hidden');
 }
