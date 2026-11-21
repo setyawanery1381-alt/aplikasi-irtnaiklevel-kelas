@@ -258,7 +258,9 @@ function initData() {
       if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 744.000";
 
       // Ensure portalTools has full 62 level curriculum (auto-upgrade old cached localStorage)
-      if (!courseData.portalTools || courseData.portalTools.length < 50 || !courseData.portalTools.some(t => t.id && t.id.startsWith('lvl-'))) {
+      const hasOldFallback = courseData.portalTools && courseData.portalTools.some(t => (t.videos || []).some(v => v.url && v.url.includes('XiG2enHWrLQ')));
+      const isOutdated = !courseData.portalTools || courseData.portalTools.length !== 62 || !courseData.portalTools[0] || !courseData.portalTools[0].name.includes('PEMULA') || hasOldFallback;
+      if (isOutdated) {
         courseData.portalTools = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.portalTools || []));
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
@@ -4358,11 +4360,11 @@ function renderMemberTools() {
   }
 
   container.innerHTML = filtered.map(t => {
-    const cover = t.coverUrl || 'https://www.animato.id/cinema/asmr.webp';
-    const videoList = (t.videos && t.videos.length > 0) ? t.videos : (t.videoUrl ? [{ title: 'Tutorial Utama', url: t.videoUrl }] : []);
+    const cover = t.coverUrl || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80';
+    const videoList = (t.videos && t.videos.length > 0) ? t.videos : (t.videoUrl ? [{ title: t.name, url: t.videoUrl }] : []);
     const hasVideo = videoList.length > 0;
-    const hasTool = !!t.toolUrl;
-    const videoCount = videoList.length;
+    const hasInstructions = (t.instructions && t.instructions.length > 0) || (t.fullTexts && t.fullTexts.length > 0);
+    const hasTool = !!t.toolUrl && !t.toolUrl.includes('notion.so');
 
     let cleanToolUrl = (t.toolUrl || '').trim();
     if (cleanToolUrl && !/^https?:\/\//i.test(cleanToolUrl)) {
@@ -4372,7 +4374,7 @@ function renderMemberTools() {
     return `
       <div class="member-tool-card flex flex-col p-4 sm:p-5 group bg-white dark:bg-[#15161c] rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-xl transition-all">
         <!-- Thumbnail & Badges -->
-        <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 mb-4 cursor-pointer" onclick="${hasVideo ? `openVideoModal('${t.id}')` : (hasTool ? `openToolExternal('${t.id}')` : '')}">
+        <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 mb-4 cursor-pointer" onclick="${hasVideo ? `openVideoModal('${t.id}')` : `openGuideModal('${t.id}')`}">
           <img src="${cover}" alt="${t.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           
@@ -4383,41 +4385,64 @@ function renderMemberTools() {
             </span>
           </div>
 
-          <!-- Video Play Overlay Pill -->
+          <!-- Video Play Overlay Pill OR Document Guide Pill -->
           ${hasVideo ? `
             <div class="absolute inset-0 flex items-center justify-center">
               <div class="w-12 h-12 rounded-full bg-purple-600/90 hover:bg-purple-600 text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
                 <i class="fa-solid fa-play ml-0.5 text-sm"></i>
               </div>
             </div>
-            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-mono text-white flex items-center gap-1">
-              <i class="fa-brands fa-youtube text-red-500"></i> ${videoCount > 1 ? `${videoCount} Video Tutor` : 'Video Tutor'}
+            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-mono font-bold text-white flex items-center gap-1 border border-white/10">
+              <i class="fa-solid fa-video text-purple-400 text-[9px]"></i> ${videoList.length} Video
             </div>
-          ` : ''}
+          ` : `
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-12 h-12 rounded-full bg-emerald-600/90 hover:bg-emerald-600 text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-book-open text-sm"></i>
+              </div>
+            </div>
+            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-mono font-bold text-emerald-300 flex items-center gap-1 border border-white/10">
+              <i class="fa-solid fa-file-lines text-[9px]"></i> Modul & Panduan
+            </div>
+          `}
         </div>
 
-        <!-- Tool Info -->
+        <!-- Details -->
         <div class="flex-1 flex flex-col">
           <div class="flex items-center justify-between gap-2 mb-1.5">
-            <h3 class="font-heading text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-1">
-              ${t.name}
-            </h3>
+            <span class="text-[11px] font-mono font-bold text-purple-400 tracking-wider uppercase">
+              ${t.levelNum >= 0 ? 'LEVEL ' + t.levelNum : 'MODUL'}
+            </span>
+            <span class="text-[10px] text-slate-500 font-mono flex items-center gap-1">
+              <i class="fa-solid fa-eye text-[9px]"></i> ${t.views || 25}x
+            </span>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 flex-1">
-            ${t.desc || 'Tutorial dan panduan lengkap membuat video animasi dengan tools AI ini.'}
+
+          <h3 class="font-heading text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-400 transition-colors line-clamp-2 mb-2">
+            ${t.name}
+          </h3>
+
+          <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 mb-4 flex-1">
+            ${t.desc}
           </p>
 
+          <!-- Action Buttons -->
           <div class="flex items-center gap-2 pt-3 border-t border-slate-100 dark:border-white/5">
             ${hasVideo ? `
-              <button onclick="openVideoModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+              <button onclick="openVideoModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-md shadow-purple-600/20 flex items-center justify-center gap-1.5 cursor-pointer">
                 <i class="fa-solid fa-play text-[10px]"></i>
-                <span>Tonton Video ${videoCount > 1 ? `(${videoCount})` : ''}</span>
+                <span>Tonton Video (${videoList.length})</span>
               </button>
             ` : ''}
+
+            <button onclick="openGuideModal('${t.id}')" class="${hasVideo ? 'px-3' : 'flex-1'} py-2 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Buka Detail & Langkah Praktik">
+              <i class="fa-solid fa-book-open text-[10px] text-purple-400"></i>
+              <span>${hasVideo ? 'Panduan' : 'Buka Panduan & Langkah'}</span>
+            </button>
+
             ${hasTool ? `
-              <a href="${cleanToolUrl}" target="_blank" rel="noopener noreferrer" onclick="trackToolView('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-800 dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors text-center">
+              <a href="${cleanToolUrl}" target="_blank" class="px-3 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer" title="Buka Aplikasi / Tool">
                 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                <span>Buka Tools</span>
               </a>
             ` : ''}
           </div>
@@ -6059,4 +6084,75 @@ function toggleNotionEmbed() {
     if (icon) icon.className = 'fa-solid fa-book-open text-purple-400 text-xs';
     if (text) text.textContent = 'Baca Langsung di Sini';
   }
+}
+
+
+// =========================================================================
+// GUIDE MODAL (DETAIL MATERI, LANGKAH PRAKTIK & PROMPT RESMI)
+// =========================================================================
+function openGuideModal(toolId) {
+  const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA && window.DEFAULT_COURSE_DATA.portalTools) || [];
+  const t = tools.find(item => item.id === toolId);
+  if (!t) return;
+
+  const modal = document.getElementById('guideModal');
+  const modalTitle = document.getElementById('guideModalTitle');
+  const modalCategory = document.getElementById('guideModalCategory');
+  const modalContent = document.getElementById('guideModalContent');
+  if (!modal || !modalContent) return;
+
+  if (modalTitle) modalTitle.textContent = t.name;
+  if (modalCategory) modalCategory.textContent = t.category || 'Materi Resmi';
+
+  const stepsHtml = (t.instructions && t.instructions.length > 0)
+    ? `
+      <div class="space-y-3">
+        <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-list-ol text-purple-400"></i> Langkah Praktik demi Langkah:
+        </h4>
+        <ol class="space-y-2 text-xs sm:text-sm text-slate-300">
+          ${t.instructions.map((step, idx) => `
+            <li class="p-3 rounded-xl bg-black/40 border border-white/5 flex items-start gap-3">
+              <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                ${idx + 1}
+              </span>
+              <span class="flex-1 leading-relaxed">${step}</span>
+            </li>
+          `).join('')}
+        </ol>
+      </div>
+    `
+    : '';
+
+  const textsHtml = (t.fullTexts && t.fullTexts.length > 0)
+    ? `
+      <div class="space-y-2 mt-4 pt-4 border-t border-white/10">
+        <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-align-left text-purple-400"></i> Rangkuman Materi & Catatan Penting:
+        </h4>
+        <div class="p-4 rounded-xl bg-black/30 border border-white/5 text-xs text-slate-300 space-y-2 leading-relaxed">
+          ${t.fullTexts.map(txt => `<p>${txt}</p>`).join('')}
+        </div>
+      </div>
+    `
+    : '';
+
+  const videoBtnHtml = (t.videos && t.videos.length > 0)
+    ? `
+      <div class="mt-5 pt-4 border-t border-white/10 flex flex-wrap gap-2">
+        <button onclick="closeModal('guideModal'); openVideoModal('${t.id}')" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-purple-600/30">
+          <i class="fa-solid fa-play text-xs"></i>
+          <span>Tonton Video Tutorial (${t.videos.length} Video)</span>
+        </button>
+      </div>
+    `
+    : '';
+
+  modalContent.innerHTML = stepsHtml + textsHtml + videoBtnHtml;
+  modal.classList.remove('hidden');
+}
+
+function closeGuideModal() {
+  const modal = document.getElementById('guideModal');
+  if (modal) modal.classList.add('hidden');
 }
