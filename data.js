@@ -413,7 +413,7 @@ const DEFAULT_COURSE_DATA = {
       "2196152.jpg",
       "2196158.jpg"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-0.jpg",
     "toolUrl": "https://www.notion.so/3fe1ad47aa0580268119f947851d7395",
     "videoUrl": "https://youtu.be/LOwyXFwNUfk?si=qMdrjDzUwC1iyR2f",
     "videos": [
@@ -465,7 +465,7 @@ const DEFAULT_COURSE_DATA = {
       "klik tutorial disini ",
       "Video tutorial"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-1.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa05809a8e42d8acbdec36d2",
     "videoUrl": "https://youtu.be/2SpOxk_6buI?si=I3DCe5QU9rhV8_bP",
     "videos": [
@@ -508,7 +508,7 @@ const DEFAULT_COURSE_DATA = {
       "Tools klik disini ",
       "‎Gemini - direct access to Google AI"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-2.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa0580d895e0dc14feb4b03e",
     "videoUrl": "https://youtu.be/hPofjxF4A34?si=79LIabyVLTFByG2l",
     "videos": [
@@ -550,7 +550,7 @@ const DEFAULT_COURSE_DATA = {
       "👇",
       "ChatGPT - 3D CARTOON BY IRT NAIK LEVEL"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-3.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa058009bf65c5cb4aff6179",
     "videoUrl": "",
     "videos": [],
@@ -583,7 +583,7 @@ const DEFAULT_COURSE_DATA = {
       "Klik disini ",
       "Tools skeleton  "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-4.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa05808b9b09d492822d6432",
     "videoUrl": "",
     "videos": [],
@@ -606,7 +606,7 @@ const DEFAULT_COURSE_DATA = {
       "AMBIL PEOMPT DISINI 👇",
       "Tutorial 3 "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-5.jpg",
     "toolUrl": "https://www.notion.so/3381ad47aa058066adf6ef61ab31d191",
     "videoUrl": "https://youtube.com/shorts/Litl0-XkNbk?si=R8Tntm9VdsVtF0Dt",
     "videos": [
@@ -633,7 +633,7 @@ const DEFAULT_COURSE_DATA = {
       "Video tutorial VOICE OVER VERSI IRT NAIK LEVEL",
       "👈Buat voice disini Klik panah "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-6.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa0580668bf5c3f182a0afbb",
     "videoUrl": "https://youtube.com/shorts/UcG-WhKCrCk?si=ZOIyh4HVtvXBBIZB",
     "videos": [
@@ -679,7 +679,7 @@ const DEFAULT_COURSE_DATA = {
       "contoh master karakter \n",
       "1292092.png"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-7.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa0580a0ba75dedf3adfd54a",
     "videoUrl": "",
     "videos": [],
@@ -707,7 +707,7 @@ const DEFAULT_COURSE_DATA = {
       "‎Gemini - direct access to Google AI",
       "TUTORIAL 1 "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-8.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa0580c48b11c54507db06f5",
     "videoUrl": "https://youtube.com/shorts/z5juR1nVtvo?si=F4bTD5dMlVm1Kd5I",
     "videos": [
@@ -753,7 +753,7 @@ const DEFAULT_COURSE_DATA = {
       "TOOLS ASMR PENGHASIL PROMPT KETUK DISINI👇",
       "ChatGPT - ASMR MAGIC by KAK LIA IRT NAIK LEVEL"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-9.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa058035a785d76907fc15c0",
     "videoUrl": "",
     "videos": [],
@@ -794,7 +794,7 @@ const DEFAULT_COURSE_DATA = {
       "Gunung berdialog telor ceplok lava ",
       "ChatGPT - Object Talk Generator ( irt naik level)"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-10.jpg",
     "toolUrl": "https://www.notion.so/33a1ad47aa0580a7824af8e5397c2a64",
     "videoUrl": "https://youtu.be/QK4z3aOKntg?si=1azvcTIHNbUE8GbY",
     "videos": [
@@ -833,7 +833,7 @@ const DEFAULT_COURSE_DATA = {
       "Klik disini ",
       "Tools AMIGURUMI "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-11.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa0580e8ae6adb8daf8e8372",
     "videoUrl": "",
     "videos": [],
@@ -868,7 +868,7 @@ const DEFAULT_COURSE_DATA = {
       "Video tutorialnya Disini",
       "Contoh video PPDB pakai karakter 3D cartoon Pixar "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-12.jpg",
     "toolUrl": "https://www.notion.so/3731ad47aa0580018257e5fff602b5f6",
     "videoUrl": "",
     "videos": [],
@@ -897,7 +897,7 @@ const DEFAULT_COURSE_DATA = {
       "prompt awal copya dan pastikan ke chatgpt :",
       "Buatkan prompt teks to image dan prompt image to video beserta narasi untuk  bahan ajar rantai makanan (GANTI SESUAI DENGAN PELAJARAN YANG MAU DIBUAT). Buat 6 scene urutannya Prompt gambar, promt video dan narasi.tambahkan gambar referensi sebagai guru atau narasi . Buatkan master prompt untuk karakter konsisten stylenya 3d cartoon pixar. 16:9"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-13.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa0580c2b75fc34f217221fe",
     "videoUrl": "https://youtu.be/SgwQjDIrjS0?si=KMEjOU8Bb0zqTdUB",
     "videos": [
@@ -934,7 +934,7 @@ const DEFAULT_COURSE_DATA = {
       " BIKIN LAGU + VIDEO CLIP",
       "Klik disini "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-14.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa05804baad4fd8449acabd9",
     "videoUrl": "",
     "videos": [],
@@ -954,7 +954,7 @@ const DEFAULT_COURSE_DATA = {
       "48706.png",
       "Tutorial menggabungkan Video"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-15.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa05806189f5ef12860b5ddb",
     "videoUrl": "https://youtu.be/U4_sss1dpLo?si=knYqOqus3WDBYD2X",
     "videos": [
@@ -1047,7 +1047,7 @@ const DEFAULT_COURSE_DATA = {
       "💡 Catatan: Facebook tidak memiliki fitur keranjang kuning seperti TikTok dan Shopee. Promosi produk di Facebook dilakukan melalui link produk, Meta Shop (jika tersedia), atau katalog produk.",
       "KAMU JUGA BISA CARI TUTORIALNYA DI YOUTOBE YA KALAU KAMU MASIH GAK PAHAM. OKE."
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-16.jpg",
     "toolUrl": "http://LYNK.ID",
     "videoUrl": "https://youtu.be/vawDDJlcK48?si=e-ZhZLTLyOVdpUF_",
     "videos": [
@@ -1160,7 +1160,7 @@ const DEFAULT_COURSE_DATA = {
       "Cukup berikan mata pelajaran + kelas + materi, lalu biarkan tools membantu menyusun konsep dan prompt secara otomatis.",
       "Makin jelas materi yang diberikan, makin sesuai hasil infografisnya."
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-17.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa0580ca952ef5b42f835667",
     "videoUrl": "https://youtube.com/shorts/zqwi3zRN06s?si=fd5v2J4bbEyIo1vE",
     "videos": [
@@ -1192,7 +1192,7 @@ const DEFAULT_COURSE_DATA = {
       "\n💜 LANGKAH 5 — Edit di CapCut\nBuka CapCut dan buat proyek baru.\nMasukkan video timelapse.\nTambahkan musik cinematic atau efek suara renovasi.\nTambahkan tulisan \"Rumah Tua Jadi Mewah dalam 10 Detik!\"\nExport dengan kualitas 1080p atau lebih tinggi.",
       "\n💛 LANGKAH 6 — Upload ke Media Sosial\nUpload hasilnya ke TikTok, Instagram Reels, Facebook Reels, atau YouTube Shorts.\nTambahkan caption menarik dan hashtag yang relevan."
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-18.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa058037bf54fb1e0efc674a",
     "videoUrl": "https://youtu.be/nrBjotOCAAQ?si=tQcVwGVVtxvLgt0_",
     "videos": [
@@ -1219,7 +1219,7 @@ const DEFAULT_COURSE_DATA = {
       "Upload video lalu tekan yg dibawah lalu masukkan video yang ingin di analisis ",
       "ChatGPT - Cloning Video By IRT Naik Level"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-19.jpg",
     "toolUrl": "https://www.notion.so/3fe1ad47aa0580489ee1c429c6f55f0e",
     "videoUrl": "",
     "videos": [],
@@ -1241,7 +1241,7 @@ const DEFAULT_COURSE_DATA = {
       "Tools resep1 ",
       "Tools resep 2"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-20.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa05808699d2edae031b7276",
     "videoUrl": "",
     "videos": [],
@@ -1263,7 +1263,7 @@ const DEFAULT_COURSE_DATA = {
       "Tools disini",
       "ChatGPT - ACTION MOVIE GENERATOR by IRT NAIK LEVEL"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-21.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa05800f9d90cd54eb39162f",
     "videoUrl": "",
     "videos": [],
@@ -1359,7 +1359,7 @@ const DEFAULT_COURSE_DATA = {
       "AMBIL PROMPT DI TOOLS INI",
       "TUTORIAL CARA BIKIN QUOTES "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-22.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa0580b79502c287f9c7b62d",
     "videoUrl": "attachment:488b5637-2733-4041-a455-55f19cd97856:48319.mp4",
     "videos": [
@@ -1403,7 +1403,7 @@ const DEFAULT_COURSE_DATA = {
       "Video tutorial ",
       "Klik tools disini "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-23.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa05800e8632dccc5932d582",
     "videoUrl": "",
     "videos": [],
@@ -1436,7 +1436,7 @@ const DEFAULT_COURSE_DATA = {
       "Klik disini untuk membuat desain ucapan ",
       "VIDEO TUTORIAL "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-24.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa05802bbdb6dee11f3ff74d",
     "videoUrl": "",
     "videos": [],
@@ -1475,7 +1475,7 @@ const DEFAULT_COURSE_DATA = {
       "1000864091.png",
       "1000864101.png"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-25.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa0580e38104c1c10eb6587f",
     "videoUrl": "https://youtu.be/-fUz12Rz96o?si=0xM8TgOFJA5JK8M4",
     "videos": [
@@ -1501,7 +1501,7 @@ const DEFAULT_COURSE_DATA = {
       "17033.png",
       "VIDEO TUTORIAL "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-26.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa0580629bd9f38c6e4a53f5",
     "videoUrl": "https://youtu.be/qt3rpkguS1M?si=_uguAbVOQt3m4Mni",
     "videos": [
@@ -1531,7 +1531,7 @@ const DEFAULT_COURSE_DATA = {
       "Klik tools  disini 👇👇👇",
       "VIDEO TUTORIAL PAKAI FLOW"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-27.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa0580a899f9e3fb0b80b71e",
     "videoUrl": "",
     "videos": [],
@@ -1566,7 +1566,7 @@ const DEFAULT_COURSE_DATA = {
       "44008.jpg",
       "44009.jpg"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-28.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa05806f8da0d770f06db3ef",
     "videoUrl": "https://youtube.com/shorts/O-7j_lAYNdM?si=bYzZ8B60rdzn7zuo",
     "videos": [
@@ -1593,7 +1593,7 @@ const DEFAULT_COURSE_DATA = {
       "TOOLS TINY ",
       "VIDEO TUTORIAL "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-29.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa058007a488e587edbf8c57",
     "videoUrl": "",
     "videos": [],
@@ -1622,7 +1622,7 @@ const DEFAULT_COURSE_DATA = {
       "Buatkan bBuatkan gambar background estetik untuk affiliate produk  sebuah meja estetik terdapat lampu estetik  dan bunga estetik diatas sebuah meja identik dengan warna netral. Rasio 1:1",
       "Buat gambar storyboard yang dikiri jadi satu dengan gambar yang kanan, buat seolah lagi review produk.untuk durasi 10 detik. Terdapat CTA di akhir .dan tulisan unik dan lucu. Rasio 1:1"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-30.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa0580659189d110443445a1",
     "videoUrl": "https://youtu.be/xoso69JWKXE?si=D2hwlXUkJbj92-fu",
     "videos": [
@@ -1648,7 +1648,7 @@ const DEFAULT_COURSE_DATA = {
       "14933.png",
       "Video tutorial "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-31.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa058056bb94dc162c045bff",
     "videoUrl": "https://youtu.be/pYeXnEIdTK8?si=1nFhU27luXzR5Oud",
     "videos": [
@@ -1676,7 +1676,7 @@ const DEFAULT_COURSE_DATA = {
       "ChatGPT - DRAMA BUAH SAYUR ANTROPOMORFIK",
       "Video tutorial "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-32.jpg",
     "toolUrl": "https://www.notion.so/3741ad47aa0580b88d26ef4b485256ba",
     "videoUrl": "https://youtu.be/i7DOSY_LvoM?si=OVSKUIBMgS-xyug2",
     "videos": [
@@ -1703,7 +1703,7 @@ const DEFAULT_COURSE_DATA = {
       "TUTORIAL ",
       "TOOLS GENERATOR "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-33.jpg",
     "toolUrl": "https://www.notion.so/3751ad47aa058004baadd96d894f49e9",
     "videoUrl": "",
     "videos": [],
@@ -1724,7 +1724,7 @@ const DEFAULT_COURSE_DATA = {
       "VIDEO TUTORIAL ",
       "Bisa juga login pakai email temporary"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-34.jpg",
     "toolUrl": "https://www.notion.so/3771ad47aa0580db978ac171a9ff5061",
     "videoUrl": "",
     "videos": [],
@@ -1745,7 +1745,7 @@ const DEFAULT_COURSE_DATA = {
       "TUTORIAL ",
       "Klik disini "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-35.jpg",
     "toolUrl": "https://www.notion.so/3771ad47aa0580fabb58c269747a145d",
     "videoUrl": "",
     "videos": [],
@@ -1807,7 +1807,7 @@ const DEFAULT_COURSE_DATA = {
       "Langsung buatkan gambarnya, bukan hanya menjelaskan konsep storyboard.",
       "VIDEO TUTORIAL "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-36.jpg",
     "toolUrl": "https://drive.google.com/file/d/1LUl9MELEtM_r1gfmK797I8_wZLphr3im/view?usp=drivesdk",
     "videoUrl": "https://youtu.be/iIpv6ylNOjM?si=eblrMP-xldpU3Qc4",
     "videos": [
@@ -1834,7 +1834,7 @@ const DEFAULT_COURSE_DATA = {
       "VIDEO TUTORIAL CARA ",
       "BIAR DAPAT EXTRA KREDIT TAMBAHAN MASUKKAN Kode Voucher IRT100 AKSES WEB NYA DISINI.KETUK TANDA PANAH."
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-37.jpg",
     "toolUrl": "https://www.notion.so/37f1ad47aa0580f59530e89ee4d7621f",
     "videoUrl": "",
     "videos": [],
@@ -1855,7 +1855,7 @@ const DEFAULT_COURSE_DATA = {
       "Tools PEMBUAT prompt cozy miniatur ",
       "Klik tanda panah  lalu klik lagi "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-37.jpg",
     "toolUrl": "https://www.notion.so/37a1ad47aa05807bb99cf428514c347c",
     "videoUrl": "",
     "videos": [],
@@ -1883,7 +1883,7 @@ const DEFAULT_COURSE_DATA = {
       "Buatkan prompt teks to image dan prompt image to video serta visual dan narasinya dalam bahasa indonesia .",
       "Pastekan ke Chatgpt lalu enter nanti kamu akan dapat prompt lengkapnya."
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-38.jpg",
     "toolUrl": "https://www.notion.so/37f1ad47aa0580358d5ded1025b45cfe",
     "videoUrl": "https://youtu.be/eYH-OaELaxs?si=1AtQFAXnwVzJgzhU",
     "videos": [
@@ -1910,7 +1910,7 @@ const DEFAULT_COURSE_DATA = {
       "VIDEO TUTORIAL ",
       "PROMPT : BUATKAN GAMBAR STORYBOARD UNTUK UNDANGAN PERNIKAHAN  ANTARA BUDI DAN ANI. BUAT YANG MENARIK UNTUK 10 DETIK. BUAT KARAKTER 3D CARTOON PIXAR. (LAMPIRKAN HARI BULAN DAN TAHUN DAN LOKASI BESERTA ALAMAT ACARA) LALU COPY PASTE KE CHAT GPT. (OPTIONAL TAMBAHKAN GAMBAR REFERENSI)"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-39.jpg",
     "toolUrl": "https://www.notion.so/3841ad47aa0580df8349c93cd11c083b",
     "videoUrl": "https://youtu.be/43uBoTyytcQ?si=L5-ORp3JX0XMH0kV",
     "videos": [
@@ -1999,7 +1999,7 @@ const DEFAULT_COURSE_DATA = {
       "✅ Untuk serial, setiap episode dibuat satu per satu agar alur cerita tetap rapi dan penonton penasaran menunggu episode berikutnya.",
       "Selamat berkarya dan semoga serial AI Anda semakin menarik!"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-40.jpg",
     "toolUrl": "https://www.notion.so/3841ad47aa0580d3a42becd8075ed5c4",
     "videoUrl": "https://youtu.be/rauHo2mXT-Q?si=5sdCzTcC7Mv4yRFB",
     "videos": [
@@ -2028,7 +2028,7 @@ const DEFAULT_COURSE_DATA = {
       "Ketuk Tools Generator  dibawah ini :",
       "ChatGPT - KOMIK GENERATOR IRT NAIK LEVEL"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-41.jpg",
     "toolUrl": "https://www.notion.so/38c1ad47aa05809c8c3cf136e9540d43",
     "videoUrl": "",
     "videos": [],
@@ -2049,7 +2049,7 @@ const DEFAULT_COURSE_DATA = {
       "TOOLS DRACIN ",
       "TUTORIAL DRACIN"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-42.jpg",
     "toolUrl": "https://www.notion.so/38d1ad47aa058046ac5be7442b9f012f",
     "videoUrl": "https://youtu.be/70Hq2IHy9Q0?si=3hq40oHN0utLXZLR",
     "videos": [
@@ -2077,7 +2077,7 @@ const DEFAULT_COURSE_DATA = {
       "ChatGPT - 🍔 FOOD HEAD CREATOR by IRT NAIK LEVEL",
       "TUTORIAL FOOD HEAD CREATOR "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-43.jpg",
     "toolUrl": "https://www.notion.so/3911ad47aa0580768bacdf9f2eea046a",
     "videoUrl": "https://youtu.be/ze9SOGLokvk?si=UOlIHwgCyH6DWDyd",
     "videos": [
@@ -2107,7 +2107,7 @@ const DEFAULT_COURSE_DATA = {
       "PROMPT MANUAL TANPA TOOLS , KAMU JUGA BISA COPY PASTE INI LALU MASUKKAN KE CHATGPT",
       "🎬 MULAI\nSaya ingin membuat video Animasi AI bertema MPLS Sekolah.\nSilakan tanyakan data berikut satu per satu, lalu setelah semua data lengkap, buatkan hasil yang siap digunakan.\n---\n📋 DATA PROYEK\n1. Nama Sekolah :\n2. Jenjang :(TK / SD / SMP / SMA / SMK)\n3. Tema Video :\n4. Tujuan Video :(Promosi Sekolah / MPLS / PPDB / Profil Sekolah)\n5. Jumlah Scene :\n6. Durasi per Scene :(Default 10 detik)\n7. Rasio Video :\n- 9:16- 16:9- 1:1\n8. Style Karakter :\n- 3D Cartoon Pixar- Clay- Anime- Disney Style- Realistis- Chibi- Lainnya\n9. Bahasa :\n10. Referensi Gambar :(Lampirkan jika ada.)\n---\n📦 SETELAH SEMUA DATA LENGKAP\nBuatkan secara lengkap:\n✅ Storyboard setiap scene\n✅ Prompt Text-to-Image setiap scene\n✅ Prompt Image-to-Video setiap scene\n✅ Dialog karakter\n✅ Dialog narator\n✅ Camera Movement\n✅ Gerakan karakter\n✅ Ekspresi karakter\n✅ Detail lokasi\n✅ Sound Effect (SFX)\n✅ Background Music (BGM)\n✅ Negative Prompt\n✅ Prompt Master Character yang konsisten di semua scene\n✅ Prompt siap copy-paste ke AI Generator\nPastikan seluruh karakter memiliki penampilan yang konsisten pada setiap scene, visual berkualitas tinggi, sinematik, penuh warna, dan cocok untuk konten media sosial."
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-44.jpg",
     "toolUrl": "https://www.notion.so/3951ad47aa0580509ecef9aba2b7d519",
     "videoUrl": "https://youtu.be/5gvyy_-c52c?si=Ci1zGN0yeM4GYiiO",
     "videos": [
@@ -2139,7 +2139,7 @@ const DEFAULT_COURSE_DATA = {
       "ChatGPT - 🎁UNBOXING PRODUCT GENERATOR by IRT NAIK LEVEL",
       "Buatkan jadi video jangan ada yang typo dan kesalahan kata. Buat suara narator konsisten suara wanita usia 30 tahun ,lembut dan natural layaknya untuk suara iklan."
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-45.jpg",
     "toolUrl": "https://www.notion.so/3961ad47aa0580ee83a3ded26afb15dd",
     "videoUrl": "https://youtu.be/7x01oy9a1Dg?si=6lqiz60cfi7oS0Cn",
     "videos": [
@@ -2201,7 +2201,7 @@ const DEFAULT_COURSE_DATA = {
       "ChatGPT - AI LKPD GENERATOR PRO | IRT NAIK LEVEL",
       "ChatGPT - GURU CERDAS AI"
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-46.jpg",
     "toolUrl": "https://www.notion.so/3a71ad47aa05800a8e8dc0f1a06419b1",
     "videoUrl": "https://youtu.be/E7TOtLYKL2A?si=tTMiZ1IyLEIS6h4y",
     "videos": [
@@ -2240,7 +2240,7 @@ const DEFAULT_COURSE_DATA = {
       "CARA MEMBUAT COVERNYA : MASUK KE CHATGPT LALU BILANG BEGINI :",
       "BUATKAN COVER WORKSHEET ANAK YANG MENARIK UKURAN 1:1 BUAT ESTETIK DAN MENARIK UNTUK ANAK ANAK. "
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-47.jpg",
     "toolUrl": "https://www.notion.so/3ab1ad47aa058012b555ec765829b04a",
     "videoUrl": "",
     "videos": [],
@@ -2354,7 +2354,7 @@ const DEFAULT_COURSE_DATA = {
       "😊 Coba lagi!",
       "Jangan menghukum anak."
     ],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-48.jpg",
     "toolUrl": "https://www.notion.so/3ab1ad47aa0580819135c71b8b9dc866",
     "videoUrl": "https://youtube.com/shorts/zhrTuihMBjU?si=H3OTR9ZBWk7bHWwf",
     "videos": [
@@ -2376,7 +2376,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-49.jpg",
     "toolUrl": "https://www.notion.so/3b31ad47aa0580558bc8ca55f52daedd",
     "videoUrl": "",
     "videos": [],
@@ -2392,7 +2392,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-50.jpg",
     "toolUrl": "https://www.notion.so/3b61ad47aa0580f7a8f8c57f925a413f",
     "videoUrl": "",
     "videos": [],
@@ -2408,7 +2408,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-51.jpg",
     "toolUrl": "https://www.notion.so/3b91ad47aa0580048af8cf89dabcc9b8",
     "videoUrl": "",
     "videos": [],
@@ -2424,7 +2424,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-52.jpg",
     "toolUrl": "https://www.notion.so/3ba1ad47aa0580c2a4a1e2c3fe1c19f8",
     "videoUrl": "",
     "videos": [],
@@ -2440,7 +2440,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-53.jpg",
     "toolUrl": "https://www.notion.so/3be1ad47aa058060aa47f3a3374cf6d2",
     "videoUrl": "",
     "videos": [],
@@ -2456,7 +2456,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-54.jpg",
     "toolUrl": "https://www.notion.so/3d31ad47aa0580de8623ca7f09b9ef03",
     "videoUrl": "",
     "videos": [],
@@ -2472,7 +2472,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-55.jpg",
     "toolUrl": "https://www.notion.so/3d91ad47aa0580608e69ec1bf7fe8a0f",
     "videoUrl": "",
     "videos": [],
@@ -2488,7 +2488,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-56.jpg",
     "toolUrl": "https://www.notion.so/4001ad47aa0580e7902ae858c4d3aa9d",
     "videoUrl": "",
     "videos": [],
@@ -2504,7 +2504,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-57.jpg",
     "toolUrl": "https://www.notion.so/4011ad47aa0580a9b8b0d19bde77e9ed",
     "videoUrl": "",
     "videos": [],
@@ -2520,7 +2520,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-58.jpg",
     "toolUrl": "https://www.notion.so/4091ad47aa0580b4ac33ee9822328fd8",
     "videoUrl": "",
     "videos": [],
@@ -2536,7 +2536,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-59.jpg",
     "toolUrl": "https://www.notion.so/4121ad47aa0580f4923ff38aac43cd04",
     "videoUrl": "",
     "videos": [],
@@ -2552,7 +2552,7 @@ const DEFAULT_COURSE_DATA = {
     "instructions": [],
     "prompts": [],
     "fullTexts": [],
-    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+    "coverUrl": "assets/covers/lvl-60.jpg",
     "toolUrl": "https://www.notion.so/4121ad47aa05802eae7beab2f4b58633",
     "videoUrl": "",
     "videos": [],

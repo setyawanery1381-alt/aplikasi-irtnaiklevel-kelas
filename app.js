@@ -257,9 +257,10 @@ function initData() {
       if (!courseData.pricing.promoPrice) courseData.pricing.promoPrice = "Rp 99.000";
       if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 744.000";
 
-      // Ensure portalTools has full 62 level curriculum (auto-upgrade old cached localStorage)
+      // Ensure portalTools has full 62 level curriculum & exact covers (auto-upgrade old cached localStorage)
       const hasOldFallback = courseData.portalTools && courseData.portalTools.some(t => (t.videos || []).some(v => v.url && v.url.includes('XiG2enHWrLQ')));
-      const isOutdated = !courseData.portalTools || courseData.portalTools.length !== 62 || !courseData.portalTools[0] || !courseData.portalTools[0].name.includes('PEMULA') || hasOldFallback;
+      const hasOldCovers = courseData.portalTools && courseData.portalTools.some(t => t.coverUrl && t.coverUrl.includes('unsplash.com'));
+      const isOutdated = !courseData.portalTools || courseData.portalTools.length !== 62 || !courseData.portalTools[0] || !courseData.portalTools[0].name.includes('PEMULA') || hasOldFallback || hasOldCovers;
       if (isOutdated) {
         courseData.portalTools = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.portalTools || []));
         try {
