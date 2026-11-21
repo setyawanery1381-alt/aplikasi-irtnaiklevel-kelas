@@ -260,7 +260,9 @@ function initData() {
       // Ensure portalTools has full 62 level curriculum & exact covers (auto-upgrade old cached localStorage)
       const hasOldFallback = courseData.portalTools && courseData.portalTools.some(t => (t.videos || []).some(v => v.url && v.url.includes('XiG2enHWrLQ')));
       const hasOldCovers = courseData.portalTools && courseData.portalTools.some(t => t.coverUrl && t.coverUrl.includes('unsplash.com'));
-      const isOutdated = !courseData.portalTools || courseData.portalTools.length !== 62 || !courseData.portalTools[0] || !courseData.portalTools[0].name.includes('PEMULA') || hasOldFallback || hasOldCovers;
+      // Force auto-upgrade to version 6 with markdown prompts and all tool links
+      const hasOldVer = !courseData.portalTools || !courseData.portalTools[0] || !courseData.portalTools[0].markdownPrompt || courseData.portalTools.length !== 62;
+      const isOutdated = hasOldVer || hasOldFallback || hasOldCovers;
       if (isOutdated) {
         courseData.portalTools = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.portalTools || []));
         try {
@@ -4361,49 +4363,44 @@ function renderMemberTools() {
   }
 
   container.innerHTML = filtered.map(t => {
-    const cover = t.coverUrl || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80';
+    const cover = t.coverUrl || 'assets/covers/' + t.id + '.jpg';
     const videoList = (t.videos && t.videos.length > 0) ? t.videos : (t.videoUrl ? [{ title: t.name, url: t.videoUrl }] : []);
     const hasVideo = videoList.length > 0;
-    const hasInstructions = (t.instructions && t.instructions.length > 0) || (t.fullTexts && t.fullTexts.length > 0);
-    const hasTool = !!t.toolUrl && !t.toolUrl.includes('notion.so');
-
-    let cleanToolUrl = (t.toolUrl || '').trim();
-    if (cleanToolUrl && !/^https?:\/\//i.test(cleanToolUrl)) {
-      cleanToolUrl = 'https://' + cleanToolUrl;
+    
+    // Tools logic
+    const toolList = (t.tools && t.tools.length > 0) ? t.tools : (t.toolUrl && !t.toolUrl.includes('notion.so') ? [{ url: t.toolUrl, title: 'Buka Tools' }] : []);
+    const hasTool = toolList.length > 0;
+    let primaryToolUrl = hasTool ? toolList[0].url.trim() : '';
+    if (primaryToolUrl && !/^https?:\/\//i.test(primaryToolUrl)) {
+      primaryToolUrl = 'https://' + primaryToolUrl;
     }
 
+    // Markdown Prompt lines calculation
+    const promptText = t.markdownPrompt || (t.instructions && t.instructions.length > 0 ? t.instructions.join('\n') : t.desc);
+    const lineCount = promptText.split('\n').filter(l => l.trim().length > 0).length || 15;
+
     return `
-      <div class="member-tool-card flex flex-col p-4 sm:p-5 group bg-white dark:bg-[#15161c] rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-xl transition-all">
+      <div class="member-tool-card flex flex-col p-4 sm:p-5 group bg-white dark:bg-[#14151c] rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-2xl hover:border-purple-500/40 transition-all duration-300">
         <!-- Thumbnail & Badges -->
-        <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 mb-4 cursor-pointer" onclick="${hasVideo ? `openVideoModal('${t.id}')` : `openGuideModal('${t.id}')`}">
+        <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 mb-4 cursor-pointer" onclick="openPromptMarkdownModal('${t.id}')">
           <img src="${cover}" alt="${t.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
           
           <!-- Category Badge -->
           <div class="absolute top-2.5 left-2.5">
-            <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-black/60 backdrop-blur-md text-purple-300 border border-white/10 uppercase tracking-wider">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-black/70 backdrop-blur-md text-purple-300 border border-white/10 uppercase tracking-wider">
               ${t.category || 'Materi'}
             </span>
           </div>
 
-          <!-- Video Play Overlay Pill OR Document Guide Pill -->
+          <!-- Video Pill -->
           ${hasVideo ? `
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-12 h-12 rounded-full bg-purple-600/90 hover:bg-purple-600 text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-play ml-0.5 text-sm"></i>
-              </div>
-            </div>
-            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-mono font-bold text-white flex items-center gap-1 border border-white/10">
-              <i class="fa-solid fa-video text-purple-400 text-[9px]"></i> ${videoList.length} Video
+            <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-white flex items-center gap-1.5 border border-purple-500/30">
+              <i class="fa-solid fa-circle-play text-purple-400 text-xs"></i> ${videoList.length} Video
             </div>
           ` : `
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-12 h-12 rounded-full bg-emerald-600/90 hover:bg-emerald-600 text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-book-open text-sm"></i>
-              </div>
-            </div>
-            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-mono font-bold text-emerald-300 flex items-center gap-1 border border-white/10">
-              <i class="fa-solid fa-file-lines text-[9px]"></i> Modul & Panduan
+            <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-emerald-300 flex items-center gap-1.5 border border-emerald-500/30">
+              <i class="fa-solid fa-file-lines text-xs"></i> Modul & Prompt
             </div>
           `}
         </div>
@@ -4415,37 +4412,52 @@ function renderMemberTools() {
               ${t.levelNum >= 0 ? 'LEVEL ' + t.levelNum : 'MODUL'}
             </span>
             <span class="text-[10px] text-slate-500 font-mono flex items-center gap-1">
-              <i class="fa-solid fa-eye text-[9px]"></i> ${t.views || 25}x
+              <i class="fa-solid fa-eye text-[9px]"></i> ${t.views || 35}x
             </span>
           </div>
 
-          <h3 class="font-heading text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-400 transition-colors line-clamp-2 mb-2">
+          <h3 class="font-heading text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-400 transition-colors line-clamp-2 mb-2 leading-snug">
             ${t.name}
           </h3>
 
-          <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 mb-4 flex-1">
+          <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mb-3 flex-1 leading-relaxed">
             ${t.desc}
           </p>
 
-          <!-- Action Buttons -->
-          <div class="flex items-center gap-2 pt-3 border-t border-slate-100 dark:border-white/5">
-            ${hasVideo ? `
-              <button onclick="openVideoModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-md shadow-purple-600/20 flex items-center justify-center gap-1.5 cursor-pointer">
-                <i class="fa-solid fa-play text-[10px]"></i>
-                <span>Tonton Video (${videoList.length})</span>
-              </button>
-            ` : ''}
+          <!-- Metadata Baris & Tanggal (Sesuai Foto 1) -->
+          <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono mb-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5">
+            <span class="flex items-center gap-1.5">
+              <i class="fa-solid fa-file-lines text-purple-400"></i> ${lineCount} Baris
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i class="fa-regular fa-calendar text-slate-500"></i> 22/11/2026
+            </span>
+          </div>
 
-            <button onclick="openGuideModal('${t.id}')" class="${hasVideo ? 'px-3' : 'flex-1'} py-2 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Buka Detail & Langkah Praktik">
-              <i class="fa-solid fa-book-open text-[10px] text-purple-400"></i>
-              <span>${hasVideo ? 'Panduan' : 'Buka Panduan & Langkah'}</span>
+          <!-- Action Buttons -->
+          <div class="flex flex-col gap-2 pt-1">
+            <!-- Main CTA: Buka Prompt (Sesuai Foto 1) -->
+            <button onclick="openPromptMarkdownModal('${t.id}')" class="w-full py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-700 active:scale-[0.98] text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center justify-center gap-2 cursor-pointer">
+              <i class="fa-solid fa-eye text-xs"></i>
+              <span>Buka Prompt</span>
             </button>
 
-            ${hasTool ? `
-              <a href="${cleanToolUrl}" target="_blank" class="px-3 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer" title="Buka Aplikasi / Tool">
-                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-            ` : ''}
+            <!-- Secondary Actions: Buka Tools & Tonton Video -->
+            <div class="flex items-center gap-2">
+              ${hasTool ? `
+                <a href="${primaryToolUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 active:scale-[0.98] text-amber-300 border border-amber-500/30 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Tool AI / Custom GPT">
+                  <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                  <span>Buka Tools</span>
+                </a>
+              ` : ''}
+
+              ${hasVideo ? `
+                <button onclick="openVideoModal('${t.id}')" class="${hasTool ? 'flex-1' : 'w-full'} py-2 px-3 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 active:scale-[0.98] text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Tonton Video Tutorial">
+                  <i class="fa-solid fa-play text-[10px] text-purple-400"></i>
+                  <span>Tonton Video (${videoList.length})</span>
+                </button>
+              ` : ''}
+            </div>
           </div>
         </div>
       </div>
@@ -6156,4 +6168,162 @@ function openGuideModal(toolId) {
 function closeGuideModal() {
   const modal = document.getElementById('guideModal');
   if (modal) modal.classList.add('hidden');
+}
+
+
+// =========================================================================
+// MARKDOWN PROMPT MODAL CONTROLLER (FOTO 1 & FOTO 2)
+// =========================================================================
+let currentActivePromptMarkdown = '';
+let currentActivePromptTitle = '';
+let currentActivePromptLevelId = '';
+let currentPromptTab = 'rendered'; // 'rendered' or 'raw'
+
+function renderSimpleMarkdown(md) {
+  if (!md) return '<p class="text-slate-400 italic">Tidak ada konten prompt untuk modul ini.</p>';
+  
+  let html = md
+    // Escape HTML
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    // Headings
+    .replace(/^### (.*$)/gim, '<h3 class="text-base sm:text-lg font-bold text-purple-300 mt-5 mb-2 flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs text-purple-400"></i> $1</h3>')
+    .replace(/^## (.*$)/gim, '<h2 class="text-lg sm:text-xl font-black text-white mt-6 mb-3 pb-1 border-b border-white/10">$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1 class="text-xl sm:text-2xl font-black text-white mt-6 mb-4">$1</h1>')
+    // Bold
+    .replace(/\*\*(.*?)\*\*/gim, '<strong class="font-bold text-white">$1</strong>')
+    // Blockquote
+    .replace(/^> (.*$)/gim, '<blockquote class="p-3 my-3 bg-purple-950/20 border-l-4 border-purple-500 rounded-r-xl text-slate-300 text-xs sm:text-sm italic">$1</blockquote>')
+    // Numbered list
+    .replace(/^(\d+)\. (.*$)/gim, '<div class="flex items-start gap-3 my-2 text-xs sm:text-sm text-slate-300"><span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">$1</span><span class="flex-1 leading-relaxed">$2</span></div>')
+    // Bullet list
+    .replace(/^- (.*$)/gim, '<div class="flex items-start gap-2.5 my-1.5 text-xs sm:text-sm text-slate-300"><span class="text-purple-400 mt-1">•</span><span class="flex-1 leading-relaxed">$1</span></div>')
+    // Horizontal Rule
+    .replace(/^---$/gim, '<hr class="my-5 border-white/10">')
+    // Paragraphs
+    .replace(/\n\n/gim, '</p><p class="my-2.5 leading-relaxed text-xs sm:text-sm text-slate-300">');
+
+  return '<div class="space-y-2 text-slate-300">' + html + '</div>';
+}
+
+function openPromptMarkdownModal(toolId) {
+  const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA.portalTools || []);
+  const tool = tools.find(t => t.id === toolId);
+  if (!tool) return;
+
+  currentActivePromptLevelId = tool.id;
+  currentActivePromptTitle = tool.name;
+
+  // Build markdown string
+  let md = tool.markdownPrompt;
+  if (!md || md.trim().length === 0) {
+    if (tool.instructions && tool.instructions.length > 0) {
+      md = tool.instructions.map((step, i) => `${i + 1}. ${step}`).join('\n\n');
+    } else if (tool.fullTexts && tool.fullTexts.length > 0) {
+      md = tool.fullTexts.join('\n\n');
+    } else {
+      md = tool.desc || 'Panduan praktis materi kelas animasi AI IRT Naik Level.';
+    }
+  }
+
+  currentActivePromptMarkdown = md;
+
+  const modal = document.getElementById('promptMarkdownModal');
+  const titleEl = document.getElementById('pmModalTitle');
+  const badgeEl = document.getElementById('pmModalBadge');
+  const renderedContainer = document.getElementById('pmModalRendered');
+  const rawContainer = document.getElementById('pmModalRaw');
+  const footerFile = document.getElementById('pmModalFooterFile');
+
+  if (titleEl) titleEl.textContent = tool.name;
+  if (badgeEl) badgeEl.textContent = tool.levelNum >= 0 ? 'LEVEL ' + tool.levelNum : 'MODUL';
+  if (footerFile) footerFile.textContent = `File: prompt_${tool.id}.md | Terakhir diperbarui: 22/11/2026`;
+
+  // Render markdown
+  if (renderedContainer) renderedContainer.innerHTML = renderSimpleMarkdown(md);
+  if (rawContainer) rawContainer.value = md;
+
+  switchPromptTab('rendered');
+
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closePromptMarkdownModal() {
+  const modal = document.getElementById('promptMarkdownModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function switchPromptTab(tab) {
+  currentPromptTab = tab;
+  const btnRendered = document.getElementById('pmTabBtnRendered');
+  const btnRaw = document.getElementById('pmTabBtnRaw');
+  const renderedContainer = document.getElementById('pmModalRendered');
+  const rawContainer = document.getElementById('pmModalRawWrapper');
+
+  if (tab === 'rendered') {
+    if (btnRendered) {
+      btnRendered.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold bg-purple-600 text-white shadow-sm transition-all flex items-center gap-1.5';
+    }
+    if (btnRaw) {
+      btnRaw.className = 'px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all flex items-center gap-1.5';
+    }
+    if (renderedContainer) renderedContainer.classList.remove('hidden');
+    if (rawContainer) rawContainer.classList.add('hidden');
+  } else {
+    if (btnRaw) {
+      btnRaw.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold bg-purple-600 text-white shadow-sm transition-all flex items-center gap-1.5';
+    }
+    if (btnRendered) {
+      btnRendered.className = 'px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all flex items-center gap-1.5';
+    }
+    if (renderedContainer) renderedContainer.classList.add('hidden');
+    if (rawContainer) rawContainer.classList.remove('hidden');
+  }
+}
+
+function copyPromptMarkdown() {
+  if (!currentActivePromptMarkdown) return;
+  navigator.clipboard.writeText(currentActivePromptMarkdown).then(() => {
+    showToast('✅ Naskah Prompt berhasil disalin ke clipboard!');
+    const btnText = document.getElementById('pmCopyBtnText');
+    const btnIcon = document.getElementById('pmCopyBtnIcon');
+    if (btnText) btnText.textContent = 'Tersalin!';
+    if (btnIcon) btnIcon.className = 'fa-solid fa-check text-emerald-400';
+    setTimeout(() => {
+      if (btnText) btnText.textContent = 'Salin Isi Prompt';
+      if (btnIcon) btnIcon.className = 'fa-regular fa-copy';
+    }, 2500);
+  }).catch(() => {
+    showToast('Gagal menyalin, silakan gunakan tombol Teks Mentah');
+  });
+}
+
+function downloadPromptMarkdown() {
+  if (!currentActivePromptMarkdown) return;
+  const blob = new Blob([currentActivePromptMarkdown], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `prompt_${currentActivePromptLevelId || 'materi'}.md`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('📥 Berkas prompt (.md) berhasil diunduh!');
+}
+
+// =========================================================================
+// FLOATING WHATSAPP MENTOR CONTROLLER
+// =========================================================================
+function toggleWhatsAppMentorPopup() {
+  const popup = document.getElementById('waMentorPopup');
+  if (!popup) return;
+  popup.classList.toggle('hidden');
+}
+
+function openDirectWhatsAppMentor() {
+  const adminWa = (courseData && courseData.contact && courseData.contact.adminWaClean) || '6281319894236';
+  const text = encodeURIComponent('Halo Mentor Kak Lia! Saya member Kelas Animasi AI IRT Naik Level. Saya ingin konsultasi seputar materi...');
+  window.open(`https://wa.me/${adminWa}?text=${text}`, '_blank');
 }

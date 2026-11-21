@@ -392,56 +392,44 @@ const DEFAULT_COURSE_DATA = {
     "levelNum": 0,
     "name": "LEVEL 0 UNTUK PEMULA",
     "category": "Pemula & Dasar",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 40059.png 40060.png",
+    "desc": "DOWNLOAD DULU APLIKASI DIATAS YA⤴️⤴️⤴️ MACAM MACAM KARAKTEE STYLE. JADI KALAU KAMU MAU BUAT ANIMASI KAMU BISA PILIH KARAKTER NYA SEPERTI DIBAWAH INI...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "40059.png",
-      "40060.png",
       "DOWNLOAD DULU APLIKASI DIATAS YA⤴️⤴️⤴️",
       "MACAM MACAM KARAKTEE STYLE. JADI KALAU KAMU MAU BUAT ANIMASI KAMU BISA PILIH KARAKTER NYA SEPERTI DIBAWAH INI",
       "TUTORIAL PEMULA ",
-      "  ",
-      "44016.png",
-      "44026.png",
-      "2196156.jpg",
-      "2196157.jpg",
-      "2196155.jpg",
-      "2196154.jpg",
-      "2196153.jpg",
-      "2196152.jpg",
-      "2196158.jpg"
+      "  "
     ],
+    "markdownPrompt": "DOWNLOAD DULU APLIKASI DIATAS YA⤴️⤴️⤴️\n\nMACAM MACAM KARAKTEE STYLE. JADI KALAU KAMU MAU BUAT ANIMASI KAMU BISA PILIH KARAKTER NYA SEPERTI DIBAWAH INI\n\nTUTORIAL PEMULA \n\n  ",
     "coverUrl": "assets/covers/lvl-0.jpg",
-    "toolUrl": "https://www.notion.so/3fe1ad47aa0580268119f947851d7395",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/LOwyXFwNUfk?si=qMdrjDzUwC1iyR2f",
     "videos": [
       {
-        "title": "TUTORIAL PEMULA CARA MENGGUNAKAN MATERI KAK LIA IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 0 UNTUK PEMULA",
         "url": "https://youtu.be/LOwyXFwNUfk?si=qMdrjDzUwC1iyR2f",
-        "embedUrl": "https://www.youtube.com/embed/LOwyXFwNUfk?rel=0"
+        "embedUrl": "https://youtu.be/LOwyXFwNUfk?si=qMdrjDzUwC1iyR2f"
       },
       {
-        "title": "TUTORIAL ANIMASI STORYBOARD ANTI RIBET BY IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 0 UNTUK PEMULA",
         "url": "https://youtu.be/mwzqFa0MvYk?si=_h5nAlfwPTqa8YSD",
-        "embedUrl": "https://www.youtube.com/embed/mwzqFa0MvYk?rel=0"
+        "embedUrl": "https://youtu.be/mwzqFa0MvYk?si=_h5nAlfwPTqa8YSD"
       },
       {
-        "title": "CARA GENERATE PAKAI FLOW OLEH IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL 0 UNTUK PEMULA",
         "url": "https://youtu.be/186T8JuDDJA?si=yktz_xP3rqMlMMYa",
-        "embedUrl": "https://www.youtube.com/embed/186T8JuDDJA?rel=0"
+        "embedUrl": "https://youtu.be/186T8JuDDJA?si=yktz_xP3rqMlMMYa"
       }
-    ],
-    "status": true,
-    "views": 46
+    ]
   },
   {
     "id": "lvl-1",
     "levelNum": 1,
     "name": "LEVEL 1- KARAKTER KONSISTEN/KARAKTER SHEET",
     "category": "Pemula & Dasar",
-    "desc": "Ketuk Tools Karakter Konsisten di bawah. Tekan tombol Mulai.",
+    "desc": "jenis -jenis karakter style Klik disini ...",
     "instructions": [
       "Ketuk Tools Karakter Konsisten di bawah.",
       "Tekan tombol Mulai.",
@@ -454,8 +442,6 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14891.png",
       "jenis -jenis karakter style",
       "Klik disini ",
       "Cara Menggunakan Tools Prompt Karakter Konsisten",
@@ -465,25 +451,25 @@ const DEFAULT_COURSE_DATA = {
       "klik tutorial disini ",
       "Video tutorial"
     ],
+    "markdownPrompt": "1. Ketuk Tools Karakter Konsisten di bawah.\n\n2. Tekan tombol Mulai.\n\n3. Masukkan deskripsi karakter yang ingin dibuat (misalnya: nama karakter, usia, penampilan, pakaian, dan gaya visual).\n\n4. Tunggu hingga tools menghasilkan prompt karakter yang konsisten.\n\n5. Salin prompt yang sudah dibuat.\n\n6. Tempelkan prompt ke ChatGPT atau Gemini untuk menghasilkan gambar karakter.\n\n7. Simpan prompt tersebut, lalu gunakan kembali pada setiap gambar atau adegan agar karakter tetap memiliki wajah, pakaian, dan ciri khas yang sama.\n\n8. Generate gambar dan unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-1.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa05809a8e42d8acbdec36d2",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/2SpOxk_6buI?si=I3DCe5QU9rhV8_bP",
     "videos": [
       {
-        "title": "TUTORIAL KARAKTER SHEET OLEH IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 1- KARAKTER KONSISTEN/KARAKTER SHEET",
         "url": "https://youtu.be/2SpOxk_6buI?si=I3DCe5QU9rhV8_bP",
-        "embedUrl": "https://www.youtube.com/embed/2SpOxk_6buI?rel=0"
+        "embedUrl": "https://youtu.be/2SpOxk_6buI?si=I3DCe5QU9rhV8_bP"
       }
-    ],
-    "status": true,
-    "views": 38
+    ]
   },
   {
     "id": "lvl-2",
     "levelNum": 2,
     "name": "LEVEL 2 -FAKTA MENARIK",
     "category": "Pemula & Dasar",
-    "desc": "Ketuk Tools Fakta Menarik di bawah. Tekan tombol Mulai.",
+    "desc": "Cara Menggunakan Tools Fakta Menarik Tutorial Animasi Clay ...",
     "instructions": [
       "Ketuk Tools Fakta Menarik di bawah.",
       "Tekan tombol Mulai.",
@@ -497,8 +483,6 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14887.png",
       "Cara Menggunakan Tools Fakta Menarik",
       "Tutorial Animasi Clay ",
       "Video tutorial ",
@@ -508,25 +492,31 @@ const DEFAULT_COURSE_DATA = {
       "Tools klik disini ",
       "‎Gemini - direct access to Google AI"
     ],
+    "markdownPrompt": "1. Ketuk Tools Fakta Menarik di bawah.\n\n2. Tekan tombol Mulai.\n\n3. Tulis topik fakta yang ingin dibuat (misalnya: hewan, makanan, sains, sejarah, tubuh manusia, atau luar angkasa).\n\n4. Tunggu hingga tools menghasilkan storyboard, narasi, prompt gambar, dan prompt video secara otomatis.\n\n5. Salin prompt yang telah dibuat.\n\n6. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan gambar.\n\n7. Unduh gambar yang sudah dibuat.\n\n8. Gunakan gambar dan prompt video tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-2.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa0580d895e0dc14feb4b03e",
+    "toolUrl": "https://gemini.google.com/share/9d03a7a1a611",
+    "tools": [
+      {
+        "url": "https://gemini.google.com/share/9d03a7a1a611",
+        "title": "‎Gemini - direct access to Google AI",
+        "description": "Created with Gemini"
+      }
+    ],
     "videoUrl": "https://youtu.be/hPofjxF4A34?si=79LIabyVLTFByG2l",
     "videos": [
       {
-        "title": "FAKTA UNIK NEW VERSI 2026  oleh IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL 2 -FAKTA MENARIK",
         "url": "https://youtu.be/hPofjxF4A34?si=79LIabyVLTFByG2l",
-        "embedUrl": "https://www.youtube.com/embed/hPofjxF4A34?rel=0"
+        "embedUrl": "https://youtu.be/hPofjxF4A34?si=79LIabyVLTFByG2l"
       }
-    ],
-    "status": true,
-    "views": 20
+    ]
   },
   {
     "id": "lvl-3",
     "levelNum": 3,
     "name": "LEVEL 3 - 3D CARTOON",
     "category": "Pemula & Dasar",
-    "desc": "Ketuk Tools 3D Cartoon di bawah. Tekan tombol Mulai.",
+    "desc": "Cara Menggunakan Tools 3D Cartoon Tutorial Animasi 3D Cartoon...",
     "instructions": [
       "Ketuk Tools 3D Cartoon di bawah.",
       "Tekan tombol Mulai.",
@@ -540,8 +530,6 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14888.png",
       "Cara Menggunakan Tools 3D Cartoon",
       "Tutorial Animasi 3D Cartoon",
       "Video Tutorial ",
@@ -550,19 +538,25 @@ const DEFAULT_COURSE_DATA = {
       "👇",
       "ChatGPT - 3D CARTOON BY IRT NAIK LEVEL"
     ],
+    "markdownPrompt": "1. Ketuk Tools 3D Cartoon di bawah.\n\n2. Tekan tombol Mulai.\n\n3. Tulis objek atau karakter yang ingin dibuat dalam gaya 3D Cartoon.\n\n4. Tunggu hingga tools menghasilkan prompt secara otomatis.\n\n5. Salin prompt yang telah dibuat.\n\n6. Tempelkan prompt ke ChatGPT atau Gemini untuk menghasilkan gambar.\n\n7. Unduh gambar yang sudah dibuat.\n\n8. Gunakan gambar dan prompt tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-3.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa058009bf65c5cb4aff6179",
+    "toolUrl": "https://chatgpt.com/g/g-6a075049e36c81919e2e129450bc578b-3d-cartoon-by-irt-naik-level",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a075049e36c81919e2e129450bc578b-3d-cartoon-by-irt-naik-level",
+        "title": "ChatGPT - 3D CARTOON BY IRT NAIK LEVEL",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 27
+    "videos": []
   },
   {
     "id": "lvl-4",
     "levelNum": 4,
     "name": "LEVEL 4 - SKELETON",
     "category": "Pemula & Dasar",
-    "desc": "Ketuk Tools Skeleton AI di bawah. Tekan tombol Mulai.",
+    "desc": "Cara Menggunakan Tools Skeleton AI Cara bikin Animasi  Skeleton sama dengan contoh pertama ...",
     "instructions": [
       "Ketuk Tools Skeleton AI di bawah.",
       "Tekan tombol Mulai.",
@@ -576,82 +570,76 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14889.png",
       "Cara Menggunakan Tools Skeleton AI",
       "Cara bikin Animasi  Skeleton sama dengan contoh pertama ",
       "Klik disini ",
       "Tools skeleton  "
     ],
+    "markdownPrompt": "1. Ketuk Tools Skeleton AI di bawah.\n\n2. Tekan tombol Mulai.\n\n3. Tulis ide atau topik animasi yang ingin dibuat.\n\n4. Tunggu hingga tools menghasilkan storyboard, prompt gambar, dan prompt video secara otomatis.\n\n5. Salin prompt yang telah dibuat.\n\n6. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan gambar skeleton.\n\n7. Unduh gambar yang sudah dibuat.\n\n8. Gunakan gambar dan prompt video tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-4.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa05808b9b09d492822d6432",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 35
+    "videos": []
   },
   {
     "id": "lvl-5",
     "levelNum": 5,
     "name": "LEVEL 5 - TUTORIAL BIKIN POSTER",
     "category": "Pemula & Dasar",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14910.png Tutorial bikin poster ",
+    "desc": "Tutorial bikin poster  Tutorial 2 ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14910.png",
       "Tutorial bikin poster ",
       "Tutorial 2 ",
       "AMBIL PEOMPT DISINI 👇",
       "Tutorial 3 "
     ],
+    "markdownPrompt": "Tutorial bikin poster \n\nTutorial 2 \n\nAMBIL PEOMPT DISINI 👇\n\nTutorial 3 ",
     "coverUrl": "assets/covers/lvl-5.jpg",
-    "toolUrl": "https://www.notion.so/3381ad47aa058066adf6ef61ab31d191",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtube.com/shorts/Litl0-XkNbk?si=R8Tntm9VdsVtF0Dt",
     "videos": [
       {
-        "title": "TUTORIAL BIKIN POSTER",
+        "title": "Tutorial LEVEL 5 - TUTORIAL BIKIN POSTER",
         "url": "https://youtube.com/shorts/Litl0-XkNbk?si=R8Tntm9VdsVtF0Dt",
-        "embedUrl": "https://www.youtube.com/embed/Litl0-XkNbk?rel=0"
+        "embedUrl": "https://youtube.com/shorts/Litl0-XkNbk?si=R8Tntm9VdsVtF0Dt"
       }
-    ],
-    "status": true,
-    "views": 18
+    ]
   },
   {
     "id": "lvl-6",
     "levelNum": 6,
     "name": "LEVEL 6 - Tutorial Voice Over Animasi",
     "category": "Pemula & Dasar",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14911.png Video tutorial VOICE OVER VERSI IRT NAIK LEVEL",
+    "desc": "Video tutorial VOICE OVER VERSI IRT NAIK LEVEL 👈Buat voice disini Klik panah ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14911.png",
       "Video tutorial VOICE OVER VERSI IRT NAIK LEVEL",
       "👈Buat voice disini Klik panah "
     ],
+    "markdownPrompt": "Video tutorial VOICE OVER VERSI IRT NAIK LEVEL\n\n👈Buat voice disini Klik panah ",
     "coverUrl": "assets/covers/lvl-6.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa0580668bf5c3f182a0afbb",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtube.com/shorts/UcG-WhKCrCk?si=ZOIyh4HVtvXBBIZB",
     "videos": [
       {
-        "title": "VOICE OVER OLEH IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 6 - Tutorial Voice Over Animasi",
         "url": "https://youtube.com/shorts/UcG-WhKCrCk?si=ZOIyh4HVtvXBBIZB",
-        "embedUrl": "https://www.youtube.com/embed/UcG-WhKCrCk?rel=0"
+        "embedUrl": "https://youtube.com/shorts/UcG-WhKCrCk?si=ZOIyh4HVtvXBBIZB"
       }
-    ],
-    "status": true,
-    "views": 38
+    ]
   },
   {
     "id": "lvl-7",
     "levelNum": 7,
     "name": "LEVEL 7- FILM ANIMASI / FILM ROMANTIS/FILM PROFESI",
     "category": "Drama & Cerita AI",
-    "desc": "Tonton terlebih dahulu video tutorial agar memahami alur penggunaan tools. Ketuk Tools Film Romantis AI di bawah.",
+    "desc": "Cara Menggunakan Tools Film Romantis AI Tutorial bikin film romantis ...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami alur penggunaan tools.",
       "Ketuk Tools Film Romantis AI di bawah.",
@@ -668,35 +656,30 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14913.png",
       "Cara Menggunakan Tools Film Romantis AI",
       "Tutorial bikin film romantis ",
       "Video Tutorial ",
       "Ketuk Tools dan Mulai disini ",
       "masuk ke chatgpt tempel prompt dibawab :",
       "buatkan drama percintaan antara perawat dan pelaut (ganti judul sesuai yang kami mau ) storytelling, berkarakter 3d dimensi terdiri dari 6 scene buatkan yang menyentuh hati penonton.\ngeneratenya sama seperti biasa ",
-      "contoh master karakter \n",
-      "1292092.png"
+      "contoh master karakter \n"
     ],
+    "markdownPrompt": "1. Tonton terlebih dahulu video tutorial agar memahami alur penggunaan tools.\n\n2. Ketuk Tools Film Romantis AI di bawah.\n\n3. Tekan tombol Mulai.\n\n4. Tulis ide atau tema film romantis yang ingin dibuat.\n\n5. Tunggu hingga tools menghasilkan storyboard, prompt gambar, dan prompt video secara otomatis.\n\n6. Salin prompt yang telah dibuat.\n\n7. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan gambar.\n\n8. Unduh gambar yang sudah dibuat.\n\n9. Gunakan gambar dan prompt video tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n10. Generate video, lalu unduh hasilnya.\n\n11. membuat gambar bisa di chatgpt, gemini atau di flow.\n\n12. Membuat Video Di flow /gemini tapi kalau gemini harus langaaman dulu (hanya 3, video sehari)",
     "coverUrl": "assets/covers/lvl-7.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa0580a0ba75dedf3adfd54a",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 42
+    "videos": []
   },
   {
     "id": "lvl-8",
     "levelNum": 8,
     "name": "LEVEL 8- GEMINI STORYBOOK",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14917.png Cara buat story book ",
+    "desc": "Cara buat story book  ( MUNGKIN TAMPILAN DI GEMININYA BERUBAH UBAH YA TIDAK SELALU SAMA, DICOBA AJA DULU CARI TULISAN GEM BARU COBA BUAT , KAMI USAHAKAN TUTORIA...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14917.png",
       "Cara buat story book ",
       "( MUNGKIN TAMPILAN DI GEMININYA BERUBAH UBAH YA TIDAK SELALU SAMA, DICOBA AJA DULU CARI TULISAN GEM BARU COBA BUAT , KAMI USAHAKAN TUTORIAL AKAN UPGRADE BERKALA)",
       "Buat di gemini Pro ( harus upgrade gemini dulu ke pro )",
@@ -704,33 +687,38 @@ const DEFAULT_COURSE_DATA = {
       "TUTORIAL 2",
       "\n",
       "contoh storybook nya",
-      "‎Gemini - direct access to Google AI",
-      "TUTORIAL 1 "
+      "‎Gemini - direct access to Google AI"
     ],
+    "markdownPrompt": "Cara buat story book \n\n( MUNGKIN TAMPILAN DI GEMININYA BERUBAH UBAH YA TIDAK SELALU SAMA, DICOBA AJA DULU CARI TULISAN GEM BARU COBA BUAT , KAMI USAHAKAN TUTORIAL AKAN UPGRADE BERKALA)\n\nBuat di gemini Pro ( harus upgrade gemini dulu ke pro )\n\nGoogle Gemini https://share.google/no6cI666KwoqwYygO\n\nTUTORIAL 2\n\n\n\n\ncontoh storybook nya\n\n‎Gemini - direct access to Google AI",
     "coverUrl": "assets/covers/lvl-8.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa0580c48b11c54507db06f5",
+    "toolUrl": "https://share.gemini.google/nZ9NiLe6henT",
+    "tools": [
+      {
+        "url": "https://share.gemini.google/nZ9NiLe6henT",
+        "title": "‎Gemini - direct access to Google AI",
+        "description": "Created with Gemini"
+      }
+    ],
     "videoUrl": "https://youtube.com/shorts/z5juR1nVtvo?si=F4bTD5dMlVm1Kd5I",
     "videos": [
       {
-        "title": "TUTORIAL STORYBOOK GEMINI",
+        "title": "Tutorial LEVEL 8- GEMINI STORYBOOK",
         "url": "https://youtube.com/shorts/z5juR1nVtvo?si=F4bTD5dMlVm1Kd5I",
-        "embedUrl": "https://www.youtube.com/embed/z5juR1nVtvo?rel=0"
+        "embedUrl": "https://youtube.com/shorts/z5juR1nVtvo?si=F4bTD5dMlVm1Kd5I"
       },
       {
-        "title": "tutorial gemini storybook",
+        "title": "Tutorial LEVEL 8- GEMINI STORYBOOK",
         "url": "https://youtube.com/shorts/aFQjvEyVCJw?si=7nqlerTLDR0iG6Ec",
-        "embedUrl": "https://www.youtube.com/embed/aFQjvEyVCJw?rel=0"
+        "embedUrl": "https://youtube.com/shorts/aFQjvEyVCJw?si=7nqlerTLDR0iG6Ec"
       }
-    ],
-    "status": true,
-    "views": 38
+    ]
   },
   {
     "id": "lvl-9",
     "levelNum": 9,
     "name": "LEVEL 9 - Tutorial animasi ASMR",
     "category": "Animasi Kreatif",
-    "desc": "Ketuk Tools ASMR AI di bawah. Tekan tombol Mulai/tulis MULAI",
+    "desc": "TONTON DULU VIDEO TURORIALNYA YA Cara Menggunakan Tools ASMR AI...",
     "instructions": [
       "Ketuk Tools ASMR AI di bawah.",
       "Tekan tombol Mulai/tulis MULAI",
@@ -744,8 +732,6 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14920.png",
       "TONTON DULU VIDEO TURORIALNYA YA",
       "Cara Menggunakan Tools ASMR AI",
       "Klik prompt manual disini ",
@@ -753,19 +739,25 @@ const DEFAULT_COURSE_DATA = {
       "TOOLS ASMR PENGHASIL PROMPT KETUK DISINI👇",
       "ChatGPT - ASMR MAGIC by KAK LIA IRT NAIK LEVEL"
     ],
+    "markdownPrompt": "1. Ketuk Tools ASMR AI di bawah.\n\n2. Tekan tombol Mulai/tulis MULAI\n\n3. Tulis objek atau tema ASMR yang ingin dibuat (misalnya: buah, makanan, sabun, slime, bunga, atau objek lainnya).\n\n4. Tunggu hingga tools menghasilkan prompt gambar dan prompt video secara otomatis.\n\n5. Salin prompt yang telah dibuat.\n\n6. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan gambar.\n\n7. Unduh gambar yang sudah dibuat.\n\n8. Gunakan gambar dan prompt video tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-9.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa058035a785d76907fc15c0",
+    "toolUrl": "https://chatgpt.com/g/g-6a7df9961c688191bed3be8134e0afdf-asmr-magic-by-kak-lia-irt-naik-level",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a7df9961c688191bed3be8134e0afdf-asmr-magic-by-kak-lia-irt-naik-level",
+        "title": "ChatGPT - ASMR MAGIC by KAK LIA IRT NAIK LEVEL",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 51
+    "videos": []
   },
   {
     "id": "lvl-10",
     "levelNum": 10,
     "name": "LEVEL 10 - OBJECT TALK",
     "category": "Animasi Kreatif",
-    "desc": "Ketuk Tools Object Talk di bawah. Tekan tombol Mulai.",
+    "desc": "Cara Menggunakan Tools Object Talk Tutorial OBJECT TALK \n...",
     "instructions": [
       "Ketuk Tools Object Talk di bawah.",
       "Tekan tombol Mulai.",
@@ -779,8 +771,6 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14921.png",
       "Cara Menggunakan Tools Object Talk",
       "Tutorial OBJECT TALK \n",
       "Tools PENGHASIL OBJECT TALK",
@@ -791,28 +781,21 @@ const DEFAULT_COURSE_DATA = {
       "buat berdialog bergantian.\ngorengan dialog sbg pria.\nsayuran dialog sbg wanita.",
       "buat (bebas kamu tulis) scene. Lalu ketuk generate. Tinggal copy scene by scene aja.",
       "Yang lagi viral",
-      "Gunung berdialog telor ceplok lava ",
-      "ChatGPT - Object Talk Generator ( irt naik level)"
+      "Gunung berdialog telor ceplok lava "
     ],
+    "markdownPrompt": "1. Ketuk Tools Object Talk di bawah.\n\n2. Tekan tombol Mulai.\n\n3. Tulis objek yang ingin dijadikan karakter yang bisa berbicara (misalnya: gelas, sepatu, bantal, buku, atau benda lainnya).\n\n4. Tunggu hingga tools menghasilkan storyboard, dialog, prompt gambar, dan prompt video secara otomatis.\n\n5. Semua hasil akan dibuat langsung oleh ChatGPT, sehingga tidak perlu menyalin prompt ke aplikasi lain.\n\n6. Generate gambar langsung di ChatGPT.\n\n7. Unduh gambar yang sudah dibuat.\n\n8. Gunakan gambar dan prompt video tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-10.jpg",
-    "toolUrl": "https://www.notion.so/33a1ad47aa0580a7824af8e5397c2a64",
-    "videoUrl": "https://youtu.be/QK4z3aOKntg?si=1azvcTIHNbUE8GbY",
-    "videos": [
-      {
-        "title": "TUTORIAL OBJECT TALK BY IRT NAIK LEVEL MENGGUNAKAN GEMINI",
-        "url": "https://youtu.be/QK4z3aOKntg?si=1azvcTIHNbUE8GbY",
-        "embedUrl": "https://www.youtube.com/embed/QK4z3aOKntg?rel=0"
-      }
-    ],
-    "status": true,
-    "views": 50
+    "toolUrl": "",
+    "tools": [],
+    "videoUrl": "",
+    "videos": []
   },
   {
     "id": "lvl-11",
     "levelNum": 11,
     "name": "LEVEL 11 - ANIMASI AMIGURUMI",
     "category": "Edukasi & Anak",
-    "desc": "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools. Ketuk Tools Amigurumi AI di bawah.",
+    "desc": "Cara Menggunakan Tools Amigurumi AI Tutorial animasi amigurumi...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
       "Ketuk Tools Amigurumi AI di bawah.",
@@ -826,26 +809,24 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14918.png",
       "Cara Menggunakan Tools Amigurumi AI",
       "Tutorial animasi amigurumi",
       "Klik disini ",
       "Tools AMIGURUMI "
     ],
+    "markdownPrompt": "1. Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.\n\n2. Ketuk Tools Amigurumi AI di bawah.\n\n3. Tekan tombol Mulai.\n\n4. Tulis objek atau karakter yang ingin dibuat dalam gaya Amigurumi.\n\n5. Tunggu hingga tools menghasilkan prompt gambar dan prompt video secara otomatis.\n\n6. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan gambar.\n\n7. Unduh gambar yang sudah dibuat.\n\n8. Gunakan gambar dan prompt video tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-11.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa0580e8ae6adb8daf8e8372",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 24
+    "videos": []
   },
   {
     "id": "lvl-12",
     "levelNum": 12,
     "name": "LEVEL 12 - ANIMASI PPDB",
     "category": "Animasi Kreatif",
-    "desc": "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools. Ketuk Tools PPDB AI di bawah.",
+    "desc": "Cara Menggunakan Tools PPDB AI Tools 1 PPDB...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
       "Ketuk Tools PPDB AI di bawah.",
@@ -859,8 +840,6 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14919.png",
       "Cara Menggunakan Tools PPDB AI",
       "Tools 1 PPDB",
       "Tools storyboard PPDB",
@@ -868,24 +847,22 @@ const DEFAULT_COURSE_DATA = {
       "Video tutorialnya Disini",
       "Contoh video PPDB pakai karakter 3D cartoon Pixar "
     ],
+    "markdownPrompt": "1. Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.\n\n2. Ketuk Tools PPDB AI di bawah.\n\n3. Tekan tombol Mulai.\n\n4. Masukkan informasi sekolah yang akan dipromosikan (nama sekolah, jenjang, program unggulan, fasilitas, dan informasi penting lainnya).\n\n5. Tunggu hingga tools menghasilkan konsep promosi, storyboard, narasi, prompt gambar, dan prompt video secara otomatis.\n\n6. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan gambar.\n\n7. Unduh gambar yang sudah dibuat.\n\n8. Gunakan gambar dan prompt video tersebut untuk membuat video promosi di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-12.jpg",
-    "toolUrl": "https://www.notion.so/3731ad47aa0580018257e5fff602b5f6",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 33
+    "videos": []
   },
   {
     "id": "lvl-13",
     "levelNum": 13,
     "name": "LEVEL 13 - TUTORIAL ANIMASI EDUKASI MENGGUNAKAN GEMINI",
     "category": "Edukasi & Anak",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14922.png GANTI PEMBUATAN VIDEONYA KE FLOW SAJA KARENA GEMINI HARUS PRO.",
+    "desc": "GANTI PEMBUATAN VIDEONYA KE FLOW SAJA KARENA GEMINI HARUS PRO. VIDOE TUTORIAL ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14922.png",
       "GANTI PEMBUATAN VIDEONYA KE FLOW SAJA KARENA GEMINI HARUS PRO.",
       "VIDOE TUTORIAL ",
       "Masuk ke chatgpt lalu enter prompt dibawah ini : ganti topik pelajarannya dengan yang kamu mau.",
@@ -897,82 +874,84 @@ const DEFAULT_COURSE_DATA = {
       "prompt awal copya dan pastikan ke chatgpt :",
       "Buatkan prompt teks to image dan prompt image to video beserta narasi untuk  bahan ajar rantai makanan (GANTI SESUAI DENGAN PELAJARAN YANG MAU DIBUAT). Buat 6 scene urutannya Prompt gambar, promt video dan narasi.tambahkan gambar referensi sebagai guru atau narasi . Buatkan master prompt untuk karakter konsisten stylenya 3d cartoon pixar. 16:9"
     ],
+    "markdownPrompt": "GANTI PEMBUATAN VIDEONYA KE FLOW SAJA KARENA GEMINI HARUS PRO.\n\nVIDOE TUTORIAL \n\nMasuk ke chatgpt lalu enter prompt dibawah ini : ganti topik pelajarannya dengan yang kamu mau.\n\nPencemaran air . Style: 3D Clay Pixar, warna cerah, ramah anak SD, cinematic, highly detailed, soft lighting, educational, 16:9.\n\nBuatkan prompt teks to image dan prompt image to video beserta narasi untuk  bahan ajar fotosintesis . Buat 6 scene urutannya Prompt gambar, promt video dan narasi.tambahkan gambar referensi sebagai guru atau narasi .untuk durasi setiap scene terdapat 10 detik.\n\nTutorial dengan tools \n\nTOOLS KETUK DISINI👇\n\nChatGPT - EDUKASI GENERATOR IRT NAIK LEVEL\n\nprompt awal copya dan pastikan ke chatgpt :\n\nBuatkan prompt teks to image dan prompt image to video beserta narasi untuk  bahan ajar rantai makanan (GANTI SESUAI DENGAN PELAJARAN YANG MAU DIBUAT). Buat 6 scene urutannya Prompt gambar, promt video dan narasi.tambahkan gambar referensi sebagai guru atau narasi . Buatkan master prompt untuk karakter konsisten stylenya 3d cartoon pixar. 16:9",
     "coverUrl": "assets/covers/lvl-13.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa0580c2b75fc34f217221fe",
+    "toolUrl": "https://chatgpt.com/g/g-6a752816681081918b32d6989b3c103b-edukasi-generator-irt-naik-level",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a752816681081918b32d6989b3c103b-edukasi-generator-irt-naik-level",
+        "title": "ChatGPT - EDUKASI GENERATOR IRT NAIK LEVEL",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "https://youtu.be/SgwQjDIrjS0?si=KMEjOU8Bb0zqTdUB",
     "videos": [
       {
-        "title": "TUTORIAL ANIMASI EDUKASI MEMAKAI GENERATOR GEMINI",
+        "title": "Tutorial LEVEL 13 - TUTORIAL ANIMASI EDUKASI MENGGUNAKAN GEMINI",
         "url": "https://youtu.be/SgwQjDIrjS0?si=KMEjOU8Bb0zqTdUB",
-        "embedUrl": "https://www.youtube.com/embed/SgwQjDIrjS0?rel=0"
+        "embedUrl": "https://youtu.be/SgwQjDIrjS0?si=KMEjOU8Bb0zqTdUB"
       },
       {
-        "title": "TUTORIAL ANIMASI PEMBELAJARAN oleh IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 13 - TUTORIAL ANIMASI EDUKASI MENGGUNAKAN GEMINI",
         "url": "https://youtube.com/shorts/CoZhS9MwZWE?si=Fb_XmEKmjUNSprRF",
-        "embedUrl": "https://www.youtube.com/embed/CoZhS9MwZWE?rel=0"
+        "embedUrl": "https://youtube.com/shorts/CoZhS9MwZWE?si=Fb_XmEKmjUNSprRF"
       },
       {
-        "title": "TUTORIAL CARA BUAT BAHAN PELAJARAN PAKAI AI. ",
+        "title": "Tutorial LEVEL 13 - TUTORIAL ANIMASI EDUKASI MENGGUNAKAN GEMINI",
         "url": "https://youtu.be/Gedmj8z92Hg?si=K3l_JTo-ZE8BdiDA",
-        "embedUrl": "https://www.youtube.com/embed/Gedmj8z92Hg?rel=0"
+        "embedUrl": "https://youtu.be/Gedmj8z92Hg?si=K3l_JTo-ZE8BdiDA"
       }
-    ],
-    "status": true,
-    "views": 53
+    ]
   },
   {
     "id": "lvl-14",
     "levelNum": 14,
     "name": "LEVEL 14 - TUTORIAL LIPSING",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14923.png  BIKIN LAGU + VIDEO CLIP",
+    "desc": " BIKIN LAGU + VIDEO CLIP Klik disini ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14923.png",
       " BIKIN LAGU + VIDEO CLIP",
       "Klik disini "
     ],
+    "markdownPrompt": " BIKIN LAGU + VIDEO CLIP\n\nKlik disini ",
     "coverUrl": "assets/covers/lvl-14.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa05804baad4fd8449acabd9",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 29
+    "videos": []
   },
   {
     "id": "lvl-15",
     "levelNum": 15,
     "name": "LEVEL 15 - EDITING KONTEN ANIMASI DI CAPCUT",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 48706.png Tutorial menggabungkan Video",
+    "desc": "Tutorial menggabungkan Video...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "48706.png",
       "Tutorial menggabungkan Video"
     ],
+    "markdownPrompt": "Tutorial menggabungkan Video",
     "coverUrl": "assets/covers/lvl-15.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa05806189f5ef12860b5ddb",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/U4_sss1dpLo?si=knYqOqus3WDBYD2X",
     "videos": [
       {
-        "title": "EDITING ANIMASI DI CAPCUT OLEH LIA, IRTNAIKLEVEL ",
+        "title": "Tutorial LEVEL 15 - EDITING KONTEN ANIMASI DI CAPCUT",
         "url": "https://youtu.be/U4_sss1dpLo?si=knYqOqus3WDBYD2X",
-        "embedUrl": "https://www.youtube.com/embed/U4_sss1dpLo?rel=0"
+        "embedUrl": "https://youtu.be/U4_sss1dpLo?si=knYqOqus3WDBYD2X"
       }
-    ],
-    "status": true,
-    "views": 41
+    ]
   },
   {
     "id": "lvl-16",
     "levelNum": 16,
     "name": "LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
     "category": "Affiliate & Iklan",
-    "desc": "TUTORIAL BIKIN TOKO [LYNK.ID](http://LYNK.ID) & BONUS PRODUK DIGITAL SIAP JUAL PRODUK DIGITAL WORKSHEET ANAK BOLEH DIJUAL ADA DI DESKRIPSI GRUP YANG TULISAN BONUS.",
+    "desc": "KALAU KAMU MAU BELAJAR ALUR BISNIS PRODUK DIGITAL DAN ANIMASI AI JANGAN SKIP YA SCROLL SAMPAI BAW AH DIBACA PELAN2 DI TONTON PELAN-PELAN SAMPAI PAHAM. CARA MENG...",
     "instructions": [
       "TUTORIAL BIKIN TOKO [LYNK.ID](http://LYNK.ID) & BONUS PRODUK DIGITAL SIAP JUAL",
       "PRODUK DIGITAL WORKSHEET ANAK BOLEH DIJUAL ADA DI DESKRIPSI GRUP YANG TULISAN BONUS.",
@@ -1007,10 +986,7 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "2140605.png",
       "KALAU KAMU MAU BELAJAR ALUR BISNIS PRODUK DIGITAL DAN ANIMASI AI JANGAN SKIP YA SCROLL SAMPAI BAW AH DIBACA PELAN2 DI TONTON PELAN-PELAN SAMPAI PAHAM.",
-      "1512661.png",
       "CARA MENGAKTIFKAN FB PRO SUPAYA DI MONETISASI",
       "CARA MENGAKTIFKAN FACEBOOK PRO",
       "klik panah untuk membuka folder👈",
@@ -1032,9 +1008,6 @@ const DEFAULT_COURSE_DATA = {
       "CARA UPLOAD GDRIVE BONUS WORKSHEET ANAK KE TOKO DIGITAL LYNKID.",
       "Strategi jualan",
       "⬇️⬇️⬇️⬇️⬇️⬇️",
-      "1979003.png",
-      "1979007.png",
-      "1979010.png",
       "CUAN DARI KERANJANG KUNING  TIKTOK, FACEBOOK, SHOPEE ",
       "Cara Menautkan Keranjang Kuning Affiliate",
       "Ingin mulai mendapatkan komisi dari affiliate? Ikuti langkah-langkah berikut:",
@@ -1047,51 +1020,66 @@ const DEFAULT_COURSE_DATA = {
       "💡 Catatan: Facebook tidak memiliki fitur keranjang kuning seperti TikTok dan Shopee. Promosi produk di Facebook dilakukan melalui link produk, Meta Shop (jika tersedia), atau katalog produk.",
       "KAMU JUGA BISA CARI TUTORIALNYA DI YOUTOBE YA KALAU KAMU MASIH GAK PAHAM. OKE."
     ],
+    "markdownPrompt": "1. TUTORIAL BIKIN TOKO [LYNK.ID](http://LYNK.ID) & BONUS PRODUK DIGITAL SIAP JUAL\n\n2. PRODUK DIGITAL WORKSHEET ANAK BOLEH DIJUAL ADA DI DESKRIPSI GRUP YANG TULISAN BONUS.\n\n3. Pilih produk affiliate yang ingin dipromosikan.\n\n4. Buat video yang menarik tentang produk tersebut (review, unboxing, tutorial, atau rekomendasi).\n\n5. Upload video ke platform yang kamu gunakan.\n\n6. Saat mengunggah video, tautkan produk affiliate ke keranjang kuning.\n\n7. Bagikan video secara konsisten di TikTok, Facebook, dan Shopee Video agar jangkauan lebih luas.\n\n8. Setiap ada pembeli yang checkout melalui keranjang kuningmu, kamu berpeluang mendapatkan komisi sesuai ketentuan program affiliate.\n\n9. Buka aplikasi TikTok.\n\n10. Tekan tombol + lalu unggah atau rekam video.\n\n11. Setelah selesai mengedit, pilih Tambah Tautan (Add Link).\n\n12. Pilih Produk.\n\n13. Cari dan pilih produk affiliate yang ingin dipromosikan.\n\n14. Tambahkan produk tersebut ke video.\n\n15. Isi caption, lalu klik Posting.\n\n16. Buka aplikasi Shopee.\n\n17. Masuk ke menu Shopee Video.\n\n18. Ketuk ikon + untuk mengunggah video.\n\n19. Pilih video yang ingin diposting.\n\n20. Ketuk Tambahkan Produk.\n\n21. Pilih produk dari akun Shopee Affiliate kamu.\n\n22. Tambahkan produk ke video, lalu isi judul atau deskripsi.\n\n23. Klik Posting.\n\n24. Buka aplikasi Facebook.\n\n25. Ketuk Buat Reels atau unggah video.\n\n26. Pilih video yang ingin diposting.\n\n27. Tambahkan judul atau caption yang menarik.\n\n28. Tempelkan link produk affiliate atau link toko pada caption (atau sematkan di komentar setelah video diposting).\n\n29. Klik Bagikan untuk mempublikasikan video.\n\n30. Ajak penonton membuka link yang kamu bagikan untuk melihat atau membeli produk.",
     "coverUrl": "assets/covers/lvl-16.jpg",
     "toolUrl": "http://LYNK.ID",
+    "tools": [],
     "videoUrl": "https://youtu.be/vawDDJlcK48?si=e-ZhZLTLyOVdpUF_",
     "videos": [
       {
-        "title": "CARA MEMULAI BISNIS PRODUK DIGITAL ",
+        "title": "Tutorial LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
         "url": "https://youtu.be/vawDDJlcK48?si=e-ZhZLTLyOVdpUF_",
-        "embedUrl": "https://www.youtube.com/embed/vawDDJlcK48?rel=0"
+        "embedUrl": "https://youtu.be/vawDDJlcK48?si=e-ZhZLTLyOVdpUF_"
       },
       {
-        "title": "ALUR BISNIS PRODUK DIGITAL",
+        "title": "Tutorial LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
         "url": "https://youtu.be/U7AsdGny0qg?si=3cYM03sCmIBByB-1",
-        "embedUrl": "https://www.youtube.com/embed/U7AsdGny0qg?rel=0"
+        "embedUrl": "https://youtu.be/U7AsdGny0qg?si=3cYM03sCmIBByB-1"
       },
       {
-        "title": "CARA BUAT COVER MENARIK UNTUK TOKO LYNK.ID OLEH IRTNAIKLEVEL ",
+        "title": "Tutorial LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
         "url": "https://youtu.be/yCYck4wNeAc?si=_360N8EynBiHyfkB",
-        "embedUrl": "https://www.youtube.com/embed/yCYck4wNeAc?rel=0"
+        "embedUrl": "https://youtu.be/yCYck4wNeAc?si=_360N8EynBiHyfkB"
       },
       {
-        "title": "BIKIN LINK CANVA UNTUK BUNDLING PRODUK DIGITAL BY IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
         "url": "https://youtu.be/ET4mwcb7wfw?si=nxFa-vdVJC5nRCVw",
-        "embedUrl": "https://www.youtube.com/embed/ET4mwcb7wfw?rel=0"
+        "embedUrl": "https://youtu.be/ET4mwcb7wfw?si=nxFa-vdVJC5nRCVw"
       },
       {
-        "title": "CARA UPLOAD PRODUK DIGITAL KE TOKO DIGITAL LYNKID.",
+        "title": "Tutorial LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
         "url": "https://youtu.be/shQOJliOZH8?si=u9BDX4LsgTEJBMQB",
-        "embedUrl": "https://www.youtube.com/embed/shQOJliOZH8?rel=0"
+        "embedUrl": "https://youtu.be/shQOJliOZH8?si=u9BDX4LsgTEJBMQB"
       },
       {
-        "title": "CARA PROMOSI PRODUK DIGITAL by Lia, IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
         "url": "https://youtu.be/EToDEWb7Fnw?si=CKerbPOicnlcPiZy",
-        "embedUrl": "https://www.youtube.com/embed/EToDEWb7Fnw?rel=0"
+        "embedUrl": "https://youtu.be/EToDEWb7Fnw?si=CKerbPOicnlcPiZy"
       }
-    ],
-    "status": true,
-    "views": 19
+    ]
   },
   {
     "id": "lvl-17",
     "levelNum": 17,
     "name": "LEVEL 17 - INFOGRAFIS PEMBELAJARAN",
     "category": "Edukasi & Anak",
-    "desc": "Konsep infografis Isi setiap halaman",
+    "desc": "Video Tutorial Cara minta promt ke chatgpt ...",
     "instructions": [
+      "Mata Pelajaran",
+      "Jenjang & Kelas",
+      "Topik/Materi",
+      "A4 → untuk print/worksheet",
+      "1:1 → untuk posting Instagram",
+      "4:5 → untuk feed",
+      "9:16 → untuk Story/Reels/TikTok",
+      "16:9 → untuk presentasi/video",
+      "3D Cartoon",
+      "Clay",
+      "Cute Educational",
+      "Minimalist",
+      "Doodle",
+      "Watercolor",
+      "Isometric",
       "Konsep infografis",
       "Isi setiap halaman",
       "Rancangan visual",
@@ -1103,8 +1091,6 @@ const DEFAULT_COURSE_DATA = {
       "Buat infografis Matematika kelas 4 SD tentang pecahan, 6 halaman, A4, gaya cute educational."
     ],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14931.png",
       "Video Tutorial",
       "Cara minta promt ke chatgpt ",
       "Mulai buat tekan disini ( tools terbaru)",
@@ -1118,33 +1104,16 @@ const DEFAULT_COURSE_DATA = {
       "Tools ini membantu kamu membuat infografis pembelajaran untuk berbagai mata pelajaran dengan bantuan AI.",
       "LANGKAH 1 — TENTUKAN MATERI",
       "Masukkan:",
-      "Mata Pelajaran",
-      "Jenjang & Kelas",
-      "Topik/Materi",
       "Contoh:",
       "Mata Pelajaran: IPAS",
       "LANGKAH 2 — PILIH JUMLAH HALAMAN",
       "Tentukan jumlah halaman yang ingin dibuat.",
       "Contoh:",
-      "Kelas: 5 SD",
-      "Materi: Rantai Makanan",
       "5 halaman",
       "LANGKAH 3 — PILIH UKURAN",
       "Pilih ukuran sesuai kebutuhan:",
-      "A4 → untuk print/worksheet",
-      "1:1 → untuk posting Instagram",
-      "4:5 → untuk feed",
-      "9:16 → untuk Story/Reels/TikTok",
-      "16:9 → untuk presentasi/video",
       "LANGKAH 4 — PILIH GAYA",
       "Contoh:",
-      "3D Cartoon",
-      "Clay",
-      "Cute Educational",
-      "Minimalist",
-      "Doodle",
-      "Watercolor",
-      "Isometric",
       "Jika bingung, tulis:",
       "Pilihkan yang paling cocok.",
       "LANGKAH 5 — GENERATE",
@@ -1160,30 +1129,34 @@ const DEFAULT_COURSE_DATA = {
       "Cukup berikan mata pelajaran + kelas + materi, lalu biarkan tools membantu menyusun konsep dan prompt secara otomatis.",
       "Makin jelas materi yang diberikan, makin sesuai hasil infografisnya."
     ],
+    "markdownPrompt": "Buat infografis IPAS kelas 5 SD tentang rantai makanan, 5 halaman, A4, gaya 3D Cartoon, warna cerah.\n\n---\n\nBuat infografis Matematika kelas 4 SD tentang pecahan, 6 halaman, A4, gaya cute educational.",
     "coverUrl": "assets/covers/lvl-17.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa0580ca952ef5b42f835667",
+    "toolUrl": "https://chatgpt.com/g/g-6a7ce13ab4148191a00c65007626d84a-irt-naik-level-infografis-pembelajaran",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a7ce13ab4148191a00c65007626d84a-irt-naik-level-infografis-pembelajaran",
+        "title": "ChatGPT - IRT NAIK LEVEL — INFOGRAFIS PEMBELAJARAN",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "https://youtube.com/shorts/zqwi3zRN06s?si=fd5v2J4bbEyIo1vE",
     "videos": [
       {
-        "title": "IRT NAIK LEVEL -TUTORIAL INFOGRAFIS",
+        "title": "Tutorial LEVEL 17 - INFOGRAFIS PEMBELAJARAN",
         "url": "https://youtube.com/shorts/zqwi3zRN06s?si=fd5v2J4bbEyIo1vE",
-        "embedUrl": "https://www.youtube.com/embed/zqwi3zRN06s?rel=0"
+        "embedUrl": "https://youtube.com/shorts/zqwi3zRN06s?si=fd5v2J4bbEyIo1vE"
       }
-    ],
-    "status": true,
-    "views": 52
+    ]
   },
   {
     "id": "lvl-18",
     "levelNum": 18,
     "name": "LEVEL 18 - TUTORIAL TIMELAPSE  AI",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 40066.png TUTORIAL TIMELAPSE AI 💜✨\nBelajar dari Nol Bersama IRT Naik Level\nMau bikin video rumah tua beruba",
+    "desc": "TUTORIAL TIMELAPSE AI 💜✨\nBelajar dari Nol Bersama IRT Naik Level\nMau bikin video rumah tua berubah jadi rumah mewah hanya dengan AI? 🏚️➡️🏡\nYuk, ikuti langkah...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "40066.png",
       "TUTORIAL TIMELAPSE AI 💜✨\nBelajar dari Nol Bersama IRT Naik Level\nMau bikin video rumah tua berubah jadi rumah mewah hanya dengan AI? 🏚️➡️🏡\nYuk, ikuti langkah mudah berikut ini!\n💜 LANGKAH 1 — Buat Konsep di ChatGPT\nBuka ChatGPT, lalu masukkan prompt berikut:",
       "/TIMELAPSE + Tema: Renovasi rumah tua menjadi rumah mewah + Style: Realistis cinematic + Durasi: 10 detik + Rasio: 9:16. Buatkan konsep, tahapan renovasi, prompt gambar BEFORE dan AFTER, serta prompt video timelapse yang realistis dan konsisten.",
       "LANGKAH 2 — Buat Gambar BEFORE\nBuka Gemini atau ChatGPT.\nSalin prompt gambar BEFORE dari langkah pertama.\nGenerate gambar rumah tua.\nSimpan hasil gambarnya.",
@@ -1192,91 +1165,118 @@ const DEFAULT_COURSE_DATA = {
       "\n💜 LANGKAH 5 — Edit di CapCut\nBuka CapCut dan buat proyek baru.\nMasukkan video timelapse.\nTambahkan musik cinematic atau efek suara renovasi.\nTambahkan tulisan \"Rumah Tua Jadi Mewah dalam 10 Detik!\"\nExport dengan kualitas 1080p atau lebih tinggi.",
       "\n💛 LANGKAH 6 — Upload ke Media Sosial\nUpload hasilnya ke TikTok, Instagram Reels, Facebook Reels, atau YouTube Shorts.\nTambahkan caption menarik dan hashtag yang relevan."
     ],
+    "markdownPrompt": "TUTORIAL TIMELAPSE AI 💜✨\nBelajar dari Nol Bersama IRT Naik Level\nMau bikin video rumah tua berubah jadi rumah mewah hanya dengan AI? 🏚️➡️🏡\nYuk, ikuti langkah mudah berikut ini!\n💜 LANGKAH 1 — Buat Konsep di ChatGPT\nBuka ChatGPT, lalu masukkan prompt berikut:\n\n/TIMELAPSE + Tema: Renovasi rumah tua menjadi rumah mewah + Style: Realistis cinematic + Durasi: 10 detik + Rasio: 9:16. Buatkan konsep, tahapan renovasi, prompt gambar BEFORE dan AFTER, serta prompt video timelapse yang realistis dan konsisten.\n\nLANGKAH 2 — Buat Gambar BEFORE\nBuka Gemini atau ChatGPT.\nSalin prompt gambar BEFORE dari langkah pertama.\nGenerate gambar rumah tua.\nSimpan hasil gambarnya.\n\n\n💜 LANGKAH 3 — Buat Gambar AFTER\nUpload gambar rumah tua tadi.\nMasukkan prompt gambar AFTER.\nMinta AI mengubahnya menjadi rumah mewah.\nPastikan bentuk rumah, posisi kamera, dan sudut bangunan tetap sama.\nSimpan hasil gambar AFTER.\n\n\n💛 LANGKAH 4 — Buat Video di Flow\nBuka Google Flow.\nPilih fitur pembuatan video yang mendukung frame awal dan akhir.\nUpload gambar BEFORE sebagai frame awal.\nUpload gambar AFTER sebagai frame akhir.\nTempel prompt video timelapse dari ChatGPT.\nPilih rasio 9:16 dan durasi 10 detik jika tersedia.\nKlik Generate.\nCatatan: Pilihan fitur, rasio, dan durasi bisa berbeda tergantung model serta versi Flow yang digunakan.\n\n\n💜 LANGKAH 5 — Edit di CapCut\nBuka CapCut dan buat proyek baru.\nMasukkan video timelapse.\nTambahkan musik cinematic atau efek suara renovasi.\nTambahkan tulisan \"Rumah Tua Jadi Mewah dalam 10 Detik!\"\nExport dengan kualitas 1080p atau lebih tinggi.\n\n\n💛 LANGKAH 6 — Upload ke Media Sosial\nUpload hasilnya ke TikTok, Instagram Reels, Facebook Reels, atau YouTube Shorts.\nTambahkan caption menarik dan hashtag yang relevan.",
     "coverUrl": "assets/covers/lvl-18.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa058037bf54fb1e0efc674a",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/nrBjotOCAAQ?si=tQcVwGVVtxvLgt0_",
     "videos": [
       {
-        "title": "TIMELAPSE BY LIA, IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL 18 - TUTORIAL TIMELAPSE  AI",
         "url": "https://youtu.be/nrBjotOCAAQ?si=tQcVwGVVtxvLgt0_",
-        "embedUrl": "https://www.youtube.com/embed/nrBjotOCAAQ?rel=0"
+        "embedUrl": "https://youtu.be/nrBjotOCAAQ?si=tQcVwGVVtxvLgt0_"
       }
-    ],
-    "status": true,
-    "views": 42
+    ]
   },
   {
     "id": "lvl-19",
     "levelNum": 19,
     "name": "LEVEL 19 - CLONING VIDEO Cloning /analisis Video (1)",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 1479685.png Upload video lalu tekan yg dibawah lalu masukkan video yang ingin di analisis ",
+    "desc": "Upload video lalu tekan yg dibawah lalu masukkan video yang ingin di analisis  ChatGPT - Cloning Video By IRT Naik Level...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "1479685.png",
       "Upload video lalu tekan yg dibawah lalu masukkan video yang ingin di analisis ",
       "ChatGPT - Cloning Video By IRT Naik Level"
     ],
+    "markdownPrompt": "Upload video lalu tekan yg dibawah lalu masukkan video yang ingin di analisis \n\nChatGPT - Cloning Video By IRT Naik Level",
     "coverUrl": "assets/covers/lvl-19.jpg",
-    "toolUrl": "https://www.notion.so/3fe1ad47aa0580489ee1c429c6f55f0e",
+    "toolUrl": "https://chatgpt.com/g/g-69e9569029a481918a6d4afeac48d158-cloning-video-by-irt-naik-level",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-69e9569029a481918a6d4afeac48d158-cloning-video-by-irt-naik-level",
+        "title": "ChatGPT - Cloning Video By IRT Naik Level",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 47
+    "videos": []
   },
   {
     "id": "lvl-20",
     "levelNum": 20,
     "name": "LEVEL 20 - CHEF ANIMASI",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 2884.png cara buat videonya sama dengan seperti tutorial lainnya ",
+    "desc": "cara buat videonya sama dengan seperti tutorial lainnya  Tools resep1 ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "2884.png",
       "cara buat videonya sama dengan seperti tutorial lainnya ",
       "Tools resep1 ",
       "Tools resep 2"
     ],
+    "markdownPrompt": "cara buat videonya sama dengan seperti tutorial lainnya \n\nTools resep1 \n\nTools resep 2",
     "coverUrl": "assets/covers/lvl-20.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa05808699d2edae031b7276",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 25
+    "videos": []
   },
   {
     "id": "lvl-21",
     "levelNum": 21,
     "name": "LEVEL 21 - FILM ACTION",
     "category": "Drama & Cerita AI",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14932.png Tools Film Action ",
+    "desc": "Tools Film Action  Tools disini...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14932.png",
       "Tools Film Action ",
       "Tools disini",
       "ChatGPT - ACTION MOVIE GENERATOR by IRT NAIK LEVEL"
     ],
+    "markdownPrompt": "Tools Film Action \n\nTools disini\n\nChatGPT - ACTION MOVIE GENERATOR by IRT NAIK LEVEL",
     "coverUrl": "assets/covers/lvl-21.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa05800f9d90cd54eb39162f",
+    "toolUrl": "https://chatgpt.com/g/g-6a73ff0a86e481919358ef5c76ef973f-action-movie-generator-by-irt-naik-level",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a73ff0a86e481919358ef5c76ef973f-action-movie-generator-by-irt-naik-level",
+        "title": "ChatGPT - ACTION MOVIE GENERATOR by IRT NAIK LEVEL",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 43
+    "videos": []
   },
   {
     "id": "lvl-22",
     "levelNum": 22,
     "name": "LEVEL 22 - QUOTES KEHIDUPAN VIDEO BERGERAK",
     "category": "Animasi Kreatif",
-    "desc": "Ketuk Tools Quotes Kehidupan di bawah. Tekan tombol Mulai.",
+    "desc": "VERSI BARU VIRAL SOSMED PROMPT TEKS TO IMAGE TEMPEL KE CHATGPT SERTAKAN GAMBAR KAMU DAN QUOTES KAMU ....",
     "instructions": [
+      "Rambut: [warna dan model rambut]",
+      "Hijab: [pakai hijab/tanpa hijab]",
+      "Pakaian: [jenis dan warna pakaian]",
+      "Bawahan: [rok/celana/dress]",
+      "Sepatu: [jenis dan warna]",
+      "Aksesori: [kacamata/tas/topi/dll.]",
+      ". ADEGAN / AKTIVITAS",
+      "Rasio vertikal 9:16.",
+      "Karakter berada di tengah bagian bawah.",
+      "Quotes berada di bagian atas.",
+      "Background terlihat indah dan estetik.",
+      "Teks tidak menutupi wajah karakter.",
+      "Hasil akhir tajam, bersih, dan berkualitas tinggi.",
+      "Preserve the original character's face, hairstyle, glasses, outfit, and appearance.",
+      "Maintain the original premium 3D chibi animation style.",
+      "Keep all quotes and watermark visible, static, and unchanged.",
+      "Do not add new characters.",
+      "No face distortion, no flickering, no extra limbs.",
+      "Smooth natural animation.",
+      "Peaceful, dreamy, magical atmosphere.",
+      "No dialogue, no voice-over.",
       "Ketuk Tools Quotes Kehidupan di bawah.",
       "Tekan tombol Mulai.",
       "Tulis tema atau pesan yang ingin disampaikan (misalnya: motivasi, kehidupan, kesabaran, kesuksesan, keluarga, atau islami).",
@@ -1289,9 +1289,6 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "48290.png",
-      "48291.png",
       "VERSI BARU VIRAL SOSMED",
       "PROMPT TEKS TO IMAGE TEMPEL KE CHATGPT SERTAKAN GAMBAR KAMU DAN QUOTES KAMU .",
       "🌸 PROMPT UNIVERSAL ANIMASI 3D CHIBI ESTETIK",
@@ -1300,13 +1297,6 @@ const DEFAULT_COURSE_DATA = {
       "1. KARAKTER UTAMA",
       "Seorang [wanita/pria/anak-anak/nenek/kakek], usia [isi usia], berwajah imut dan ekspresif, mata besar berkilau, pipi merona, senyum manis.",
       "Detail karakter:",
-      "Rambut: [warna dan model rambut]",
-      "Hijab: [pakai hijab/tanpa hijab]",
-      "Pakaian: [jenis dan warna pakaian]",
-      "Bawahan: [rok/celana/dress]",
-      "Sepatu: [jenis dan warna]",
-      "Aksesori: [kacamata/tas/topi/dll.]",
-      ". ADEGAN / AKTIVITAS",
       "Karakter sedang [isi aktivitas, misalnya mengendarai sepeda, berjalan membawa bunga, minum kopi, memasak, membaca buku, atau duduk santai].",
       "Ekspresi wajah [bahagia/tersenyum/semangat/tenang/lucu].",
       "Pose natural, menggemaskan, dan penuh kehidupan.",
@@ -1327,14 +1317,7 @@ const DEFAULT_COURSE_DATA = {
       "6. STYLE VISUAL",
       "Premium 3D animated movie, adorable chibi character, soft pastel colors, cinematic lighting, dreamy atmosphere, magical environment, ultra detailed, soft depth of field, beautiful composition, smooth textures, high-quality 3D rendering.",
       "7. KOMPOSISI GAMBAR",
-      "Rasio vertikal 9:16.",
-      "Karakter berada di tengah bagian bawah.",
-      "Quotes berada di bagian atas.",
-      "Background terlihat indah dan estetik.",
-      "Teks tidak menutupi wajah karakter.",
-      "Hasil akhir tajam, bersih, dan berkualitas tinggi.",
       "Buat gambar langsung berdasarkan detail di atas.",
-      "48318.jpg",
       "Bonus Prompt Universal Video Animasi (Google Flow)\nSetelah gambar jadi, upload gambar tersebut ke Flow lalu gunakan prompt ini.",
       "Animate the provided 3D chibi image into a beautiful cinematic animated scene.",
       "Duration: 8–10 seconds.",
@@ -1342,16 +1325,9 @@ const DEFAULT_COURSE_DATA = {
       "Environment animation:\nFlowers gently sway in the breeze, cherry blossom petals float slowly through the air, sunlight glows softly, and background elements move naturally.",
       "Camera movement:\nSmooth cinematic slow dolly-in with subtle parallax, maintaining the original composition.",
       "Important instructions:",
-      "Preserve the original character's face, hairstyle, glasses, outfit, and appearance.",
-      "Maintain the original premium 3D chibi animation style.",
-      "Keep all quotes and watermark visible, static, and unchanged.",
-      "Do not add new characters.",
-      "No face distortion, no flickering, no extra limbs.",
-      "Smooth natural animation.",
-      "Peaceful, dreamy, magical atmosphere.",
-      "No dialogue, no voice-over.",
       "Aspect ratio: 9:16.",
       "Quality: Premium cinematic 3D animation, smooth motion, beautiful golden-hour lighting.",
+      "48319.mp4",
       "VIDEO TUTORIAL DIBAWAH INI ",
       " ",
       "Cara Menggunakan Tools Quotes Kehidupan",
@@ -1359,8 +1335,10 @@ const DEFAULT_COURSE_DATA = {
       "AMBIL PROMPT DI TOOLS INI",
       "TUTORIAL CARA BIKIN QUOTES "
     ],
+    "markdownPrompt": "1. Rambut: [warna dan model rambut]\n\n2. Hijab: [pakai hijab/tanpa hijab]\n\n3. Pakaian: [jenis dan warna pakaian]\n\n4. Bawahan: [rok/celana/dress]\n\n5. Sepatu: [jenis dan warna]\n\n6. Aksesori: [kacamata/tas/topi/dll.]\n\n7. . ADEGAN / AKTIVITAS\n\n8. Rasio vertikal 9:16.\n\n9. Karakter berada di tengah bagian bawah.\n\n10. Quotes berada di bagian atas.\n\n11. Background terlihat indah dan estetik.\n\n12. Teks tidak menutupi wajah karakter.\n\n13. Hasil akhir tajam, bersih, dan berkualitas tinggi.\n\n14. Preserve the original character's face, hairstyle, glasses, outfit, and appearance.\n\n15. Maintain the original premium 3D chibi animation style.\n\n16. Keep all quotes and watermark visible, static, and unchanged.\n\n17. Do not add new characters.\n\n18. No face distortion, no flickering, no extra limbs.\n\n19. Smooth natural animation.\n\n20. Peaceful, dreamy, magical atmosphere.\n\n21. No dialogue, no voice-over.\n\n22. Ketuk Tools Quotes Kehidupan di bawah.\n\n23. Tekan tombol Mulai.\n\n24. Tulis tema atau pesan yang ingin disampaikan (misalnya: motivasi, kehidupan, kesabaran, kesuksesan, keluarga, atau islami).\n\n25. Tunggu hingga tools menghasilkan quotes, caption, prompt gambar, dan prompt video secara otomatis.\n\n26. Salin prompt yang telah dibuat.\n\n27. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan gambar.\n\n28. Unduh gambar yang sudah dibuat.\n\n29. Gunakan gambar dan prompt video tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n30. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-22.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa0580b79502c287f9c7b62d",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "attachment:488b5637-2733-4041-a455-55f19cd97856:48319.mp4",
     "videos": [
       {
@@ -1369,20 +1347,18 @@ const DEFAULT_COURSE_DATA = {
         "embedUrl": "attachment:488b5637-2733-4041-a455-55f19cd97856:48319.mp4"
       },
       {
-        "title": "QUOTES ESTETIK BY LIA,IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 22 - QUOTES KEHIDUPAN VIDEO BERGERAK",
         "url": "https://youtu.be/I96Dg7ZY5SE?si=yJ9HoMfhW8U9_k9v",
-        "embedUrl": "https://www.youtube.com/embed/I96Dg7ZY5SE?rel=0"
+        "embedUrl": "https://youtu.be/I96Dg7ZY5SE?si=yJ9HoMfhW8U9_k9v"
       }
-    ],
-    "status": true,
-    "views": 34
+    ]
   },
   {
     "id": "lvl-23",
     "levelNum": 23,
     "name": "LEVEL 23 - GIAND OBJECT",
     "category": "Animasi Kreatif",
-    "desc": "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools. Ketuk Tools Giant Object AI di bawah.",
+    "desc": "Cara Menggunakan Tools Giant Object AI Tools penghasil Prompt GIANT OBJECT ...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
       "Ketuk Tools Giant Object AI di bawah.",
@@ -1396,26 +1372,24 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "6407.png",
       "Cara Menggunakan Tools Giant Object AI",
       "Tools penghasil Prompt GIANT OBJECT ",
       "Video tutorial ",
       "Klik tools disini "
     ],
+    "markdownPrompt": "1. Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.\n\n2. Ketuk Tools Giant Object AI di bawah.\n\n3. Tekan tombol Mulai.\n\n4. Tulis objek raksasa yang ingin dibuat (misalnya: makanan, buah, minuman, mainan, atau benda lainnya).\n\n5. Tunggu hingga tools menghasilkan prompt gambar dan prompt video secara otomatis.\n\n6. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan gambar.\n\n7. Unduh gambar yang sudah dibuat.\n\n8. Gunakan gambar dan prompt video tersebut untuk membuat video di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-23.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa05800e8632dccc5932d582",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 30
+    "videos": []
   },
   {
     "id": "lvl-24",
     "levelNum": 24,
     "name": "LEVEL 24 - DESIGN UCAPAN",
     "category": "Animasi Kreatif",
-    "desc": "Ketuk Tools Design Ucapan di bawah. Tekan tombol Mulai.",
+    "desc": "Design ucapan kamu disini ya  Cara Menggunakan Tools Design Ucapan...",
     "instructions": [
       "Ketuk Tools Design Ucapan di bawah.",
       "Tekan tombol Mulai.",
@@ -1429,26 +1403,24 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14930.png",
       "Design ucapan kamu disini ya ",
       "Cara Menggunakan Tools Design Ucapan",
       "Klik disini untuk membuat desain ucapan ",
       "VIDEO TUTORIAL "
     ],
+    "markdownPrompt": "1. Ketuk Tools Design Ucapan di bawah.\n\n2. Tekan tombol Mulai.\n\n3. Tulis jenis ucapan yang ingin dibuat (misalnya: ulang tahun, pernikahan, wisuda, kelahiran, hari raya, atau ucapan terima kasih).\n\n4. Tunggu hingga tools menghasilkan desain konsep, teks ucapan, dan prompt gambar secara otomatis.\n\n5. Salin prompt yang telah dibuat.\n\n6. Tempelkan prompt gambar ke ChatGPT atau Gemini untuk menghasilkan desain.\n\n7. Unduh hasil desain yang sudah dibuat.\n\n8. Jika ingin dibuat dalam bentuk video, gunakan gambar dan prompt video tersebut di Grok, Leonardo AI, Google Flow, atau Gemini.\n\n9. Generate video, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-24.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa05802bbdb6dee11f3ff74d",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 53
+    "videos": []
   },
   {
     "id": "lvl-25",
     "levelNum": 25,
     "name": "LEVEL 25 - PROMPT ESTETIK IRTNAIKLEVEL",
     "category": "Karakter & Prompt",
-    "desc": "Ketuk Tools di bawah. Tekan tombol Mulai.",
+    "desc": "Cara Menggunakan Tools Prompt Otomatis ChatGPT - TOOLS PENGHASIL PROMPT OTOMATIS...",
     "instructions": [
       "Ketuk Tools di bawah.",
       "Tekan tombol Mulai.",
@@ -1460,95 +1432,90 @@ const DEFAULT_COURSE_DATA = {
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "12050.jpg",
       "Cara Menggunakan Tools Prompt Otomatis",
       "ChatGPT - TOOLS PENGHASIL PROMPT OTOMATIS",
       "VIDEO TUTORIAL ",
       "CONTOH PROMPT ",
       "Prompt 1 ",
-      "1000833077.png",
       "Masuk ke chat gpt pastekan prompt dibawah",
       "Contoh prompt ",
       "Buat ilustrasi aesthetic meja kerja cozy bergaya kawaii pastel dengan nuansa hangat dan feminin. Tampilan dari atas (top view) sebuah meja kayu estetik warna coklat muda dengan dekorasi pink pastel lucu. Di atas meja terdapat keyboard putih minimalis, mouse putih, secangkir matcha latte creamy, alas meja pink aesthetic penuh doodle putih lucu, serta pot bunga kecil warna pink berbentuk bunga lotus.\nTambahkan tulisan besar bubble text lucu: “MEJA KERJA NYAMAN”\nGunakan font kawaii pastel dengan kombinasi warna pink, cream, dan hijau sage.\nTambahkan stiker dan doodle aesthetic seperti:\nhati kecil\nbintang\nbunga kecil\ngaris doodle putih\ncatatan lucu\nchecklist harian\nelemen scrapbook aesthetic\nIsi tulisan kecil semuanya dalam bahasa Indonesia, seperti:\n“hari baik menanti”\n“hal kecil kebahagiaan besar”\n“kamu sudah hebat”\n“matcha bikin bahagia”\n“rencana hari ini”\n“tetap semangat”\n“langkah kecil setiap hari”\n“fokus”\n“kopi enak”\n“pikiran positif”\n“lakukan yang terbaik”\nSuasana keseluruhan hangat, nyaman, dreamy, soft lighting pagi hari, ada bayangan sinar matahari dari jendela, detail clean dan super aesthetic ala Pinterest/Instagram.\nStyle: kawaii pastel, cozy workspace, aesthetic stationery, cute desk setup, ultra detail, soft shadow, feminine vibe, high quality digital art, 3D semi cartoon illustration.",
-      "Hasil promptnya : kalau mau kata2 lain tggl diganti aja ya sblm di generate  ",
-      "1000864091.png",
-      "1000864101.png"
+      "Hasil promptnya : kalau mau kata2 lain tggl diganti aja ya sblm di generate  "
     ],
+    "markdownPrompt": "1. Ketuk Tools di bawah.\n\n2. Tekan tombol Mulai.\n\n3. Tulis prompt yang ingin kamu buat (misalnya: poster, animasi, quotes, produk, atau lainnya).\n\n4. Tunggu hingga tools menghasilkan prompt secara otomatis.\n\n5. Salin prompt yang sudah dibuat.\n\n6. Tempelkan prompt ke ChatGPT atau Gemini.\n\n7. Generate gambar, lalu unduh hasilnya.",
     "coverUrl": "assets/covers/lvl-25.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa0580e38104c1c10eb6587f",
+    "toolUrl": "https://chatgpt.com/g/g-6a48dbb46f8c81919ce94b1dac8a4c26-tools-penghasil-prompt-otomatis",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a48dbb46f8c81919ce94b1dac8a4c26-tools-penghasil-prompt-otomatis",
+        "title": "ChatGPT - TOOLS PENGHASIL PROMPT OTOMATIS",
+        "description": "By irt naik level"
+      }
+    ],
     "videoUrl": "https://youtu.be/-fUz12Rz96o?si=0xM8TgOFJA5JK8M4",
     "videos": [
       {
-        "title": "TUTORIAL PENGHASIL PROMPT OTOMATIS BY IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL 25 - PROMPT ESTETIK IRTNAIKLEVEL",
         "url": "https://youtu.be/-fUz12Rz96o?si=0xM8TgOFJA5JK8M4",
-        "embedUrl": "https://www.youtube.com/embed/-fUz12Rz96o?rel=0"
+        "embedUrl": "https://youtu.be/-fUz12Rz96o?si=0xM8TgOFJA5JK8M4"
       }
-    ],
-    "status": true,
-    "views": 50
+    ]
   },
   {
     "id": "lvl-26",
     "levelNum": 26,
     "name": "LEVEL 26- CARA MEMBUAT LAGU DI GEMINI",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 17033.png VIDEO TUTORIAL ",
+    "desc": "VIDEO TUTORIAL ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "17033.png",
       "VIDEO TUTORIAL "
     ],
+    "markdownPrompt": "VIDEO TUTORIAL ",
     "coverUrl": "assets/covers/lvl-26.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa0580629bd9f38c6e4a53f5",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/qt3rpkguS1M?si=_uguAbVOQt3m4Mni",
     "videos": [
       {
-        "title": "cara membuat musik atau lagu anak di gemini oleh kak lia , irt naik level",
+        "title": "Tutorial LEVEL 26- CARA MEMBUAT LAGU DI GEMINI",
         "url": "https://youtu.be/qt3rpkguS1M?si=_uguAbVOQt3m4Mni",
-        "embedUrl": "https://www.youtube.com/embed/qt3rpkguS1M?rel=0"
+        "embedUrl": "https://youtu.be/qt3rpkguS1M?si=_uguAbVOQt3m4Mni"
       }
-    ],
-    "status": true,
-    "views": 54
+    ]
   },
   {
     "id": "lvl-27",
     "levelNum": 27,
     "name": "LEVEL 27 - ANIMASI MINIATUR",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 2883.png VIDEO TUTORIAL ",
+    "desc": "VIDEO TUTORIAL  Klik disini ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "2883.png",
       "VIDEO TUTORIAL ",
       "Klik disini ",
       "VIDEO TUTORIAL CUTE MINIATUR",
       "Klik tools  disini 👇👇👇",
       "VIDEO TUTORIAL PAKAI FLOW"
     ],
+    "markdownPrompt": "VIDEO TUTORIAL \n\nKlik disini \n\nVIDEO TUTORIAL CUTE MINIATUR\n\nKlik tools  disini 👇👇👇\n\nVIDEO TUTORIAL PAKAI FLOW",
     "coverUrl": "assets/covers/lvl-27.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa0580a899f9e3fb0b80b71e",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 49
+    "videos": []
   },
   {
     "id": "lvl-28",
     "levelNum": 28,
     "name": "LEVEL 28 - IKLAN PRODUK & MIRROR SELFIE AFFILIATE",
     "category": "Affiliate & Iklan",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 1533087.png MIRROR SELFIE AFFILIATE ",
+    "desc": "MIRROR SELFIE AFFILIATE  PROMPT GAMBAR MIRROR SELFIE...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "1533087.png",
       "MIRROR SELFIE AFFILIATE ",
       "PROMPT GAMBAR MIRROR SELFIE",
       "Prompt Image Generation\nEnglish Prompt:\nA stylish young woman taking a full-body mirror selfie in a cozy elegant bedroom, long wavy dark brown hair, wearing a feminine cream-white long-sleeve blouse with delicate floral prints, subtle ruffle details and a peplum silhouette, paired with light blue high-waisted straight-leg jeans and clean white platform sneakers. She carries a small elegant cream handbag with a gold chain strap. She holds a modern smartphone in front of her face, naturally covering her facial features. Relaxed feminine standing pose, one leg slightly forward, natural body posture. Large arched full-length mirror with a warm wooden frame, luxurious beige bedroom interior, soft curtains, upholstered bed, wooden bedside table, small decorative plants, neutral cream and warm brown color palette. Beautiful natural morning sunlight entering through the window, realistic soft shadows, elegant lifestyle fashion photography, highly detailed fabric texture, realistic proportions, photorealistic, clean composition, premium aesthetic, warm cozy atmosphere, vertical full-body composition.\nNegative Prompt\ndistorted body, extra fingers, extra arms, missing fingers, deformed hands, bad anatomy, unrealistic proportions, duplicate person, duplicate limbs, blurry, low quality, oversaturated, harsh lighting, messy background, warped mirror, distorted phone, floating objects, text, watermark, logo, cropped feet, cropped body, unnatural pose\nRasio: 9:16\nStyle: Photorealistic / Luxury Lifestyle\nLighting: Soft natural morning light\nCamera: Full-body mirror photography, eye-level, realistic smartphone photography.",
@@ -1562,55 +1529,49 @@ const DEFAULT_COURSE_DATA = {
       "Video Tutorial Iklan produk",
       "Klik disini ",
       "Tools iklan klik disini ",
-      "Prompt gamis masuk ke chatgpt lalu minta prompt generate di flow ",
-      "44008.jpg",
-      "44009.jpg"
+      "Prompt gamis masuk ke chatgpt lalu minta prompt generate di flow "
     ],
+    "markdownPrompt": "MIRROR SELFIE AFFILIATE \n\nPROMPT GAMBAR MIRROR SELFIE\n\nPrompt Image Generation\nEnglish Prompt:\nA stylish young woman taking a full-body mirror selfie in a cozy elegant bedroom, long wavy dark brown hair, wearing a feminine cream-white long-sleeve blouse with delicate floral prints, subtle ruffle details and a peplum silhouette, paired with light blue high-waisted straight-leg jeans and clean white platform sneakers. She carries a small elegant cream handbag with a gold chain strap. She holds a modern smartphone in front of her face, naturally covering her facial features. Relaxed feminine standing pose, one leg slightly forward, natural body posture. Large arched full-length mirror with a warm wooden frame, luxurious beige bedroom interior, soft curtains, upholstered bed, wooden bedside table, small decorative plants, neutral cream and warm brown color palette. Beautiful natural morning sunlight entering through the window, realistic soft shadows, elegant lifestyle fashion photography, highly detailed fabric texture, realistic proportions, photorealistic, clean composition, premium aesthetic, warm cozy atmosphere, vertical full-body composition.\nNegative Prompt\ndistorted body, extra fingers, extra arms, missing fingers, deformed hands, bad anatomy, unrealistic proportions, duplicate person, duplicate limbs, blurry, low quality, oversaturated, harsh lighting, messy background, warped mirror, distorted phone, floating objects, text, watermark, logo, cropped feet, cropped body, unnatural pose\nRasio: 9:16\nStyle: Photorealistic / Luxury Lifestyle\nLighting: Soft natural morning light\nCamera: Full-body mirror photography, eye-level, realistic smartphone photography.\n\nPROMT NYA COPY DARI SINI YA\n\nVERSI 1\n\nMIRROR SELFIE AFFILIATE\nPROMPT IMAGE GENERATION — MIRROR SELFIE\nprompt gambar : Ganti pakaian pada wanita di foto pertama dengan pakaian blouse pada foto referensi kedua. Pertahankan framing wanita di foto pertama. Ubah pose menjadi mirror selfie. AR 9:16. Pencahayaan alami.\n\nPROMPT IMAGE TO VIDEO — MIRROR SELFIE\nPrompt:\nBuatkan prompt image to video gerakan mirror selfie dengan gerakan yang natural. Gunakan timeline dari detik 1–10, durasi 10 detik, serta berikan negative prompt.\n\nVERSI 2\n\nPrompt Image Generation — Full Body Mirror Selfie\nGanti pakaian wanita pada foto pertama dengan pakaian blouse dari foto referensi kedua. Pertahankan identitas visual, proporsi tubuh, dan framing wanita dari foto pertama. Ubah pose menjadi full-body mirror selfie, berdiri menghadap cermin besar dengan smartphone di depan wajah. Pastikan seluruh tubuh terlihat utuh dari kepala hingga ujung kaki, termasuk kedua kaki dan alas kaki. Gunakan full-length mirror yang cukup besar, kamera berada cukup jauh untuk menangkap seluruh tubuh tanpa cropping. Pose santai dan natural, satu tangan memegang smartphone, tubuh sedikit menyamping secara natural. Pertahankan desain, warna, motif, tekstur, jahitan, dan bentuk pakaian sesuai foto referensi. Interior kamar atau dressing room minimalis dan estetik, pencahayaan alami lembut, realistic fashion photography, clean composition, high detail, 9:16 vertical aspect ratio.\nNegative Prompt:\ncropped body, cut off feet, cut off head, half body, upper body only, close-up, zoomed-in framing, missing legs, missing feet, distorted body, extra limbs, extra fingers, deformed hands, unrealistic proportions, floating feet, duplicate person, duplicate reflection, blurry clothing, distorted clothing, warped mirror, unnatural pose, low resolution. \n\nPROMPT IMAGE TO VIDEO — FULL BODY MIRROR SELFIE | 10 DETIK\nPrompt:\nCreate a realistic full-body mirror selfie fashion video, 10 seconds duration. Keep the woman, outfit, body proportions, mirror, room, lighting, and overall composition consistent with the reference image. The entire body must remain visible from head to toe throughout the video.\n0–2 seconds: The woman stands naturally in front of the full-length mirror, holding her smartphone in front of her face. Her posture is relaxed.\n2–4 seconds: She slightly adjusts her posture and gently moves one foot forward, naturally showing the full outfit from top to bottom.\n4–6 seconds: She slowly turns her body slightly to the left, giving a subtle side view of the blouse and outfit.\n6–8 seconds: She gently turns back toward the mirror and slightly adjusts the blouse with her free hand.\n8–10 seconds: She returns to a relaxed front-facing mirror selfie pose and makes a small natural movement with her body. Keep the camera framing stable and maintain the full-body composition until the final frame.\nNatural human movement, subtle realistic hand and body motion, smooth transitions, realistic fabric movement, natural lighting, aesthetic fashion review, stable mirror reflection, high detail, realistic smartphone mirror selfie, vertical 9:16.\nNegative Prompt:\ncropped head, cropped feet, missing legs, half body, close-up, zoom in, camera movement, body distortion, warped body, extra fingers, deformed hands, extra limbs, duplicate person, duplicate reflection, distorted mirror, floating feet, unnatural movement, exaggerated motion, outfit changing, clothing deformation, flickering, blurry image, low resolution, unstable framing. CRT\n\nVideo Tutorial Iklan produk\n\nKlik disini \n\nTools iklan klik disini \n\nPrompt gamis masuk ke chatgpt lalu minta prompt generate di flow ",
     "coverUrl": "assets/covers/lvl-28.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa05806f8da0d770f06db3ef",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtube.com/shorts/O-7j_lAYNdM?si=bYzZ8B60rdzn7zuo",
     "videos": [
       {
-        "title": "TUTORIAL AFFILIATE MIRROR SELFIE oleh irt naik level",
+        "title": "Tutorial LEVEL 28 - IKLAN PRODUK & MIRROR SELFIE AFFILIATE",
         "url": "https://youtube.com/shorts/O-7j_lAYNdM?si=bYzZ8B60rdzn7zuo",
-        "embedUrl": "https://www.youtube.com/embed/O-7j_lAYNdM?rel=0"
+        "embedUrl": "https://youtube.com/shorts/O-7j_lAYNdM?si=bYzZ8B60rdzn7zuo"
       }
-    ],
-    "status": true,
-    "views": 41
+    ]
   },
   {
     "id": "lvl-29",
     "levelNum": 29,
     "name": "LEVEL 29 - TINI WORLD RESCUE",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 4496.png TOOLS TINY ",
+    "desc": "TOOLS TINY  VIDEO TUTORIAL ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "4496.png",
       "TOOLS TINY ",
       "VIDEO TUTORIAL "
     ],
+    "markdownPrompt": "TOOLS TINY \n\nVIDEO TUTORIAL ",
     "coverUrl": "assets/covers/lvl-29.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa058007a488e587edbf8c57",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 17
+    "videos": []
   },
   {
     "id": "lvl-30",
     "levelNum": 30,
     "name": "LEVEL 30 - STORYBOARD IKLAN/ AFFILIATE PRODUK",
     "category": "Affiliate & Iklan",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14929.png Tutorial Cara bikin iklan dan iklan  Menu untuk  dengan AI ",
+    "desc": "Tutorial Cara bikin iklan dan iklan  Menu untuk  dengan AI  VIDEO TUTORIAL IKLAN ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14929.png",
       "Tutorial Cara bikin iklan dan iklan  Menu untuk  dengan AI ",
       "VIDEO TUTORIAL IKLAN ",
       "TUTORIAL ",
@@ -1622,142 +1583,138 @@ const DEFAULT_COURSE_DATA = {
       "Buatkan bBuatkan gambar background estetik untuk affiliate produk  sebuah meja estetik terdapat lampu estetik  dan bunga estetik diatas sebuah meja identik dengan warna netral. Rasio 1:1",
       "Buat gambar storyboard yang dikiri jadi satu dengan gambar yang kanan, buat seolah lagi review produk.untuk durasi 10 detik. Terdapat CTA di akhir .dan tulisan unik dan lucu. Rasio 1:1"
     ],
+    "markdownPrompt": "Tutorial Cara bikin iklan dan iklan  Menu untuk  dengan AI \n\nVIDEO TUTORIAL IKLAN \n\nTUTORIAL \n\nKlik disini \n\nToolsnya disini ya \n\nContoh iklan 1\n\nContoh 2\n\nTutorial affilate estetik\n\nBuatkan bBuatkan gambar background estetik untuk affiliate produk  sebuah meja estetik terdapat lampu estetik  dan bunga estetik diatas sebuah meja identik dengan warna netral. Rasio 1:1\n\nBuat gambar storyboard yang dikiri jadi satu dengan gambar yang kanan, buat seolah lagi review produk.untuk durasi 10 detik. Terdapat CTA di akhir .dan tulisan unik dan lucu. Rasio 1:1",
     "coverUrl": "assets/covers/lvl-30.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa0580659189d110443445a1",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/xoso69JWKXE?si=D2hwlXUkJbj92-fu",
     "videos": [
       {
-        "title": "TUTORIAL AFFILIATE PRODUK ESTETIK BY IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL 30 - STORYBOARD IKLAN/ AFFILIATE PRODUK",
         "url": "https://youtu.be/xoso69JWKXE?si=D2hwlXUkJbj92-fu",
-        "embedUrl": "https://www.youtube.com/embed/xoso69JWKXE?rel=0"
+        "embedUrl": "https://youtu.be/xoso69JWKXE?si=D2hwlXUkJbj92-fu"
       }
-    ],
-    "status": true,
-    "views": 21
+    ]
   },
   {
     "id": "lvl-31",
     "levelNum": 31,
     "name": "LEVEL 31 - CARA GENERATE DIGROK",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14933.png Video tutorial ",
+    "desc": "Video tutorial ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14933.png",
       "Video tutorial "
     ],
+    "markdownPrompt": "Video tutorial ",
     "coverUrl": "assets/covers/lvl-31.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa058056bb94dc162c045bff",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/pYeXnEIdTK8?si=1nFhU27luXzR5Oud",
     "videos": [
       {
-        "title": "TUTORIAL GENERATE GAMBAR TO VIDEO DI GROK",
+        "title": "Tutorial LEVEL 31 - CARA GENERATE DIGROK",
         "url": "https://youtu.be/pYeXnEIdTK8?si=1nFhU27luXzR5Oud",
-        "embedUrl": "https://www.youtube.com/embed/pYeXnEIdTK8?rel=0"
+        "embedUrl": "https://youtu.be/pYeXnEIdTK8?si=1nFhU27luXzR5Oud"
       }
-    ],
-    "status": true,
-    "views": 27
+    ]
   },
   {
     "id": "lvl-32",
     "levelNum": 32,
     "name": "LEVEL 32-DRAMA BUAH",
     "category": "Drama & Cerita AI",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 11055.png TOOLS DRAMA BUAH ",
+    "desc": "TOOLS DRAMA BUAH  ChatGPT - DRAMA BUAH SAYUR ANTROPOMORFIK...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "11055.png",
       "TOOLS DRAMA BUAH ",
       "ChatGPT - DRAMA BUAH SAYUR ANTROPOMORFIK",
       "Video tutorial "
     ],
+    "markdownPrompt": "TOOLS DRAMA BUAH \n\nChatGPT - DRAMA BUAH SAYUR ANTROPOMORFIK\n\nVideo tutorial ",
     "coverUrl": "assets/covers/lvl-32.jpg",
-    "toolUrl": "https://www.notion.so/3741ad47aa0580b88d26ef4b485256ba",
+    "toolUrl": "https://chatgpt.com/g/g-6a41fa4c84608191aa031362b8d1739c-drama-buah-sayur-antropomorfik",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a41fa4c84608191aa031362b8d1739c-drama-buah-sayur-antropomorfik",
+        "title": "ChatGPT - DRAMA BUAH SAYUR ANTROPOMORFIK",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "https://youtu.be/i7DOSY_LvoM?si=OVSKUIBMgS-xyug2",
     "videos": [
       {
-        "title": "TUTORIAL DRAMA BUAH OLEH IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL 32-DRAMA BUAH",
         "url": "https://youtu.be/i7DOSY_LvoM?si=OVSKUIBMgS-xyug2",
-        "embedUrl": "https://www.youtube.com/embed/i7DOSY_LvoM?rel=0"
+        "embedUrl": "https://youtu.be/i7DOSY_LvoM?si=OVSKUIBMgS-xyug2"
       }
-    ],
-    "status": true,
-    "views": 37
+    ]
   },
   {
     "id": "lvl-33",
     "levelNum": 33,
     "name": "LEVEL 33 - CARA MEMBUAT BUKU CERITA / EDUKASI PEMBELAJARAN ANAK MENGGUNAKAN AI",
     "category": "Edukasi & Anak",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 6826.png TUTORIAL ",
+    "desc": "TUTORIAL  TOOLS GENERATOR ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "6826.png",
       "TUTORIAL ",
       "TOOLS GENERATOR "
     ],
+    "markdownPrompt": "TUTORIAL \n\nTOOLS GENERATOR ",
     "coverUrl": "assets/covers/lvl-33.jpg",
-    "toolUrl": "https://www.notion.so/3751ad47aa058004baadd96d894f49e9",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 23
+    "videos": []
   },
   {
     "id": "lvl-34",
     "levelNum": 34,
     "name": "LEVEL 34- CARA MENGGUNAKAN PIXVERSE AI",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 6830.png VIDEO TUTORIAL ",
+    "desc": "VIDEO TUTORIAL  Bisa juga login pakai email temporary...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "6830.png",
       "VIDEO TUTORIAL ",
       "Bisa juga login pakai email temporary"
     ],
+    "markdownPrompt": "VIDEO TUTORIAL \n\nBisa juga login pakai email temporary",
     "coverUrl": "assets/covers/lvl-34.jpg",
-    "toolUrl": "https://www.notion.so/3771ad47aa0580db978ac171a9ff5061",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 21
+    "videos": []
   },
   {
     "id": "lvl-35",
     "levelNum": 35,
     "name": "LEVEL 35- ANIMASI PAKAI META AI",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 6982.png TUTORIAL ",
+    "desc": "TUTORIAL  Klik disini ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "6982.png",
       "TUTORIAL ",
       "Klik disini "
     ],
+    "markdownPrompt": "TUTORIAL \n\nKlik disini ",
     "coverUrl": "assets/covers/lvl-35.jpg",
-    "toolUrl": "https://www.notion.so/3771ad47aa0580fabb58c269747a145d",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 34
+    "videos": []
   },
   {
     "id": "lvl-36",
     "levelNum": 36,
     "name": "LEVEL 36- TUTORIAL MEMBUAT IKLAN PROMOSI USAHA UMKM",
     "category": "Affiliate & Iklan",
-    "desc": "Buat gambar storyboard realistis dan sinematik, terdiri dari 3 scene dalam satu gambar. Total durasi video 10 detik.",
+    "desc": "Download Google Drive dibawah lalu tempel ke chatgpt ...",
     "instructions": [
       "Buat gambar storyboard realistis dan sinematik, terdiri dari 3 scene dalam satu gambar.",
       "Total durasi video 10 detik.",
@@ -1768,12 +1725,16 @@ const DEFAULT_COURSE_DATA = {
       "Buat visual yang natural, menarik, dan cocok untuk iklan UMKM.",
       "Gunakan konsep yang aman untuk di-generate di Google Flow dan hindari konten yang berpotensi melanggar kebijakan komunitas.",
       "Buat dialog bahasa Indonesia yang natural, seperti suara manusia asli, bukan bahasa iklan yang terlalu kaku.",
-      "Wajib terdapat CTA (ajakan membeli, memesan, atau mengunjungi usaha)."
+      "Wajib terdapat CTA (ajakan membeli, memesan, atau mengunjungi usaha).",
+      "Gunakan bahasa Indonesia sehari-hari.",
+      "Dialog singkat, ramah, dan mudah dipahami.",
+      "Sesuaikan jumlah kata agar nyaman diucapkan dalam 10 detik.",
+      "Gunakan satu karakter sebagai pembicara utama.",
+      "Hindari klaim berlebihan atau informasi produk yang tidak diberikan.",
+      "Pastikan dialog memiliki hook, promosi, dan CTA."
     ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "48086.png",
       "Download Google Drive dibawah lalu tempel ke chatgpt",
       "[https://drive.google.com/file/d/1LUl9MELEtM_r1gfmK797I8_wZLphr3im/view?usp=drivesdk](https://drive.google.com/file/d/1LUl9MELEtM_r1gfmK797I8_wZLphr3im/view?usp=drivesdk)",
       "Atau pakai prompt manual ini tempel ke chatgpt :",
@@ -1795,84 +1756,77 @@ const DEFAULT_COURSE_DATA = {
       "SCENE 3 — CTA (7–10 detik)",
       "Karakter mengajak penonton membeli, memesan, atau mengunjungi usaha dengan ekspresi natural.",
       "KETENTUAN DIALOG",
-      "Gunakan bahasa Indonesia sehari-hari.",
-      "Dialog singkat, ramah, dan mudah dipahami.",
-      "Sesuaikan jumlah kata agar nyaman diucapkan dalam 10 detik.",
-      "Gunakan satu karakter sebagai pembicara utama.",
-      "Hindari klaim berlebihan atau informasi produk yang tidak diberikan.",
-      "Pastikan dialog memiliki hook, promosi, dan CTA.",
       "HASIL AKHIR",
       "Buat satu gambar storyboard persegi 1:1 yang menampilkan 3 scene berurutan, lengkap dengan keterangan durasi dan dialog masing-masing scene.",
       "Visual harus realistis, estetik, profesional, konsisten, dan mudah dijadikan referensi video AI di Google Flow.",
       "Langsung buatkan gambarnya, bukan hanya menjelaskan konsep storyboard.",
       "VIDEO TUTORIAL "
     ],
+    "markdownPrompt": "1. Buat gambar storyboard realistis dan sinematik, terdiri dari 3 scene dalam satu gambar.\n\n2. Total durasi video 10 detik.\n\n3. Rasio gambar 1:1 (persegi).\n\n4. Karakter harus konsisten di semua scene, termasuk wajah, pakaian, dan warna.\n\n5. Produk dan nama usaha harus sesuai dengan informasi yang diberikan.\n\n6. Jika ada foto referensi produk, pertahankan bentuk, warna, kemasan, dan detail utamanya.\n\n7. Buat visual yang natural, menarik, dan cocok untuk iklan UMKM.\n\n8. Gunakan konsep yang aman untuk di-generate di Google Flow dan hindari konten yang berpotensi melanggar kebijakan komunitas.\n\n9. Buat dialog bahasa Indonesia yang natural, seperti suara manusia asli, bukan bahasa iklan yang terlalu kaku.\n\n10. Wajib terdapat CTA (ajakan membeli, memesan, atau mengunjungi usaha).\n\n11. Gunakan bahasa Indonesia sehari-hari.\n\n12. Dialog singkat, ramah, dan mudah dipahami.\n\n13. Sesuaikan jumlah kata agar nyaman diucapkan dalam 10 detik.\n\n14. Gunakan satu karakter sebagai pembicara utama.\n\n15. Hindari klaim berlebihan atau informasi produk yang tidak diberikan.\n\n16. Pastikan dialog memiliki hook, promosi, dan CTA.",
     "coverUrl": "assets/covers/lvl-36.jpg",
     "toolUrl": "https://drive.google.com/file/d/1LUl9MELEtM_r1gfmK797I8_wZLphr3im/view?usp=drivesdk",
+    "tools": [
+      {
+        "url": "https://drive.google.com/file/d/1LUl9MELEtM_r1gfmK797I8_wZLphr3im/view?usp=drivesdk",
+        "title": "[https://drive.google.com/file/d/1LUl9MELEtM_r1gfmK797I8_wZLphr3im/view?usp=drivesdk](https://drive.google.com/file/d/1LUl9MELEtM_r1gfmK797I8_wZLphr3im/view?usp=drivesdk)"
+      }
+    ],
     "videoUrl": "https://youtu.be/iIpv6ylNOjM?si=eblrMP-xldpU3Qc4",
     "videos": [
       {
-        "title": "TUTORIAL PROMOSI USAHA UMKM BY IRTNAIKLEVEL ",
+        "title": "Tutorial LEVEL 36- TUTORIAL MEMBUAT IKLAN PROMOSI USAHA UMKM",
         "url": "https://youtu.be/iIpv6ylNOjM?si=eblrMP-xldpU3Qc4",
-        "embedUrl": "https://www.youtube.com/embed/iIpv6ylNOjM?rel=0"
+        "embedUrl": "https://youtu.be/iIpv6ylNOjM?si=eblrMP-xldpU3Qc4"
       }
-    ],
-    "status": true,
-    "views": 32
+    ]
   },
   {
     "id": "lvl-37",
     "levelNum": 37,
     "name": "LEVEL 37 - TUTORIAL CARA GENERATE VIOSTUDIO",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 8421.png VIDEO TUTORIAL CARA ",
+    "desc": "VIDEO TUTORIAL CARA  BIAR DAPAT EXTRA KREDIT TAMBAHAN MASUKKAN Kode Voucher IRT100 AKSES WEB NYA DISINI.KETUK TANDA PANAH....",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "8421.png",
       "VIDEO TUTORIAL CARA ",
       "BIAR DAPAT EXTRA KREDIT TAMBAHAN MASUKKAN Kode Voucher IRT100 AKSES WEB NYA DISINI.KETUK TANDA PANAH."
     ],
+    "markdownPrompt": "VIDEO TUTORIAL CARA \n\nBIAR DAPAT EXTRA KREDIT TAMBAHAN MASUKKAN Kode Voucher IRT100 AKSES WEB NYA DISINI.KETUK TANDA PANAH.",
     "coverUrl": "assets/covers/lvl-37.jpg",
-    "toolUrl": "https://www.notion.so/37f1ad47aa0580f59530e89ee4d7621f",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 46
+    "videos": []
   },
   {
     "id": "lvl-37",
     "levelNum": 37,
     "name": "Level -37 TOOLS COZY MINIATUR",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 7542.png Tools PEMBUAT prompt cozy miniatur ",
+    "desc": "Tools PEMBUAT prompt cozy miniatur  Klik tanda panah  lalu klik lagi ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "7542.png",
       "Tools PEMBUAT prompt cozy miniatur ",
       "Klik tanda panah  lalu klik lagi "
     ],
+    "markdownPrompt": "Tools PEMBUAT prompt cozy miniatur \n\nKlik tanda panah  lalu klik lagi ",
     "coverUrl": "assets/covers/lvl-37.jpg",
-    "toolUrl": "https://www.notion.so/37a1ad47aa05807bb99cf428514c347c",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 30
+    "videos": []
   },
   {
     "id": "lvl-38",
     "levelNum": 38,
     "name": "🩷LEVEL - 38 TUTORIAL ANIMASI FAKTA SEJARAH",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 1001072168.png Video TUTORIAL ",
+    "desc": "Video TUTORIAL  Prompt nya :...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "1001072168.png",
       "Video TUTORIAL ",
       "Prompt nya :",
       "Masuk ke chat GPT :",
@@ -1883,57 +1837,70 @@ const DEFAULT_COURSE_DATA = {
       "Buatkan prompt teks to image dan prompt image to video serta visual dan narasinya dalam bahasa indonesia .",
       "Pastekan ke Chatgpt lalu enter nanti kamu akan dapat prompt lengkapnya."
     ],
+    "markdownPrompt": "Video TUTORIAL \n\nPrompt nya :\n\nMasuk ke chat GPT :\n\nTulis judul (judulnya bebas ya teman2 pilih sendiri ) contohnya seperti ini :\n\nJudul sejarah :Kereta Api Pertama di Indonesia\n\nJumlah adegan : 7\n\nKarakter style : 3d carton pixar\n\nBuatkan prompt teks to image dan prompt image to video serta visual dan narasinya dalam bahasa indonesia .\n\nPastekan ke Chatgpt lalu enter nanti kamu akan dapat prompt lengkapnya.",
     "coverUrl": "assets/covers/lvl-38.jpg",
-    "toolUrl": "https://www.notion.so/37f1ad47aa0580358d5ded1025b45cfe",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/eYH-OaELaxs?si=1AtQFAXnwVzJgzhU",
     "videos": [
       {
-        "title": "TUTORIAL FAKTA SEJARAH",
+        "title": "Tutorial 🩷LEVEL - 38 TUTORIAL ANIMASI FAKTA SEJARAH",
         "url": "https://youtu.be/eYH-OaELaxs?si=1AtQFAXnwVzJgzhU",
-        "embedUrl": "https://www.youtube.com/embed/eYH-OaELaxs?rel=0"
+        "embedUrl": "https://youtu.be/eYH-OaELaxs?si=1AtQFAXnwVzJgzhU"
       }
-    ],
-    "status": true,
-    "views": 23
+    ]
   },
   {
     "id": "lvl-39",
     "levelNum": 39,
     "name": "LEVEL 39- TUTORIAL UNDANGAN PERNIKAHAN DENGAN AI",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14925.png VIDEO TUTORIAL ",
+    "desc": "VIDEO TUTORIAL  PROMPT : BUATKAN GAMBAR STORYBOARD UNTUK UNDANGAN PERNIKAHAN  ANTARA BUDI DAN ANI. BUAT YANG MENARIK UNTUK 10 DETIK. BUAT KARAKTER 3D CARTOON PI...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14925.png",
       "VIDEO TUTORIAL ",
       "PROMPT : BUATKAN GAMBAR STORYBOARD UNTUK UNDANGAN PERNIKAHAN  ANTARA BUDI DAN ANI. BUAT YANG MENARIK UNTUK 10 DETIK. BUAT KARAKTER 3D CARTOON PIXAR. (LAMPIRKAN HARI BULAN DAN TAHUN DAN LOKASI BESERTA ALAMAT ACARA) LALU COPY PASTE KE CHAT GPT. (OPTIONAL TAMBAHKAN GAMBAR REFERENSI)"
     ],
+    "markdownPrompt": "VIDEO TUTORIAL \n\nPROMPT : BUATKAN GAMBAR STORYBOARD UNTUK UNDANGAN PERNIKAHAN  ANTARA BUDI DAN ANI. BUAT YANG MENARIK UNTUK 10 DETIK. BUAT KARAKTER 3D CARTOON PIXAR. (LAMPIRKAN HARI BULAN DAN TAHUN DAN LOKASI BESERTA ALAMAT ACARA) LALU COPY PASTE KE CHAT GPT. (OPTIONAL TAMBAHKAN GAMBAR REFERENSI)",
     "coverUrl": "assets/covers/lvl-39.jpg",
-    "toolUrl": "https://www.notion.so/3841ad47aa0580df8349c93cd11c083b",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/43uBoTyytcQ?si=L5-ORp3JX0XMH0kV",
     "videos": [
       {
-        "title": "TUTORIAl ANIMASI UNDANGAN PERNIKAHAN AI",
+        "title": "Tutorial LEVEL 39- TUTORIAL UNDANGAN PERNIKAHAN DENGAN AI",
         "url": "https://youtu.be/43uBoTyytcQ?si=L5-ORp3JX0XMH0kV",
-        "embedUrl": "https://www.youtube.com/embed/43uBoTyytcQ?rel=0"
+        "embedUrl": "https://youtu.be/43uBoTyytcQ?si=L5-ORp3JX0XMH0kV"
       }
-    ],
-    "status": true,
-    "views": 29
+    ]
   },
   {
     "id": "lvl-40",
     "levelNum": 40,
     "name": "LEVEL 40 - MEMBUAT DRAMA AI",
     "category": "Drama & Cerita AI",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 1001146142.png Video tutorial ",
-    "instructions": [],
+    "desc": "Video tutorial  TOOLS GENERATOR KLIK DISINI 👇👇👇 ...",
+    "instructions": [
+      "Jenis Cerita",
+      "Gaya Cerita",
+      "Judul Serial",
+      "Jumlah Karakter",
+      "Gaya Visual",
+      "Judul Episode",
+      "Durasi Episode",
+      "Narasi",
+      "Subtitle",
+      "Musik",
+      "Sound Effect",
+      "TikTok",
+      "Instagram Reels",
+      "Facebook Reels",
+      "YouTube Shorts",
+      "YouTube"
+    ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "1001146142.png",
       "Video tutorial ",
       "TOOLS GENERATOR KLIK DISINI 👇👇👇 ",
       "ChatGPT - 🎬 DRAMA AI SERIAL GENERATOR",
@@ -1941,11 +1908,6 @@ const DEFAULT_COURSE_DATA = {
       "📖 CARA MENGGUNAKAN DRAMA AI SERIAL GENERATOR",
       "LANGKAH 1 — BUAT CHARACTER SHEET",
       "Masuikkan:",
-      "Jenis Cerita",
-      "Gaya Cerita",
-      "Judul Serial",
-      "Jumlah Karakter",
-      "Gaya Visual",
       "GPT akan membuat:",
       "✅ Profil Karakter",
       "✅ Prompt Character Sheet untuk setiap karakter",
@@ -1954,8 +1916,6 @@ const DEFAULT_COURSE_DATA = {
       "LANGKAH 2 — BUAT EPISODE",
       "Upload seluruh Character Sheet yang akan digunakan.",
       "Masukkan:",
-      "Judul Episode",
-      "Durasi Episode",
       "GPT akan membuat:",
       "✅ Ringkasan Cerita",
       "✅ Storyboard per Scene",
@@ -1982,155 +1942,159 @@ const DEFAULT_COURSE_DATA = {
       "LANGKAH 5 — EDIT VIDEO",
       "Gabungkan seluruh video sesuai urutan storyboard menggunakan CapCut atau editor video lainnya.",
       "Tambahkan:",
-      "Narasi",
-      "Subtitle",
-      "Musik",
-      "Sound Effect",
       "LANGKAH 6 — UPLOAD",
       "Video siap dipublikasikan ke:",
-      "TikTok",
-      "Instagram Reels",
-      "Facebook Reels",
-      "YouTube Shorts",
-      "YouTube",
       "TIPS",
       "✅ Character Sheet cukup dibuat sekali untuk satu serial.",
       "✅ Gunakan Character Sheet yang sama pada semua episode agar karakter tetap konsisten.",
       "✅ Untuk serial, setiap episode dibuat satu per satu agar alur cerita tetap rapi dan penonton penasaran menunggu episode berikutnya.",
       "Selamat berkarya dan semoga serial AI Anda semakin menarik!"
     ],
+    "markdownPrompt": "1. Jenis Cerita\n\n2. Gaya Cerita\n\n3. Judul Serial\n\n4. Jumlah Karakter\n\n5. Gaya Visual\n\n6. Judul Episode\n\n7. Durasi Episode\n\n8. Narasi\n\n9. Subtitle\n\n10. Musik\n\n11. Sound Effect\n\n12. TikTok\n\n13. Instagram Reels\n\n14. Facebook Reels\n\n15. YouTube Shorts\n\n16. YouTube",
     "coverUrl": "assets/covers/lvl-40.jpg",
-    "toolUrl": "https://www.notion.so/3841ad47aa0580d3a42becd8075ed5c4",
+    "toolUrl": "https://chatgpt.com/g/g-6a3bd3ef544081919def056d3d2a819e-drama-komedi-serial-ai-generator",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a3bd3ef544081919def056d3d2a819e-drama-komedi-serial-ai-generator",
+        "title": "ChatGPT - 🎬 DRAMA AI SERIAL GENERATOR",
+        "description": "By irt naik level"
+      }
+    ],
     "videoUrl": "https://youtu.be/rauHo2mXT-Q?si=5sdCzTcC7Mv4yRFB",
     "videos": [
       {
-        "title": "TUTORIAL DRAMA KOMEDI AI by Irt naik level",
+        "title": "Tutorial LEVEL 40 - MEMBUAT DRAMA AI",
         "url": "https://youtu.be/rauHo2mXT-Q?si=5sdCzTcC7Mv4yRFB",
-        "embedUrl": "https://www.youtube.com/embed/rauHo2mXT-Q?rel=0"
+        "embedUrl": "https://youtu.be/rauHo2mXT-Q?si=5sdCzTcC7Mv4yRFB"
       }
-    ],
-    "status": true,
-    "views": 20
+    ]
   },
   {
     "id": "lvl-41",
     "levelNum": 41,
     "name": "🎊LEVEL 41- MEMBUAT KOMIK LEGENDA, DLL",
     "category": "Drama & Cerita AI",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 1001184646.png Caranya ketik mulai di generator lalu isi dulu semua permintaan lalu setelah itu minta dibuat",
+    "desc": "Caranya ketik mulai di generator lalu isi dulu semua permintaan lalu setelah itu minta dibuatkan gambar per halaman. Ketuk Tools Generator  dibawah ini :...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "1001184646.png",
       "Caranya ketik mulai di generator lalu isi dulu semua permintaan lalu setelah itu minta dibuatkan gambar per halaman.",
-      "46392.png",
       "Ketuk Tools Generator  dibawah ini :",
       "ChatGPT - KOMIK GENERATOR IRT NAIK LEVEL"
     ],
+    "markdownPrompt": "Caranya ketik mulai di generator lalu isi dulu semua permintaan lalu setelah itu minta dibuatkan gambar per halaman.\n\nKetuk Tools Generator  dibawah ini :\n\nChatGPT - KOMIK GENERATOR IRT NAIK LEVEL",
     "coverUrl": "assets/covers/lvl-41.jpg",
-    "toolUrl": "https://www.notion.so/38c1ad47aa05809c8c3cf136e9540d43",
+    "toolUrl": "https://chatgpt.com/g/g-6a3fc58d20a88191a5aeebaf9f44cebc-komik-generator-irt-naik-level",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a3fc58d20a88191a5aeebaf9f44cebc-komik-generator-irt-naik-level",
+        "title": "ChatGPT - KOMIK GENERATOR IRT NAIK LEVEL",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 30
+    "videos": []
   },
   {
     "id": "lvl-42",
     "levelNum": 42,
     "name": "LEVEL 42 -  DRACIN",
     "category": "Drama & Cerita AI",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 14934.png TOOLS DRACIN ",
+    "desc": "TOOLS DRACIN  TUTORIAL DRACIN...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "14934.png",
       "TOOLS DRACIN ",
       "TUTORIAL DRACIN"
     ],
+    "markdownPrompt": "TOOLS DRACIN \n\nTUTORIAL DRACIN",
     "coverUrl": "assets/covers/lvl-42.jpg",
-    "toolUrl": "https://www.notion.so/38d1ad47aa058046ac5be7442b9f012f",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtu.be/70Hq2IHy9Q0?si=3hq40oHN0utLXZLR",
     "videos": [
       {
-        "title": "TUTORIAL DRACIN oleh IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL 42 -  DRACIN",
         "url": "https://youtu.be/70Hq2IHy9Q0?si=3hq40oHN0utLXZLR",
-        "embedUrl": "https://www.youtube.com/embed/70Hq2IHy9Q0?rel=0"
+        "embedUrl": "https://youtu.be/70Hq2IHy9Q0?si=3hq40oHN0utLXZLR"
       }
-    ],
-    "status": true,
-    "views": 29
+    ]
   },
   {
     "id": "lvl-43",
     "levelNum": 43,
     "name": "Level - 43 DRAMA FOOD HEAD CREATOR",
     "category": "Drama & Cerita AI",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 12241.png TOOLS KLIK DISINI ",
+    "desc": "TOOLS KLIK DISINI  ChatGPT - 🍔 FOOD HEAD CREATOR by IRT NAIK LEVEL...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "12241.png",
       "TOOLS KLIK DISINI ",
       "ChatGPT - 🍔 FOOD HEAD CREATOR by IRT NAIK LEVEL",
       "TUTORIAL FOOD HEAD CREATOR "
     ],
+    "markdownPrompt": "TOOLS KLIK DISINI \n\nChatGPT - 🍔 FOOD HEAD CREATOR by IRT NAIK LEVEL\n\nTUTORIAL FOOD HEAD CREATOR ",
     "coverUrl": "assets/covers/lvl-43.jpg",
-    "toolUrl": "https://www.notion.so/3911ad47aa0580768bacdf9f2eea046a",
+    "toolUrl": "https://chatgpt.com/g/g-6a49e01cb3a481918eafef1a4bef1540-food-head-creator-by-irt-naik-level",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a49e01cb3a481918eafef1a4bef1540-food-head-creator-by-irt-naik-level",
+        "title": "ChatGPT - 🍔 FOOD HEAD CREATOR by IRT NAIK LEVEL",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "https://youtu.be/ze9SOGLokvk?si=UOlIHwgCyH6DWDyd",
     "videos": [
       {
-        "title": "TUTORIAL FOOD CREATOR OLEH IRT NAIK LEVEL ",
+        "title": "Tutorial Level - 43 DRAMA FOOD HEAD CREATOR",
         "url": "https://youtu.be/ze9SOGLokvk?si=UOlIHwgCyH6DWDyd",
-        "embedUrl": "https://www.youtube.com/embed/ze9SOGLokvk?rel=0"
+        "embedUrl": "https://youtu.be/ze9SOGLokvk?si=UOlIHwgCyH6DWDyd"
       }
-    ],
-    "status": true,
-    "views": 41
+    ]
   },
   {
     "id": "lvl-44",
     "levelNum": 44,
     "name": "LEVEL 44 - TUTORIAL CARA BIKIN VIDEO MPLS PAKAI FLOW",
     "category": "Animasi Kreatif",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 12544.png VIDEO TUTORIAL ",
+    "desc": "VIDEO TUTORIAL  TOOLS CUSTOM ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "12544.png",
       "VIDEO TUTORIAL ",
       "TOOLS CUSTOM ",
       "ChatGPT - 🎓 IRT NAIK LEVEL MPLS ANIMATION GENERATOR PRO",
       "PROMPT MANUAL TANPA TOOLS , KAMU JUGA BISA COPY PASTE INI LALU MASUKKAN KE CHATGPT",
       "🎬 MULAI\nSaya ingin membuat video Animasi AI bertema MPLS Sekolah.\nSilakan tanyakan data berikut satu per satu, lalu setelah semua data lengkap, buatkan hasil yang siap digunakan.\n---\n📋 DATA PROYEK\n1. Nama Sekolah :\n2. Jenjang :(TK / SD / SMP / SMA / SMK)\n3. Tema Video :\n4. Tujuan Video :(Promosi Sekolah / MPLS / PPDB / Profil Sekolah)\n5. Jumlah Scene :\n6. Durasi per Scene :(Default 10 detik)\n7. Rasio Video :\n- 9:16- 16:9- 1:1\n8. Style Karakter :\n- 3D Cartoon Pixar- Clay- Anime- Disney Style- Realistis- Chibi- Lainnya\n9. Bahasa :\n10. Referensi Gambar :(Lampirkan jika ada.)\n---\n📦 SETELAH SEMUA DATA LENGKAP\nBuatkan secara lengkap:\n✅ Storyboard setiap scene\n✅ Prompt Text-to-Image setiap scene\n✅ Prompt Image-to-Video setiap scene\n✅ Dialog karakter\n✅ Dialog narator\n✅ Camera Movement\n✅ Gerakan karakter\n✅ Ekspresi karakter\n✅ Detail lokasi\n✅ Sound Effect (SFX)\n✅ Background Music (BGM)\n✅ Negative Prompt\n✅ Prompt Master Character yang konsisten di semua scene\n✅ Prompt siap copy-paste ke AI Generator\nPastikan seluruh karakter memiliki penampilan yang konsisten pada setiap scene, visual berkualitas tinggi, sinematik, penuh warna, dan cocok untuk konten media sosial."
     ],
+    "markdownPrompt": "VIDEO TUTORIAL \n\nTOOLS CUSTOM \n\nChatGPT - 🎓 IRT NAIK LEVEL MPLS ANIMATION GENERATOR PRO\n\nPROMPT MANUAL TANPA TOOLS , KAMU JUGA BISA COPY PASTE INI LALU MASUKKAN KE CHATGPT\n\n🎬 MULAI\nSaya ingin membuat video Animasi AI bertema MPLS Sekolah.\nSilakan tanyakan data berikut satu per satu, lalu setelah semua data lengkap, buatkan hasil yang siap digunakan.\n---\n📋 DATA PROYEK\n1. Nama Sekolah :\n2. Jenjang :(TK / SD / SMP / SMA / SMK)\n3. Tema Video :\n4. Tujuan Video :(Promosi Sekolah / MPLS / PPDB / Profil Sekolah)\n5. Jumlah Scene :\n6. Durasi per Scene :(Default 10 detik)\n7. Rasio Video :\n- 9:16- 16:9- 1:1\n8. Style Karakter :\n- 3D Cartoon Pixar- Clay- Anime- Disney Style- Realistis- Chibi- Lainnya\n9. Bahasa :\n10. Referensi Gambar :(Lampirkan jika ada.)\n---\n📦 SETELAH SEMUA DATA LENGKAP\nBuatkan secara lengkap:\n✅ Storyboard setiap scene\n✅ Prompt Text-to-Image setiap scene\n✅ Prompt Image-to-Video setiap scene\n✅ Dialog karakter\n✅ Dialog narator\n✅ Camera Movement\n✅ Gerakan karakter\n✅ Ekspresi karakter\n✅ Detail lokasi\n✅ Sound Effect (SFX)\n✅ Background Music (BGM)\n✅ Negative Prompt\n✅ Prompt Master Character yang konsisten di semua scene\n✅ Prompt siap copy-paste ke AI Generator\nPastikan seluruh karakter memiliki penampilan yang konsisten pada setiap scene, visual berkualitas tinggi, sinematik, penuh warna, dan cocok untuk konten media sosial.",
     "coverUrl": "assets/covers/lvl-44.jpg",
-    "toolUrl": "https://www.notion.so/3951ad47aa0580509ecef9aba2b7d519",
+    "toolUrl": "https://chatgpt.com/g/g-6a46f478a92c81919fc77eecc4421d2c-irt-naik-level-mpls-animation-generator-pro",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a46f478a92c81919fc77eecc4421d2c-irt-naik-level-mpls-animation-generator-pro",
+        "title": "ChatGPT - 🎓 IRT NAIK LEVEL MPLS ANIMATION GENERATOR PRO",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "https://youtu.be/5gvyy_-c52c?si=Ci1zGN0yeM4GYiiO",
     "videos": [
       {
-        "title": "TUTORIAL CARA BIKIN VIDEO ANIMASI MPLS SEKOLAH oleh IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL 44 - TUTORIAL CARA BIKIN VIDEO MPLS PAKAI FLOW",
         "url": "https://youtu.be/5gvyy_-c52c?si=Ci1zGN0yeM4GYiiO",
-        "embedUrl": "https://www.youtube.com/embed/5gvyy_-c52c?rel=0"
+        "embedUrl": "https://youtu.be/5gvyy_-c52c?si=Ci1zGN0yeM4GYiiO"
       }
-    ],
-    "status": true,
-    "views": 40
+    ]
   },
   {
     "id": "lvl-45",
     "levelNum": 45,
     "name": "🎊LEVEL 45- BANK TOOLS IRT NAIK LEVEL & AFFILIATE UNBOXING",
     "category": "Affiliate & Iklan",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 16912.png Nanti tools tools tambahan siap pakai akan saya masukkan disini ya. Ditunggu saja ",
+    "desc": "Nanti tools tools tambahan siap pakai akan saya masukkan disini ya. Ditunggu saja  Masuk ke chatgpt lalu masukkan promptnimi...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "16912.png",
       "Nanti tools tools tambahan siap pakai akan saya masukkan disini ya. Ditunggu saja ",
       "Masuk ke chatgpt lalu masukkan promptnimi",
       "Tiny Construction 🚧\nPekerja mini membangun atau memperbaiki benda besar.\nContoh: memperbaiki sepatu robek, menambal retak pada telur, mengecat cangkir.",
@@ -2139,35 +2103,39 @@ const DEFAULT_COURSE_DATA = {
       "ChatGPT - 🎁UNBOXING PRODUCT GENERATOR by IRT NAIK LEVEL",
       "Buatkan jadi video jangan ada yang typo dan kesalahan kata. Buat suara narator konsisten suara wanita usia 30 tahun ,lembut dan natural layaknya untuk suara iklan."
     ],
+    "markdownPrompt": "Nanti tools tools tambahan siap pakai akan saya masukkan disini ya. Ditunggu saja \n\nMasuk ke chatgpt lalu masukkan promptnimi\n\nTiny Construction 🚧\nPekerja mini membangun atau memperbaiki benda besar.\nContoh: memperbaiki sepatu robek, menambal retak pada telur, mengecat cangkir.\n\nTutorialnya disini ya \n\nTOOLS UNBOXING PRODUK \n\nChatGPT - 🎁UNBOXING PRODUCT GENERATOR by IRT NAIK LEVEL\n\nBuatkan jadi video jangan ada yang typo dan kesalahan kata. Buat suara narator konsisten suara wanita usia 30 tahun ,lembut dan natural layaknya untuk suara iklan.",
     "coverUrl": "assets/covers/lvl-45.jpg",
-    "toolUrl": "https://www.notion.so/3961ad47aa0580ee83a3ded26afb15dd",
+    "toolUrl": "https://chatgpt.com/g/g-6a52309000f481918a6cb4b0977002df-unboxing-product-generator-by-irt-naik-level",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a52309000f481918a6cb4b0977002df-unboxing-product-generator-by-irt-naik-level",
+        "title": "ChatGPT - 🎁UNBOXING PRODUCT GENERATOR by IRT NAIK LEVEL",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
     "videoUrl": "https://youtu.be/7x01oy9a1Dg?si=6lqiz60cfi7oS0Cn",
     "videos": [
       {
-        "title": "TUTORIAL TINY CONSTRUKSI OLEH IRT NAIK LEVEL ",
+        "title": "Tutorial 🎊LEVEL 45- BANK TOOLS IRT NAIK LEVEL & AFFILIATE UNBOXING",
         "url": "https://youtu.be/7x01oy9a1Dg?si=6lqiz60cfi7oS0Cn",
-        "embedUrl": "https://www.youtube.com/embed/7x01oy9a1Dg?rel=0"
+        "embedUrl": "https://youtu.be/7x01oy9a1Dg?si=6lqiz60cfi7oS0Cn"
       },
       {
-        "title": "TUTORIAL UNBOXING PRODUK DENGAN AI BY IRT NAIK LEVEL ",
+        "title": "Tutorial 🎊LEVEL 45- BANK TOOLS IRT NAIK LEVEL & AFFILIATE UNBOXING",
         "url": "https://youtu.be/tRC6m_TCZk0?si=vqCm49jh1EpiB2NL",
-        "embedUrl": "https://www.youtube.com/embed/tRC6m_TCZk0?rel=0"
+        "embedUrl": "https://youtu.be/tRC6m_TCZk0?si=vqCm49jh1EpiB2NL"
       }
-    ],
-    "status": true,
-    "views": 25
+    ]
   },
   {
     "id": "lvl-46",
     "levelNum": 46,
     "name": "LEVEL -46 MEMBUAT PEMBELAJARAN MENARIK PAKAI AI/ POP BOOK/LKPD/RPP/RPM",
     "category": "Edukasi & Anak",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 16208.png VIDEO TUTORIAL ",
+    "desc": "VIDEO TUTORIAL  TOOLS PENGHASIL PROMPT ...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "16208.png",
       "VIDEO TUTORIAL ",
       "TOOLS PENGHASIL PROMPT ",
       "ChatGPT - GENERATOR PEMBELAJARAN",
@@ -2193,7 +2161,6 @@ const DEFAULT_COURSE_DATA = {
       "✅ Jika memilih 2️⃣ Generate Gambar\nAI akan langsung membuat:\n• Cover\n• Halaman 1\n• Halaman 2\n• Dan seterusnya",
       "✅ Jika memilih 3️⃣ Generate Video Prompt\nAI akan membuat prompt animasi untuk setiap gambar.",
       "HIASAN KELAS ",
-      "16291.png",
       "PROMPT MASTER – POSTER GANTUNG SELAMAT DATANG DI KELAS\nCreate a premium printable classroom hanging decoration poster in vertical 9:16 ratio. Cute Pixar-quality 3D cartoon with layered paper-cut craft style, realistic paper texture, bright colorful design, soft lighting, ultra detailed, child-friendly, symmetrical composition, clean white background.\nCreate a large decorative hanging sign at the top with colorful bubble letters:\n\"SELAMAT DATANG DI KELAS\"\nThe entire decoration must use the theme:\n[TEMA]\nReplace every decorative element according to the chosen theme, including the title frame, borders, hanging ornaments, characters, plants, objects, icons, background decorations, ropes, flowers, leaves, and accessories.\nSurround the title with multiple cute themed characters and decorative elements. Make the theme dominate the entire design while keeping it cheerful and suitable for kindergarten and elementary classrooms.\nUnder the title, create three vertical hanging ornaments connected with decorative ropes, vines, ribbons, chains, or themed connectors.\nLEFT COLUMN\n🌸 SENYUM 😊\n⭐ SAPA 👋\n☁ SOPAN 🙏\nDecorate each ornament with cute [TEMA] elements.\nCENTER COLUMN\nBELAJAR\nBERMAIN\nBERKARYA\nBERSAMA\nPlace a large central themed decoration surrounded by adorable [TEMA] characters.\nRIGHT COLUMN\n🌸 DENGAR 👂\n⭐ TOLONG MENOLONG ❤️\n☁ TERIMA KASIH 💚\nDecorate with additional [TEMA] elements matching the overall concept.\nAdd plenty of colorful details including themed objects, plants, accessories, textures, sparkles, flowers, leaves, ribbons, clouds, stars, and decorative ornaments. Everything must match the selected theme.\nStyle: Premium classroom wall decoration, Pixar 3D cartoon, paper craft, vibrant colors, highly detailed, educational, magical atmosphere, professional printable quality, 8K Ultra HD.\nCara Menggunakan\nCukup ganti bagian:\n[TEMA] = Dinosaurus\natau\nHutan Rimba\nPetualangan Laut\nSerangga\nRobot\nHewan Safari\nSekolah Ceria\nIslami Ceria\nHari Guru\nHari Kartini\n17 Agustus\nPahlawan Kemerdekaan\nLuar Angkasa\nUnicorn\nPrincess\nTransportasi\nProfesi\nAlfabet\nAngka\nBuah & Sayur\nTata Surya\nKebun Binatang\nFarm/Hewan Ternak\nMusim Hujan\nMusim Semi\ndan tema lainnya.",
       "COPY PROMPT DIATAS PASTEKAN KE CHATGPT LALU GANTI TEMA NYA ",
       "CARA PENGGUNAAN NYA KETUK TOOLSNYA LALU KETIK MULAI LALU PILIH JUDUL YANG MAU DIBUAT .",
@@ -2201,63 +2168,122 @@ const DEFAULT_COURSE_DATA = {
       "ChatGPT - AI LKPD GENERATOR PRO | IRT NAIK LEVEL",
       "ChatGPT - GURU CERDAS AI"
     ],
+    "markdownPrompt": "VIDEO TUTORIAL \n\nTOOLS PENGHASIL PROMPT \n\nChatGPT - GENERATOR PEMBELAJARAN\n\nTidak perlu bisa membuat prompt. Cukup ikuti langkah-langkah berikut.\n\nTidak perlu bisa membuat prompt. Cukup ikuti langkah-langkah berikut.\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n🟢 LANGKAH 1\n\nKetik:\n\nMULAI\n\nLalu pilih salah satu menu berikut:\n\n1️⃣ Prompt Lengkap\n(Prompt Gambar + Prompt Video + Narasi)\n\n2️⃣ Generate Gambar\n(AI langsung membuat Cover & setiap halaman)\n\n3️⃣ Generate Video Prompt\n(Prompt animasi dari gambar yang sudah dibuat)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n🟢 LANGKAH 2\n\nIsi data yang diminta.\n\nContoh:\n\n📚 Judul Materi : Sistem Tata Surya\n🎓 Jenjang : SD\n📄 Jumlah Halaman : 6\n🎨 Style : Pixar 3D\n📐 Rasio : 1:1\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n🟢 LANGKAH 3\n\nAI akan mulai membuat sesuai menu yang dipilih.\n\n✅ Jika memilih 1️⃣ Prompt Lengkap\nAI akan membuat:\n• Prompt Gambar\n• Prompt Video\n• Narasi\n• Teks di Dalam Buku\n\n✅ Jika memilih 2️⃣ Generate Gambar\nAI akan langsung membuat:\n• Cover\n• Halaman 1\n• Halaman 2\n• Dan seterusnya\n\n✅ Jika memilih 3️⃣ Generate Video Prompt\nAI akan membuat prompt animasi untuk setiap gambar.\n\nHIASAN KELAS \n\nPROMPT MASTER – POSTER GANTUNG SELAMAT DATANG DI KELAS\nCreate a premium printable classroom hanging decoration poster in vertical 9:16 ratio. Cute Pixar-quality 3D cartoon with layered paper-cut craft style, realistic paper texture, bright colorful design, soft lighting, ultra detailed, child-friendly, symmetrical composition, clean white background.\nCreate a large decorative hanging sign at the top with colorful bubble letters:\n\"SELAMAT DATANG DI KELAS\"\nThe entire decoration must use the theme:\n[TEMA]\nReplace every decorative element according to the chosen theme, including the title frame, borders, hanging ornaments, characters, plants, objects, icons, background decorations, ropes, flowers, leaves, and accessories.\nSurround the title with multiple cute themed characters and decorative elements. Make the theme dominate the entire design while keeping it cheerful and suitable for kindergarten and elementary classrooms.\nUnder the title, create three vertical hanging ornaments connected with decorative ropes, vines, ribbons, chains, or themed connectors.\nLEFT COLUMN\n🌸 SENYUM 😊\n⭐ SAPA 👋\n☁ SOPAN 🙏\nDecorate each ornament with cute [TEMA] elements.\nCENTER COLUMN\nBELAJAR\nBERMAIN\nBERKARYA\nBERSAMA\nPlace a large central themed decoration surrounded by adorable [TEMA] characters.\nRIGHT COLUMN\n🌸 DENGAR 👂\n⭐ TOLONG MENOLONG ❤️\n☁ TERIMA KASIH 💚\nDecorate with additional [TEMA] elements matching the overall concept.\nAdd plenty of colorful details including themed objects, plants, accessories, textures, sparkles, flowers, leaves, ribbons, clouds, stars, and decorative ornaments. Everything must match the selected theme.\nStyle: Premium classroom wall decoration, Pixar 3D cartoon, paper craft, vibrant colors, highly detailed, educational, magical atmosphere, professional printable quality, 8K Ultra HD.\nCara Menggunakan\nCukup ganti bagian:\n[TEMA] = Dinosaurus\natau\nHutan Rimba\nPetualangan Laut\nSerangga\nRobot\nHewan Safari\nSekolah Ceria\nIslami Ceria\nHari Guru\nHari Kartini\n17 Agustus\nPahlawan Kemerdekaan\nLuar Angkasa\nUnicorn\nPrincess\nTransportasi\nProfesi\nAlfabet\nAngka\nBuah & Sayur\nTata Surya\nKebun Binatang\nFarm/Hewan Ternak\nMusim Hujan\nMusim Semi\ndan tema lainnya.\n\nCOPY PROMPT DIATAS PASTEKAN KE CHATGPT LALU GANTI TEMA NYA \n\nCARA PENGGUNAAN NYA KETUK TOOLSNYA LALU KETIK MULAI LALU PILIH JUDUL YANG MAU DIBUAT .\n\nTOOLS LKPD ESTETIK BERBAGAI PELAJARAN  \n\nChatGPT - AI LKPD GENERATOR PRO | IRT NAIK LEVEL\n\nChatGPT - GURU CERDAS AI",
     "coverUrl": "assets/covers/lvl-46.jpg",
-    "toolUrl": "https://www.notion.so/3a71ad47aa05800a8e8dc0f1a06419b1",
+    "toolUrl": "https://chatgpt.com/g/g-6a62f51cf65c8191b9dee48222f590dc-generator-pembelajaran",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a62f51cf65c8191b9dee48222f590dc-generator-pembelajaran",
+        "title": "ChatGPT - GENERATOR PEMBELAJARAN",
+        "description": "Disusun oleh kak Lia irt naik level, untuk mempermudah para guru membuat bahan ajar dengan Ai"
+      },
+      {
+        "url": "https://chatgpt.com/g/g-6a64244323208191a917eca295a9ba91-ai-lkpd-generator-pro-irt-naik-level",
+        "title": "ChatGPT - AI LKPD GENERATOR PRO | IRT NAIK LEVEL",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      },
+      {
+        "url": "https://chatgpt.com/g/g-6a68f5cc150481919f1f15a722599d7e-guru-cerdas-ai",
+        "title": "ChatGPT - GURU CERDAS AI",
+        "description": "Disusun oleh kak Lia, irt naik level untuk membantu para guru. Bapak ibu cukup ketuk tulisan \"mulai\" atau tulisan kata \"mulai\" lalu enter, nanti tools ini akan membantu proses sesuai yang diminta ."
+      }
+    ],
     "videoUrl": "https://youtu.be/E7TOtLYKL2A?si=tTMiZ1IyLEIS6h4y",
     "videos": [
       {
-        "title": "TUTORIAL ANIMASI PEMBELAJARAN by IRT NAIK LEVEL",
+        "title": "Tutorial LEVEL -46 MEMBUAT PEMBELAJARAN MENARIK PAKAI AI/ POP BOOK/LKPD/RPP/RPM",
         "url": "https://youtu.be/E7TOtLYKL2A?si=tTMiZ1IyLEIS6h4y",
-        "embedUrl": "https://www.youtube.com/embed/E7TOtLYKL2A?rel=0"
+        "embedUrl": "https://youtu.be/E7TOtLYKL2A?si=tTMiZ1IyLEIS6h4y"
       },
       {
-        "title": "TUTORIAL ANIMASI PEMBELAJARAN DENGAN GEMINI OLEH IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL -46 MEMBUAT PEMBELAJARAN MENARIK PAKAI AI/ POP BOOK/LKPD/RPP/RPM",
         "url": "https://youtu.be/_MgzmXIxoOo?si=Tgxx_73-DjQint-N",
-        "embedUrl": "https://www.youtube.com/embed/_MgzmXIxoOo?rel=0"
+        "embedUrl": "https://youtu.be/_MgzmXIxoOo?si=Tgxx_73-DjQint-N"
       },
       {
-        "title": "TUTORIAL CARA MEMBUAT LKPD ATAU BAHAN AJAR OLEH LIA IRT NAIK LEVEL ",
+        "title": "Tutorial LEVEL -46 MEMBUAT PEMBELAJARAN MENARIK PAKAI AI/ POP BOOK/LKPD/RPP/RPM",
         "url": "https://youtu.be/jWEQoPHs7uc?si=B9kMpNqKcG8Ki_oX",
-        "embedUrl": "https://www.youtube.com/embed/jWEQoPHs7uc?rel=0"
+        "embedUrl": "https://youtu.be/jWEQoPHs7uc?si=B9kMpNqKcG8Ki_oX"
       }
-    ],
-    "status": true,
-    "views": 34
+    ]
   },
   {
     "id": "lvl-47",
     "levelNum": 47,
     "name": "LEVEL 47- BONUS WORKSHEET ANAK",
     "category": "Edukasi & Anak",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 16911.png KLIK / COPY LINK INI UNTUK MEMBUKA WORKSHEET ANAK : ",
+    "desc": "KLIK / COPY LINK INI UNTUK MEMBUKA WORKSHEET ANAK :  https://drive.google.com/drive/folders/13eTB02UmZZLt-lFvZzG9JLmHiLryyF9V...",
     "instructions": [],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "16911.png",
       "KLIK / COPY LINK INI UNTUK MEMBUKA WORKSHEET ANAK : ",
       "https://drive.google.com/drive/folders/13eTB02UmZZLt-lFvZzG9JLmHiLryyF9V",
       "CARA MEMBUAT COVERNYA : MASUK KE CHATGPT LALU BILANG BEGINI :",
       "BUATKAN COVER WORKSHEET ANAK YANG MENARIK UKURAN 1:1 BUAT ESTETIK DAN MENARIK UNTUK ANAK ANAK. "
     ],
+    "markdownPrompt": "KLIK / COPY LINK INI UNTUK MEMBUKA WORKSHEET ANAK : \n\nhttps://drive.google.com/drive/folders/13eTB02UmZZLt-lFvZzG9JLmHiLryyF9V\n\nCARA MEMBUAT COVERNYA : MASUK KE CHATGPT LALU BILANG BEGINI :\n\nBUATKAN COVER WORKSHEET ANAK YANG MENARIK UKURAN 1:1 BUAT ESTETIK DAN MENARIK UNTUK ANAK ANAK. ",
     "coverUrl": "assets/covers/lvl-47.jpg",
-    "toolUrl": "https://www.notion.so/3ab1ad47aa058012b555ec765829b04a",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 32
+    "videos": []
   },
   {
     "id": "lvl-48",
     "levelNum": 48,
     "name": "LEVEL -48 CARA MEMBUAT GAMES INTERAKTIF ANAK",
     "category": "Edukasi & Anak",
-    "desc": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level 17051.png VIDEO TUTORIAL",
-    "instructions": [],
+    "desc": "VIDEO TUTORIAL MASUK KE GEMINI KETUK TANDA + LALU PILIH CANVAS ,MASUKKAN PROMPT DIBAWAH INI : KAMU JUGA BISA GANTI GANTI PROMPTNYA SESUAI DENGAN MATA PELAJARAN ...",
+    "instructions": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Tidak membutuhkan login",
+      "Tidak membutuhkan database",
+      "Tidak membutuhkan internet untuk fungsi utama game",
+      "Responsive untuk HP, tablet, dan komputer",
+      "Tampilan fullscreen yang nyaman disentuh",
+      "Gunakan teks yang sangat sedikit",
+      "Gunakan font besar dan mudah dibaca",
+      "Gunakan tombol besar",
+      "Gunakan ikon dan gambar sebagai petunjuk",
+      "Gunakan instruksi sederhana",
+      "Hindari permainan yang terlalu sulit",
+      "Hindari timer yang membuat anak tertekan",
+      "Berikan feedback positif setiap kali anak mencoba",
+      "ceria",
+      "lucu",
+      "aman",
+      "ramah anak",
+      "colorful",
+      "playful",
+      "premium educational game",
+      "biru laut",
+      "turquoise",
+      "biru muda",
+      "coral pink",
+      "kuning pastel",
+      "hijau mint",
+      "putih",
+      "gelembung air",
+      "karang warna-warni",
+      "rumput laut",
+      "pasir laut",
+      "kerang",
+      "bintang laut",
+      "ikan kecil yang bergerak perlahan",
+      "ikan kecil lucu",
+      "gurita tersenyum",
+      "lumba-lumba",
+      "penyu",
+      "paus",
+      "confetti",
+      "bintang",
+      "karakter tersenyum",
+      "suara kemenangan lembut"
+    ],
     "prompts": [],
     "fullTexts": [
-      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
-      "17051.png",
       "VIDEO TUTORIAL",
       "MASUK KE GEMINI KETUK TANDA + LALU PILIH CANVAS ,MASUKKAN PROMPT DIBAWAH INI : KAMU JUGA BISA GANTI GANTI PROMPTNYA SESUAI DENGAN MATA PELAJARAN YANG KAMU MAU.",
       "PROMPT GEMINI CANVAS — GAME EDUKATIF ANAK",
@@ -2268,53 +2294,15 @@ const DEFAULT_COURSE_DATA = {
       "PLATFORM",
       "Buat sebagai web game interaktif yang dapat langsung dimainkan di Gemini Canvas.",
       "Gunakan:",
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Tidak membutuhkan login",
-      "Tidak membutuhkan database",
-      "Tidak membutuhkan internet untuk fungsi utama game",
-      "Responsive untuk HP, tablet, dan komputer",
-      "Tampilan fullscreen yang nyaman disentuh",
       "TARGET",
       "Anak usia 4 tahun / PAUD-TK.",
       "Karena target masih kecil:",
-      "Gunakan teks yang sangat sedikit",
-      "Semua elemen dibuat dalam satu halaman",
-      "Gunakan font besar dan mudah dibaca",
-      "Gunakan tombol besar",
-      "Gunakan ikon dan gambar sebagai petunjuk",
-      "Gunakan instruksi sederhana",
-      "Hindari permainan yang terlalu sulit",
-      "Hindari timer yang membuat anak tertekan",
-      "Berikan feedback positif setiap kali anak mencoba",
       "KONSEP VISUAL",
       "Gunakan gaya:",
       "Cute 3D Cartoon + Soft Toy + Colorful Underwater World",
       "Nuansa:",
-      "ceria",
-      "lucu",
-      "aman",
-      "ramah anak",
-      "colorful",
-      "playful",
-      "premium educational game",
       "Gunakan warna:",
-      "biru laut",
-      "turquoise",
-      "biru muda",
-      "coral pink",
-      "kuning pastel",
-      "hijau mint",
-      "putih",
       "Background berupa dunia bawah laut dengan:",
-      "gelembung air",
-      "karang warna-warni",
-      "rumput laut",
-      "pasir laut",
-      "kerang",
-      "bintang laut",
-      "ikan kecil yang bergerak perlahan",
       "Gunakan karakter hewan laut yang lucu dan tidak menakutkan.",
       "Hewan utama:\n🐠 Ikan\n🐙 Gurita\n🐢 Penyu\n🐳 Paus\n🦀 Kepiting\n⭐ Bintang laut\n🦑 Cumi-cumi\n🐬 Lumba-lumba",
       "HALAMAN 1 — COVER",
@@ -2323,11 +2311,6 @@ const DEFAULT_COURSE_DATA = {
       "Subjudul:",
       "Yuk kenalan dengan hewan laut!",
       "Tampilkan karakter:",
-      "ikan kecil lucu",
-      "gurita tersenyum",
-      "lumba-lumba",
-      "penyu",
-      "paus",
       "Buat animasi ringan seperti hewan berenang perlahan.",
       "Tombol besar:",
       "▶️ MULAI BERMAIN",
@@ -2346,218 +2329,532 @@ const DEFAULT_COURSE_DATA = {
       "Jika benar:",
       "🎉 HEBAT!",
       "Tambahkan animasi:",
-      "confetti",
-      "bintang",
-      "karakter tersenyum",
-      "suara kemenangan lembut",
       "Jika salah:",
       "😊 Coba lagi!",
       "Jangan menghukum anak."
     ],
+    "markdownPrompt": "1. HTML\n\n2. CSS\n\n3. JavaScript\n\n4. Tidak membutuhkan login\n\n5. Tidak membutuhkan database\n\n6. Tidak membutuhkan internet untuk fungsi utama game\n\n7. Responsive untuk HP, tablet, dan komputer\n\n8. Tampilan fullscreen yang nyaman disentuh\n\n9. Gunakan teks yang sangat sedikit\n\n10. Gunakan font besar dan mudah dibaca\n\n11. Gunakan tombol besar\n\n12. Gunakan ikon dan gambar sebagai petunjuk\n\n13. Gunakan instruksi sederhana\n\n14. Hindari permainan yang terlalu sulit\n\n15. Hindari timer yang membuat anak tertekan\n\n16. Berikan feedback positif setiap kali anak mencoba\n\n17. ceria\n\n18. lucu\n\n19. aman\n\n20. ramah anak\n\n21. colorful\n\n22. playful\n\n23. premium educational game\n\n24. biru laut\n\n25. turquoise\n\n26. biru muda\n\n27. coral pink\n\n28. kuning pastel\n\n29. hijau mint\n\n30. putih\n\n31. gelembung air\n\n32. karang warna-warni\n\n33. rumput laut\n\n34. pasir laut\n\n35. kerang\n\n36. bintang laut\n\n37. ikan kecil yang bergerak perlahan\n\n38. ikan kecil lucu\n\n39. gurita tersenyum\n\n40. lumba-lumba\n\n41. penyu\n\n42. paus\n\n43. confetti\n\n44. bintang\n\n45. karakter tersenyum\n\n46. suara kemenangan lembut",
     "coverUrl": "assets/covers/lvl-48.jpg",
-    "toolUrl": "https://www.notion.so/3ab1ad47aa0580819135c71b8b9dc866",
+    "toolUrl": "",
+    "tools": [],
     "videoUrl": "https://youtube.com/shorts/zhrTuihMBjU?si=H3OTR9ZBWk7bHWwf",
     "videos": [
       {
-        "title": "tutorial games gemini by irt naik level",
+        "title": "Tutorial LEVEL -48 CARA MEMBUAT GAMES INTERAKTIF ANAK",
         "url": "https://youtube.com/shorts/zhrTuihMBjU?si=H3OTR9ZBWk7bHWwf",
-        "embedUrl": "https://www.youtube.com/embed/zhrTuihMBjU?rel=0"
+        "embedUrl": "https://youtube.com/shorts/zhrTuihMBjU?si=H3OTR9ZBWk7bHWwf"
       }
-    ],
-    "status": true,
-    "views": 51
+    ]
   },
   {
     "id": "lvl-49",
     "levelNum": 49,
     "name": "LEVEL - 49 EDU UNBOXING GENERATOR",
     "category": "Animasi Kreatif",
-    "desc": "Modul pembelajaran praktis LEVEL - 49 EDU UNBOXING GENERATOR dari IRT Naik Level.",
+    "desc": "VIDEO TUTORIAL  TOOLS PENGHASIL PROMPT KETUK /TULIS MULAI DIBAWAH INI ...",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "VIDEO TUTORIAL ",
+      "TOOLS PENGHASIL PROMPT KETUK /TULIS MULAI DIBAWAH INI ",
+      "ChatGPT - AI EDU UNBOXING GENERATOR"
+    ],
+    "markdownPrompt": "VIDEO TUTORIAL \n\nTOOLS PENGHASIL PROMPT KETUK /TULIS MULAI DIBAWAH INI \n\nChatGPT - AI EDU UNBOXING GENERATOR",
     "coverUrl": "assets/covers/lvl-49.jpg",
-    "toolUrl": "https://www.notion.so/3b31ad47aa0580558bc8ca55f52daedd",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 28
+    "toolUrl": "https://chatgpt.com/g/g-6a731f0d03f481918eddb571666580e0-ai-edu-unboxing-generator",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a731f0d03f481918eddb571666580e0-ai-edu-unboxing-generator",
+        "title": "ChatGPT - AI EDU UNBOXING GENERATOR",
+        "description": "Disusun oleh kak Lia, irt naik level"
+      }
+    ],
+    "videoUrl": "https://youtu.be/iTQofIwZfV4?si=-iRxTGNp3HJsbmyt",
+    "videos": [
+      {
+        "title": "Tutorial LEVEL - 49 EDU UNBOXING GENERATOR",
+        "url": "https://youtu.be/iTQofIwZfV4?si=-iRxTGNp3HJsbmyt",
+        "embedUrl": "https://youtu.be/iTQofIwZfV4?si=-iRxTGNp3HJsbmyt"
+      }
+    ]
   },
   {
     "id": "lvl-50",
     "levelNum": 50,
     "name": "LEVEL -50 MEMBUAT ANIMASI KONSEP SENDIRI / PERSONAL BRANDING",
     "category": "Animasi Kreatif",
-    "desc": "Modul pembelajaran praktis LEVEL -50 MEMBUAT ANIMASI KONSEP SENDIRI / PERSONAL BRANDING dari IRT Naik Level.",
+    "desc": "VIDEO TUTORIAL  AMBIL PROMPT NYA DI TOOLS DIBAWAH INI...",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "VIDEO TUTORIAL ",
+      "AMBIL PROMPT NYA DI TOOLS DIBAWAH INI",
+      "Ketuk lalu tulis “ Mulai”",
+      "ChatGPT - IRT NAIK LEVEL - TOOLS ANIMASI KONSEP SENDIRI",
+      "CARA BUAT VIDEO ANIMASI UNTUK PERSONAL BRANDING",
+      "Yang sering kak Lia praktekkan dilive adalah donghua "
+    ],
+    "markdownPrompt": "VIDEO TUTORIAL \n\nAMBIL PROMPT NYA DI TOOLS DIBAWAH INI\n\nKetuk lalu tulis “ Mulai”\n\nChatGPT - IRT NAIK LEVEL - TOOLS ANIMASI KONSEP SENDIRI\n\nCARA BUAT VIDEO ANIMASI UNTUK PERSONAL BRANDING\n\nYang sering kak Lia praktekkan dilive adalah donghua ",
     "coverUrl": "assets/covers/lvl-50.jpg",
-    "toolUrl": "https://www.notion.so/3b61ad47aa0580f7a8f8c57f925a413f",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 23
+    "toolUrl": "https://chatgpt.com/g/g-6a76e27d4ca88191ae17458c7cf3472b-irt-naik-level-tools-animasi-konsep-sendiri",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a76e27d4ca88191ae17458c7cf3472b-irt-naik-level-tools-animasi-konsep-sendiri",
+        "title": "ChatGPT - IRT NAIK LEVEL - TOOLS ANIMASI KONSEP SENDIRI",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
+    "videoUrl": "https://youtu.be/QR9uFTUvkg0?si=FROJu_ND4GoW7uSp",
+    "videos": [
+      {
+        "title": "Tutorial LEVEL -50 MEMBUAT ANIMASI KONSEP SENDIRI / PERSONAL BRANDING",
+        "url": "https://youtu.be/QR9uFTUvkg0?si=FROJu_ND4GoW7uSp",
+        "embedUrl": "https://youtu.be/QR9uFTUvkg0?si=FROJu_ND4GoW7uSp"
+      },
+      {
+        "title": "Tutorial LEVEL -50 MEMBUAT ANIMASI KONSEP SENDIRI / PERSONAL BRANDING",
+        "url": "https://youtu.be/5NhFsqK7Lq4?si=7Nox_wVr9yKfEr_s",
+        "embedUrl": "https://youtu.be/5NhFsqK7Lq4?si=7Nox_wVr9yKfEr_s"
+      }
+    ]
   },
   {
     "id": "lvl-51",
     "levelNum": 51,
     "name": "Level -51 ANIMASI HOLOGRAM",
     "category": "Animasi Kreatif",
-    "desc": "Modul pembelajaran praktis Level -51 ANIMASI HOLOGRAM dari IRT Naik Level.",
+    "desc": "AMBIL PROMPT DI TOOLS DIBAWAH INI DENGAN MENGETUK DAN KETIK KATA “MULAI” ChatGPT - IRT NAIK LEVEL — TEACHER HOLOGRAM AI...",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "AMBIL PROMPT DI TOOLS DIBAWAH INI DENGAN MENGETUK DAN KETIK KATA “MULAI”",
+      "ChatGPT - IRT NAIK LEVEL — TEACHER HOLOGRAM AI",
+      "TUTORIAL "
+    ],
+    "markdownPrompt": "AMBIL PROMPT DI TOOLS DIBAWAH INI DENGAN MENGETUK DAN KETIK KATA “MULAI”\n\nChatGPT - IRT NAIK LEVEL — TEACHER HOLOGRAM AI\n\nTUTORIAL ",
     "coverUrl": "assets/covers/lvl-51.jpg",
-    "toolUrl": "https://www.notion.so/3b91ad47aa0580048af8cf89dabcc9b8",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 29
+    "toolUrl": "https://chatgpt.com/g/g-6a7b24a3b15881918e22b7d4a8ea92f2-irt-naik-level-teacher-hologram-ai",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a7b24a3b15881918e22b7d4a8ea92f2-irt-naik-level-teacher-hologram-ai",
+        "title": "ChatGPT - IRT NAIK LEVEL — TEACHER HOLOGRAM AI",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
+    "videoUrl": "https://youtu.be/Yqh8W5sSMjE?si=PahVE7PV1BaEPvly",
+    "videos": [
+      {
+        "title": "Tutorial Level -51 ANIMASI HOLOGRAM",
+        "url": "https://youtu.be/Yqh8W5sSMjE?si=PahVE7PV1BaEPvly",
+        "embedUrl": "https://youtu.be/Yqh8W5sSMjE?si=PahVE7PV1BaEPvly"
+      }
+    ]
   },
   {
     "id": "lvl-52",
     "levelNum": 52,
     "name": "LEVEL -52 PODCAST - IRT NAIK LEVEL",
     "category": "Animasi Kreatif",
-    "desc": "Modul pembelajaran praktis LEVEL -52 PODCAST - IRT NAIK LEVEL dari IRT Naik Level.",
+    "desc": "TOOL CHATGPT PENGHASIL PROMPT ChatGPT - TOOLS PODCAST AI — IRT NAIK LEVEL 2...",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "TOOL CHATGPT PENGHASIL PROMPT",
+      "ChatGPT - TOOLS PODCAST AI — IRT NAIK LEVEL 2",
+      "KLIK TOOLS DIATAS LALU ISI SEMUA, TAMBAHKAN GAMBAR REFERENSI LALU BUATKAN GAMBAR STUDIONYA. LANJUT COPY SCENE BY SCENE.",
+      "VIDEO TUTORIAL",
+      "HASIL VIDEO "
+    ],
+    "markdownPrompt": "TOOL CHATGPT PENGHASIL PROMPT\n\nChatGPT - TOOLS PODCAST AI — IRT NAIK LEVEL 2\n\nKLIK TOOLS DIATAS LALU ISI SEMUA, TAMBAHKAN GAMBAR REFERENSI LALU BUATKAN GAMBAR STUDIONYA. LANJUT COPY SCENE BY SCENE.\n\nVIDEO TUTORIAL\n\nHASIL VIDEO ",
     "coverUrl": "assets/covers/lvl-52.jpg",
-    "toolUrl": "https://www.notion.so/3ba1ad47aa0580c2a4a1e2c3fe1c19f8",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 43
+    "toolUrl": "https://chatgpt.com/g/g-6a7dd98b18808191bc4c005153d76f25-tools-podcast-ai-irt-naik-level-2",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a7dd98b18808191bc4c005153d76f25-tools-podcast-ai-irt-naik-level-2",
+        "title": "ChatGPT - TOOLS PODCAST AI — IRT NAIK LEVEL 2",
+        "description": "ChatGPT helps you get answers, find inspiration, and be more productive."
+      }
+    ],
+    "videoUrl": "https://youtu.be/LYZnTAzA_Vs?si=nwtu7BEMDVLV4X2F",
+    "videos": [
+      {
+        "title": "Tutorial LEVEL -52 PODCAST - IRT NAIK LEVEL",
+        "url": "https://youtu.be/LYZnTAzA_Vs?si=nwtu7BEMDVLV4X2F",
+        "embedUrl": "https://youtu.be/LYZnTAzA_Vs?si=nwtu7BEMDVLV4X2F"
+      },
+      {
+        "title": "Tutorial LEVEL -52 PODCAST - IRT NAIK LEVEL",
+        "url": "https://youtu.be/dGveUZgPJcs?si=W8MQYOQ9VA1JsDPx",
+        "embedUrl": "https://youtu.be/dGveUZgPJcs?si=W8MQYOQ9VA1JsDPx"
+      }
+    ]
   },
   {
     "id": "lvl-53",
     "levelNum": 53,
     "name": "LEVEL -53 CARA BUAT WORKSHEET ANAK DENGAN AI",
     "category": "Edukasi & Anak",
-    "desc": "Modul pembelajaran praktis LEVEL -53 CARA BUAT WORKSHEET ANAK DENGAN AI dari IRT Naik Level.",
+    "desc": "Tools chatgpt  klik dan ketuk “mulai” atau ketik manual “Mulai” untuk mendapatkan prompt  👇👇👇...",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "Tools chatgpt  klik dan ketuk “mulai” atau ketik manual “Mulai” untuk mendapatkan prompt ",
+      "👇👇👇",
+      "ChatGPT - GENERATOR WORKSHEET",
+      "TUTORIAL MEMBUAT WORKSHEET ANAK"
+    ],
+    "markdownPrompt": "Tools chatgpt  klik dan ketuk “mulai” atau ketik manual “Mulai” untuk mendapatkan prompt \n\n👇👇👇\n\nChatGPT - GENERATOR WORKSHEET\n\nTUTORIAL MEMBUAT WORKSHEET ANAK",
     "coverUrl": "assets/covers/lvl-53.jpg",
-    "toolUrl": "https://www.notion.so/3be1ad47aa058060aa47f3a3374cf6d2",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 54
+    "toolUrl": "https://chatgpt.com/g/g-6a241f59cf808191a6ca9e9efd2a09bc-generator-worksheet",
+    "tools": [
+      {
+        "url": "https://chatgpt.com/g/g-6a241f59cf808191a6ca9e9efd2a09bc-generator-worksheet",
+        "title": "ChatGPT - GENERATOR WORKSHEET",
+        "description": "By IRT NAIK LEVEL"
+      }
+    ],
+    "videoUrl": "https://youtu.be/IiM8oyySmXc?si=bDXNZ2W7UhXPbDT3",
+    "videos": [
+      {
+        "title": "Tutorial LEVEL -53 CARA BUAT WORKSHEET ANAK DENGAN AI",
+        "url": "https://youtu.be/IiM8oyySmXc?si=bDXNZ2W7UhXPbDT3",
+        "embedUrl": "https://youtu.be/IiM8oyySmXc?si=bDXNZ2W7UhXPbDT3"
+      }
+    ]
   },
   {
     "id": "lvl-54",
     "levelNum": 54,
     "name": "LEVEL 54- ANIMASI PETUALANGAN /EDUKASI",
     "category": "Edukasi & Anak",
-    "desc": "Modul pembelajaran praktis LEVEL 54- ANIMASI PETUALANGAN /EDUKASI dari IRT Naik Level.",
+    "desc": "PROMPT NYA COPY DARI SINI LALU PASTEKAN KE CHATGPT KAMU. LALU KAMU TINGGAL UBAH KE JUDUL YANG KAMU MAU. buatkan prompt teks to image prompt image to video dan d...",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "PROMPT NYA COPY DARI SINI LALU PASTEKAN KE CHATGPT KAMU. LALU KAMU TINGGAL UBAH KE JUDUL YANG KAMU MAU.",
+      "buatkan prompt teks to image prompt image to video dan dialog dari :\nTOPIC: Petualangan di pencernaan\nORGAN / BODY SYSTEM: Pencernaan manusia\nEDUCATIONAL OBJECTIVE: Anak memahami fungsi pencernaan\njumlah SCENE : 6\nRasio 16:9\ndurasi scene : 10 detik per scene.\nSCENE DESCRIPTION: The tiny Indonesian girl has just entered the human respiratory system. She stands inside a gigantic airway that looks like a magical organic tunnel. Two enormous glowing lungs can be seen in the distance.\nCHARACTER ACTION: The girl looks around in amazement and points toward the giant lungs.\nANATOMICAL ACTION: Glowing blue oxygen particles begin traveling through the airway toward the lungs.\nMAGICAL EFFECT: Soft blue and white glowing oxygen particles float and move gently through the airway.\nCHARACTER EMOTION: Curious, amazed, excited, and happy.\nCAMERA: Start with a wide cinematic shot showing the tiny girl and enormous respiratory environment, then slowly push the camera toward the giant lungs."
+    ],
+    "markdownPrompt": "PROMPT NYA COPY DARI SINI LALU PASTEKAN KE CHATGPT KAMU. LALU KAMU TINGGAL UBAH KE JUDUL YANG KAMU MAU.\n\nbuatkan prompt teks to image prompt image to video dan dialog dari :\nTOPIC: Petualangan di pencernaan\nORGAN / BODY SYSTEM: Pencernaan manusia\nEDUCATIONAL OBJECTIVE: Anak memahami fungsi pencernaan\njumlah SCENE : 6\nRasio 16:9\ndurasi scene : 10 detik per scene.\nSCENE DESCRIPTION: The tiny Indonesian girl has just entered the human respiratory system. She stands inside a gigantic airway that looks like a magical organic tunnel. Two enormous glowing lungs can be seen in the distance.\nCHARACTER ACTION: The girl looks around in amazement and points toward the giant lungs.\nANATOMICAL ACTION: Glowing blue oxygen particles begin traveling through the airway toward the lungs.\nMAGICAL EFFECT: Soft blue and white glowing oxygen particles float and move gently through the airway.\nCHARACTER EMOTION: Curious, amazed, excited, and happy.\nCAMERA: Start with a wide cinematic shot showing the tiny girl and enormous respiratory environment, then slowly push the camera toward the giant lungs.",
     "coverUrl": "assets/covers/lvl-54.jpg",
-    "toolUrl": "https://www.notion.so/3d31ad47aa0580de8623ca7f09b9ef03",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 34
+    "toolUrl": "",
+    "tools": [],
+    "videoUrl": "https://youtube.com/shorts/v4H-NMb52w0?si=FCltmsGhtoj4z3O3",
+    "videos": [
+      {
+        "title": "Tutorial LEVEL 54- ANIMASI PETUALANGAN /EDUKASI",
+        "url": "https://youtube.com/shorts/v4H-NMb52w0?si=FCltmsGhtoj4z3O3",
+        "embedUrl": "https://youtube.com/shorts/v4H-NMb52w0?si=FCltmsGhtoj4z3O3"
+      }
+    ]
   },
   {
     "id": "lvl-55",
     "levelNum": 55,
     "name": "LEVEL 55- 100 IDE GPT untuk GURU by IRT NAIK LEVEL",
     "category": "Edukasi & Anak",
-    "desc": "Modul pembelajaran praktis LEVEL 55- 100 IDE GPT untuk GURU by IRT NAIK LEVEL dari IRT Naik Level.",
+    "desc": "100 IDE CHATGPT  KLIK TANDA PANAH UNTUK MELIHAT 100  IDE  ( PILIH SALAH SATU PASTEKAN KE CHATGPT SESUAI KEBUTUHAN BAPAK IBU GURU) ...",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "100 IDE CHATGPT ",
+      "KLIK TANDA PANAH UNTUK MELIHAT 100  IDE  ( PILIH SALAH SATU PASTEKAN KE CHATGPT SESUAI KEBUTUHAN BAPAK IBU GURU) ",
+      "TUTORIAL KLIK DIBAWAH👇"
+    ],
+    "markdownPrompt": "100 IDE CHATGPT \n\nKLIK TANDA PANAH UNTUK MELIHAT 100  IDE  ( PILIH SALAH SATU PASTEKAN KE CHATGPT SESUAI KEBUTUHAN BAPAK IBU GURU) \n\nTUTORIAL KLIK DIBAWAH👇",
     "coverUrl": "assets/covers/lvl-55.jpg",
-    "toolUrl": "https://www.notion.so/3d91ad47aa0580608e69ec1bf7fe8a0f",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 25
+    "toolUrl": "",
+    "tools": [],
+    "videoUrl": "https://youtube.com/shorts/UG8XXEZo8Tk?si=ggB1C8QtZCSeoVSc",
+    "videos": [
+      {
+        "title": "Tutorial LEVEL 55- 100 IDE GPT untuk GURU by IRT NAIK LEVEL",
+        "url": "https://youtube.com/shorts/UG8XXEZo8Tk?si=ggB1C8QtZCSeoVSc",
+        "embedUrl": "https://youtube.com/shorts/UG8XXEZo8Tk?si=ggB1C8QtZCSeoVSc"
+      }
+    ]
   },
   {
     "id": "lvl-56",
     "levelNum": 56,
     "name": "LEVEL 56- MOTION CONTROL",
     "category": "Animasi Kreatif",
-    "desc": "Modul pembelajaran praktis LEVEL 56- MOTION CONTROL dari IRT Naik Level.",
+    "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
+      "40732.png"
+    ],
+    "markdownPrompt": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level\n\n40732.png",
     "coverUrl": "assets/covers/lvl-56.jpg",
-    "toolUrl": "https://www.notion.so/4001ad47aa0580e7902ae858c4d3aa9d",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 38
+    "toolUrl": "",
+    "tools": [],
+    "videoUrl": "https://youtu.be/GvOkpQ2JeF0?si=RB7-0-plbWNuE4rw",
+    "videos": [
+      {
+        "title": "Tutorial LEVEL 56- MOTION CONTROL",
+        "url": "https://youtu.be/GvOkpQ2JeF0?si=RB7-0-plbWNuE4rw",
+        "embedUrl": "https://youtu.be/GvOkpQ2JeF0?si=RB7-0-plbWNuE4rw"
+      }
+    ]
   },
   {
     "id": "lvl-57",
     "levelNum": 57,
     "name": "Level 57- Animasi Joget Lucu",
     "category": "Animasi Kreatif",
-    "desc": "Modul pembelajaran praktis Level 57- Animasi Joget Lucu dari IRT Naik Level.",
+    "desc": "buka chatgpt lalu masukkan prompt dibawah :  Buatkan animasi viral joget lagu Jenna Jenna realistis seperti kucing asli kucing kampung lagi ngamen yang keliatan...",
     "instructions": [],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "buka chatgpt lalu masukkan prompt dibawah : ",
+      "Buatkan animasi viral joget lagu Jenna Jenna realistis seperti kucing asli kucing kampung lagi ngamen yang keliatan melas 3 ekor sedang bernyanyi Jenna Jenna dan 1 kucing main gitar, satu pegang plastik saweran ngamen, warna kucingnya Oren, hitam, abu, dan ada kucing putih yang kaya sedangnlewat dan  nyawer .buatkan untuk durasi 10 detik dan rasio 9:16",
+      "lalu generate ke gambar. stelah itu ke video. lalu minta dibuatkan lanjutannya scene ke 2 ke chatgptnya.",
+      "ulangi hal yang sama , stelah videonya kelar ekstrak di tiktok tambahkan musik nya. bisukan sound ai nya."
+    ],
+    "markdownPrompt": "buka chatgpt lalu masukkan prompt dibawah : \n\nBuatkan animasi viral joget lagu Jenna Jenna realistis seperti kucing asli kucing kampung lagi ngamen yang keliatan melas 3 ekor sedang bernyanyi Jenna Jenna dan 1 kucing main gitar, satu pegang plastik saweran ngamen, warna kucingnya Oren, hitam, abu, dan ada kucing putih yang kaya sedangnlewat dan  nyawer .buatkan untuk durasi 10 detik dan rasio 9:16\n\nlalu generate ke gambar. stelah itu ke video. lalu minta dibuatkan lanjutannya scene ke 2 ke chatgptnya.\n\nulangi hal yang sama , stelah videonya kelar ekstrak di tiktok tambahkan musik nya. bisukan sound ai nya.",
     "coverUrl": "assets/covers/lvl-57.jpg",
-    "toolUrl": "https://www.notion.so/4011ad47aa0580a9b8b0d19bde77e9ed",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 22
+    "toolUrl": "",
+    "tools": [],
+    "videoUrl": "https://youtu.be/KMHGo52LYH4?si=xVTkkGp8PtY4IJ1O",
+    "videos": [
+      {
+        "title": "Tutorial Level 57- Animasi Joget Lucu",
+        "url": "https://youtu.be/KMHGo52LYH4?si=xVTkkGp8PtY4IJ1O",
+        "embedUrl": "https://youtu.be/KMHGo52LYH4?si=xVTkkGp8PtY4IJ1O"
+      }
+    ]
   },
   {
     "id": "lvl-58",
     "levelNum": 58,
     "name": "Level 58- 215 KODE RAHASIA AFFILIATE VIRAL",
     "category": "Affiliate & Iklan",
-    "desc": "Modul pembelajaran praktis Level 58- 215 KODE RAHASIA AFFILIATE VIRAL dari IRT Naik Level.",
-    "instructions": [],
+    "desc": "PROMPT DIBAWAH INI COPY KE CHATGPT TINGGAL UBAH KODE SESUAI KEBUTUHAN KAMU Buatkan gambar storyboard review produk tumbler dari foto yang saya upload menggunaka...",
+    "instructions": [
+      "\"/ootdmirror\" — Review outfit mirror selfie",
+      "\"/fashionwalk\" — Model berjalan sambil review",
+      "\"/grwmlook\" — Get Ready With Me",
+      "\"/outfittransition\" — Transisi pergantian outfit",
+      "\"/softgirlstyle\" — Outfit soft girl pastel",
+      "\"/koreanfashion\" — Fashion ala Korea",
+      "\"/oldmoneystyle\" — Outfit elegan old money",
+      "\"/casualdaily\" — Outfit kasual sehari-hari",
+      "\"/fashion360\" — Detail outfit putar 360°",
+      "\"/threewaystyle\" — Satu baju tiga styling",
+      "\"/gamiswalk\" — Gamis berjalan anggun",
+      "\"/gamisflow\" — Detail kain gamis bergerak",
+      "\"/gamismirror\" — Mirror selfie gamis",
+      "\"/modestluxury\" — Gamis elegan premium",
+      "\"/gamiscafe\" — Review gamis di kafe",
+      "\"/gamisdetail\" — Close-up jahitan dan bahan",
+      "\"/gamisoutdoor\" — Gamis di taman estetik",
+      "\"/gamisrotate\" — Putaran lembut menampilkan gamis",
+      "\"/gamispov\" — POV pemakai gamis",
+      "\"/gamistransition\" — Transisi gamis kasual ke formal",
+      "\"/bagwalk\" — Review tas sambil berjalan",
+      "\"/bagunboxing\" — Unboxing tas premium",
+      "\"/bagcloseup\" — Close-up tekstur tas",
+      "\"/bagmirror\" — OOTD mirror selfie dengan tas",
+      "\"/bagessentials\" — What's in my bag",
+      "\"/bagcafe\" — Tas di meja kafe estetik",
+      "\"/bagluxury\" — Showcase tas luxury look",
+      "\"/bag360\" — Putaran produk tas 360°",
+      "\"/bagpov\" — POV membawa tas",
+      "\"/walletreview\" — Review dompet minimalis",
+      "\"/shoewalk\" — Review sepatu saat berjalan",
+      "\"/shoeunboxing\" — Unboxing sepatu estetik",
+      "\"/shoedetail\" — Close-up material sepatu",
+      "\"/shoetransition\" — Transisi ganti sepatu",
+      "\"/shoepov\" — POV sepatu saat melangkah",
+      "\"/sneakerstyle\" — Sneakers streetwear",
+      "\"/heelswalk\" — Heels berjalan elegan",
+      "\"/sandalreview\" — Review sandal kasual",
+      "\"/shoe360\" — Putaran sepatu 360°",
+      "\"/shoematch\" — Mix-and-match sepatu dengan outfit",
+      "\"/skincaretable\" — Produk skincare di meja estetik",
+      "\"/serumdrop\" — Tetes serum macro shot",
+      "\"/creamtexture\" — Close-up tekstur cream",
+      "\"/skincarepov\" — POV rutinitas skincare",
+      "\"/skincareunboxing\" — Unboxing skincare",
+      "\"/glowroutine\" — Rutinitas perawatan wajah",
+      "\"/beautyflatlay\" — Flat lay produk kecantikan",
+      "\"/skincareapply\" — Demo mengaplikasikan skincare",
+      "\"/skincareasmr\" — ASMR kemasan skincare",
+      "\"/beautyshelf\" — Showcase rak skincare estetik",
+      "\"/lipstickapply\" — Demo lipstik natural",
+      "\"/lipswatch\" — Swatch warna lip product",
+      "\"/makeupgrwm\" — GRWM makeup",
+      "\"/cushionreview\" — Review cushion",
+      "\"/makeupcloseup\" — Detail kemasan makeup",
+      "\"/perfumespray\" — Semprotan parfum sinematik",
+      "\"/perfumeunboxing\" — Unboxing parfum elegan",
+      "\"/perfumerose\" — Parfum dengan kelopak bunga",
+      "\"/makeupbag\" — Isi makeup pouch",
+      "\"/beautytransition\" — Transisi tampilan makeup",
+      "\"/tumblerunboxing\" — Unboxing tumbler",
+      "\"/tumblerpour\" — Menuang minuman ke tumbler",
+      "\"/tumblerice\" — ASMR es batu dalam tumbler",
+      "\"/tumblerdesk\" — Tumbler di meja kerja",
+      "\"/tumblercafe\" — Tumbler di kafe estetik",
+      "\"/tumbler360\" — Putaran tumbler 360°",
+      "\"/tumblercloseup\" — Detail tutup dan material",
+      "\"/tumblercarry\" — Tumbler dibawa jalan",
+      "\"/tumblerasmr\" — ASMR membuka tutup tumbler",
+      "\"/tumblerlifestyle\" — Tumbler untuk rutinitas harian",
+      "\"/homeaesthetic\" — Showcase dekorasi rumah",
+      "\"/kitchenreview\" — Review alat dapur",
+      "\"/roommakeover\" — Transformasi dekorasi kamar",
+      "\"/organizerpov\" — POV menata organizer"
+    ],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "PROMPT DIBAWAH INI COPY KE CHATGPT TINGGAL UBAH KODE SESUAI KEBUTUHAN KAMU",
+      "Buatkan gambar storyboard review produk tumbler dari foto yang saya upload menggunakan kode /tumblerasmr.",
+      "Konsep unboxing aesthetic luxury ASMR, hanya menampilkan tangan wanita dengan kuku panjang, lentik, almond shape, glossy pink nude dengan nail art cantik.",
+      "Tangan membuka kotak tumbler secara perlahan, mengangkat tumbler, memperlihatkan detail produk, membuka tutupnya, lalu memasukkan es batu dan menuangkan minuman.",
+      "Background meja marmer cream dengan dekorasi bunga pink pastel, pencahayaan natural lembut, suasana estetik dan premium.",
+      "Buat storyboard 4 panel untuk durasi 10 detik, rasio 9:16, photorealistic, cinematic close-up.",
+      "Pertahankan bentuk, warna, logo, ukuran, dan detail tumbler sesuai foto asli.",
+      "Tanpa wajah, tanpa tulisan, tanpa jari tambahan, tanpa distorsi produk.",
+      "Setelah gambar storyboard selesai, buatkan juga prompt video Google Flow dengan gerakan tangan natural, suara ASMR realistis, musik lembut, dan produk tetap konsisten.",
+      "TUTORIALNYA DISINI ⬇️⬇️⬇️⬇️",
+      "215_Kode_Affiliate_Aesthetic_IRT_Naik_Level.pdf",
+      "✨ 215 KODE AFFILIATE AESTHETIC & REVIEW PRODUK",
+      "Kumpulan Kode Kreatif untuk Konten TikTok Affiliate, Shopee Video, Reels & Google Flow",
+      "Cocok untuk video review produk, unboxing, ASMR, UGC, mirror selfie, dan konten affiliate estetik.",
+      "👗 A. FASHION & OOTD",
+      "🌸 B. GAMIS & MODEST FASHION",
+      "👜 C. TAS & DOMPET",
+      "👟 D. SEPATU & SANDAL",
+      "🧴 E. SKINCARE & BEAUTY",
+      "💄 F. MAKEUP & PARFUM",
+      "🥤 G. TUMBLER & BOTOL MINUM",
+      "🏡 H. HOME LIVING & PERALATAN DAPUR"
+    ],
+    "markdownPrompt": "1. \"/ootdmirror\" — Review outfit mirror selfie\n\n2. \"/fashionwalk\" — Model berjalan sambil review\n\n3. \"/grwmlook\" — Get Ready With Me\n\n4. \"/outfittransition\" — Transisi pergantian outfit\n\n5. \"/softgirlstyle\" — Outfit soft girl pastel\n\n6. \"/koreanfashion\" — Fashion ala Korea\n\n7. \"/oldmoneystyle\" — Outfit elegan old money\n\n8. \"/casualdaily\" — Outfit kasual sehari-hari\n\n9. \"/fashion360\" — Detail outfit putar 360°\n\n10. \"/threewaystyle\" — Satu baju tiga styling\n\n11. \"/gamiswalk\" — Gamis berjalan anggun\n\n12. \"/gamisflow\" — Detail kain gamis bergerak\n\n13. \"/gamismirror\" — Mirror selfie gamis\n\n14. \"/modestluxury\" — Gamis elegan premium\n\n15. \"/gamiscafe\" — Review gamis di kafe\n\n16. \"/gamisdetail\" — Close-up jahitan dan bahan\n\n17. \"/gamisoutdoor\" — Gamis di taman estetik\n\n18. \"/gamisrotate\" — Putaran lembut menampilkan gamis\n\n19. \"/gamispov\" — POV pemakai gamis\n\n20. \"/gamistransition\" — Transisi gamis kasual ke formal\n\n21. \"/bagwalk\" — Review tas sambil berjalan\n\n22. \"/bagunboxing\" — Unboxing tas premium\n\n23. \"/bagcloseup\" — Close-up tekstur tas\n\n24. \"/bagmirror\" — OOTD mirror selfie dengan tas\n\n25. \"/bagessentials\" — What's in my bag\n\n26. \"/bagcafe\" — Tas di meja kafe estetik\n\n27. \"/bagluxury\" — Showcase tas luxury look\n\n28. \"/bag360\" — Putaran produk tas 360°\n\n29. \"/bagpov\" — POV membawa tas\n\n30. \"/walletreview\" — Review dompet minimalis\n\n31. \"/shoewalk\" — Review sepatu saat berjalan\n\n32. \"/shoeunboxing\" — Unboxing sepatu estetik\n\n33. \"/shoedetail\" — Close-up material sepatu\n\n34. \"/shoetransition\" — Transisi ganti sepatu\n\n35. \"/shoepov\" — POV sepatu saat melangkah\n\n36. \"/sneakerstyle\" — Sneakers streetwear\n\n37. \"/heelswalk\" — Heels berjalan elegan\n\n38. \"/sandalreview\" — Review sandal kasual\n\n39. \"/shoe360\" — Putaran sepatu 360°\n\n40. \"/shoematch\" — Mix-and-match sepatu dengan outfit\n\n41. \"/skincaretable\" — Produk skincare di meja estetik\n\n42. \"/serumdrop\" — Tetes serum macro shot\n\n43. \"/creamtexture\" — Close-up tekstur cream\n\n44. \"/skincarepov\" — POV rutinitas skincare\n\n45. \"/skincareunboxing\" — Unboxing skincare\n\n46. \"/glowroutine\" — Rutinitas perawatan wajah\n\n47. \"/beautyflatlay\" — Flat lay produk kecantikan\n\n48. \"/skincareapply\" — Demo mengaplikasikan skincare\n\n49. \"/skincareasmr\" — ASMR kemasan skincare\n\n50. \"/beautyshelf\" — Showcase rak skincare estetik\n\n51. \"/lipstickapply\" — Demo lipstik natural\n\n52. \"/lipswatch\" — Swatch warna lip product\n\n53. \"/makeupgrwm\" — GRWM makeup\n\n54. \"/cushionreview\" — Review cushion\n\n55. \"/makeupcloseup\" — Detail kemasan makeup\n\n56. \"/perfumespray\" — Semprotan parfum sinematik\n\n57. \"/perfumeunboxing\" — Unboxing parfum elegan\n\n58. \"/perfumerose\" — Parfum dengan kelopak bunga\n\n59. \"/makeupbag\" — Isi makeup pouch\n\n60. \"/beautytransition\" — Transisi tampilan makeup\n\n61. \"/tumblerunboxing\" — Unboxing tumbler\n\n62. \"/tumblerpour\" — Menuang minuman ke tumbler\n\n63. \"/tumblerice\" — ASMR es batu dalam tumbler\n\n64. \"/tumblerdesk\" — Tumbler di meja kerja\n\n65. \"/tumblercafe\" — Tumbler di kafe estetik\n\n66. \"/tumbler360\" — Putaran tumbler 360°\n\n67. \"/tumblercloseup\" — Detail tutup dan material\n\n68. \"/tumblercarry\" — Tumbler dibawa jalan\n\n69. \"/tumblerasmr\" — ASMR membuka tutup tumbler\n\n70. \"/tumblerlifestyle\" — Tumbler untuk rutinitas harian\n\n71. \"/homeaesthetic\" — Showcase dekorasi rumah\n\n72. \"/kitchenreview\" — Review alat dapur\n\n73. \"/roommakeover\" — Transformasi dekorasi kamar\n\n74. \"/organizerpov\" — POV menata organizer",
     "coverUrl": "assets/covers/lvl-58.jpg",
-    "toolUrl": "https://www.notion.so/4091ad47aa0580b4ac33ee9822328fd8",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 30
+    "toolUrl": "https://drive.google.com/file/d/1e6etYsP756gxP2aoSFy8ydYNKh8TmDw8/view?usp=drivesdk",
+    "tools": [
+      {
+        "url": "https://drive.google.com/file/d/1e6etYsP756gxP2aoSFy8ydYNKh8TmDw8/view?usp=drivesdk",
+        "title": "215_Kode_Affiliate_Aesthetic_IRT_Naik_Level.pdf",
+        "description": ""
+      }
+    ],
+    "videoUrl": "https://youtu.be/KMVmuhyLDmE?si=9Q6RQWkHcGhbW-yz",
+    "videos": [
+      {
+        "title": "Tutorial Level 58- 215 KODE RAHASIA AFFILIATE VIRAL",
+        "url": "https://youtu.be/KMVmuhyLDmE?si=9Q6RQWkHcGhbW-yz",
+        "embedUrl": "https://youtu.be/KMVmuhyLDmE?si=9Q6RQWkHcGhbW-yz"
+      }
+    ]
   },
   {
     "id": "lvl-59",
     "levelNum": 59,
     "name": "❤️LEVEL 59- BABY INTERVIEW",
     "category": "Drama & Cerita AI",
-    "desc": "Modul pembelajaran praktis ❤️LEVEL 59- BABY INTERVIEW dari IRT Naik Level.",
-    "instructions": [],
+    "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
+    "instructions": [
+      "Buat gambar: \"Buatkan gambar Baby Interview dari ide nomor 1, bayi realistis super gemoy, rasio 9:16.\"",
+      "Buat video: \"Buatkan prompt video Google Flow durasi 10 detik, dengan dialog bahasa Indonesia dan suara bayi yang lucu.\""
+    ],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
+      "2707379.png",
+      "Masukkkan prompt teks to image ini ke Chatgpt /Flow/Gemini :",
+      "Buat gambar bayi Indonesia super gemoy usia sekitar 1 tahun, wajah realistis, pipi bulat tembem, mata besar berbinar, rambut hitam tipis, memakai romper pink pastel. Bayi duduk di sofa mini warna cream dalam studio podcast estetik bernuansa pink dan lilac. Tangan reporter dewasa terlihat dari samping memegang mikrofon kecil ke arah bayi. Bayi berekspresi serius tetapi sangat menggemaskan seperti sedang diwawancarai. Background studio modern dengan boneka beruang, pencahayaan lembut, cinematic photorealistic, detail wajah natural, kualitas 4K, rasio 9:16. Tanpa teks. By",
+      "kalau sudan jadi gambar masukkan ke flow lalu tempel prompt video nya ini lalu klik animasikan :",
+      "PROMT VIDEO : ",
+      "Create a photorealistic, funny baby interview video based on the reference image. Vertical 9:16, duration 10 seconds. An adorable chubby Indonesian baby sits on a pastel sofa while an adult reporter holds a microphone near the baby. Dialogue in natural Indonesian: Reporter (adult female voice): 'Dek, kenapa kamu mau lahir ke dunia?' Baby (cute, playful baby-like voice): 'Katanya hidup enak, ternyata susu aja harus nangis dulu!' The baby speaks with adorable facial expressions, natural lip synchronization, blinks, moves tiny hands, then giggles at the end. Realistic baby appearance, funny comedic timing, natural Indonesian pronunciation, soft cinematic lighting, stable camera, no subtitles, no background music, clear dialogue, no additional speakers.",
+      "CARA KEDUA MASUKKAN INI KE CHATGPT LALU IKUTI INSTRUKSINYA :",
+      "💡 TIPS MEMBUAT KONTEN BABY INTERVIEW DENGAN AI 👶🎤",
+      "Kakak juga bisa langsung minta ide ke ChatGPT dengan mengetik:",
+      "\"Buatkan beberapa ide untuk Baby Interview yang lucu, menggemaskan, dan berpotensi viral. Lengkap dengan pertanyaan reporter dan jawaban bayi yang kocak menggunakan bahasa Indonesia.\"",
+      "✨ Setelah mendapatkan ide, lanjutkan dengan perintah:",
+      "Buat gambar: \"Buatkan gambar Baby Interview dari ide nomor 1, bayi realistis super gemoy, rasio 9:16.\"",
+      "Buat video: \"Buatkan prompt video Google Flow durasi 10 detik, dengan dialog bahasa Indonesia dan suara bayi yang lucu.\"",
+      "🎬 Tinggal praktik, edit, lalu upload!",
+      "💕 By IRT NAIK LEVEL"
+    ],
+    "markdownPrompt": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level\n\n2707379.png\n\nMasukkkan prompt teks to image ini ke Chatgpt /Flow/Gemini :\n\nBuat gambar bayi Indonesia super gemoy usia sekitar 1 tahun, wajah realistis, pipi bulat tembem, mata besar berbinar, rambut hitam tipis, memakai romper pink pastel. Bayi duduk di sofa mini warna cream dalam studio podcast estetik bernuansa pink dan lilac. Tangan reporter dewasa terlihat dari samping memegang mikrofon kecil ke arah bayi. Bayi berekspresi serius tetapi sangat menggemaskan seperti sedang diwawancarai. Background studio modern dengan boneka beruang, pencahayaan lembut, cinematic photorealistic, detail wajah natural, kualitas 4K, rasio 9:16. Tanpa teks. By\n\nkalau sudan jadi gambar masukkan ke flow lalu tempel prompt video nya ini lalu klik animasikan :\n\nPROMT VIDEO : \n\nCreate a photorealistic, funny baby interview video based on the reference image. Vertical 9:16, duration 10 seconds. An adorable chubby Indonesian baby sits on a pastel sofa while an adult reporter holds a microphone near the baby. Dialogue in natural Indonesian: Reporter (adult female voice): 'Dek, kenapa kamu mau lahir ke dunia?' Baby (cute, playful baby-like voice): 'Katanya hidup enak, ternyata susu aja harus nangis dulu!' The baby speaks with adorable facial expressions, natural lip synchronization, blinks, moves tiny hands, then giggles at the end. Realistic baby appearance, funny comedic timing, natural Indonesian pronunciation, soft cinematic lighting, stable camera, no subtitles, no background music, clear dialogue, no additional speakers.\n\nCARA KEDUA MASUKKAN INI KE CHATGPT LALU IKUTI INSTRUKSINYA :\n\n💡 TIPS MEMBUAT KONTEN BABY INTERVIEW DENGAN AI 👶🎤\n\nKakak juga bisa langsung minta ide ke ChatGPT dengan mengetik:\n\n\"Buatkan beberapa ide untuk Baby Interview yang lucu, menggemaskan, dan berpotensi viral. Lengkap dengan pertanyaan reporter dan jawaban bayi yang kocak menggunakan bahasa Indonesia.\"\n\n✨ Setelah mendapatkan ide, lanjutkan dengan perintah:\n\n1. Buat gambar: \"Buatkan gambar Baby Interview dari ide nomor 1, bayi realistis super gemoy, rasio 9:16.\"\n\n1. Buat video: \"Buatkan prompt video Google Flow durasi 10 detik, dengan dialog bahasa Indonesia dan suara bayi yang lucu.\"\n\n🎬 Tinggal praktik, edit, lalu upload!\n\n💕 By IRT NAIK LEVEL",
     "coverUrl": "assets/covers/lvl-59.jpg",
-    "toolUrl": "https://www.notion.so/4121ad47aa0580f4923ff38aac43cd04",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 42
+    "toolUrl": "",
+    "tools": [],
+    "videoUrl": "https://youtu.be/5pP99c-xBHs?si=dg1ze5O26OPRMTp_",
+    "videos": [
+      {
+        "title": "Tutorial Baby Interview AI",
+        "url": "https://youtu.be/5pP99c-xBHs?si=dg1ze5O26OPRMTp_",
+        "embedUrl": "https://youtu.be/5pP99c-xBHs?si=dg1ze5O26OPRMTp_"
+      }
+    ]
   },
   {
     "id": "lvl-60",
     "levelNum": 60,
     "name": "👽LEVEL 60-ANIMASI HORROR",
     "category": "Animasi Kreatif",
-    "desc": "Modul pembelajaran praktis 👽LEVEL 60-ANIMASI HORROR dari IRT Naik Level.",
-    "instructions": [],
+    "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
+    "instructions": [
+      "Genre horor supernatural dan misteri.",
+      "Cerita realistis seperti film horor Indonesia.",
+      "Memiliki judul menarik dan sinopsis singkat.",
+      "Ada kejadian misterius yang membuat penasaran.",
+      "Memiliki ending mengejutkan atau menggantung.",
+      "Tanpa darah, kekerasan grafis, dan adegan sadis agar lebih aman dibuat di Google Flow.",
+      "Prompt Character Sheet agar wajah, pakaian, dan karakter konsisten.",
+      "Prompt Text to Image untuk setiap scene.",
+      "Prompt Image to Video untuk Google Flow, masing-masing 10 detik.",
+      "Dialog bahasa Indonesia yang natural dan sesuai durasi.",
+      "Gerakan kamera, ekspresi karakter, suasana, dan efek suara horor.",
+      "Ending plot twist yang membuat penonton penasaran dengan Part 2."
+    ],
     "prompts": [],
-    "fullTexts": [],
+    "fullTexts": [
+      "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level",
+      "2709322.png",
+      "STEP 1 :",
+      "Buatkan 20 ide cerita drama horor misteri Indonesia yang menarik, menegangkan, penuh plot twist, dan berpotensi viral di Facebook Reels, TikTok, serta YouTube Shorts.",
+      "Syarat:",
+      "Genre horor supernatural dan misteri.",
+      "Cerita realistis seperti film horor Indonesia.",
+      "Memiliki judul menarik dan sinopsis singkat.",
+      "Ada kejadian misterius yang membuat penasaran.",
+      "Memiliki ending mengejutkan atau menggantung.",
+      "Tanpa darah, kekerasan grafis, dan adegan sadis agar lebih aman dibuat di Google Flow.",
+      "Buatkan daftar 20 ide, lalu biarkan saya memilih nomor cerita yang ingin dikembangkan.",
+      "STEP 2",
+      "Saya pilih ide nomor 1.",
+      "Kembangkan menjadi drama horor sinematik sebanyak 6 scene, masing-masing berdurasi 10 detik, total 60 detik, rasio 9:16.",
+      "Buatkan secara lengkap:",
+      "Prompt Character Sheet agar wajah, pakaian, dan karakter konsisten.",
+      "Prompt Text to Image untuk setiap scene.",
+      "Prompt Image to Video untuk Google Flow, masing-masing 10 detik.",
+      "Dialog bahasa Indonesia yang natural dan sesuai durasi.",
+      "Gerakan kamera, ekspresi karakter, suasana, dan efek suara horor.",
+      "Ending plot twist yang membuat penonton penasaran dengan Part 2.",
+      "Gunakan gaya cinematic photorealistic 4K, suasana horor Indonesia, tanpa kekerasan grafis, dan usahakan aman untuk kebijakan Google Flow.",
+      "Pisahkan semua prompt per scene agar mudah disalin.",
+      "STEP 3 —",
+      "Generate Gambar dan Video\nSetelah prompt selesai:\nChatGPT: Buat Character Sheet terlebih dahulu.\nChatGPT: Generate gambar Scene 1 sampai Scene 6 menggunakan referensi karakter yang sama.\nGoogle Flow: Upload gambar masing-masing scene, lalu masukkan prompt Image to Video beserta dialognya.\nCapCut: Gabungkan video, tambahkan efek suara horor, judul, dan watermark IRT NAIK LEVEL.",
+      "\nTips: Untuk membuat serial horor, tambahkan perintah \"Buatkan kelanjutan Part 2 dengan karakter dan lokasi yang sama, tetapi misterinya semakin menegangkan.\""
+    ],
+    "markdownPrompt": "🌸Selamat Datang di Kelas Animasi AI IRT Naik Level\n\n2709322.png\n\nSTEP 1 :\n\nBuatkan 20 ide cerita drama horor misteri Indonesia yang menarik, menegangkan, penuh plot twist, dan berpotensi viral di Facebook Reels, TikTok, serta YouTube Shorts.\n\nSyarat:\n\n- Genre horor supernatural dan misteri.\n\n- Cerita realistis seperti film horor Indonesia.\n\n- Memiliki judul menarik dan sinopsis singkat.\n\n- Ada kejadian misterius yang membuat penasaran.\n\n- Memiliki ending mengejutkan atau menggantung.\n\n- Tanpa darah, kekerasan grafis, dan adegan sadis agar lebih aman dibuat di Google Flow.\n\nBuatkan daftar 20 ide, lalu biarkan saya memilih nomor cerita yang ingin dikembangkan.\n\nSTEP 2\n\nSaya pilih ide nomor 1.\n\nKembangkan menjadi drama horor sinematik sebanyak 6 scene, masing-masing berdurasi 10 detik, total 60 detik, rasio 9:16.\n\nBuatkan secara lengkap:\n\n1. Prompt Character Sheet agar wajah, pakaian, dan karakter konsisten.\n\n1. Prompt Text to Image untuk setiap scene.\n\n1. Prompt Image to Video untuk Google Flow, masing-masing 10 detik.\n\n1. Dialog bahasa Indonesia yang natural dan sesuai durasi.\n\n1. Gerakan kamera, ekspresi karakter, suasana, dan efek suara horor.\n\n1. Ending plot twist yang membuat penonton penasaran dengan Part 2.\n\nGunakan gaya cinematic photorealistic 4K, suasana horor Indonesia, tanpa kekerasan grafis, dan usahakan aman untuk kebijakan Google Flow.\n\nPisahkan semua prompt per scene agar mudah disalin.\n\nSTEP 3 —\n\nGenerate Gambar dan Video\nSetelah prompt selesai:\nChatGPT: Buat Character Sheet terlebih dahulu.\nChatGPT: Generate gambar Scene 1 sampai Scene 6 menggunakan referensi karakter yang sama.\nGoogle Flow: Upload gambar masing-masing scene, lalu masukkan prompt Image to Video beserta dialognya.\nCapCut: Gabungkan video, tambahkan efek suara horor, judul, dan watermark IRT NAIK LEVEL.\n\n\nTips: Untuk membuat serial horor, tambahkan perintah \"Buatkan kelanjutan Part 2 dengan karakter dan lokasi yang sama, tetapi misterinya semakin menegangkan.\"",
     "coverUrl": "assets/covers/lvl-60.jpg",
-    "toolUrl": "https://www.notion.so/4121ad47aa05802eae7beab2f4b58633",
-    "videoUrl": "",
-    "videos": [],
-    "status": true,
-    "views": 47
+    "toolUrl": "",
+    "tools": [],
+    "videoUrl": "https://youtu.be/DFeTsz-FUHg?si=zamDS_1ABmBYeYkC",
+    "videos": [
+      {
+        "title": "Tutorial Animasi Horror AI",
+        "url": "https://youtu.be/DFeTsz-FUHg?si=zamDS_1ABmBYeYkC",
+        "embedUrl": "https://youtu.be/DFeTsz-FUHg?si=zamDS_1ABmBYeYkC"
+      }
+    ]
   }
 ],
   contact: {
