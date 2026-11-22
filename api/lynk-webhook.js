@@ -44,6 +44,7 @@ module.exports = async (req, res) => {
     // 3. Ambil Merchant Key & Config
     const merchantKey = process.env.LYNK_MERCHANT_KEY || '5yHRLMslVGgoLRSc2Nl7xl8FD_fvOcWe';
     const appsScriptUrl = process.env.APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbwMSZdBB7cKPVz5-UCmkijLs5uI5AbddcFsACfZGV6Bz1xKsnFluTaqqyjgVGq1hFNk/exec";
+    const portalAppsScriptUrl = process.env.PORTAL_APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbwIhAJ833VoEcCR9XkwYI5_OyIlx9N0_Xph8vjjrW4psr3sJSIbWtP7Hbc8nSwWXjQPjw/exec";
     const sharedSecret = process.env.APPS_SCRIPT_SHARED_SECRET || "IRT_LYNK_SECRET_2026";
     const productFilter = (process.env.LYNK_PRODUCT_FILTER || process.env.LYNK_PRODUCT_NAME || '').trim().toLowerCase();
 
@@ -57,21 +58,21 @@ module.exports = async (req, res) => {
     if (isTestPing) {
       console.log('[LYNK-WEBHOOK] Test Ping dari dashboard Lynk.id diterima.');
       
-      try {
-        await forwardToAppsScript(appsScriptUrl, {
-          action: 'handleLynkWebhook',
-          sharedSecret: sharedSecret,
-          refId: refId || 'TEST-PING',
-          grandTotal: grandTotal || 0,
-          message_id: messageId || 'PING',
-          email: 'test@lynk.id',
-          name: 'Lynk Test Ping',
-          phone: '-',
-          event: event || 'test.ping',
-          status: 'Sukses (Test Ping)',
-          rawPayload: { headers: rawHeaders, body: body }
-        });
-      } catch (e) {}
+      const testPayload = {
+        action: 'handleLynkWebhook',
+        sharedSecret: sharedSecret,
+        refId: refId || 'TEST-PING',
+        grandTotal: grandTotal || 0,
+        message_id: messageId || 'PING',
+        email: 'test@lynk.id',
+        name: 'Lynk Test Ping',
+        phone: '-',
+        event: event || 'test.ping',
+        status: 'Sukses (Test Ping)',
+        rawPayload: { headers: rawHeaders, body: body }
+      };
+      try { await forwardToAppsScript(appsScriptUrl, testPayload); } catch (e) {}
+      try { await forwardToAppsScript(portalAppsScriptUrl, testPayload); } catch (e) {}
 
       return res.status(200).json({
         success: true,
@@ -165,7 +166,7 @@ module.exports = async (req, res) => {
       });
     }
 
-    // 7. Teruskan data bersih ke Google Apps Script Web App
+    // 7. Teruskan data bersih ke Google Apps Script (Smart Dispatcher: IRT Kelas & Portal Materi)
     const gasPayload = {
       action: 'handleLynkWebhook',
       sharedSecret: sharedSecret,
@@ -176,28 +177,44 @@ module.exports = async (req, res) => {
       name: name,
       phone: phone,
       event: event,
+      productTitle: itemTitle,
       rawPayload: body
     };
 
-    let gasResult = null;
-    try {
-      gasResult = await forwardToAppsScript(appsScriptUrl, gasPayload);
-    } catch (gasErr) {
-      console.error('[LYNK-WEBHOOK] Error forwarding to Apps Script:', gasErr);
-      return res.status(200).json({
-        success: true,
-        message: 'Webhook diterima oleh Vercel, namun terjadi kendala saat meneruskan ke Sheets.',
-        error: gasErr.message
-      });
+    const lowerTitle = (itemTitle || '').toLowerCase();
+    const isPortalProduct = lowerTitle.includes('portal') || lowerTitle.includes('materi') || lowerTitle.includes('tools') || lowerTitle.includes('creator') || lowerTitle.includes('vip') || lowerTitle.includes('reseller');
+    const isIrtProduct = lowerTitle.includes('irt') || lowerTitle.includes('naik level') || lowerTitle.includes('bunda');
+
+    let targets = [];
+    if (isPortalProduct && !isIrtProduct) {
+      targets.push({ name: 'Portal Materi Tools', url: portalAppsScriptUrl });
+    } else if (isIrtProduct && !isPortalProduct) {
+      targets.push({ name: 'IRT Naik Level', url: appsScriptUrl });
+    } else {
+      // Jika nama produk umum atau tidak spesifik, teruskan ke kedua Google Apps Script
+      targets.push({ name: 'IRT Naik Level', url: appsScriptUrl });
+      targets.push({ name: 'Portal Materi Tools', url: portalAppsScriptUrl });
+    }
+
+    let dispatchResults = [];
+    for (const target of targets) {
+      try {
+        const resGAS = await forwardToAppsScript(target.url, gasPayload);
+        dispatchResults.push({ target: target.name, success: true, result: resGAS });
+        console.log(`[LYNK-WEBHOOK] Sukses forward ke ${target.name}:`, resGAS);
+      } catch (gasErr) {
+        console.error(`[LYNK-WEBHOOK] Kendala forward ke ${target.name}:`, gasErr.message);
+        dispatchResults.push({ target: target.name, success: false, error: gasErr.message });
+      }
     }
 
     // 8. Respon 200 OK ke Lynk.id
     return res.status(200).json({
       success: true,
-      message: 'Webhook Lynk.id berhasil diproses.',
+      message: 'Webhook Lynk.id berhasil diproses dan diteruskan.',
       refId: refId,
       email: email,
-      gasResult: gasResult
+      dispatchResults: dispatchResults
     });
 
   } catch (error) {
