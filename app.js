@@ -4198,59 +4198,45 @@ function renderMemberTools() {
   if (notionHubContainer) {
     if (isMemberUnlocked) {
       notionHubContainer.innerHTML = `
-        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1c162b] via-[#14121d] to-[#0d0c12] border border-purple-500/40 shadow-2xl p-6 sm:p-8 md:p-10">
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1c162b] via-[#14121d] to-[#0d0c12] border border-purple-500/40 shadow-2xl p-4 sm:p-6 md:p-8">
           <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-          <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-pink-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
-          <div class="relative z-10 space-y-6">
-            <!-- Header Kurikulum Resmi -->
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
-              <div class="space-y-2.5 max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                  <i class="fa-solid fa-crown text-amber-400"></i>
-                  <span>Kurikulum Resmi 62 Level — IRT Naik Level</span>
-                </div>
-                <h3 class="font-heading text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
-                  🌸 Selamat Datang di Kelas Animasi AI IRT Naik Level
+          <div class="relative z-10 space-y-5">
+            <!-- Header Infografis & Aksi -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 text-pink-300 text-[11px] font-bold uppercase tracking-wider">
+                  <i class="fa-solid fa-crown text-amber-400"></i> Silabus Resmi IRT Naik Level
+                </span>
+                <h3 class="font-heading text-xl sm:text-2xl md:text-3xl font-black text-white mt-1.5 tracking-tight">
+                  Daftar Lengkap 60 Level Materi Animasi AI
                 </h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  Semua materi telah disusun langsung ke dalam <strong>62 Level Pembelajaran Praktis</strong> di bawah ini. Dari pemula nol tanpa keahlian gambar, hingga mahir membuat animasi komersial, affiliate, dan edukasi anak.
+                <p class="text-xs text-slate-400 mt-1">
+                  Kurikulum terstruktur dari nol hingga mahir membuat video animasi komersial & affiliate.
                 </p>
               </div>
 
-              <!-- Stats Pill -->
-              <div class="grid grid-cols-2 gap-2.5 shrink-0">
-                <div class="px-4 py-3 rounded-2xl bg-black/40 border border-white/10 text-center">
-                  <div class="text-xl sm:text-2xl font-black text-amber-400 font-mono">62</div>
-                  <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Level Materi</div>
-                </div>
-                <div class="px-4 py-3 rounded-2xl bg-black/40 border border-white/10 text-center">
-                  <div class="text-xl sm:text-2xl font-black text-emerald-400 font-mono">52+</div>
-                  <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Video Tutorial</div>
-                </div>
+              <!-- Shortcut Buttons -->
+              <div class="flex items-center gap-2 shrink-0">
+                <button onclick="openSyllabusModal()" class="px-4 py-2.5 rounded-xl bg-purple-600/80 hover:bg-purple-600 text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center gap-2 cursor-pointer">
+                  <i class="fa-solid fa-list-ol"></i>
+                  <span>Daftar Pustaka (0-60)</span>
+                </button>
+                <button onclick="openLightboxInfographic()" class="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border border-white/10" title="Perbesar Gambar Infografis">
+                  <i class="fa-solid fa-magnifying-glass-plus text-purple-400"></i>
+                  <span class="hidden md:inline">Perbesar</span>
+                </button>
               </div>
             </div>
 
-            <!-- Pesan & Pengumuman Penting dari Materi Kelas -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-              <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-1.5">
-                <div class="font-bold text-purple-300 flex items-center gap-1.5">
-                  <i class="fa-solid fa-circle-info text-purple-400"></i> Informasi & Bantuan Mentor
-                </div>
-                <p class="text-slate-300 text-[11px] leading-relaxed">
-                  🌸 <strong>Langganan Flow Gemini durasi 18 bulan</strong> bisa langsung hubungi Kak Lia.<br>
-                  🔒 <em>Dilarang menjual / menyebarluaskan materi ini, khusus untuk media belajar member resmi IRT Naik Level.</em>
-                </p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 space-y-1.5">
-                <div class="font-bold text-emerald-300 flex items-center gap-1.5">
-                  <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i> Rekomendasi Tools Remove Watermark
-                </div>
-                <p class="text-slate-300 text-[11px] leading-relaxed">
-                  🔗 <strong>Erasio:</strong> <a href="http://erasio.io/" target="_blank" class="text-emerald-400 underline font-semibold">erasio.io</a> (Dapat 90 kredit/hari, hanya 3 kredit/file).<br>
-                  ▶ <a href="https://youtube.com/shorts/mHJY0-yWsjY?si=v2sGL5QXbT-1rKxm" target="_blank" class="text-emerald-300 underline font-semibold">Tonton Tutorial Remover Watermark</a>
-                </p>
+            <!-- Foto 2 Infografis Silabus Banner -->
+            <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-xl group cursor-pointer bg-black/40" onclick="openLightboxInfographic()">
+              <img src="assets/daftar_60_level_materi.webp" alt="Daftar Lengkap 60 Level Materi Animasi AI IRT Naik Level" class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500" loading="lazy">
+              <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="px-4 py-2 rounded-xl bg-black/80 backdrop-blur-md text-white text-xs font-bold border border-white/20 shadow-lg flex items-center gap-2">
+                  <i class="fa-solid fa-expand text-purple-400"></i> Klik untuk Melihat Ukuran Penuh
+                </span>
               </div>
             </div>
           </div>
@@ -4312,45 +4298,57 @@ function renderMemberTools() {
   }
 
   // Extract unique categories for filter pills with intuitive curated order
-  const desiredOrder = [
-    'all',
-    'Pemula & Dasar',
-    'Animasi Kreatif',
-    'Drama & Cerita AI',
-    'Edukasi & Anak',
-    'Affiliate & Iklan',
-    'Karakter & Prompt',
-    'Custom GPT Studio'
+  // 6 Official Categories matching Foto 2
+  const categoryConfig = [
+    { id: 'all', label: 'Semua (62)', short: 'Semua' },
+    { id: 'Dasar Animasi AI', label: '01. Dasar Animasi AI (0-10)', short: '01. Dasar (0-10)' },
+    { id: 'Konten Kreatif & Editing', label: '02. Konten Kreatif & Editing (11-20)', short: '02. Kreatif (11-20)' },
+    { id: 'Konten Viral & Affiliate', label: '03. Konten Viral & Affiliate (21-30)', short: '03. Affiliate (21-30)' },
+    { id: 'Drama AI & Promosi Usaha', label: '04. Drama AI & Promosi Usaha (31-40)', short: '04. Drama (31-40)' },
+    { id: 'Edukasi, Guru & Produk Digital', label: '05. Edukasi, Guru & Produk (41-50)', short: '05. Edukasi (41-50)' },
+    { id: 'Materi Bonus & Update Terbaru', label: '06. Bonus & Update Terbaru (51-60)', short: '06. Bonus (51-60)' }
   ];
-  const rawCats = ['all', ...new Set(tools.map(t => t.category).filter(Boolean))];
-  const categories = desiredOrder.filter(c => c === 'all' || rawCats.includes(c));
-  rawCats.forEach(c => { if (!categories.includes(c)) categories.push(c); });
+
   if (filtersContainer) {
-    filtersContainer.innerHTML = categories.map(cat => {
-      const isActive = memberToolFilterCategory === cat;
-      const label = cat === 'all' ? 'Semua' : cat;
+    filtersContainer.innerHTML = categoryConfig.map(cat => {
+      const isActive = memberToolFilterCategory === cat.id;
       return `
-        <button onclick="setMemberToolCategory('${cat}')" class="px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+        <button onclick="setMemberToolCategory('${cat.id}')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
           isActive 
-            ? 'bg-purple-600 text-white shadow-xs' 
+            ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/30' 
             : 'bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/15'
         }">
-          ${label}
+          ${cat.label}
         </button>
       `;
     }).join('');
   }
 
-  // Filter tools
+  // Enhanced Smart Filter: supports searching by exact Level Number (e.g. typing "20", "level 20", "lvl 20")
   const filtered = tools.filter(t => {
     if (t.status === false) return false;
     if (memberToolFilterCategory !== 'all' && t.category !== memberToolFilterCategory) return false;
+    
     if (memberToolSearchQuery && !memberToolSearchQuery.startsWith('@')) {
-      const q = memberToolSearchQuery.toLowerCase();
+      const q = memberToolSearchQuery.trim().toLowerCase();
+      
+      // 1. Exact level number match (e.g. user types "20", "level 20", "lvl 20")
+      if (t.levelNum !== undefined && t.levelNum !== null) {
+        if (t.levelNum.toString() === q) return true;
+        if (`level ${t.levelNum}` === q || `lvl ${t.levelNum}` === q || `level-${t.levelNum}` === q) return true;
+        
+        // If query is just digits (e.g. "5", "12")
+        const numOnly = q.replace(/[^0-9]/g, '');
+        if (numOnly && parseInt(numOnly, 10) === t.levelNum) return true;
+      }
+
+      // 2. Text matches
       const matchName = (t.name || '').toLowerCase().includes(q);
       const matchDesc = (t.desc || '').toLowerCase().includes(q);
       const matchCat = (t.category || '').toLowerCase().includes(q);
-      if (!matchName && !matchDesc && !matchCat) return false;
+      const matchPrompt = (t.markdownPrompt || '').toLowerCase().includes(q);
+
+      if (!matchName && !matchDesc && !matchCat && !matchPrompt) return false;
     }
     return true;
   });
@@ -6387,5 +6385,97 @@ function openToolPickerModal(toolId) {
 
 function closeToolPickerModal() {
   const modal = document.getElementById('toolPickerModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+
+// =========================================================================
+// SYLLABUS (DAFTAR PUSTAKA) & INFOGRAPHIC LIGHTBOX CONTROLLER
+// =========================================================================
+function openSyllabusModal() {
+  const modal = document.getElementById('syllabusModal');
+  const tbody = document.getElementById('syllabusTableBody');
+  const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA.portalTools || []);
+  if (!modal || !tbody) return;
+
+  tbody.innerHTML = tools.map((t, idx) => {
+    const hasVideo = (t.videos && t.videos.length > 0) || !!t.videoUrl;
+    const hasTool = (t.tools && t.tools.length > 0) || (!!t.toolUrl && !t.toolUrl.includes('notion.so'));
+    const lineCount = (t.markdownPrompt || '').split('\n').filter(l => l.trim().length > 0).length || 10;
+
+    let badgeColor = 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+    if (t.levelNum >= 0 && t.levelNum <= 10) badgeColor = 'bg-pink-500/20 text-pink-300 border-pink-500/30';
+    else if (t.levelNum >= 11 && t.levelNum <= 20) badgeColor = 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+    else if (t.levelNum >= 21 && t.levelNum <= 30) badgeColor = 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+    else if (t.levelNum >= 31 && t.levelNum <= 40) badgeColor = 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+    else if (t.levelNum >= 41 && t.levelNum <= 50) badgeColor = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+    else badgeColor = 'bg-red-500/20 text-red-300 border-red-500/30';
+
+    return `
+      <tr class="hover:bg-white/5 transition-colors border-b border-white/5">
+        <td class="p-3 text-center">
+          <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold border ${badgeColor}">
+            ${t.levelNum >= 0 ? 'LEVEL ' + t.levelNum : 'MODUL'}
+          </span>
+        </td>
+        <td class="p-3 font-medium text-white text-xs sm:text-sm">
+          <div class="line-clamp-1">${t.name}</div>
+          <div class="text-[10px] text-slate-400 font-normal line-clamp-1">${t.desc}</div>
+        </td>
+        <td class="p-3 text-[11px] text-slate-300 whitespace-nowrap">
+          ${t.category}
+        </td>
+        <td class="p-3 whitespace-nowrap">
+          <div class="flex items-center gap-1.5">
+            ${hasVideo ? '<span class="px-2 py-0.5 rounded text-[10px] bg-indigo-500/20 text-indigo-300 font-mono" title="Ada Video Tutorial"><i class="fa-solid fa-play text-[8px]"></i> Video</span>' : ''}
+            ${hasTool ? '<span class="px-2 py-0.5 rounded text-[10px] bg-amber-500/20 text-amber-300 font-mono" title="Ada Link Tools ChatGPT"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i> Tools</span>' : ''}
+            <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 font-mono" title="Naskah Prompt MD"><i class="fa-solid fa-file-lines text-[8px]"></i> ${lineCount} Baris</span>
+          </div>
+        </td>
+        <td class="p-3 text-center whitespace-nowrap">
+          <button onclick="closeSyllabusModal(); scrollToLevel('${t.id}')" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-sm cursor-pointer">
+            Buka Kartu
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  modal.classList.remove('hidden');
+}
+
+function closeSyllabusModal() {
+  const modal = document.getElementById('syllabusModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function scrollToLevel(toolId) {
+  // Clear filter so the tool is visible
+  memberToolFilterCategory = 'all';
+  memberToolSearchQuery = '';
+  const searchInput = document.getElementById('memberToolSearchInput');
+  if (searchInput) searchInput.value = '';
+  renderMemberTools();
+
+  setTimeout(() => {
+    const card = document.querySelector(`[onclick*="${toolId}"]`);
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const parentCard = card.closest('.member-tool-card') || card;
+      parentCard.classList.add('ring-4', 'ring-purple-500', 'shadow-2xl');
+      setTimeout(() => {
+        parentCard.classList.remove('ring-4', 'ring-purple-500');
+      }, 3000);
+    }
+  }, 150);
+}
+
+function openLightboxInfographic() {
+  const modal = document.getElementById('infographicLightboxModal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeLightboxInfographic() {
+  const modal = document.getElementById('infographicLightboxModal');
   if (modal) modal.classList.add('hidden');
 }

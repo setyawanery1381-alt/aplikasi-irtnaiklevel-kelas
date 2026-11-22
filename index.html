@@ -3854,6 +3854,75 @@ v>
   </div>
   <!-- END TOOL PICKER MODAL -->
   
+  
+  <!-- SYLLABUS & DAFTAR PUSTAKA MODAL (LEVEL 0 - LEVEL 60) -->
+  <div id="syllabusModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md hidden transition-all">
+    <div class="relative w-full max-w-5xl max-h-[90vh] flex flex-col rounded-3xl bg-[#12131a] border border-purple-500/30 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <!-- Header -->
+      <div class="p-5 border-b border-white/10 flex items-center justify-between gap-3 bg-gradient-to-r from-purple-950/40 via-purple-900/20 to-transparent">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-lg border border-purple-500/30 shrink-0">
+            <i class="fa-solid fa-book-bookmark"></i>
+          </div>
+          <div>
+            <h3 class="font-heading text-base sm:text-lg font-black text-white leading-tight">
+              Daftar Pustaka & Silabus Materi (Level 0 - 60)
+            </h3>
+            <p class="text-[11px] text-slate-400">
+              Koleksi seluruh kurikulum pembelajaran terstruktur IRT Naik Level
+            </p>
+          </div>
+        </div>
+        <button onclick="closeSyllabusModal()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white flex items-center justify-center transition-all cursor-pointer shrink-0">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Table Scrollable -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider bg-white/5">
+              <th class="p-3 text-center">Level</th>
+              <th class="p-3">Judul Materi & Modul</th>
+              <th class="p-3">Kategori</th>
+              <th class="p-3">Isi Konten</th>
+              <th class="p-3 text-center">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="syllabusTableBody" class="divide-y divide-white/5">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Footer -->
+      <div class="p-3.5 px-6 border-t border-white/10 bg-[#0d0e14] flex items-center justify-between text-xs text-slate-400 font-mono">
+        <span>Total: 62 Level Pembelajaran Lengkap</span>
+        <button onclick="closeSyllabusModal()" class="px-4 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-sans text-xs font-semibold transition-all cursor-pointer">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFOGRAPHIC LIGHTBOX MODAL (FOTO 2 RESOLUSI PENUH) -->
+  <div id="infographicLightboxModal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-lg hidden transition-all">
+    <div class="relative w-full max-w-6xl max-h-[96vh] flex flex-col rounded-3xl bg-[#0f1015] border border-white/15 shadow-2xl overflow-hidden">
+      <div class="p-3 sm:p-4 border-b border-white/10 flex items-center justify-between gap-3 bg-[#14151e]">
+        <h4 class="font-heading text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-image text-pink-400"></i> Silabus 60 Level Materi Animasi AI â€” IRT Naik Level
+        </h4>
+        <button onclick="closeLightboxInfographic()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+      <div class="p-2 sm:p-4 overflow-auto flex items-center justify-center bg-black/50 max-h-[calc(96vh-60px)]">
+        <img src="assets/daftar_60_level_materi.webp" alt="Silabus 60 Level IRT Naik Level" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl">
+      </div>
+    </div>
+  </div>
+  
   <div id="toast" class="bg-slate-950 text-white dark:bg-white dark:text-slate-950 px-5 py-3 rounded-full shadow-2xl border border-white/10 dark:border-slate-800 flex items-center gap-3 text-xs font-semibold">
     <div class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-[10px] shrink-0 font-bold">
       <i class="fa-solid fa-check"></i>
@@ -4259,7 +4328,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-0",
     "levelNum": 0,
     "name": "LEVEL 0 UNTUK PEMULA",
-    "category": "Pemula & Dasar",
+    "category": "Dasar Animasi AI",
     "desc": "DOWNLOAD DULU APLIKASI DIATAS YA⤴️⤴️⤴️ MACAM MACAM KARAKTEE STYLE. JADI KALAU KAMU MAU BUAT ANIMASI KAMU BISA PILIH KARAKTER NYA SEPERTI DIBAWAH INI...",
     "instructions": [],
     "prompts": [],
@@ -4296,7 +4365,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-1",
     "levelNum": 1,
     "name": "LEVEL 1- KARAKTER KONSISTEN/KARAKTER SHEET",
-    "category": "Pemula & Dasar",
+    "category": "Dasar Animasi AI",
     "desc": "jenis -jenis karakter style Klik disini ...",
     "instructions": [
       "Ketuk Tools Karakter Konsisten di bawah.",
@@ -4336,7 +4405,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-2",
     "levelNum": 2,
     "name": "LEVEL 2 -FAKTA MENARIK",
-    "category": "Pemula & Dasar",
+    "category": "Dasar Animasi AI",
     "desc": "Cara Menggunakan Tools Fakta Menarik Tutorial Animasi Clay ...",
     "instructions": [
       "Ketuk Tools Fakta Menarik di bawah.",
@@ -4383,7 +4452,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-3",
     "levelNum": 3,
     "name": "LEVEL 3 - 3D CARTOON",
-    "category": "Pemula & Dasar",
+    "category": "Dasar Animasi AI",
     "desc": "Cara Menggunakan Tools 3D Cartoon Tutorial Animasi 3D Cartoon...",
     "instructions": [
       "Ketuk Tools 3D Cartoon di bawah.",
@@ -4423,7 +4492,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-4",
     "levelNum": 4,
     "name": "LEVEL 4 - SKELETON",
-    "category": "Pemula & Dasar",
+    "category": "Dasar Animasi AI",
     "desc": "Cara Menggunakan Tools Skeleton AI Cara bikin Animasi  Skeleton sama dengan contoh pertama ...",
     "instructions": [
       "Ketuk Tools Skeleton AI di bawah.",
@@ -4454,7 +4523,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-5",
     "levelNum": 5,
     "name": "LEVEL 5 - TUTORIAL BIKIN POSTER",
-    "category": "Pemula & Dasar",
+    "category": "Dasar Animasi AI",
     "desc": "Tutorial bikin poster  Tutorial 2 ...",
     "instructions": [],
     "prompts": [],
@@ -4481,7 +4550,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-6",
     "levelNum": 6,
     "name": "LEVEL 6 - Tutorial Voice Over Animasi",
-    "category": "Pemula & Dasar",
+    "category": "Dasar Animasi AI",
     "desc": "Video tutorial VOICE OVER VERSI IRT NAIK LEVEL 👈Buat voice disini Klik panah ...",
     "instructions": [],
     "prompts": [],
@@ -4506,7 +4575,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-7",
     "levelNum": 7,
     "name": "LEVEL 7- FILM ANIMASI / FILM ROMANTIS/FILM PROFESI",
-    "category": "Drama & Cerita AI",
+    "category": "Dasar Animasi AI",
     "desc": "Cara Menggunakan Tools Film Romantis AI Tutorial bikin film romantis ...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami alur penggunaan tools.",
@@ -4543,7 +4612,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-8",
     "levelNum": 8,
     "name": "LEVEL 8- GEMINI STORYBOOK",
-    "category": "Animasi Kreatif",
+    "category": "Dasar Animasi AI",
     "desc": "Cara buat story book  ( MUNGKIN TAMPILAN DI GEMININYA BERUBAH UBAH YA TIDAK SELALU SAMA, DICOBA AJA DULU CARI TULISAN GEM BARU COBA BUAT , KAMI USAHAKAN TUTORIA...",
     "instructions": [],
     "prompts": [],
@@ -4585,7 +4654,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-9",
     "levelNum": 9,
     "name": "LEVEL 9 - Tutorial animasi ASMR",
-    "category": "Animasi Kreatif",
+    "category": "Dasar Animasi AI",
     "desc": "TONTON DULU VIDEO TURORIALNYA YA Cara Menggunakan Tools ASMR AI...",
     "instructions": [
       "Ketuk Tools ASMR AI di bawah.",
@@ -4624,7 +4693,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-10",
     "levelNum": 10,
     "name": "LEVEL 10 - OBJECT TALK",
-    "category": "Animasi Kreatif",
+    "category": "Dasar Animasi AI",
     "desc": "Cara Menggunakan Tools Object Talk Tutorial OBJECT TALK \n...",
     "instructions": [
       "Ketuk Tools Object Talk di bawah.",
@@ -4662,7 +4731,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-11",
     "levelNum": 11,
     "name": "LEVEL 11 - ANIMASI AMIGURUMI",
-    "category": "Edukasi & Anak",
+    "category": "Konten Kreatif & Editing",
     "desc": "Cara Menggunakan Tools Amigurumi AI Tutorial animasi amigurumi...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
@@ -4693,7 +4762,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-12",
     "levelNum": 12,
     "name": "LEVEL 12 - ANIMASI PPDB",
-    "category": "Animasi Kreatif",
+    "category": "Konten Kreatif & Editing",
     "desc": "Cara Menggunakan Tools PPDB AI Tools 1 PPDB...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
@@ -4726,7 +4795,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-13",
     "levelNum": 13,
     "name": "LEVEL 13 - TUTORIAL ANIMASI EDUKASI MENGGUNAKAN GEMINI",
-    "category": "Edukasi & Anak",
+    "category": "Konten Kreatif & Editing",
     "desc": "GANTI PEMBUATAN VIDEONYA KE FLOW SAJA KARENA GEMINI HARUS PRO. VIDOE TUTORIAL ...",
     "instructions": [],
     "prompts": [],
@@ -4775,7 +4844,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-14",
     "levelNum": 14,
     "name": "LEVEL 14 - TUTORIAL LIPSING",
-    "category": "Animasi Kreatif",
+    "category": "Konten Kreatif & Editing",
     "desc": " BIKIN LAGU + VIDEO CLIP Klik disini ...",
     "instructions": [],
     "prompts": [],
@@ -4794,7 +4863,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-15",
     "levelNum": 15,
     "name": "LEVEL 15 - EDITING KONTEN ANIMASI DI CAPCUT",
-    "category": "Animasi Kreatif",
+    "category": "Konten Kreatif & Editing",
     "desc": "Tutorial menggabungkan Video...",
     "instructions": [],
     "prompts": [],
@@ -4818,7 +4887,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-16",
     "levelNum": 16,
     "name": "LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
-    "category": "Affiliate & Iklan",
+    "category": "Konten Kreatif & Editing",
     "desc": "KALAU KAMU MAU BELAJAR ALUR BISNIS PRODUK DIGITAL DAN ANIMASI AI JANGAN SKIP YA SCROLL SAMPAI BAW AH DIBACA PELAN2 DI TONTON PELAN-PELAN SAMPAI PAHAM. CARA MENG...",
     "instructions": [
       "TUTORIAL BIKIN TOKO [LYNK.ID](http://LYNK.ID) & BONUS PRODUK DIGITAL SIAP JUAL",
@@ -4930,7 +4999,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-17",
     "levelNum": 17,
     "name": "LEVEL 17 - INFOGRAFIS PEMBELAJARAN",
-    "category": "Edukasi & Anak",
+    "category": "Konten Kreatif & Editing",
     "desc": "Video Tutorial Cara minta promt ke chatgpt ...",
     "instructions": [
       "Mata Pelajaran",
@@ -5020,7 +5089,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-18",
     "levelNum": 18,
     "name": "LEVEL 18 - TUTORIAL TIMELAPSE  AI",
-    "category": "Animasi Kreatif",
+    "category": "Konten Kreatif & Editing",
     "desc": "TUTORIAL TIMELAPSE AI 💜✨\nBelajar dari Nol Bersama IRT Naik Level\nMau bikin video rumah tua berubah jadi rumah mewah hanya dengan AI? 🏚️➡️🏡\nYuk, ikuti langkah...",
     "instructions": [],
     "prompts": [],
@@ -5050,7 +5119,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-19",
     "levelNum": 19,
     "name": "LEVEL 19 - CLONING VIDEO Cloning /analisis Video (1)",
-    "category": "Animasi Kreatif",
+    "category": "Konten Kreatif & Editing",
     "desc": "Upload video lalu tekan yg dibawah lalu masukkan video yang ingin di analisis  ChatGPT - Cloning Video By IRT Naik Level...",
     "instructions": [],
     "prompts": [],
@@ -5075,7 +5144,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-20",
     "levelNum": 20,
     "name": "LEVEL 20 - CHEF ANIMASI",
-    "category": "Animasi Kreatif",
+    "category": "Konten Kreatif & Editing",
     "desc": "cara buat videonya sama dengan seperti tutorial lainnya. Dilengkapi 2 Tools AI Resep (Chef Animasi & Dapur Pintar).",
     "instructions": [
       "cara buat videonya sama dengan seperti tutorial lainnya",
@@ -5108,7 +5177,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-21",
     "levelNum": 21,
     "name": "LEVEL 21 - FILM ACTION",
-    "category": "Drama & Cerita AI",
+    "category": "Konten Viral & Affiliate",
     "desc": "Tools Film Action  Tools disini...",
     "instructions": [],
     "prompts": [],
@@ -5134,7 +5203,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-22",
     "levelNum": 22,
     "name": "LEVEL 22 - QUOTES KEHIDUPAN VIDEO BERGERAK",
-    "category": "Animasi Kreatif",
+    "category": "Konten Viral & Affiliate",
     "desc": "VERSI BARU VIRAL SOSMED PROMPT TEKS TO IMAGE TEMPEL KE CHATGPT SERTAKAN GAMBAR KAMU DAN QUOTES KAMU ....",
     "instructions": [
       "Rambut: [warna dan model rambut]",
@@ -5238,7 +5307,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-23",
     "levelNum": 23,
     "name": "LEVEL 23 - GIAND OBJECT",
-    "category": "Animasi Kreatif",
+    "category": "Konten Viral & Affiliate",
     "desc": "Cara Menggunakan Tools Giant Object AI Tools penghasil Prompt GIANT OBJECT ...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
@@ -5269,7 +5338,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-24",
     "levelNum": 24,
     "name": "LEVEL 24 - DESIGN UCAPAN",
-    "category": "Animasi Kreatif",
+    "category": "Konten Viral & Affiliate",
     "desc": "Design ucapan kamu disini ya  Cara Menggunakan Tools Design Ucapan...",
     "instructions": [
       "Ketuk Tools Design Ucapan di bawah.",
@@ -5300,7 +5369,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-25",
     "levelNum": 25,
     "name": "LEVEL 25 - PROMPT ESTETIK IRTNAIKLEVEL",
-    "category": "Karakter & Prompt",
+    "category": "Konten Viral & Affiliate",
     "desc": "Cara Menggunakan Tools Prompt Otomatis ChatGPT - TOOLS PENGHASIL PROMPT OTOMATIS...",
     "instructions": [
       "Ketuk Tools di bawah.",
@@ -5346,7 +5415,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-26",
     "levelNum": 26,
     "name": "LEVEL 26- CARA MEMBUAT LAGU DI GEMINI",
-    "category": "Animasi Kreatif",
+    "category": "Konten Viral & Affiliate",
     "desc": "VIDEO TUTORIAL ...",
     "instructions": [],
     "prompts": [],
@@ -5370,7 +5439,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-27",
     "levelNum": 27,
     "name": "LEVEL 27 - ANIMASI MINIATUR",
-    "category": "Animasi Kreatif",
+    "category": "Konten Viral & Affiliate",
     "desc": "VIDEO TUTORIAL  Klik disini ...",
     "instructions": [],
     "prompts": [],
@@ -5392,7 +5461,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-28",
     "levelNum": 28,
     "name": "LEVEL 28 - IKLAN PRODUK & MIRROR SELFIE AFFILIATE",
-    "category": "Affiliate & Iklan",
+    "category": "Konten Viral & Affiliate",
     "desc": "MIRROR SELFIE AFFILIATE  PROMPT GAMBAR MIRROR SELFIE...",
     "instructions": [],
     "prompts": [],
@@ -5429,7 +5498,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-29",
     "levelNum": 29,
     "name": "LEVEL 29 - TINI WORLD RESCUE",
-    "category": "Animasi Kreatif",
+    "category": "Konten Viral & Affiliate",
     "desc": "TOOLS TINY  VIDEO TUTORIAL ...",
     "instructions": [],
     "prompts": [],
@@ -5448,7 +5517,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-30",
     "levelNum": 30,
     "name": "LEVEL 30 - STORYBOARD IKLAN/ AFFILIATE PRODUK",
-    "category": "Affiliate & Iklan",
+    "category": "Konten Viral & Affiliate",
     "desc": "Tutorial Cara bikin iklan dan iklan  Menu untuk  dengan AI  VIDEO TUTORIAL IKLAN ...",
     "instructions": [],
     "prompts": [],
@@ -5481,7 +5550,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-31",
     "levelNum": 31,
     "name": "LEVEL 31 - CARA GENERATE DIGROK",
-    "category": "Animasi Kreatif",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "Video tutorial ...",
     "instructions": [],
     "prompts": [],
@@ -5505,7 +5574,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-32",
     "levelNum": 32,
     "name": "LEVEL 32-DRAMA BUAH",
-    "category": "Drama & Cerita AI",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "TOOLS DRAMA BUAH  ChatGPT - DRAMA BUAH SAYUR ANTROPOMORFIK...",
     "instructions": [],
     "prompts": [],
@@ -5537,7 +5606,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-33",
     "levelNum": 33,
     "name": "LEVEL 33 - CARA MEMBUAT BUKU CERITA / EDUKASI PEMBELAJARAN ANAK MENGGUNAKAN AI",
-    "category": "Edukasi & Anak",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "TUTORIAL  TOOLS GENERATOR ...",
     "instructions": [],
     "prompts": [],
@@ -5556,7 +5625,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-34",
     "levelNum": 34,
     "name": "LEVEL 34- CARA MENGGUNAKAN PIXVERSE AI",
-    "category": "Animasi Kreatif",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "VIDEO TUTORIAL  Bisa juga login pakai email temporary...",
     "instructions": [],
     "prompts": [],
@@ -5575,7 +5644,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-35",
     "levelNum": 35,
     "name": "LEVEL 35- ANIMASI PAKAI META AI",
-    "category": "Animasi Kreatif",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "TUTORIAL  Klik disini ...",
     "instructions": [],
     "prompts": [],
@@ -5594,7 +5663,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-36",
     "levelNum": 36,
     "name": "LEVEL 36- TUTORIAL MEMBUAT IKLAN PROMOSI USAHA UMKM",
-    "category": "Affiliate & Iklan",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "Download Google Drive dibawah lalu tempel ke chatgpt ...",
     "instructions": [
       "Buat gambar storyboard realistis dan sinematik, terdiri dari 3 scene dalam satu gambar.",
@@ -5665,7 +5734,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-37",
     "levelNum": 37,
     "name": "LEVEL 37 - TUTORIAL CARA GENERATE VIOSTUDIO",
-    "category": "Animasi Kreatif",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "VIDEO TUTORIAL CARA  BIAR DAPAT EXTRA KREDIT TAMBAHAN MASUKKAN Kode Voucher IRT100 AKSES WEB NYA DISINI.KETUK TANDA PANAH....",
     "instructions": [],
     "prompts": [],
@@ -5684,7 +5753,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-37",
     "levelNum": 37,
     "name": "Level -37 TOOLS COZY MINIATUR",
-    "category": "Animasi Kreatif",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "Tools PEMBUAT prompt cozy miniatur  Klik tanda panah  lalu klik lagi ...",
     "instructions": [],
     "prompts": [],
@@ -5703,7 +5772,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-38",
     "levelNum": 38,
     "name": "🩷LEVEL - 38 TUTORIAL ANIMASI FAKTA SEJARAH",
-    "category": "Animasi Kreatif",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "Video TUTORIAL  Prompt nya :...",
     "instructions": [],
     "prompts": [],
@@ -5735,7 +5804,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-39",
     "levelNum": 39,
     "name": "LEVEL 39- TUTORIAL UNDANGAN PERNIKAHAN DENGAN AI",
-    "category": "Animasi Kreatif",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "VIDEO TUTORIAL  PROMPT : BUATKAN GAMBAR STORYBOARD UNTUK UNDANGAN PERNIKAHAN  ANTARA BUDI DAN ANI. BUAT YANG MENARIK UNTUK 10 DETIK. BUAT KARAKTER 3D CARTOON PI...",
     "instructions": [],
     "prompts": [],
@@ -5760,7 +5829,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-40",
     "levelNum": 40,
     "name": "LEVEL 40 - MEMBUAT DRAMA AI",
-    "category": "Drama & Cerita AI",
+    "category": "Drama AI & Promosi Usaha",
     "desc": "Video tutorial  TOOLS GENERATOR KLIK DISINI 👇👇👇 ...",
     "instructions": [
       "Jenis Cerita",
@@ -5854,7 +5923,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-41",
     "levelNum": 41,
     "name": "🎊LEVEL 41- MEMBUAT KOMIK LEGENDA, DLL",
-    "category": "Drama & Cerita AI",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "Caranya ketik mulai di generator lalu isi dulu semua permintaan lalu setelah itu minta dibuatkan gambar per halaman. Ketuk Tools Generator  dibawah ini :...",
     "instructions": [],
     "prompts": [],
@@ -5880,7 +5949,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-42",
     "levelNum": 42,
     "name": "LEVEL 42 -  DRACIN",
-    "category": "Drama & Cerita AI",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "TOOLS DRACIN  TUTORIAL DRACIN...",
     "instructions": [],
     "prompts": [],
@@ -5905,7 +5974,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-43",
     "levelNum": 43,
     "name": "Level - 43 DRAMA FOOD HEAD CREATOR",
-    "category": "Drama & Cerita AI",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "TOOLS KLIK DISINI  ChatGPT - 🍔 FOOD HEAD CREATOR by IRT NAIK LEVEL...",
     "instructions": [],
     "prompts": [],
@@ -5937,7 +6006,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-44",
     "levelNum": 44,
     "name": "LEVEL 44 - TUTORIAL CARA BIKIN VIDEO MPLS PAKAI FLOW",
-    "category": "Animasi Kreatif",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "VIDEO TUTORIAL  TOOLS CUSTOM ...",
     "instructions": [],
     "prompts": [],
@@ -5971,7 +6040,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-45",
     "levelNum": 45,
     "name": "🎊LEVEL 45- BANK TOOLS IRT NAIK LEVEL & AFFILIATE UNBOXING",
-    "category": "Affiliate & Iklan",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "Nanti tools tools tambahan siap pakai akan saya masukkan disini ya. Ditunggu saja  Masuk ke chatgpt lalu masukkan promptnimi...",
     "instructions": [],
     "prompts": [],
@@ -6012,7 +6081,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-46",
     "levelNum": 46,
     "name": "LEVEL -46 MEMBUAT PEMBELAJARAN MENARIK PAKAI AI/ POP BOOK/LKPD/RPP/RPM",
-    "category": "Edukasi & Anak",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "VIDEO TUTORIAL  TOOLS PENGHASIL PROMPT ...",
     "instructions": [],
     "prompts": [],
@@ -6092,7 +6161,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-47",
     "levelNum": 47,
     "name": "LEVEL 47- BONUS WORKSHEET ANAK",
-    "category": "Edukasi & Anak",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "KLIK / COPY LINK INI UNTUK MEMBUKA WORKSHEET ANAK :  https://drive.google.com/drive/folders/13eTB02UmZZLt-lFvZzG9JLmHiLryyF9V...",
     "instructions": [],
     "prompts": [],
@@ -6113,7 +6182,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-48",
     "levelNum": 48,
     "name": "LEVEL -48 CARA MEMBUAT GAMES INTERAKTIF ANAK",
-    "category": "Edukasi & Anak",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "VIDEO TUTORIAL MASUK KE GEMINI KETUK TANDA + LALU PILIH CANVAS ,MASUKKAN PROMPT DIBAWAH INI : KAMU JUGA BISA GANTI GANTI PROMPTNYA SESUAI DENGAN MATA PELAJARAN ...",
     "instructions": [
       "HTML",
@@ -6231,7 +6300,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-49",
     "levelNum": 49,
     "name": "LEVEL - 49 EDU UNBOXING GENERATOR",
-    "category": "Animasi Kreatif",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "VIDEO TUTORIAL  TOOLS PENGHASIL PROMPT KETUK /TULIS MULAI DIBAWAH INI ...",
     "instructions": [],
     "prompts": [],
@@ -6263,7 +6332,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-50",
     "levelNum": 50,
     "name": "LEVEL -50 MEMBUAT ANIMASI KONSEP SENDIRI / PERSONAL BRANDING",
-    "category": "Animasi Kreatif",
+    "category": "Edukasi, Guru & Produk Digital",
     "desc": "VIDEO TUTORIAL  AMBIL PROMPT NYA DI TOOLS DIBAWAH INI...",
     "instructions": [],
     "prompts": [],
@@ -6303,7 +6372,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-51",
     "levelNum": 51,
     "name": "Level -51 ANIMASI HOLOGRAM",
-    "category": "Animasi Kreatif",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "AMBIL PROMPT DI TOOLS DIBAWAH INI DENGAN MENGETUK DAN KETIK KATA “MULAI” ChatGPT - IRT NAIK LEVEL — TEACHER HOLOGRAM AI...",
     "instructions": [],
     "prompts": [],
@@ -6335,7 +6404,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-52",
     "levelNum": 52,
     "name": "LEVEL -52 PODCAST - IRT NAIK LEVEL",
-    "category": "Animasi Kreatif",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "TOOL CHATGPT PENGHASIL PROMPT ChatGPT - TOOLS PODCAST AI — IRT NAIK LEVEL 2...",
     "instructions": [],
     "prompts": [],
@@ -6374,7 +6443,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-53",
     "levelNum": 53,
     "name": "LEVEL -53 CARA BUAT WORKSHEET ANAK DENGAN AI",
-    "category": "Edukasi & Anak",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "Tools chatgpt  klik dan ketuk “mulai” atau ketik manual “Mulai” untuk mendapatkan prompt  👇👇👇...",
     "instructions": [],
     "prompts": [],
@@ -6407,7 +6476,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-54",
     "levelNum": 54,
     "name": "LEVEL 54- ANIMASI PETUALANGAN /EDUKASI",
-    "category": "Edukasi & Anak",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "PROMPT NYA COPY DARI SINI LALU PASTEKAN KE CHATGPT KAMU. LALU KAMU TINGGAL UBAH KE JUDUL YANG KAMU MAU. buatkan prompt teks to image prompt image to video dan d...",
     "instructions": [],
     "prompts": [],
@@ -6432,7 +6501,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-55",
     "levelNum": 55,
     "name": "LEVEL 55- 100 IDE GPT untuk GURU by IRT NAIK LEVEL",
-    "category": "Edukasi & Anak",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "100 IDE CHATGPT  KLIK TANDA PANAH UNTUK MELIHAT 100  IDE  ( PILIH SALAH SATU PASTEKAN KE CHATGPT SESUAI KEBUTUHAN BAPAK IBU GURU) ...",
     "instructions": [],
     "prompts": [],
@@ -6458,7 +6527,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-56",
     "levelNum": 56,
     "name": "LEVEL 56- MOTION CONTROL",
-    "category": "Animasi Kreatif",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
     "instructions": [],
     "prompts": [],
@@ -6483,7 +6552,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-57",
     "levelNum": 57,
     "name": "Level 57- Animasi Joget Lucu",
-    "category": "Animasi Kreatif",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "buka chatgpt lalu masukkan prompt dibawah :  Buatkan animasi viral joget lagu Jenna Jenna realistis seperti kucing asli kucing kampung lagi ngamen yang keliatan...",
     "instructions": [],
     "prompts": [],
@@ -6510,7 +6579,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-58",
     "levelNum": 58,
     "name": "Level 58- 215 KODE RAHASIA AFFILIATE VIRAL",
-    "category": "Affiliate & Iklan",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "PROMPT DIBAWAH INI COPY KE CHATGPT TINGGAL UBAH KODE SESUAI KEBUTUHAN KAMU Buatkan gambar storyboard review produk tumbler dari foto yang saya upload menggunaka...",
     "instructions": [
       "\"/ootdmirror\" — Review outfit mirror selfie",
@@ -6636,7 +6705,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-59",
     "levelNum": 59,
     "name": "❤️LEVEL 59- BABY INTERVIEW",
-    "category": "Drama & Cerita AI",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
     "instructions": [
       "Buat gambar: \"Buatkan gambar Baby Interview dari ide nomor 1, bayi realistis super gemoy, rasio 9:16.\"",
@@ -6678,7 +6747,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-60",
     "levelNum": 60,
     "name": "👽LEVEL 60-ANIMASI HORROR",
-    "category": "Animasi Kreatif",
+    "category": "Materi Bonus & Update Terbaru",
     "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
     "instructions": [
       "Genre horor supernatural dan misteri.",
@@ -11042,59 +11111,45 @@ function renderMemberTools() {
   if (notionHubContainer) {
     if (isMemberUnlocked) {
       notionHubContainer.innerHTML = `
-        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1c162b] via-[#14121d] to-[#0d0c12] border border-purple-500/40 shadow-2xl p-6 sm:p-8 md:p-10">
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1c162b] via-[#14121d] to-[#0d0c12] border border-purple-500/40 shadow-2xl p-4 sm:p-6 md:p-8">
           <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-          <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-pink-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
-          <div class="relative z-10 space-y-6">
-            <!-- Header Kurikulum Resmi -->
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
-              <div class="space-y-2.5 max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                  <i class="fa-solid fa-crown text-amber-400"></i>
-                  <span>Kurikulum Resmi 62 Level — IRT Naik Level</span>
-                </div>
-                <h3 class="font-heading text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
-                  🌸 Selamat Datang di Kelas Animasi AI IRT Naik Level
+          <div class="relative z-10 space-y-5">
+            <!-- Header Infografis & Aksi -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 text-pink-300 text-[11px] font-bold uppercase tracking-wider">
+                  <i class="fa-solid fa-crown text-amber-400"></i> Silabus Resmi IRT Naik Level
+                </span>
+                <h3 class="font-heading text-xl sm:text-2xl md:text-3xl font-black text-white mt-1.5 tracking-tight">
+                  Daftar Lengkap 60 Level Materi Animasi AI
                 </h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  Semua materi telah disusun langsung ke dalam <strong>62 Level Pembelajaran Praktis</strong> di bawah ini. Dari pemula nol tanpa keahlian gambar, hingga mahir membuat animasi komersial, affiliate, dan edukasi anak.
+                <p class="text-xs text-slate-400 mt-1">
+                  Kurikulum terstruktur dari nol hingga mahir membuat video animasi komersial & affiliate.
                 </p>
               </div>
 
-              <!-- Stats Pill -->
-              <div class="grid grid-cols-2 gap-2.5 shrink-0">
-                <div class="px-4 py-3 rounded-2xl bg-black/40 border border-white/10 text-center">
-                  <div class="text-xl sm:text-2xl font-black text-amber-400 font-mono">62</div>
-                  <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Level Materi</div>
-                </div>
-                <div class="px-4 py-3 rounded-2xl bg-black/40 border border-white/10 text-center">
-                  <div class="text-xl sm:text-2xl font-black text-emerald-400 font-mono">52+</div>
-                  <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Video Tutorial</div>
-                </div>
+              <!-- Shortcut Buttons -->
+              <div class="flex items-center gap-2 shrink-0">
+                <button onclick="openSyllabusModal()" class="px-4 py-2.5 rounded-xl bg-purple-600/80 hover:bg-purple-600 text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center gap-2 cursor-pointer">
+                  <i class="fa-solid fa-list-ol"></i>
+                  <span>Daftar Pustaka (0-60)</span>
+                </button>
+                <button onclick="openLightboxInfographic()" class="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border border-white/10" title="Perbesar Gambar Infografis">
+                  <i class="fa-solid fa-magnifying-glass-plus text-purple-400"></i>
+                  <span class="hidden md:inline">Perbesar</span>
+                </button>
               </div>
             </div>
 
-            <!-- Pesan & Pengumuman Penting dari Materi Kelas -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-              <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-1.5">
-                <div class="font-bold text-purple-300 flex items-center gap-1.5">
-                  <i class="fa-solid fa-circle-info text-purple-400"></i> Informasi & Bantuan Mentor
-                </div>
-                <p class="text-slate-300 text-[11px] leading-relaxed">
-                  🌸 <strong>Langganan Flow Gemini durasi 18 bulan</strong> bisa langsung hubungi Kak Lia.<br>
-                  🔒 <em>Dilarang menjual / menyebarluaskan materi ini, khusus untuk media belajar member resmi IRT Naik Level.</em>
-                </p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 space-y-1.5">
-                <div class="font-bold text-emerald-300 flex items-center gap-1.5">
-                  <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i> Rekomendasi Tools Remove Watermark
-                </div>
-                <p class="text-slate-300 text-[11px] leading-relaxed">
-                  🔗 <strong>Erasio:</strong> <a href="http://erasio.io/" target="_blank" class="text-emerald-400 underline font-semibold">erasio.io</a> (Dapat 90 kredit/hari, hanya 3 kredit/file).<br>
-                  ▶ <a href="https://youtube.com/shorts/mHJY0-yWsjY?si=v2sGL5QXbT-1rKxm" target="_blank" class="text-emerald-300 underline font-semibold">Tonton Tutorial Remover Watermark</a>
-                </p>
+            <!-- Foto 2 Infografis Silabus Banner -->
+            <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-xl group cursor-pointer bg-black/40" onclick="openLightboxInfographic()">
+              <img src="assets/daftar_60_level_materi.webp" alt="Daftar Lengkap 60 Level Materi Animasi AI IRT Naik Level" class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500" loading="lazy">
+              <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="px-4 py-2 rounded-xl bg-black/80 backdrop-blur-md text-white text-xs font-bold border border-white/20 shadow-lg flex items-center gap-2">
+                  <i class="fa-solid fa-expand text-purple-400"></i> Klik untuk Melihat Ukuran Penuh
+                </span>
               </div>
             </div>
           </div>
@@ -11156,45 +11211,57 @@ function renderMemberTools() {
   }
 
   // Extract unique categories for filter pills with intuitive curated order
-  const desiredOrder = [
-    'all',
-    'Pemula & Dasar',
-    'Animasi Kreatif',
-    'Drama & Cerita AI',
-    'Edukasi & Anak',
-    'Affiliate & Iklan',
-    'Karakter & Prompt',
-    'Custom GPT Studio'
+  // 6 Official Categories matching Foto 2
+  const categoryConfig = [
+    { id: 'all', label: 'Semua (62)', short: 'Semua' },
+    { id: 'Dasar Animasi AI', label: '01. Dasar Animasi AI (0-10)', short: '01. Dasar (0-10)' },
+    { id: 'Konten Kreatif & Editing', label: '02. Konten Kreatif & Editing (11-20)', short: '02. Kreatif (11-20)' },
+    { id: 'Konten Viral & Affiliate', label: '03. Konten Viral & Affiliate (21-30)', short: '03. Affiliate (21-30)' },
+    { id: 'Drama AI & Promosi Usaha', label: '04. Drama AI & Promosi Usaha (31-40)', short: '04. Drama (31-40)' },
+    { id: 'Edukasi, Guru & Produk Digital', label: '05. Edukasi, Guru & Produk (41-50)', short: '05. Edukasi (41-50)' },
+    { id: 'Materi Bonus & Update Terbaru', label: '06. Bonus & Update Terbaru (51-60)', short: '06. Bonus (51-60)' }
   ];
-  const rawCats = ['all', ...new Set(tools.map(t => t.category).filter(Boolean))];
-  const categories = desiredOrder.filter(c => c === 'all' || rawCats.includes(c));
-  rawCats.forEach(c => { if (!categories.includes(c)) categories.push(c); });
+
   if (filtersContainer) {
-    filtersContainer.innerHTML = categories.map(cat => {
-      const isActive = memberToolFilterCategory === cat;
-      const label = cat === 'all' ? 'Semua' : cat;
+    filtersContainer.innerHTML = categoryConfig.map(cat => {
+      const isActive = memberToolFilterCategory === cat.id;
       return `
-        <button onclick="setMemberToolCategory('${cat}')" class="px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+        <button onclick="setMemberToolCategory('${cat.id}')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
           isActive 
-            ? 'bg-purple-600 text-white shadow-xs' 
+            ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/30' 
             : 'bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/15'
         }">
-          ${label}
+          ${cat.label}
         </button>
       `;
     }).join('');
   }
 
-  // Filter tools
+  // Enhanced Smart Filter: supports searching by exact Level Number (e.g. typing "20", "level 20", "lvl 20")
   const filtered = tools.filter(t => {
     if (t.status === false) return false;
     if (memberToolFilterCategory !== 'all' && t.category !== memberToolFilterCategory) return false;
+    
     if (memberToolSearchQuery && !memberToolSearchQuery.startsWith('@')) {
-      const q = memberToolSearchQuery.toLowerCase();
+      const q = memberToolSearchQuery.trim().toLowerCase();
+      
+      // 1. Exact level number match (e.g. user types "20", "level 20", "lvl 20")
+      if (t.levelNum !== undefined && t.levelNum !== null) {
+        if (t.levelNum.toString() === q) return true;
+        if (`level ${t.levelNum}` === q || `lvl ${t.levelNum}` === q || `level-${t.levelNum}` === q) return true;
+        
+        // If query is just digits (e.g. "5", "12")
+        const numOnly = q.replace(/[^0-9]/g, '');
+        if (numOnly && parseInt(numOnly, 10) === t.levelNum) return true;
+      }
+
+      // 2. Text matches
       const matchName = (t.name || '').toLowerCase().includes(q);
       const matchDesc = (t.desc || '').toLowerCase().includes(q);
       const matchCat = (t.category || '').toLowerCase().includes(q);
-      if (!matchName && !matchDesc && !matchCat) return false;
+      const matchPrompt = (t.markdownPrompt || '').toLowerCase().includes(q);
+
+      if (!matchName && !matchDesc && !matchCat && !matchPrompt) return false;
     }
     return true;
   });
@@ -13231,6 +13298,98 @@ function openToolPickerModal(toolId) {
 
 function closeToolPickerModal() {
   const modal = document.getElementById('toolPickerModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+
+// =========================================================================
+// SYLLABUS (DAFTAR PUSTAKA) & INFOGRAPHIC LIGHTBOX CONTROLLER
+// =========================================================================
+function openSyllabusModal() {
+  const modal = document.getElementById('syllabusModal');
+  const tbody = document.getElementById('syllabusTableBody');
+  const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA.portalTools || []);
+  if (!modal || !tbody) return;
+
+  tbody.innerHTML = tools.map((t, idx) => {
+    const hasVideo = (t.videos && t.videos.length > 0) || !!t.videoUrl;
+    const hasTool = (t.tools && t.tools.length > 0) || (!!t.toolUrl && !t.toolUrl.includes('notion.so'));
+    const lineCount = (t.markdownPrompt || '').split('\n').filter(l => l.trim().length > 0).length || 10;
+
+    let badgeColor = 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+    if (t.levelNum >= 0 && t.levelNum <= 10) badgeColor = 'bg-pink-500/20 text-pink-300 border-pink-500/30';
+    else if (t.levelNum >= 11 && t.levelNum <= 20) badgeColor = 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+    else if (t.levelNum >= 21 && t.levelNum <= 30) badgeColor = 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+    else if (t.levelNum >= 31 && t.levelNum <= 40) badgeColor = 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+    else if (t.levelNum >= 41 && t.levelNum <= 50) badgeColor = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+    else badgeColor = 'bg-red-500/20 text-red-300 border-red-500/30';
+
+    return `
+      <tr class="hover:bg-white/5 transition-colors border-b border-white/5">
+        <td class="p-3 text-center">
+          <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold border ${badgeColor}">
+            ${t.levelNum >= 0 ? 'LEVEL ' + t.levelNum : 'MODUL'}
+          </span>
+        </td>
+        <td class="p-3 font-medium text-white text-xs sm:text-sm">
+          <div class="line-clamp-1">${t.name}</div>
+          <div class="text-[10px] text-slate-400 font-normal line-clamp-1">${t.desc}</div>
+        </td>
+        <td class="p-3 text-[11px] text-slate-300 whitespace-nowrap">
+          ${t.category}
+        </td>
+        <td class="p-3 whitespace-nowrap">
+          <div class="flex items-center gap-1.5">
+            ${hasVideo ? '<span class="px-2 py-0.5 rounded text-[10px] bg-indigo-500/20 text-indigo-300 font-mono" title="Ada Video Tutorial"><i class="fa-solid fa-play text-[8px]"></i> Video</span>' : ''}
+            ${hasTool ? '<span class="px-2 py-0.5 rounded text-[10px] bg-amber-500/20 text-amber-300 font-mono" title="Ada Link Tools ChatGPT"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i> Tools</span>' : ''}
+            <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 font-mono" title="Naskah Prompt MD"><i class="fa-solid fa-file-lines text-[8px]"></i> ${lineCount} Baris</span>
+          </div>
+        </td>
+        <td class="p-3 text-center whitespace-nowrap">
+          <button onclick="closeSyllabusModal(); scrollToLevel('${t.id}')" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-sm cursor-pointer">
+            Buka Kartu
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  modal.classList.remove('hidden');
+}
+
+function closeSyllabusModal() {
+  const modal = document.getElementById('syllabusModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function scrollToLevel(toolId) {
+  // Clear filter so the tool is visible
+  memberToolFilterCategory = 'all';
+  memberToolSearchQuery = '';
+  const searchInput = document.getElementById('memberToolSearchInput');
+  if (searchInput) searchInput.value = '';
+  renderMemberTools();
+
+  setTimeout(() => {
+    const card = document.querySelector(`[onclick*="${toolId}"]`);
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const parentCard = card.closest('.member-tool-card') || card;
+      parentCard.classList.add('ring-4', 'ring-purple-500', 'shadow-2xl');
+      setTimeout(() => {
+        parentCard.classList.remove('ring-4', 'ring-purple-500');
+      }, 3000);
+    }
+  }, 150);
+}
+
+function openLightboxInfographic() {
+  const modal = document.getElementById('infographicLightboxModal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeLightboxInfographic() {
+  const modal = document.getElementById('infographicLightboxModal');
   if (modal) modal.classList.add('hidden');
 }
 
