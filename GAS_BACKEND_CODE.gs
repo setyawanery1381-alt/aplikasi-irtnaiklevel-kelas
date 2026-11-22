@@ -542,12 +542,31 @@ function processMemberVerification(ss, email, code, deviceId) {
 // 5. TEMPLATE & PENGIRIMAN EMAIL OTOMATIS (MailApp & GmailApp Fallback)
 // =========================================================================
 function sendActivationEmail(toEmail, memberName, activationCode) {
+  toEmail = String(toEmail || '').trim().toLowerCase();
+  memberName = String(memberName || 'Member').trim();
+  activationCode = String(activationCode || '').trim().toUpperCase();
+
   if (!toEmail || toEmail.indexOf('@') === -1) {
     return { success: false, error: "Email tujuan tidak valid." };
   }
 
-  var subject = "🎉 Selamat! Akses Kelas Animasi AI Anda Sudah Aktif - IRT NAIK LEVEL";
+  var subject = "Akses Kelas Animasi AI Anda Sudah Aktif - IRT NAIK LEVEL";
   var loginUrl = "https://aplikasi-irtnaiklevel-kelas.vercel.app";
+  var fullActivationUrl = loginUrl + "?redeem=1&email=" + encodeURIComponent(toEmail) + "&code=" + encodeURIComponent(activationCode) + "#materi";
+
+  var plainText = "Halo Bunda/Kak " + memberName + ",\n\n" +
+    "Selamat! Pembayaran pendaftaran Kelas Animasi AI Anda di IRT NAIK LEVEL via Lynk telah BERHASIL DIVERIFIKASI 100%.\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+    "KODE AKTIVASI AKSES KELAS ANDA:\n" +
+    activationCode + "\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+    "Link Aktivasi Kelas: " + fullActivationUrl + "\n\n" +
+    "PANDUAN MASUK:\n" +
+    "1. Klik link aktivasi di atas.\n" +
+    "2. Masukkan Email Anda (" + toEmail + ") dan Kode Aktivasi (" + activationCode + ").\n" +
+    "3. Klik tombol 'Buka Akses' untuk membuka seluruh modul materi & tutorial.\n\n" +
+    "Jika butuh bantuan, hubungi Admin WhatsApp: 0813-1989-4236\n\n" +
+    "Salam hangat,\nCREATOR CLASS by IRT NAIK LEVEL";
 
   var htmlBody = `
   <!DOCTYPE html>
@@ -594,13 +613,13 @@ function sendActivationEmail(toEmail, memberName, activationCode) {
           </div>
 
           <div style="text-align: center; margin: 26px 0;">
-            <a href="${loginUrl}?redeem=1&email=${encodeURIComponent(toEmail)}" target="_blank" class="btn">🚀 Buka Website & Masukkan Kode Akses</a>
+            <a href="${fullActivationUrl}" target="_blank" class="btn">🚀 Buka Website & Masukkan Kode Akses</a>
           </div>
 
           <div class="steps">
             <div style="font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 12px;">Cara Membuka Akses Materi di Website:</div>
             <div class="step-item">1️⃣ Klik tombol <strong>"Buka Website & Masukkan Kode Akses"</strong> di atas.</div>
-            <div class="step-item">2️⃣ Di jendela login yang muncul, masukkan Email Anda (<strong>${toEmail}</strong>) dan Kode Aktivasi Unik: <strong>${activationCode}</strong>.</div>
+            <div class="step-item">2️⃣ Di jendela aktivasi yang muncul, periksa Email Anda (<strong>${toEmail}</strong>) dan Kode Aktivasi Unik: <strong>${activationCode}</strong>.</div>
             <div class="step-item">3️⃣ Klik tombol <strong>"Buka Akses"</strong>. Seluruh video tutorial dan modul kelas akan langsung terbuka!</div>
           </div>
 
@@ -621,38 +640,35 @@ function sendActivationEmail(toEmail, memberName, activationCode) {
 
   var errorMsg = "";
 
-  // Percobaan 1: Menggunakan MailApp
+  // Percobaan 1: Menggunakan GmailApp (agar langsung masuk folder Sent/Terkirim)
   try {
-    MailApp.sendEmail({
-      to: toEmail,
-      subject: subject,
+    GmailApp.sendEmail(toEmail, subject, plainText, {
       htmlBody: htmlBody,
       name: SENDER_NAME
     });
     return { success: true, error: "" };
   } catch (e1) {
-    errorMsg = "MailApp: " + e1.toString();
+    errorMsg = "GmailApp: " + e1.toString();
     Logger.log(errorMsg);
 
-    // Percobaan 2: Menggunakan GmailApp sebagai cadangan
+    // Percobaan 2: Menggunakan MailApp sebagai cadangan
     try {
-      GmailApp.sendEmail(toEmail, subject, "", {
+      MailApp.sendEmail({
+        to: toEmail,
+        subject: subject,
+        body: plainText,
         htmlBody: htmlBody,
         name: SENDER_NAME
       });
       return { success: true, error: "" };
     } catch (e2) {
-      errorMsg += " | GmailApp: " + e2.toString();
+      errorMsg += " | MailApp: " + e2.toString();
       Logger.log(errorMsg);
       return { success: false, error: errorMsg };
     }
   }
 }
 
-// =========================================================================
-// 6. FUNGSI UNTUK OTORISASI EMAIL DI GOOGLE APPS SCRIPT
-// Jalankan fungsi ini 1x di editor Apps Script dan klik "Izinkan Akses"
-// =========================================================================
 function testOtorisasiEmail() {
   var myEmail = Session.getActiveUser().getEmail();
   if (!myEmail) myEmail = "setyawnery1381@gmail.com";

@@ -9502,7 +9502,9 @@ function getActivationMessageText(p) {
   const currentOrigin = (typeof window !== "undefined" && window.location && window.location.origin && window.location.origin.includes('http')) 
     ? (window.location.origin + window.location.pathname.replace(/\/$/, '')) 
     : "https://aplikasi-irtnaiklevel-kelas.vercel.app";
-  const portalUrl = `${currentOrigin}/#materi`;
+  const emailParam = encodeURIComponent(p.email || '');
+  const codeParam = encodeURIComponent(p.activationCode || '');
+  const portalUrl = `${currentOrigin}/?redeem=1&email=${emailParam}&code=${codeParam}#materi`;
 
   return `Halo Kak ${p.name}! 🎉
 
@@ -9520,18 +9522,15 @@ Berikut informasi akun & akses masuk member Anda:
 • Email Terdaftar: ${p.email || '-'}
 • No. WhatsApp: ${p.wa}
 • Status Akun: *Aktif & Terverifikasi (Akses Selamanya)*
-• Link Portal Kelas: ${portalUrl}
+• Link Masuk & Aktivasi: ${portalUrl}
 
 *PANDUAN MASUK MEMBER & BUKA MATERI:*
-1️⃣ Buka link website materi: ${portalUrl}
-2️⃣ Pada bagian *Akses Materi Kelas*, masukkan Kode Aktivasi Anda: *${p.activationCode}*
-3️⃣ Klik tombol *"Buka Akses Kelas"*
-4️⃣ Selesai! Semua video tutorial, modul lengkap, dan modul video tutorial langsung terbuka bebas untuk Anda tonton kapan saja!
+1️⃣ Buka link website: ${portalUrl}
+2️⃣ Masukkan Email Anda (${p.email || 'Email saat pembayaran'}) dan Kode Aktivasi: *${p.activationCode}*
+3️⃣ Klik tombol *"Buka Akses"*
+4️⃣ Selesai! Semua video tutorial, modul lengkap, dan Custom GPT Studio langsung terbuka bebas untuk Anda tonton kapan saja!
 
-Simpan pesan ini baik-baik ya Kak. Jika butuh bantuan atau panduan teknis saat login, Admin siap membantu langsung di nomor WhatsApp ini (*0813-1989-4236*).
-
-Selamat belajar, berkreasi, dan sukses menghasilkan video animasi luar biasa bersama IRT NAIK LEVEL! 🚀✨
-— *Admin IRT NAIK LEVEL* —`;
+Simpan pesan ini baik-baik ya Kak. Jika butuh bantuan atau panduan teknis saat login, Admin siap membantu di WhatsApp ini. Selamat berkarya! ✨`;
 }
 
 function copyActivationMsgToClipboard(paymentId) {
@@ -10296,29 +10295,43 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(openPortalAdmin, 300);
   } else {
     // Tangani parameter dari email: ?redeem=1 atau ?login=1 atau ?code=
-    const urlParams = new URLSearchParams(window.location.search);
-    const isRedeemFromEmail = urlParams.has('redeem') || urlParams.has('login') || urlParams.has('code');
+        const urlParams = new URLSearchParams(window.location.search);
+    const isRedeemMode = urlParams.has('redeem') || urlParams.has('login') || urlParams.has('code');
     const emailFromUrl = urlParams.get('email');
     const codeFromUrl = urlParams.get('code');
 
-    if (isRedeemFromEmail) {
-      // Sesuai permintaan: Setelah member dapat kode via email, pas klik web JANGAN langsung masuk, tapi harus masukan kode unik dulu!
+    if (isRedeemMode) {
+      // Sesuai instruksi: Setelah member dapat kode via WA/email, saat link diklik WAJIB masukkan kode unik & email dulu (TIDAK BOLEH langsung tembus web)!
       isMemberUnlocked = false;
       localStorage.removeItem('creator_class_member_unlocked');
       localStorage.removeItem('creator_class_active_code');
+      localStorage.removeItem('creator_class_session_timeout');
       if (typeof updateMemberAccessUI === 'function') updateMemberAccessUI();
 
-      openLoginModal('masuk');
-      const idInput = document.getElementById('memberLoginIdentifier');
-      const passInput = document.getElementById('memberLoginPassword');
-      if (idInput && emailFromUrl) idInput.value = emailFromUrl;
-      if (passInput) {
-        if (codeFromUrl) passInput.value = codeFromUrl;
-        setTimeout(() => passInput.focus(), 300);
-      }
-      showToast("Silakan masukkan Kode Aktivasi Unik Anda dari email untuk membuka materi.");
+      // Buka modal login langsung di Tab Member dan Tampilan Masukkan Kode Unik & Email (Redeem View)
+      openModal('loginModal');
+      switchLoginModalTab('member');
+      toggleRedeemView(true);
+
+      const emailInput = document.getElementById('redeemEmailInput');
+      const codeInput = document.getElementById('redeemCodeInput');
+      if (emailInput && emailFromUrl) emailInput.value = decodeURIComponent(emailFromUrl);
+      if (codeInput && codeFromUrl) codeInput.value = decodeURIComponent(codeFromUrl);
+
+      setTimeout(() => {
+        if (codeInput && !codeFromUrl) {
+          codeInput.focus();
+        } else if (emailInput && !emailFromUrl) {
+          emailInput.focus();
+        } else {
+          const btnSubmit = document.getElementById('btnSubmitRedeem');
+          if (btnSubmit) btnSubmit.focus();
+        }
+      }, 350);
+
+      showToast("Silakan periksa Kode Aktivasi & Email Anda, lalu klik 'Buka Akses'!");
     } else {
-      // Kunjungan biasa: jika belum login, wajib muncul modal login untuk masukkan kode unik
+      // Kunjungan biasa tanpa parameter aktivasi
       const modal = document.getElementById('loginModal');
       if (modal) {
         if (isMemberUnlocked) {
@@ -10327,10 +10340,12 @@ document.addEventListener('DOMContentLoaded', () => {
           modal.classList.add('hidden');
           if (document.body) document.body.style.overflow = 'auto';
         } else {
-          modal.classList.add('active');
-          modal.style.display = 'flex';
-          modal.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
+          // Jika belum unlock dan membuka #materi, langsung tampilkan modal redeem
+          if (window.location.hash === '#materi') {
+            openModal('loginModal');
+            switchLoginModalTab('member');
+            toggleRedeemView(true);
+          }
         }
       }
       updateMemberAccessUI();
