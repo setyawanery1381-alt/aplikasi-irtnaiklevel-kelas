@@ -20,7 +20,7 @@ const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwMSZdBB7cKPVz5-UCm
  * Clean Animato.id Styling + Dark Mode + Editable Photo Cards
  */
 
-const STORAGE_KEY = "creator_class_data_v7";
+const STORAGE_KEY = "creator_class_data_v8";
 const THEME_KEY = 'IRT_NAIK_KELAS_THEME';
 
 // Current App State
@@ -204,7 +204,7 @@ function postDataToGas(payload) {
 
 function initData() {
   // Purge outdated caches with old 2.800+ or broken layouts
-  ['creator_class_data_v5', 'creator_class_data_v6', 'animatoCourseData', 'creator_class_data_v4'].forEach(k => {
+  ['creator_class_data_v7', 'creator_class_data_v6', 'creator_class_data_v5', 'animatoCourseData', 'creator_class_data_v4'].forEach(k => {
     try { localStorage.removeItem(k); } catch(e) {}
   });
 
@@ -2910,6 +2910,9 @@ function openEditToolModal(toolId) {
   document.getElementById('toolFormToolUrl').value = tool.toolUrl || '';
   document.getElementById('toolFormDesc').value = tool.desc || '';
   if (document.getElementById('toolFormMarkdownPrompt')) document.getElementById('toolFormMarkdownPrompt').value = tool.markdownPrompt || '';
+  if (document.getElementById('toolFormInstructionsMd')) {
+    document.getElementById('toolFormInstructionsMd').value = tool.instructionsMd || (tool.instructions ? tool.instructions.map((s, idx) => (idx + 1) + '. ' + s).join('\n') : '') || '';
+  }
 
   // Setup dynamic video container with existing videos
   const vidContainer = document.getElementById('toolVideosContainer');
@@ -2951,6 +2954,7 @@ function handleToolFormSubmit(e) {
   const toolUrl = document.getElementById('toolFormToolUrl').value.trim();
   const desc = document.getElementById('toolFormDesc').value.trim();
   const markdownPrompt = document.getElementById('toolFormMarkdownPrompt') ? document.getElementById('toolFormMarkdownPrompt').value.trim() : '';
+  const instructionsMd = document.getElementById('toolFormInstructionsMd') ? document.getElementById('toolFormInstructionsMd').value.trim() : '';
 
   // Extract all video rows
   const videoRows = document.querySelectorAll('.tool-video-row');
@@ -2982,6 +2986,11 @@ function handleToolFormSubmit(e) {
       existing.videoUrl = mainVideoUrl;
       existing.desc = desc;
     existing.markdownPrompt = markdownPrompt;
+      existing.instructionsMd = instructionsMd;
+      if (instructionsMd) {
+        const instLines = instructionsMd.split('\n').map(l => l.replace(/^(\d+[\.\)]|\-|\*)\s*/, '').trim()).filter(l => l.length > 0);
+        if (instLines.length > 0) existing.instructions = instLines;
+      }
     }
     showToast(`Tools "${name}" berhasil diperbarui! (${videos.length} Video tersimpan)`);
   } else {
@@ -4639,17 +4648,23 @@ function renderMemberTools() {
 
           <!-- Action Buttons: Strict separation between Prompt MD, Instruksi, Video, Tools -->
           <div class="flex flex-col gap-2 pt-1">
-            <!-- Row 1: Prompt MD & Instruksi (Terpisah Tegas) -->
+            <!-- Row 1: Prompt MD & Instruksi (Strict: hanya tampilkan Prompt jika ada prompt) -->
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="openPromptMarkdownModal('${t.id}')" class="py-2.5 px-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 active:scale-[0.98] text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center justify-center gap-1.5 cursor-pointer" title="Buka Naskah Prompt AI (Markdown)">
-                <i class="fa-solid fa-terminal text-[11px]"></i>
-                <span>Prompt MD</span>
-              </button>
-
-              <button onclick="openInstructionsModal('${t.id}')" class="py-2.5 px-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 active:scale-[0.98] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Buka Panduan Langkah Praktik">
-                <i class="fa-solid fa-list-check text-[11px]"></i>
-                <span>Instruksi</span>
-              </button>
+              ${hasPrompt ? `
+                <button onclick="openPromptMarkdownModal('${t.id}')" class="py-2.5 px-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 active:scale-[0.98] text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center justify-center gap-1.5 cursor-pointer" title="Buka Naskah Prompt AI (Markdown)">
+                  <i class="fa-solid fa-terminal text-[11px]"></i>
+                  <span>Prompt MD</span>
+                </button>
+                <button onclick="openInstructionsModal('${t.id}')" class="py-2.5 px-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 active:scale-[0.98] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Buka Panduan Langkah Praktik">
+                  <i class="fa-solid fa-list-check text-[11px]"></i>
+                  <span>Instruksi</span>
+                </button>
+              ` : `
+                <button onclick="openInstructionsModal('${t.id}')" class="col-span-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-600/40 hover:to-indigo-600/40 border border-blue-500/50 text-blue-200 hover:text-white active:scale-[0.98] text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm" title="Buka Arahan & Panduan Praktik Lengkap">
+                  <i class="fa-solid fa-list-check text-xs text-blue-400"></i>
+                  <span>Instruksi & Panduan Praktik</span>
+                </button>
+              `}
             </div>
 
             <!-- Row 2: Tonton Video & Link Tools -->
