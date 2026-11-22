@@ -90,6 +90,32 @@ function doGet(e) {
     } else if (action === 'getWebhookLogs') {
       result.webhookLogs = getSheetData(ss.getSheetByName("WebhookLog")).slice(-50).reverse();
     } 
+    // KIRIM ULANG EMAIL AKTIVASI VIA GET (ANTI-CORS)
+    else if (action === 'resendActivationEmail') {
+      var targetEmail = String(e.parameter.email || '').trim().toLowerCase();
+      var targetName = String(e.parameter.name || 'Member').trim();
+      var targetCode = String(e.parameter.code || '').trim().toUpperCase();
+
+      if (!targetEmail || !targetCode) {
+        result.success = false;
+        result.error = "Email dan Kode Aktivasi wajib disertakan.";
+      } else {
+        var resendRes = sendActivationEmail(targetEmail, targetName, targetCode);
+        result.success = resendRes.success;
+        result.error = resendRes.error;
+        result.message = resendRes.success ? 
+          ("Kode aktivasi berhasil dikirim ulang ke: " + targetEmail) : 
+          ("Gagal mengirim email: " + resendRes.error);
+        
+        var sheetLog = ss.getSheetByName("WebhookLog");
+        if (sheetLog) {
+          sheetLog.appendRow([
+            Utilities.formatDate(new Date(), "Asia/Jakarta", "dd MMM yyyy, HH:mm"), "manual.resendEmail.get", "-", "-", targetEmail, 0,
+            resendRes.success ? "Sukses" : "Gagal", "Kirim ulang manual: " + (resendRes.success ? "Terkirim" : resendRes.error), "-"
+          ]);
+        }
+      }
+    } 
     // VERIFIKASI AKSES MEMBER (2-DEVICE GUARD & ONE-CLICK RETURN LOGIN)
     else if (action === 'verifyMemberAccess' || action === 'checkCode') {
       var email = String(e.parameter.email || '').trim().toLowerCase();
@@ -206,14 +232,24 @@ function doPost(e) {
           ]);
         }
 
-        // Update status Pembayaran menjadi "Lunas (Otomatis via Lynk)"
+        // Catat Pembayaran: Jika ada invoice pending ("Menunggu Verifikasi"), update invoice tersebut.
+        // Jika sudah lunas atau belum ada, SELALU buat baris transaksi invoice baru agar riwayat transaksi akurat.
+        var isPendingPayment = false;
         if (payRowIndex !== -1) {
+          var existingStatus = String(sheetBayar.getRange(payRowIndex, 8).getValue() || '');
+          if (existingStatus.indexOf("Menunggu") !== -1) {
+            isPendingPayment = true;
+          }
+        }
+
+        if (isPendingPayment) {
           sheetBayar.getRange(payRowIndex, 8).setValue("Lunas (Otomatis via Lynk)"); // Kolom 8: Status
           sheetBayar.getRange(payRowIndex, 9).setValue(activationCode);
           if (refId) sheetBayar.getRange(payRowIndex, 2).setValue("INV-" + refId.slice(-8));
         } else {
+          var newInvoiceId = "INV-LYNK-" + (refId ? refId.slice(-6) : Math.floor(1000 + Math.random() * 9000));
           sheetBayar.appendRow([
-            nowStr, "INV-LYNK-" + (refId ? refId.slice(-6) : Math.floor(1000 + Math.random() * 9000)),
+            nowStr, newInvoiceId,
             name, email, phone, nominalTampil, "Lynk Payment", "Lunas (Otomatis via Lynk)", activationCode, "Terverifikasi Webhook"
           ]);
         }

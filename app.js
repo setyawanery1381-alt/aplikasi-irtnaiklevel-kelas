@@ -114,75 +114,57 @@ async function syncFromGasDatabase(silent = false) {
         if (typeof renderPortalWebhookLogs === 'function') renderPortalWebhookLogs();
       }
 
-      // A. Merge Payments from Sheets
+      // A. Ambil & Format Pembayaran dari Sheets (Google Sheets sebagai Sumber Kebenaran Utama)
       const sheetPayments = result.payments || [];
-      sheetPayments.forEach(sp => {
-        const invoiceId = sp['No Invoice'] || '';
-        const code = sp['Kode Aktivasi'] || '';
-        const email = (sp['Email'] || '').toLowerCase();
+      if (sheetPayments.length > 0) {
+        const formattedPayments = sheetPayments.map(sp => {
+          const invoiceId = sp['No Invoice'] || '';
+          const code = sp['Kode Aktivasi'] || '';
+          const rawTime = sp['Timestamp'] ? new Date(sp['Timestamp']).getTime() : 0;
+          return {
+            id: invoiceId || ('INV-LYNK-' + Math.floor(1000 + Math.random() * 9000)),
+            name: sp['Nama Lengkap'] || 'Calon Member',
+            email: sp['Email'] || '-',
+            wa: String(sp['WhatsApp'] || '-'),
+            amount: typeof sp['Nominal'] === 'number' ? ('Rp ' + sp['Nominal'].toLocaleString('id-ID')) : (sp['Nominal'] || 'Rp 99.000'),
+            method: sp['Metode'] || 'Lynk Payment',
+            status: sp['Status'] || 'Menunggu Verifikasi',
+            activationCode: code || 'IRT-ACT-4901',
+            proofImage: (sp['Bukti Pembayaran'] && sp['Bukti Pembayaran'] !== '-') ? sp['Bukti Pembayaran'] : 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&auto=format&fit=crop&q=80',
+            date: sp['Timestamp'] ? new Date(sp['Timestamp']).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Hari ini',
+            rawTimestamp: rawTime
+          };
+        });
 
-        // Check if exists
-        const existingIdx = courseData.portalPayments.findIndex(p => 
-          (invoiceId && p.id === invoiceId) || 
-          (code && p.activationCode === code) || 
-          (email && email !== '-' && p.email && p.email.toLowerCase() === email)
-        );
+        // Urutkan transaksi terbaru selalu berada paling atas
+        formattedPayments.sort((a, b) => b.rawTimestamp - a.rawTimestamp);
+        courseData.portalPayments = formattedPayments;
+      }
 
-        const paymentItem = {
-          id: invoiceId || ('INV-LYNK-' + Math.floor(1000 + Math.random() * 9000)),
-          name: sp['Nama Lengkap'] || 'Calon Member',
-          email: sp['Email'] || '-',
-          wa: String(sp['WhatsApp'] || '-'),
-          amount: typeof sp['Nominal'] === 'number' ? ('Rp ' + sp['Nominal'].toLocaleString('id-ID')) : (sp['Nominal'] || 'Rp 99.000'),
-          method: sp['Metode'] || 'Lynk Payment',
-          status: sp['Status'] || 'Menunggu Verifikasi',
-          activationCode: code || 'IRT-ACT-4901',
-          proofImage: (sp['Bukti Pembayaran'] && sp['Bukti Pembayaran'] !== '-') ? sp['Bukti Pembayaran'] : 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&auto=format&fit=crop&q=80',
-          date: sp['Timestamp'] ? new Date(sp['Timestamp']).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Hari ini'
-        };
-
-        if (existingIdx !== -1) {
-          // Update status if sheet has updated
-          courseData.portalPayments[existingIdx].status = paymentItem.status;
-          if (paymentItem.activationCode) courseData.portalPayments[existingIdx].activationCode = paymentItem.activationCode;
-        } else {
-          courseData.portalPayments.unshift(paymentItem);
-        }
-      });
-
-      // B. Merge Members from Sheets
+      // B. Ambil & Format Member dari Sheets
       const sheetMembers = result.members || [];
-      sheetMembers.forEach(sm => {
-        const code = (sm['Kode Aktivasi'] || '').toUpperCase();
-        const email = (sm['Email'] || '').toLowerCase();
-        const name = sm['Nama Lengkap'] || 'Member';
+      if (sheetMembers.length > 0) {
+        const formattedMembers = sheetMembers.map(sm => {
+          const code = (sm['Kode Aktivasi'] || '').toUpperCase();
+          const rawTime = sm['Timestamp'] ? new Date(sm['Timestamp']).getTime() : 0;
+          return {
+            id: sm['ID Member'] || ('mem-' + Math.floor(1000 + Math.random() * 9000)),
+            name: sm['Nama Lengkap'] || 'Member',
+            email: sm['Email'] || '-',
+            wa: String(sm['WhatsApp'] || '-'),
+            status: sm['Status Akses'] || 'Aktif',
+            activationCode: code || 'IRT-ACT-4901',
+            date: sm['Timestamp'] ? new Date(sm['Timestamp']).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Hari ini',
+            package: sm['Paket Kelas'] || 'Kelas Animasi AI',
+            rawTimestamp: rawTime
+          };
+        });
 
-        const existingIdx = courseData.portalMembers.findIndex(m => 
-          (code && m.activationCode && m.activationCode.toUpperCase() === code) ||
-          (email && email !== '-' && m.email && m.email.toLowerCase() === email) ||
-          (name && m.name && m.name.toLowerCase() === name.toLowerCase())
-        );
+        formattedMembers.sort((a, b) => b.rawTimestamp - a.rawTimestamp);
+        courseData.portalMembers = formattedMembers;
+      }
 
-        const memberItem = {
-          id: sm['ID Member'] || ('mem-' + Math.floor(1000 + Math.random() * 9000)),
-          name: name,
-          email: sm['Email'] || '-',
-          wa: String(sm['WhatsApp'] || '-'),
-          status: sm['Status Akses'] || 'Aktif',
-          activationCode: code || 'IRT-ACT-4901',
-          date: sm['Timestamp'] ? new Date(sm['Timestamp']).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Hari ini',
-          package: sm['Paket Kelas'] || 'Kelas Animasi AI'
-        };
-
-        if (existingIdx !== -1) {
-          courseData.portalMembers[existingIdx].status = memberItem.status;
-          if (memberItem.activationCode) courseData.portalMembers[existingIdx].activationCode = memberItem.activationCode;
-        } else {
-          courseData.portalMembers.unshift(memberItem);
-        }
-      });
-
-      // Save merged data
+      // Simpan data sinkron terbaru ke localStorage
       localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
 
       // Re-render
@@ -190,7 +172,7 @@ async function syncFromGasDatabase(silent = false) {
       if (typeof renderPortalMembers === 'function') renderPortalMembers();
       if (typeof renderPortalDashboard === 'function') renderPortalDashboard();
 
-      if (syncText) syncText.textContent = 'Google Sheets Sinkron (' + (sheetPayments.length) + ' data)';
+      if (syncText) syncText.textContent = 'Google Sheets Sinkron (' + (courseData.portalPayments.length) + ' data)';
       if (!silent) showToast('Data dari Google Sheets berhasil disinkronkan!');
     }
   } catch (err) {
@@ -1453,10 +1435,13 @@ function switchPortalTab(tabName) {
     renderAdminToolsTable();
   } else if (tabName === 'dashboard') {
     renderPortalDashboard();
+    if (typeof syncFromGasDatabase === 'function') syncFromGasDatabase(true);
   } else if (tabName === 'member') {
     renderPortalMembers();
+    if (typeof syncFromGasDatabase === 'function') syncFromGasDatabase(true);
   } else if (tabName === 'pembayaran') {
     renderPortalPayments();
+    if (typeof syncFromGasDatabase === 'function') syncFromGasDatabase(true);
   } else if (tabName === 'monitoring') {
     renderPortalMonitoring();
   } else if (tabName === 'pengumuman') {
@@ -2968,6 +2953,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initData();
   renderAll();
+  setTimeout(() => {
+    if (typeof syncFromGasDatabase === 'function') syncFromGasDatabase(true);
+  }, 1000);
   if (isMemberUnlocked && typeof startMemberSessionTimer === 'function') {
     startMemberSessionTimer();
   }
@@ -5637,9 +5625,10 @@ async function resendActivationEmail(email, code, encodedName) {
 
   showToast(`Mengirim email kode aktivasi ke ${email}...`);
   try {
-    const res = await fetch(GAS_API_URL, {
+    // Gunakan POST text/plain agar tidak terkena CORS preflight OPTIONS dari Google Apps Script
+    const postRes = await fetch(GAS_API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         action: 'resendActivationEmail',
         email: email,
@@ -5647,9 +5636,21 @@ async function resendActivationEmail(email, code, encodedName) {
         name: memberName
       })
     });
-    const result = await res.json();
+    let result = null;
+    try {
+      result = await postRes.json();
+    } catch(e) {}
+
+    // Fallback via GET jika POST terkendala
+    if (!result || !result.success) {
+      const getUrl = GAS_API_URL + '?action=resendActivationEmail&email=' + encodeURIComponent(email) + '&code=' + encodeURIComponent(code) + '&name=' + encodeURIComponent(memberName) + '&_t=' + Date.now();
+      const getRes = await fetch(getUrl, { cache: 'no-store' });
+      result = await getRes.json();
+    }
+
     if (result && result.success) {
-      showToast(`✅ Berhasil! Email telah dikirim ke ${email}`);
+      alert(`✅ Berhasil! Email kode aktivasi telah dikirimkan ke:\n${email}\n\n⚠️ PENTING: Mohon infokan member untuk memeriksa:\n1. Folder SPAM / JUNK\n2. Tab PROMOSI / UPDATE di Gmail\n(Terkadang email otomatis masuk ke folder tersebut)`);
+      showToast(`Email terkirim ke ${email}`);
     } else {
       alert("Gagal mengirim email: " + (result ? result.error : 'Terjadi kendala pada kuota email'));
     }
