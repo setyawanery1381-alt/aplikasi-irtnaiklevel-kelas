@@ -1239,37 +1239,54 @@ body.member-portal-mode #materi {
   <!-- MATERI KELAS & VIDEO TUTORIAL SECTION (PORTAL MEMBER) -->
   <section id="materi" class="py-20 sm:py-28 bg-white dark:bg-[#0c0c0e] border-b border-slate-200/80 dark:border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-xs font-semibold mb-3 border border-purple-200/80 dark:border-purple-800/40">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>Portal Materi & Tools AI Praktik</span>
-          </div>
-          <h2 class="font-heading text-3xl sm:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
-            Materi Kelas & Video Tutorial
-          </h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 max-w-xl">
-            Akses langsung tools AI eksklusif, Custom GPT Studio, dan video tutorial langkah demi langkah untuk setiap modul materi.
-          </p>
+      <!-- Header Judul Materi Kelas -->
+      <div class="mb-8 max-w-3xl">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-xs font-semibold mb-3 border border-purple-200/80 dark:border-purple-800/40">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Portal Materi & Tools AI Praktik</span>
         </div>
-
-        <!-- Filter & Search Controls -->
-        <div class="flex flex-wrap items-center gap-2.5">
-          <div class="relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="text" id="memberToolSearch" name="search_materi_level_no_autofill" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" oninput="handleMemberToolSearch(this.value)" placeholder="Cari Level (0 - 60) atau nama materi..." class="pl-9 pr-4 py-2 rounded-full text-xs bg-slate-100 dark:bg-[#181920] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 w-44 sm:w-56">
-          </div>
-          <div id="memberCategoryFilters" class="flex items-center gap-1.5 overflow-x-auto pb-1">
-            <!-- Filter buttons dynamically rendered by app.js -->
-          </div>
-        </div>
+        <h2 class="font-heading text-3xl sm:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+          Materi Kelas & Video Tutorial
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 leading-relaxed">
+          Akses langsung tools AI eksklusif, Custom GPT Studio, dan video tutorial langkah demi langkah untuk setiap modul materi.
+        </p>
       </div>
 
       <!-- Personalized Member Welcome & Update Bar -->
       <div id="memberWelcomeBarContainer" class="hidden"></div>
 
-      <!-- Modul Materi Notion Utama (Featured Learning Hub) -->
-      <div id="notionModuleHubContainer" class="hidden mb-10"></div>
+      <!-- Modul Materi Notion Utama (Banner Infografis Foto 2) -->
+      <div id="notionModuleHubContainer" class="hidden mb-8"></div>
+
+      <!-- Control Bar Area: Search & Filter Kategori (Rapi, Membentang Luas, Bebas Menumpuk) -->
+      <div class="mb-10 p-5 sm:p-6 rounded-3xl bg-slate-50 dark:bg-[#13141c] border border-slate-200 dark:border-white/10 shadow-lg space-y-5">
+        <!-- Baris 1: Pencarian Cerdas & Tombol Daftar Pustaka -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div class="relative flex-1 max-w-2xl">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 text-sm"></i>
+            <input type="search" id="memberToolSearch" name="search_level_query_materi" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" readonly onfocus="this.removeAttribute('readonly')" oninput="handleMemberToolSearch(this.value)" placeholder="🔍 Ketik no level (contoh: 20) atau nama materi..." class="w-full pl-11 pr-10 py-3 rounded-2xl text-xs sm:text-sm bg-white dark:bg-[#0c0d12] border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all shadow-inner">
+            <button type="button" onclick="clearMemberToolSearch()" id="memberSearchClearBtn" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white hidden cursor-pointer">
+              <i class="fa-solid fa-circle-xmark text-sm"></i>
+            </button>
+          </div>
+
+          <button onclick="openSyllabusModal()" class="px-5 py-3 rounded-2xl bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/40 text-xs sm:text-sm font-bold transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer shrink-0">
+            <i class="fa-solid fa-list-ol"></i>
+            <span>Daftar Pustaka (0 - 60)</span>
+          </button>
+        </div>
+
+        <!-- Baris 2: Kategori Filter Pills (Membentang Rapi, Semua Teks Terlihat Utuh) -->
+        <div>
+          <div class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-layer-group text-purple-400"></i> Kategori Kurikulum Resmi:
+          </div>
+          <div id="memberCategoryFilters" class="flex flex-wrap items-center gap-2 pt-0.5">
+            <!-- Filter buttons dynamically rendered by app.js -->
+          </div>
+        </div>
+      </div>
 
       <!-- Member Tools & Tutorials Grid -->
       <div id="memberToolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -11037,7 +11054,12 @@ function setMemberToolCategory(cat) {
 
 function handleMemberToolSearch(val) {
   if (val && val.trim().startsWith('@')) val = ''; // Ignore browser username autofill
-  memberToolSearchQuery = val;
+  memberToolSearchQuery = val || '';
+  const clearBtn = document.getElementById('memberSearchClearBtn');
+  if (clearBtn) {
+    if (val && val.trim().length > 0) clearBtn.classList.remove('hidden');
+    else clearBtn.classList.add('hidden');
+  }
   renderMemberTools();
 }
 
@@ -13391,6 +13413,17 @@ function openLightboxInfographic() {
 function closeLightboxInfographic() {
   const modal = document.getElementById('infographicLightboxModal');
   if (modal) modal.classList.add('hidden');
+}
+
+
+function clearMemberToolSearch() {
+  const input = document.getElementById('memberToolSearch');
+  const clearBtn = document.getElementById('memberSearchClearBtn');
+  if (input) {
+    input.value = '';
+    handleMemberToolSearch('');
+  }
+  if (clearBtn) clearBtn.classList.add('hidden');
 }
 
 </script>

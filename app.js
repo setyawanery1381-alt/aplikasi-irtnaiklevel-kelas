@@ -4124,7 +4124,12 @@ function setMemberToolCategory(cat) {
 
 function handleMemberToolSearch(val) {
   if (val && val.trim().startsWith('@')) val = ''; // Ignore browser username autofill
-  memberToolSearchQuery = val;
+  memberToolSearchQuery = val || '';
+  const clearBtn = document.getElementById('memberSearchClearBtn');
+  if (clearBtn) {
+    if (val && val.trim().length > 0) clearBtn.classList.remove('hidden');
+    else clearBtn.classList.add('hidden');
+  }
   renderMemberTools();
 }
 
@@ -6478,4 +6483,15 @@ function openLightboxInfographic() {
 function closeLightboxInfographic() {
   const modal = document.getElementById('infographicLightboxModal');
   if (modal) modal.classList.add('hidden');
+}
+
+
+function clearMemberToolSearch() {
+  const input = document.getElementById('memberToolSearch');
+  const clearBtn = document.getElementById('memberSearchClearBtn');
+  if (input) {
+    input.value = '';
+    handleMemberToolSearch('');
+  }
+  if (clearBtn) clearBtn.classList.add('hidden');
 }
