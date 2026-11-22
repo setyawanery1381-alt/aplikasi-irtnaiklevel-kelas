@@ -750,26 +750,15 @@ function renderMentor() {
   // Render Foto Founder / Avatar
   const avatarContainer = document.getElementById('mentorAvatarContainer');
   if (avatarContainer) {
-    if (mentor.avatarUrl) {
-      avatarContainer.className = 'w-44 h-44 sm:w-56 sm:h-56 rounded-3xl bg-slate-900 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-purple-500/30 group';
-      avatarContainer.innerHTML = `
-        <img src="${mentor.avatarUrl}" alt="${mentor.name}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
-        <div class="absolute bottom-3 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono text-emerald-400 border border-emerald-400/30 flex items-center gap-1.5 shadow-sm">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${mentor.badge || 'Verified Founder'}
-        </div>
-      `;
-    } else {
-      avatarContainer.className = 'w-44 h-44 sm:w-56 sm:h-56 rounded-3xl bg-gradient-to-tr from-purple-800 via-purple-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-white dark:border-white/10';
-      avatarContainer.innerHTML = `
-        <div class="text-center p-4">
-          <i class="fa-solid fa-hands-holding-child text-6xl text-purple-200 mb-2"></i>
-          <div class="text-xs font-mono font-bold tracking-widest text-purple-200">${courseData.brand?.byline || 'IRT NAIK LEVEL'}</div>
-        </div>
-        <div class="absolute bottom-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono text-emerald-400 border border-emerald-400/30 flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${mentor.badge || 'Verified Community'}
-        </div>
-      `;
-    }
+    const defaultMentorPhoto = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80";
+    const finalAvatar = (mentor.avatarUrl && mentor.avatarUrl.trim().length > 0) ? mentor.avatarUrl : defaultMentorPhoto;
+    avatarContainer.className = 'w-44 h-44 sm:w-56 sm:h-56 rounded-3xl bg-slate-900 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-purple-500/30 group';
+    avatarContainer.innerHTML = `
+      <img src="${finalAvatar}" alt="${mentor.name || 'Mentor IRT Naik Level'}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" onerror="this.src='${defaultMentorPhoto}'">
+      <div class="absolute bottom-3 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono text-emerald-400 border border-emerald-400/30 flex items-center gap-1.5 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${mentor.badge || 'Verified Community'}
+      </div>
+    `;
   }
 
   const highlightsContainer = document.getElementById('mentorHighlights');
@@ -1966,6 +1955,29 @@ function executeSaveLandingPageSettings(isManual = false) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
   } catch (err) {
     console.warn("Storage auto-save error:", err);
+  }
+
+  // SINKRONISASI LIVE KE GOOGLE SHEETS TAB PENGATURAN (Poin 3 & Poin 10)
+  if (typeof GAS_API_URL !== 'undefined' && GAS_API_URL) {
+    try {
+      fetch(GAS_API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'saveSettings',
+          settings: {
+            mentor_avatarUrl: courseData.mentor ? (courseData.mentor.avatarUrl || '') : '',
+            mentor_name: courseData.mentor ? (courseData.mentor.name || '') : '',
+            mentor_role: courseData.mentor ? (courseData.mentor.role || '') : '',
+            mentor_badge: courseData.mentor ? (courseData.mentor.badge || '') : '',
+            mentor_quote: courseData.mentor ? (courseData.mentor.quote || '') : '',
+            course_price: courseData.pricing?.promoPrice || 'Rp 1',
+            brand_name: courseData.brand?.name || 'CREATOR CLASS'
+          }
+        })
+      }).catch(e => console.warn('Sync live settings warning:', e));
+    } catch(e){}
   }
 
   if (typeof renderAudiences === 'function') renderAudiences();

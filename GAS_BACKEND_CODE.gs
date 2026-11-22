@@ -55,6 +55,33 @@ function setupSheets() {
     }
   }
 
+  // Sheet 4: Pengaturan (Simpan Kredensial Superadmin & Konfigurasi Landing Page)
+  var sheetPengaturan = ss.getSheetByName("Pengaturan");
+  if (!sheetPengaturan) {
+    sheetPengaturan = ss.insertSheet("Pengaturan");
+    sheetPengaturan.appendRow(["Kunci", "Nilai", "Keterangan", "Update Terakhir"]);
+    sheetPengaturan.getRange(1, 1, 1, 4).setFontWeight("bold").setBackground("#312e81").setFontColor("#ffffff");
+    sheetPengaturan.setFrozenRows(1);
+
+    var nowStr = Utilities.formatDate(new Date(), "Asia/Jakarta", "dd MMM yyyy, HH:mm");
+    sheetPengaturan.appendRow(["superadmin_username", "admin", "Username resmi superadmin pengelola kelas", nowStr]);
+    sheetPengaturan.appendRow(["superadmin_password", "irtnaiklevel2026", "Password aman superadmin pengelola kelas", nowStr]);
+    sheetPengaturan.appendRow(["mentor_avatarUrl", "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80", "Foto profil mentor / founder (sinkron ke HP & Laptop)", nowStr]);
+    sheetPengaturan.appendRow(["mentor_name", "Tim Pembimbing IRT NAIK LEVEL", "Nama pembimbing resmi", nowStr]);
+    sheetPengaturan.appendRow(["mentor_role", "Komunitas & Mentor Edukasi AI", "Peran pembimbing", nowStr]);
+    sheetPengaturan.appendRow(["mentor_badge", "Verified Community", "Lencana resmi mentor", nowStr]);
+    sheetPengaturan.appendRow(["course_price", "Rp 1", "Harga promo saat ini", nowStr]);
+  }
+
+  // Sheet 5: PortalTools (Simpan Revisi Tools & Materi dari Admin)
+  var sheetTools = ss.getSheetByName("PortalTools");
+  if (!sheetTools) {
+    sheetTools = ss.insertSheet("PortalTools");
+    sheetTools.appendRow(["ID", "Level", "Kategori", "Nama Modul", "Deskripsi", "Link Tools", "Link Video", "Prompt MD", "Update Terakhir"]);
+    sheetTools.getRange(1, 1, 1, 9).setFontWeight("bold").setBackground("#4338ca").setFontColor("#ffffff");
+    sheetTools.setFrozenRows(1);
+  }
+
   // Sheet 3: WebhookLog (Pencatatan Log Transaksi Masuk Lynk.id)
   var sheetLog = ss.getSheetByName("WebhookLog");
   if (!sheetLog) {
@@ -79,7 +106,20 @@ function doGet(e) {
   var result = { success: true };
 
   try {
-    if (action === 'getAll' || action === 'getAdminDashboard') {
+    if (action === 'getSettings') {
+      var sheetPengaturan = ss.getSheetByName("Pengaturan");
+      var settingsObj = {};
+      if (sheetPengaturan && sheetPengaturan.getLastRow() > 1) {
+        var rows = sheetPengaturan.getRange(2, 1, sheetPengaturan.getLastRow() - 1, 2).getValues();
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i][0]) settingsObj[rows[i][0]] = rows[i][1];
+        }
+      }
+      var sheetTools = ss.getSheetByName("PortalTools");
+      var customTools = sheetTools ? getSheetData(sheetTools) : [];
+      result.settings = settingsObj;
+      result.customTools = customTools;
+    } else if (action === 'getAll' || action === 'getAdminDashboard') {
       result.payments = getSheetData(ss.getSheetByName("Pembayaran"));
       result.members = getSheetData(ss.getSheetByName("Member"));
       result.webhookLogs = getSheetData(ss.getSheetByName("WebhookLog")).slice(-50).reverse(); // 50 log terakhir
@@ -150,6 +190,69 @@ function doPost(e) {
     var nowStr = Utilities.formatDate(new Date(), "Asia/Jakarta", "dd MMM yyyy, HH:mm");
 
     var sheetBayar = ss.getSheetByName("Pembayaran");
+    var sheetPengaturan = ss.getSheetByName("Pengaturan");
+    var sheetTools = ss.getSheetByName("PortalTools");
+
+    // =====================================================================
+    // AKSI BARU: SIMPAN PENGATURAN LANDING PAGE SECARA LIVE
+    // =====================================================================
+    if (action === 'saveSettings') {
+      var settings = data.settings || {};
+      var keys = Object.keys(settings);
+      if (sheetPengaturan && keys.length > 0) {
+        var existingKeys = {};
+        var lastRow = sheetPengaturan.getLastRow();
+        if (lastRow > 1) {
+          var vals = sheetPengaturan.getRange(2, 1, lastRow - 1, 1).getValues();
+          for (var r = 0; r < vals.length; r++) {
+            existingKeys[vals[r][0]] = r + 2;
+          }
+        }
+        keys.forEach(function(k) {
+          if (existingKeys[k]) {
+            sheetPengaturan.getRange(existingKeys[k], 2).setValue(settings[k]);
+            sheetPengaturan.getRange(existingKeys[k], 4).setValue(nowStr);
+          } else {
+            sheetPengaturan.appendRow([k, settings[k], "Pengaturan Live", nowStr]);
+          }
+        });
+      }
+      result.message = "Pengaturan berhasil disimpan live ke Google Sheets!";
+      return createJsonResponse(result);
+    }
+
+    // =====================================================================
+    // AKSI BARU: SIMPAN REVISI TOOLS MATERI SECARA LIVE
+    // =====================================================================
+    if (action === 'saveTool') {
+      var tool = data.tool || {};
+      if (sheetTools && tool.id) {
+        var lastRowTools = sheetTools.getLastRow();
+        var foundRow = 0;
+        if (lastRowTools > 1) {
+          var idVals = sheetTools.getRange(2, 1, lastRowTools - 1, 1).getValues();
+          for (var t = 0; t < idVals.length; t++) {
+            if (idVals[t][0] == tool.id) {
+              foundRow = t + 2;
+              break;
+            }
+          }
+        }
+        var rowData = [
+          tool.id, tool.levelNum || '', tool.category || '', tool.name || '',
+          tool.desc || '', tool.toolUrl || '', tool.videoUrl || '',
+          tool.markdownPrompt || '', nowStr
+        ];
+        if (foundRow > 0) {
+          sheetTools.getRange(foundRow, 1, 1, 9).setValues([rowData]);
+        } else {
+          sheetTools.appendRow(rowData);
+        }
+      }
+      result.message = "Tool berhasil disimpan live ke Google Sheets!";
+      return createJsonResponse(result);
+    }
+
     var sheetMember = ss.getSheetByName("Member");
     var sheetLog = ss.getSheetByName("WebhookLog");
 

@@ -208,15 +208,10 @@ module.exports = async (req, res) => {
       lowerTitle.includes('animasi')
     );
 
-    let targets = [];
-    if (isPortalProduct) {
-      // Pastikan HANYA ke Portal Materi Tools jika ini produk Portal / WebApp
-      targets.push({ name: 'Portal Materi Tools', url: portalAppsScriptUrl });
-    } else if (isIrtProduct) {
-      // Pastikan HANYA ke IRT Naik Level jika ini produk Kelas IRT
-      targets.push({ name: 'IRT Naik Level', url: appsScriptUrl });
-    } else {
-      // Fallback: Jika tidak terdeteksi spesifik, teruskan ke Portal Materi Tools sebagai default
+    let targets = [
+      { name: 'IRT Naik Level', url: appsScriptUrl }
+    ];
+    if (isPortalProduct && portalAppsScriptUrl && portalAppsScriptUrl !== appsScriptUrl) {
       targets.push({ name: 'Portal Materi Tools', url: portalAppsScriptUrl });
     }
 
