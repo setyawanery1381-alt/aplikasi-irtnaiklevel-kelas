@@ -2759,6 +2759,7 @@ function openAddToolModal() {
   previewToolCover('https://www.animato.id/cinema/asmr.webp');
   document.getElementById('toolFormToolUrl').value = '';
   document.getElementById('toolFormDesc').value = '';
+  if (document.getElementById('toolFormMarkdownPrompt')) document.getElementById('toolFormMarkdownPrompt').value = '';
 
   // Setup dynamic video container with 1 initial row
   const vidContainer = document.getElementById('toolVideosContainer');
@@ -2783,6 +2784,7 @@ function openEditToolModal(toolId) {
   previewToolCover(tool.coverUrl || 'https://www.animato.id/cinema/asmr.webp');
   document.getElementById('toolFormToolUrl').value = tool.toolUrl || '';
   document.getElementById('toolFormDesc').value = tool.desc || '';
+  if (document.getElementById('toolFormMarkdownPrompt')) document.getElementById('toolFormMarkdownPrompt').value = tool.markdownPrompt || '';
 
   // Setup dynamic video container with existing videos
   const vidContainer = document.getElementById('toolVideosContainer');
@@ -2823,6 +2825,7 @@ function handleToolFormSubmit(e) {
   const coverUrl = document.getElementById('toolFormCoverUrl').value.trim();
   const toolUrl = document.getElementById('toolFormToolUrl').value.trim();
   const desc = document.getElementById('toolFormDesc').value.trim();
+  const markdownPrompt = document.getElementById('toolFormMarkdownPrompt') ? document.getElementById('toolFormMarkdownPrompt').value.trim() : '';
 
   // Extract all video rows
   const videoRows = document.querySelectorAll('.tool-video-row');
@@ -2853,6 +2856,7 @@ function handleToolFormSubmit(e) {
       existing.videos = videos;
       existing.videoUrl = mainVideoUrl;
       existing.desc = desc;
+    existing.markdownPrompt = markdownPrompt;
     }
     showToast(`Tools "${name}" berhasil diperbarui! (${videos.length} Video tersimpan)`);
   } else {
@@ -4368,7 +4372,7 @@ function renderMemberTools() {
     const hasVideo = videoList.length > 0;
     
     // Tools logic
-    const toolList = (t.tools && t.tools.length > 0) ? t.tools : (t.toolUrl && !t.toolUrl.includes('notion.so') ? [{ url: t.toolUrl, title: 'Buka Tools' }] : []);
+    const toolList = (t.tools && t.tools.length > 0) ? t.tools : (t.toolUrl && !t.toolUrl.includes('notion.so') ? [{ url: t.toolUrl, title: 'Link Tools' }] : []);
     const hasTool = toolList.length > 0;
     let primaryToolUrl = hasTool ? toolList[0].url.trim() : '';
     if (primaryToolUrl && !/^https?:\/\//i.test(primaryToolUrl)) {
@@ -4393,14 +4397,14 @@ function renderMemberTools() {
             </span>
           </div>
 
-          <!-- Video Pill -->
+          <!-- Video / Prompt Pill -->
           ${hasVideo ? `
             <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-white flex items-center gap-1.5 border border-purple-500/30">
               <i class="fa-solid fa-circle-play text-purple-400 text-xs"></i> ${videoList.length} Video
             </div>
           ` : `
             <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-emerald-300 flex items-center gap-1.5 border border-emerald-500/30">
-              <i class="fa-solid fa-file-lines text-xs"></i> Modul & Prompt
+              <i class="fa-solid fa-file-code text-xs"></i> Prompt MD
             </div>
           `}
         </div>
@@ -4424,45 +4428,45 @@ function renderMemberTools() {
             ${t.desc}
           </p>
 
-          <!-- Metadata Baris & Tanggal (Sesuai Foto 1) -->
+          <!-- Metadata Baris & Tanggal -->
           <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono mb-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5">
             <span class="flex items-center gap-1.5">
-              <i class="fa-solid fa-file-lines text-purple-400"></i> ${lineCount} Baris
+              <i class="fa-solid fa-file-code text-purple-400"></i> ${lineCount} Baris
             </span>
             <span class="flex items-center gap-1.5">
               <i class="fa-regular fa-calendar text-slate-500"></i> 22/11/2026
             </span>
           </div>
 
-          <!-- Action Buttons -->
+          <!-- Action Buttons (2.1 Tonton Video, 2.2 Link Tools, 2.3 Prompt MD) -->
           <div class="flex flex-col gap-2 pt-1">
-            <!-- Main CTA: Buka Prompt (Sesuai Foto 1) -->
+            <!-- 2.3 PROMPT MD (Bisa lihat & salin) -->
             <button onclick="openPromptMarkdownModal('${t.id}')" class="w-full py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-700 active:scale-[0.98] text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center justify-center gap-2 cursor-pointer">
-              <i class="fa-solid fa-eye text-xs"></i>
-              <span>Buka Prompt</span>
+              <i class="fa-solid fa-file-lines text-xs"></i>
+              <span>Prompt MD</span>
             </button>
 
-            <!-- Secondary Actions: Buka Tools & Tonton Video -->
+            <!-- 2.1 TONTON VIDEO & 2.2 LINK TOOLS -->
             <div class="flex items-center gap-2">
-              ${hasTool ? `
-                ${toolList.length > 1 ? `
-                <button onclick="openToolPickerModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Pilihan Tools AI">
-                  <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
-                  <span>Buka Tools (${toolList.length})</span>
+              ${hasVideo ? `
+                <button onclick="openVideoModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 active:scale-[0.98] text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Tonton Video Tutorial">
+                  <i class="fa-solid fa-circle-play text-[11px] text-purple-400"></i>
+                  <span>Tonton Video ${videoList.length > 1 ? `(${videoList.length})` : ''}</span>
                 </button>
-              ` : `
-                <a href="${primaryToolUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 active:scale-[0.98] text-amber-300 border border-amber-500/30 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Tool AI / Custom GPT">
-                  <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
-                  <span>Buka Tools</span>
-                </a>
-              `}
               ` : ''}
 
-              ${hasVideo ? `
-                <button onclick="openVideoModal('${t.id}')" class="${hasTool ? 'flex-1' : 'w-full'} py-2 px-3 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 active:scale-[0.98] text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Tonton Video Tutorial">
-                  <i class="fa-solid fa-play text-[10px] text-purple-400"></i>
-                  <span>Tonton Video (${videoList.length})</span>
-                </button>
+              ${hasTool ? `
+                ${toolList.length > 1 ? `
+                  <button onclick="openToolPickerModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Link Tools ChatGPT">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                    <span>Link Tools (${toolList.length})</span>
+                  </button>
+                ` : `
+                  <a href="${primaryToolUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Link Tools ChatGPT">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                    <span>Link Tools</span>
+                  </a>
+                `}
               ` : ''}
             </div>
           </div>
