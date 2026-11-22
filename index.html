@@ -1033,66 +1033,19 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
 /* 2. Responsif Navbar di Layar HP (320px - 768px) */
 @media (max-width: 768px) {
   .floating-pill-nav {
-    padding: 0.5rem 0.75rem !important;
-    gap: 0.5rem !important;
+    padding: 0.35rem 0.5rem !important;
+    gap: 0.25rem !important;
     border-radius: 1rem !important;
-    margin-left: 0.5rem !important;
-    margin-right: 0.5rem !important;
-    max-width: calc(100vw - 1rem) !important;
+    margin-left: 0.25rem !important;
+    margin-right: 0.25rem !important;
+    max-width: calc(100vw - 0.5rem) !important;
+    width: calc(100% - 0.5rem) !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
-  
-  /* Sembunyikan badge lebar di navbar mobile agar tidak memicu pergeseran */
-  #memberNavBadge {
-    display: none !important;
-  }
-  
-  /* Perampingan Logo & Brand di Mobile */
-  .dynamic-brand-name {
-    font-size: 0.8125rem !important; /* 13px */
-  }
-  .dynamic-brand-sub {
-    font-size: 0.5625rem !important; /* 9px */
-  }
-  
-  /* Perampingan Info Member di Navbar Mobile */
-  #navMemberActions .flex-col {
-    display: none !important;
-  }
-  #navMemberActions {
-    gap: 0.35rem !important;
-  }
-  #navMemberActions > div {
-    padding: 0.25rem 0.5rem !important;
-  }
-  
-  /* Tombol WhatsApp Mengambang Aman di Layar HP */
-  #waMentorContainer {
-    bottom: 1rem !important;
-    right: 1rem !important;
-    max-width: calc(100vw - 2rem) !important;
-  }
-  #waMentorPopup {
-    width: calc(100vw - 2rem) !important;
-    max-width: 320px !important;
-  }
-  
-  /* Padding Konten Portal Member Lebih Presisi di HP */
-  #materi {
-    padding-top: 1rem !important;
-    padding-bottom: 4rem !important;
-  }
-  #materi .max-w-7xl {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-  
-  /* Filter Pills Kategori di HP */
-  #memberCategoryFilters button {
-    font-size: 11px !important;
-    padding: 0.35rem 0.75rem !important;
-    white-space: normal !important;
-    text-align: center;
-    line-height: 1.35;
+  #mobileMenuBtn {
+    margin-right: 2px !important;
+    flex-shrink: 0 !important;
   }
 }
 
@@ -1204,20 +1157,20 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
           <i class="fa-solid fa-moon text-purple-600 text-xs sm:text-sm theme-toggle-icon"></i>
         </button>
         <!-- Tombol Ganti Tema & Font untuk Member -->
-        <button type="button" onclick="openThemePickerModal()" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-100 dark:bg-[#1f1f28] hover:bg-slate-200 dark:hover:bg-[#2a2a36] border border-slate-200/80 dark:border-white/10 flex items-center justify-center transition-all shrink-0 text-slate-600 dark:text-purple-300 hover:text-purple-600" title="Kustomisasi Tema & Font">
+        <button type="button" onclick="openThemePickerModal()" class="hidden sm:flex w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-100 dark:bg-[#1f1f28] hover:bg-slate-200 dark:hover:bg-[#2a2a36] border border-slate-200/80 dark:border-white/10 items-center justify-center transition-all shrink-0 text-slate-600 dark:text-purple-300 hover:text-purple-600" title="Kustomisasi Tema & Font">
           <i class="fa-solid fa-palette text-xs sm:text-sm"></i>
         </button>
 
         <!-- Container Tombol Publik (Masuk & Gabung) -->
         <div id="navPublicActions" class="flex items-center gap-1.5 sm:gap-2">
           <!-- Tombol MASUK (Masuk ke dalam kotak, huruf kapital, agak besar, warna penanda amber emas) -->
-        <button onclick="openLoginModal()" class="px-3 sm:px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-950 font-black text-xs sm:text-sm tracking-wider uppercase flex items-center gap-1.5 transition-all cursor-pointer shadow-md shadow-amber-400/20 shrink-0 border border-amber-300/80" title="Masuk ke Portal Member">
+        <button onclick="openLoginModal()" class="px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-950 font-black text-[11px] sm:text-sm tracking-wider uppercase flex items-center gap-1 sm:gap-1.5 transition-all cursor-pointer shadow-md shadow-amber-400/20 shrink-0 border border-amber-300/80" title="Masuk ke Portal Member">
           <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
           <span>MASUK</span>
         </button>
 
         <!-- Tombol GABUNG (Rapi di dalam kotak) -->
-        <button onclick="openModal('checkoutModal')" class="animato-btn-primary px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-black tracking-wider uppercase inline-flex items-center gap-1.5 shadow-md shadow-purple-600/30 shrink-0">
+        <button onclick="openModal('checkoutModal')" class="animato-btn-primary px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-sm font-black tracking-wider uppercase inline-flex items-center gap-1 sm:gap-1.5 shadow-md shadow-purple-600/30 shrink-0">
           <span>GABUNG</span>
           <i class="fa-solid fa-arrow-right text-[10px] sm:text-[11px]"></i>
         </button>
@@ -1245,7 +1198,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
         </div>
 
         <!-- Mobile Menu Toggle (Garis 3) -->
-        <button onclick="toggleMobileMenu()" aria-label="Menu Navigasi" class="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-100 dark:bg-[#1f1f28] text-slate-700 dark:text-slate-200 flex items-center justify-center shrink-0 border border-slate-200/60 dark:border-white/10 active:scale-95 transition-transform">
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Menu Navigasi" class="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-100 dark:bg-[#1f1f28] text-slate-700 dark:text-slate-200 flex items-center justify-center shrink-0 min-w-[34px] border border-slate-200/60 dark:border-white/10 active:scale-95 transition-transform mr-0.5">
           <i class="fa-solid fa-bars text-xs sm:text-sm"></i>
         </button>
       </div>
@@ -1271,7 +1224,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
           <span>MASUK AKUN / PORTAL</span>
         </button>
         <button id="mobileDrawerCtaBtn" onclick="openModal('checkoutModal'); toggleMobileMenu();" class="w-full animato-btn-primary py-2.5 rounded-xl text-xs sm:text-sm font-black tracking-wider uppercase text-center shadow-md shadow-purple-600/30">
-          GABUNG SEKARANG — RP 99.000
+          GABUNG SEKARANG — RP 1
         </button>
       </div>
       <!-- Mobile Drawer Member Profile & Logout -->
@@ -1321,7 +1274,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
       <!-- CTA Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto mb-8">
         <button onclick="openModal('checkoutModal')" class="w-full sm:w-auto animato-btn-primary px-7 py-3.5 rounded-full text-sm sm:text-base font-bold shadow-lg shadow-purple-500/25 flex items-center justify-center gap-2">
-          <span id="heroCtaPrimary">Gabung Sekarang — Rp 99.000</span>
+          <span id="heroCtaPrimary">Gabung Sekarang — Rp 1</span>
           <i class="fa-solid fa-arrow-right text-xs"></i>
         </button>
         <a href="#proses" class="w-full sm:w-auto animato-btn-secondary px-6 py-3.5 rounded-full text-sm sm:text-base font-semibold flex items-center justify-center gap-2">
@@ -1373,22 +1326,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
           </button>
         </div>
  
-        <!-- RATIO FILTER TABS (9:16 & 1:1 PERSIS ANIMATO.ID) -->
-        <div class="mt-4 flex items-center justify-center">
-          <div class="inline-flex items-center gap-1 p-1 bg-slate-100 dark:bg-[#181922] rounded-full border border-slate-200 dark:border-white/10 text-xs shadow-inner">
-            <button onclick="filterByRatio('all', this)" class="ratio-pill active px-3.5 py-1.5 rounded-full font-bold transition-all text-purple-600 bg-white dark:bg-purple-900/60 dark:text-white shadow-xs">
-              Semua Rasio
-            </button>
-            <button onclick="filterByRatio('9:16', this)" class="ratio-pill px-3.5 py-1.5 rounded-full font-medium transition-all text-slate-600 dark:text-slate-300 hover:text-purple-600 flex items-center gap-1.5">
-              <i class="fa-solid fa-mobile-screen text-[11px] text-purple-500"></i>
-              <span>9:16 Vertikal</span>
-            </button>
-            <button onclick="filterByRatio('1:1', this)" class="ratio-pill px-3.5 py-1.5 rounded-full font-medium transition-all text-slate-600 dark:text-slate-300 hover:text-purple-600 flex items-center gap-1.5">
-              <i class="fa-solid fa-square text-[11px] text-pink-500"></i>
-              <span>1:1 Persegi</span>
-            </button>
-          </div>
-        </div>
+        
      </div>
 
       <!-- Categories 16 Photo Grid (Rendered by app.js with real photos) -->
@@ -1463,6 +1401,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
             <span>•</span>
             <span class="text-purple-300">IRT NAIK LEVEL BY LIA</span>
             <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold">PORTAL MEMBER RESMI</span>
+            <span class="text-purple-400 font-semibold">• Design By Sangcreator Tech</span>
           </div>
           <div class="flex items-center gap-4">
             <a href="https://app.notion.com/p/Selamat-Datang-di-Kelas-Animasi-AI-IRT-Naik-Level-3381ad47aa058077ad30f2b0c07c15d1?source=copy_link" target="_blank" class="hover:text-purple-300 flex items-center gap-1.5 transition-colors">
@@ -1740,7 +1679,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
       </p>
       <div class="flex items-center justify-center">
         <button onclick="openModal('checkoutModal')" class="w-full sm:w-auto animato-btn-primary bg-emerald-400 hover:bg-emerald-300 text-slate-950 border-none px-8 py-4 rounded-full text-base font-bold shadow-xl flex items-center justify-center gap-2">
-          <span class="dynamic-cta-daftar">Daftar Sekarang — Rp 99.000</span>
+          <span class="dynamic-cta-daftar">Daftar Sekarang — Rp 1</span>
           <i class="fa-solid fa-arrow-right"></i>
         </button>
       </div>
@@ -1798,7 +1737,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
           &copy; <span id="footerYear">2026</span> <strong class="dynamic-brand-name">CREATOR CLASS</strong> <span class="text-slate-400 italic font-normal">by</span> <strong class="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">IRT NAIK LEVEL</strong>. All rights reserved.
         </div>
         <div class="flex items-center gap-4 text-slate-400">
-          <span>Inspirasi Desain Animato.id</span>
+          <span class="font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Design By Sangcreator Tech</span>
           <span>•</span>
           <span>Light & Dark Mode</span>
           <span>•</span>
@@ -1834,7 +1773,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
         </div>
         <div class="text-right">
           <del class="dynamic-normal-price text-xs text-slate-500 dark:text-slate-400 block font-medium">Rp 299.000</del>
-          <span class="dynamic-promo-price font-heading text-xl font-extrabold text-purple-600 dark:text-purple-400">Rp 99.000</span>
+          <span class="dynamic-promo-price font-heading text-xl font-extrabold text-purple-600 dark:text-purple-400">Rp 1</span>
         </div>
       </div>
 
@@ -1906,12 +1845,12 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
         <!-- 2. KONTEN METODE LYNK PAYMENT -->
         <div id="payContentLynk" class="space-y-3 hidden pt-1">
           <div>
-            <h5 id="checkoutLynkStepText" class="text-xs font-bold text-slate-900 dark:text-white">Bayar Rp 99.000 melalui Lynk Payment:</h5>
+            <h5 id="checkoutLynkStepText" class="text-xs font-bold text-slate-900 dark:text-white">Bayar Rp 1 melalui Lynk Payment:</h5>
             <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Mendukung Kartu Debit/Kredit & Transfer Bank via Lynk.id.</p>
           </div>
           <a id="checkoutLynkBtnLink" href="http://lynk.id/jawierjawa/5nwddoy5kxy9" target="_blank" rel="noopener noreferrer" class="dynamic-lynk-url w-full py-3 px-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30 transition-all">
             <i class="fa-solid fa-credit-card text-purple-200"></i>
-            <span id="checkoutLynkBtnText">1. Klik Disini Untuk Bayar via Lynk (Rp 99.000) ↗</span>
+            <span id="checkoutLynkBtnText">1. Klik Disini Untuk Bayar via Lynk (Rp 1) ↗</span>
           </a>
           <p class="text-[10px] text-slate-400 flex items-center gap-1.5 italic">
             <i class="fa-solid fa-circle-info text-purple-400"></i>
@@ -2325,7 +2264,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
 
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
         <div class="text-xs text-slate-500 dark:text-slate-400 font-mono" id="proofModalDetails">
-          Nominal: <span class="dynamic-promo-price">Rp 99.000</span>
+          Nominal: <span class="dynamic-promo-price">Rp 1</span>
         </div>
         <div class="flex items-center gap-2">
           <button id="proofModalCopyBtn" type="button" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-purple-600 text-slate-200 hover:text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5" title="Salin Teks Balasan Aktivasi">
@@ -3030,7 +2969,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
           </div>
           <div class="flex items-center gap-2 flex-wrap">
             <span class="px-3.5 py-1.5 rounded-xl bg-purple-600/20 text-purple-300 border border-purple-500/30 text-xs font-mono font-bold">
-              Harga: <span class="dynamic-promo-price">Rp 99.000</span>
+              Harga: <span class="dynamic-promo-price">Rp 1</span>
             </span>
             <button type="button" onclick="syncFromGasDatabase(false)" class="px-3.5 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/40 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shadow-sm" title="Klik untuk menyinkronkan data terbaru dari Google Sheets">
               <i id="gasSyncIcon" class="fa-solid fa-arrows-rotate text-emerald-400"></i>
@@ -3485,7 +3424,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label class="block font-bold text-slate-300 mb-1">Harga Promo (Aktif)</label>
-                <input type="text" id="settPrice" oninput="autoSaveLandingPageSettings()" onchange="autoSaveLandingPageSettings()" placeholder="Rp 99.000" class="w-full px-3.5 py-2.5 rounded-xl bg-[#111217] border border-white/15 text-emerald-400 font-mono font-bold focus:outline-none focus:border-purple-500">
+                <input type="text" id="settPrice" oninput="autoSaveLandingPageSettings()" onchange="autoSaveLandingPageSettings()" placeholder="Rp 1" class="w-full px-3.5 py-2.5 rounded-xl bg-[#111217] border border-white/15 text-emerald-400 font-mono font-bold focus:outline-none focus:border-purple-500">
               </div>
               <div>
                 <label class="block font-bold text-slate-300 mb-1">Harga Normal (Coret)</label>
@@ -4222,7 +4161,7 @@ const DEFAULT_COURSE_DATA = {
     title: "Belajar Animasi AI Untuk Pemula",
     highlightText: "Bisa dari Rumah Sambil Urus Keluarga",
     description: "Ubah ide cerita dan keseharian jadi video animasi bernilai tinggi untuk edukasi anak, promosi jualan online, dan konten media sosial tanpa perlu keahlian menggambar manual.",
-    ctaPrimary: "Gabung Sekarang — Rp 99.000",
+    ctaPrimary: "Gabung Sekarang — Rp 1",
     ctaSecondary: "Lihat Proses Belajar ↓",
     guaranteeText: "Sekali Bayar • Akses Selamanya • Modul Lengkap Pemula"
   },
@@ -4230,8 +4169,8 @@ const DEFAULT_COURSE_DATA = {
     classTitle: "Kelas Animasi AI untuk Pemula — IRT NAIK LEVEL",
     subtitle: "Paket Lengkap Menghasilkan Karya & Cuan dari Rumah",
     normalPrice: "Rp 744.000",
-    promoPrice: "Rp 99.000",
-    price: "Rp 99.000",
+    promoPrice: "Rp 1",
+    price: "Rp 1",
     originalPrice: "Rp 744.000",
     discountBadge: "HEMAT 86%",
     bonusValueTotal: "Rp 1.450.000",
@@ -7580,6 +7519,12 @@ function postDataToGas(payload) {
 }
 
 function initData() {
+    // User requested price: Rp 1
+    if (window.DEFAULT_COURSE_DATA && window.DEFAULT_COURSE_DATA.pricing) {
+      window.DEFAULT_COURSE_DATA.pricing.promoPrice = 'Rp 1';
+      window.DEFAULT_COURSE_DATA.pricing.price = 'Rp 1';
+    }
+  
   if (typeof applyThemeConfig === 'function') {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -7622,7 +7567,7 @@ function initData() {
       }
       if (!courseData.hero) courseData.hero = {};
       if (!courseData.pricing) courseData.pricing = {};
-      if (!courseData.pricing.promoPrice) courseData.pricing.promoPrice = "Rp 99.000";
+      if (!courseData.pricing.promoPrice) courseData.pricing.promoPrice = 'Rp 1';
       if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 744.000";
 
       // Ensure portalTools has full 62 level curriculum & exact covers (auto-upgrade old cached localStorage)
@@ -7791,11 +7736,14 @@ function initData() {
     if (!courseData.pricing) {
       courseData.pricing = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.pricing || {}));
     }
-    // Update old default Rp 197.000 to user revised Rp 99.000
-    if (!courseData.pricing.promoPrice || courseData.pricing.promoPrice === 'Rp 197.000' || courseData.pricing.price === 'Rp 197.000') {
-      courseData.pricing.promoPrice = 'Rp 99.000';
-      courseData.pricing.price = 'Rp 99.000';
-      if (courseData.hero) courseData.hero.ctaPrimary = 'Gabung Sekarang — Rp 99.000';
+    // Update old default prices to user revised Rp 1
+    if (!courseData.pricing.promoPrice || courseData.pricing.promoPrice === 'Rp 197.000' || courseData.pricing.promoPrice === 'Rp 99.000' || courseData.pricing.price === 'Rp 99.000' || courseData.pricing.price === 'Rp 197.000' || courseData.pricing.promoPrice !== 'Rp 1') {
+      courseData.pricing.promoPrice = 'Rp 1';
+      courseData.pricing.price = 'Rp 1';
+      if (courseData.hero) courseData.hero.ctaPrimary = 'Gabung Sekarang — Rp 1';
+    }
+    if (courseData.hero && courseData.hero.ctaPrimary && (courseData.hero.ctaPrimary.includes('99.000') || courseData.hero.ctaPrimary.includes('197.000'))) {
+      courseData.hero.ctaPrimary = 'Gabung Sekarang — Rp 1';
     }
     if (!courseData.mentor) {
       courseData.mentor = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.mentor || {}));

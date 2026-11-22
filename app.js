@@ -203,6 +203,12 @@ function postDataToGas(payload) {
 }
 
 function initData() {
+    // User requested price: Rp 1
+    if (window.DEFAULT_COURSE_DATA && window.DEFAULT_COURSE_DATA.pricing) {
+      window.DEFAULT_COURSE_DATA.pricing.promoPrice = 'Rp 1';
+      window.DEFAULT_COURSE_DATA.pricing.price = 'Rp 1';
+    }
+  
   if (typeof applyThemeConfig === 'function') {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -245,7 +251,7 @@ function initData() {
       }
       if (!courseData.hero) courseData.hero = {};
       if (!courseData.pricing) courseData.pricing = {};
-      if (!courseData.pricing.promoPrice) courseData.pricing.promoPrice = "Rp 99.000";
+      if (!courseData.pricing.promoPrice) courseData.pricing.promoPrice = 'Rp 1';
       if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 744.000";
 
       // Ensure portalTools has full 62 level curriculum & exact covers (auto-upgrade old cached localStorage)
@@ -414,11 +420,14 @@ function initData() {
     if (!courseData.pricing) {
       courseData.pricing = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.pricing || {}));
     }
-    // Update old default Rp 197.000 to user revised Rp 99.000
-    if (!courseData.pricing.promoPrice || courseData.pricing.promoPrice === 'Rp 197.000' || courseData.pricing.price === 'Rp 197.000') {
-      courseData.pricing.promoPrice = 'Rp 99.000';
-      courseData.pricing.price = 'Rp 99.000';
-      if (courseData.hero) courseData.hero.ctaPrimary = 'Gabung Sekarang — Rp 99.000';
+    // Update old default prices to user revised Rp 1
+    if (!courseData.pricing.promoPrice || courseData.pricing.promoPrice === 'Rp 197.000' || courseData.pricing.promoPrice === 'Rp 99.000' || courseData.pricing.price === 'Rp 99.000' || courseData.pricing.price === 'Rp 197.000' || courseData.pricing.promoPrice !== 'Rp 1') {
+      courseData.pricing.promoPrice = 'Rp 1';
+      courseData.pricing.price = 'Rp 1';
+      if (courseData.hero) courseData.hero.ctaPrimary = 'Gabung Sekarang — Rp 1';
+    }
+    if (courseData.hero && courseData.hero.ctaPrimary && (courseData.hero.ctaPrimary.includes('99.000') || courseData.hero.ctaPrimary.includes('197.000'))) {
+      courseData.hero.ctaPrimary = 'Gabung Sekarang — Rp 1';
     }
     if (!courseData.mentor) {
       courseData.mentor = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.mentor || {}));

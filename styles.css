@@ -986,66 +986,19 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
 /* 2. Responsif Navbar di Layar HP (320px - 768px) */
 @media (max-width: 768px) {
   .floating-pill-nav {
-    padding: 0.5rem 0.75rem !important;
-    gap: 0.5rem !important;
+    padding: 0.35rem 0.5rem !important;
+    gap: 0.25rem !important;
     border-radius: 1rem !important;
-    margin-left: 0.5rem !important;
-    margin-right: 0.5rem !important;
-    max-width: calc(100vw - 1rem) !important;
+    margin-left: 0.25rem !important;
+    margin-right: 0.25rem !important;
+    max-width: calc(100vw - 0.5rem) !important;
+    width: calc(100% - 0.5rem) !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
-  
-  /* Sembunyikan badge lebar di navbar mobile agar tidak memicu pergeseran */
-  #memberNavBadge {
-    display: none !important;
-  }
-  
-  /* Perampingan Logo & Brand di Mobile */
-  .dynamic-brand-name {
-    font-size: 0.8125rem !important; /* 13px */
-  }
-  .dynamic-brand-sub {
-    font-size: 0.5625rem !important; /* 9px */
-  }
-  
-  /* Perampingan Info Member di Navbar Mobile */
-  #navMemberActions .flex-col {
-    display: none !important;
-  }
-  #navMemberActions {
-    gap: 0.35rem !important;
-  }
-  #navMemberActions > div {
-    padding: 0.25rem 0.5rem !important;
-  }
-  
-  /* Tombol WhatsApp Mengambang Aman di Layar HP */
-  #waMentorContainer {
-    bottom: 1rem !important;
-    right: 1rem !important;
-    max-width: calc(100vw - 2rem) !important;
-  }
-  #waMentorPopup {
-    width: calc(100vw - 2rem) !important;
-    max-width: 320px !important;
-  }
-  
-  /* Padding Konten Portal Member Lebih Presisi di HP */
-  #materi {
-    padding-top: 1rem !important;
-    padding-bottom: 4rem !important;
-  }
-  #materi .max-w-7xl {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-  
-  /* Filter Pills Kategori di HP */
-  #memberCategoryFilters button {
-    font-size: 11px !important;
-    padding: 0.35rem 0.75rem !important;
-    white-space: normal !important;
-    text-align: center;
-    line-height: 1.35;
+  #mobileMenuBtn {
+    margin-right: 2px !important;
+    flex-shrink: 0 !important;
   }
 }
 
