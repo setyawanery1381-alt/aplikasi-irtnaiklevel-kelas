@@ -2947,8 +2947,23 @@ function exportPortalToolsJSON() {
   showToast("File data tools materi berhasil diunduh!");
 }
 
+// Real-Time WIB Clock Engine
+function tickWibClock() {
+  const now = new Date();
+  const timeFull = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).replace(/\./g, ':') + ' WIB';
+  const timeShort = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).replace(/\./g, ':') + ' WIB';
+  const clockEl = document.getElementById('liveMemberClock');
+  if (clockEl) clockEl.textContent = timeFull;
+  const navClockEl = document.getElementById('liveNavClock');
+  if (navClockEl) navClockEl.textContent = timeShort;
+}
+
 // DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
+  // Start Real-Time Live Clock Immediately
+  tickWibClock();
+  setInterval(tickWibClock, 1000);
+
   if (isMemberUnlocked && document.body) document.body.classList.add('member-portal-mode');
   initTheme();
   initData();
@@ -2983,22 +2998,46 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal('loginModal');
     setTimeout(openPortalAdmin, 300);
   } else {
-    // Sesuai permintaan: begitu klik link web langsung muncul tampilan login jika belum login!
-    const modal = document.getElementById('loginModal');
-    if (modal) {
-      if (isMemberUnlocked) {
-        modal.classList.remove('active');
-        modal.style.display = 'none';
-        modal.classList.add('hidden');
-        if (document.body) document.body.style.overflow = 'auto';
-      } else {
-        modal.classList.add('active');
-        modal.style.display = 'flex';
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+    // Tangani parameter dari email: ?redeem=1 atau ?login=1 atau ?code=
+    const urlParams = new URLSearchParams(window.location.search);
+    const isRedeemFromEmail = urlParams.has('redeem') || urlParams.has('login') || urlParams.has('code');
+    const emailFromUrl = urlParams.get('email');
+    const codeFromUrl = urlParams.get('code');
+
+    if (isRedeemFromEmail) {
+      // Sesuai permintaan: Setelah member dapat kode via email, pas klik web JANGAN langsung masuk, tapi harus masukan kode unik dulu!
+      isMemberUnlocked = false;
+      localStorage.removeItem('creator_class_member_unlocked');
+      localStorage.removeItem('creator_class_active_code');
+      if (typeof updateMemberAccessUI === 'function') updateMemberAccessUI();
+
+      openLoginModal('masuk');
+      const idInput = document.getElementById('memberLoginIdentifier');
+      const passInput = document.getElementById('memberLoginPassword');
+      if (idInput && emailFromUrl) idInput.value = emailFromUrl;
+      if (passInput) {
+        if (codeFromUrl) passInput.value = codeFromUrl;
+        setTimeout(() => passInput.focus(), 300);
       }
+      showToast("Silakan masukkan Kode Aktivasi Unik Anda dari email untuk membuka materi.");
+    } else {
+      // Kunjungan biasa: jika belum login, wajib muncul modal login untuk masukkan kode unik
+      const modal = document.getElementById('loginModal');
+      if (modal) {
+        if (isMemberUnlocked) {
+          modal.classList.remove('active');
+          modal.style.display = 'none';
+          modal.classList.add('hidden');
+          if (document.body) document.body.style.overflow = 'auto';
+        } else {
+          modal.classList.add('active');
+          modal.style.display = 'flex';
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      updateMemberAccessUI();
     }
-    updateMemberAccessUI();
   }
 
   window.addEventListener('hashchange', () => {
@@ -3470,45 +3509,51 @@ function updateAdminStepField(index, field, value) {
 // isMemberUnlocked initialized at top of file
 
 function getActiveMemberInfo() {
-  const activeCode = localStorage.getItem('creator_class_active_code') || '';
+  const activeCode = (localStorage.getItem('creator_class_active_code') || '').toUpperCase();
+  const curEmail = (localStorage.getItem('creator_class_member_email') || '').toLowerCase();
   let memberName = localStorage.getItem('creator_class_member_name') || '';
 
-  if (!memberName || memberName.toLowerCase() === 'member vip') {
-    try {
-      const raw = localStorage.getItem('creator_class_active_member');
-      if (raw) {
-        const m = JSON.parse(raw);
-        memberName = m['Nama Lengkap'] || m.name || '';
+  const isEmailPrefix = curEmail && memberName.toLowerCase() === curEmail.split('@')[0].toLowerCase();
+
+  // 1. Prioritaskan cari nama asli dari riwayat pembayaran Google Sheets (portalPayments)
+  if (!memberName || memberName.toLowerCase() === 'member vip' || isEmailPrefix) {
+    if (courseData.portalPayments && courseData.portalPayments.length > 0) {
+      const matchPay = courseData.portalPayments.find(p => 
+        (curEmail && p.email && p.email.toLowerCase() === curEmail && p.name && !p.name.includes('@') && p.name.toLowerCase() !== 'calon member') ||
+        (activeCode && p.activationCode && p.activationCode.toUpperCase() === activeCode && p.name && !p.name.includes('@') && p.name.toLowerCase() !== 'calon member')
+      );
+      if (matchPay && matchPay.name) {
+        memberName = matchPay.name;
+        localStorage.setItem('creator_class_member_name', memberName);
       }
-    } catch (e) {}
-  }
-
-  if (!memberName || memberName.toLowerCase() === 'member vip') {
-    const remembered = getRememberedAccounts();
-    if (remembered.length > 0 && remembered[0].name) {
-      memberName = remembered[0].name;
     }
   }
 
-  if ((!memberName || memberName.toLowerCase() === 'member vip') && activeCode && courseData.portalMembers) {
-    const found = courseData.portalMembers.find(m => 
-      (m['Kode Aktivasi'] || m.activationCode || m.code || '').toUpperCase() === activeCode.toUpperCase()
-    );
-    if (found) {
-      memberName = found['Nama Lengkap'] || found.name || '';
+  // 2. Jika belum ketemu, cari di data member (portalMembers)
+  if (!memberName || memberName.toLowerCase() === 'member vip' || isEmailPrefix) {
+    if (courseData.portalMembers && courseData.portalMembers.length > 0) {
+      const matchMem = courseData.portalMembers.find(m => 
+        (curEmail && m.email && m.email.toLowerCase() === curEmail && m.name && !m.name.includes('@')) ||
+        (activeCode && (m['Kode Aktivasi'] || m.activationCode || m.code || '').toUpperCase() === activeCode && m.name && !m.name.includes('@'))
+      );
+      if (matchMem && (matchMem['Nama Lengkap'] || matchMem.name)) {
+        memberName = matchMem['Nama Lengkap'] || matchMem.name;
+        localStorage.setItem('creator_class_member_name', memberName);
+      }
     }
   }
 
+  // 3. Fallback jika masih kosong
   if (!memberName || memberName.toLowerCase() === 'member vip') {
-    const email = localStorage.getItem('creator_class_member_email') || '';
-    if (email && email.includes('@')) {
-      memberName = email.split('@')[0];
+    if (curEmail && curEmail.includes('@')) {
+      memberName = curEmail.split('@')[0];
     } else {
       memberName = 'Kreator';
     }
   }
 
-  const lastUpdated = courseData.lastUpdated || '11:21 WIB';
+  const now = new Date();
+  const lastUpdated = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).replace(/\./g, ':') + ' WIB';
   return { activeCode, memberName, lastUpdated };
 }
 
@@ -3580,7 +3625,7 @@ function updateMemberAccessUI() {
         <span class="inline-flex items-center gap-1.5 py-0.5">
           <i class="fa-solid fa-circle-user text-emerald-400 text-sm"></i>
           <span class="font-bold text-white max-w-[120px] truncate text-xs">${memberName}</span>
-          <span class="text-[10px] text-slate-400 border-l border-white/20 pl-1.5 font-mono hidden sm:inline" title="Jam update materi">${lastUpdated}</span>
+          <span id="liveNavClock" class="text-[10px] text-emerald-400 border-l border-white/20 pl-1.5 font-mono hidden sm:inline" title="Waktu Real-Time WIB">${lastUpdated}</span>
           <button type="button" onclick="event.stopPropagation(); handleMemberLogout();" title="Keluar / Kunci Akun" class="ml-1 text-slate-400 hover:text-rose-400 transition-colors">
             <i class="fa-solid fa-arrow-right-from-bracket text-[10px]"></i>
           </button>
@@ -4081,12 +4126,14 @@ function handleMemberLogout() {
     isMemberUnlocked = false;
     localStorage.removeItem('creator_class_member_unlocked');
     localStorage.removeItem('creator_class_active_code');
+    localStorage.removeItem('creator_class_member_name');
     localStorage.removeItem('creator_class_session_timeout');
     if (typeof document !== 'undefined' && document.body) {
       document.body.classList.remove('member-portal-mode');
     }
     updateMemberAccessUI();
-    showToast("Anda telah keluar. Beranda kembali ke tampilan umum.");
+    openLoginModal('masuk');
+    showToast("Anda telah keluar. Silakan masukkan kode unik untuk masuk kembali.");
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
@@ -4171,10 +4218,10 @@ function renderMemberTools() {
           </div>
           <div class="flex items-center gap-3 self-end sm:self-center">
             <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/40 border border-white/10 text-xs font-mono text-slate-300">
-              <i class="fa-regular fa-clock text-purple-400"></i>
-              <span>Jam Update: <strong class="text-emerald-400">${lastUpdated}</strong></span>
+              <i class="fa-regular fa-clock text-emerald-400 animate-pulse"></i>
+              <span>Waktu: <strong id="liveMemberClock" class="text-emerald-400 font-bold">${lastUpdated}</strong></span>
             </div>
-            <button onclick="handleMemberLogout()" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/10 text-slate-400 hover:text-rose-300 text-xs font-semibold transition-all inline-flex items-center gap-1.5" title="Kunci Akun / Keluar">
+            <button onclick="handleMemberLogout()" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/10 text-slate-400 hover:text-rose-300 text-xs font-semibold transition-all inline-flex items-center gap-1.5 cursor-pointer active:scale-95" title="Kunci Akun / Keluar">
               <i class="fa-solid fa-arrow-right-from-bracket text-[10px]"></i> Keluar
             </button>
           </div>
@@ -4777,11 +4824,24 @@ function handleNewAuthLogin() {
     rawId.toLowerCase() === 'joko';
 
   if (foundInMembers || foundInPayments || isValidCode) {
-    // Unlock Member
-    const memberName = (foundInMembers && foundInMembers.name) || (foundInPayments && foundInPayments.name) || (rawId && !rawId.includes('@') && !/^\d+$/.test(rawId) ? rawId : 'Kreator');
+    // Unlock Member - Prioritaskan nama asli dari pembayaran atau member (bukan email prefix)
+    let memberName = '';
+    if (foundInPayments && foundInPayments.name && !foundInPayments.name.includes('@') && foundInPayments.name.toLowerCase() !== 'calon member') {
+      memberName = foundInPayments.name;
+    } else if (foundInMembers && (foundInMembers['Nama Lengkap'] || foundInMembers.name) && !(foundInMembers['Nama Lengkap'] || foundInMembers.name).includes('@')) {
+      memberName = foundInMembers['Nama Lengkap'] || foundInMembers.name;
+    } else if (rawId && !rawId.includes('@') && !/^\d+$/.test(rawId)) {
+      memberName = rawId;
+    } else {
+      memberName = 'Erik';
+    }
+
+    const finalActCode = rawPass.toUpperCase() || (foundInPayments && foundInPayments.activationCode) || (foundInMembers && foundInMembers.activationCode) || 'IRT-ACT-7103';
+
     localStorage.setItem('creator_class_member_unlocked', 'true');
     localStorage.setItem('creator_class_member_name', memberName);
-    if (rawId.includes('@')) localStorage.setItem('creator_class_member_email', rawId);
+    localStorage.setItem('creator_class_active_code', finalActCode);
+    if (rawId.includes('@')) localStorage.setItem('creator_class_member_email', rawId.toLowerCase());
     if (/^\d+$/.test(rawId.replace(/\D/g, ''))) localStorage.setItem('creator_class_member_phone', rawId);
 
     isMemberUnlocked = true;

@@ -594,15 +594,14 @@ function sendActivationEmail(toEmail, memberName, activationCode) {
           </div>
 
           <div style="text-align: center; margin: 26px 0;">
-            <a href="${loginUrl}" target="_blank" class="btn">🚀 Buka Website & Mulai Belajar</a>
+            <a href="${loginUrl}?redeem=1&email=${encodeURIComponent(toEmail)}" target="_blank" class="btn">🚀 Buka Website & Masukkan Kode Akses</a>
           </div>
 
           <div class="steps">
-            <div style="font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 12px;">Cara Mengaktifkan Akses:</div>
-            <div class="step-item">1️⃣ Buka website kelas di <a href="${loginUrl}" style="color: #ffd700;">${loginUrl}</a>.</div>
-            <div class="step-item">2️⃣ Klik tombol <strong>"MASUK"</strong> di pojok kanan atas, lalu pilih <strong>"Punya Kode Akses? Redeem di sini"</strong>.</div>
-            <div class="step-item">3️⃣ Masukkan Email Anda (<strong>${toEmail}</strong>) dan Kode Aktivasi: <strong>${activationCode}</strong>.</div>
-            <div class="step-item">4️⃣ Klik <strong>Buka Akses</strong>. Perangkat Anda otomatis terdaftar (maksimal 2 perangkat). Untuk kunjungan selanjutnya di perangkat ini, Anda cukup klik email Anda saja!</div>
+            <div style="font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 12px;">Cara Membuka Akses Materi di Website:</div>
+            <div class="step-item">1️⃣ Klik tombol <strong>"Buka Website & Masukkan Kode Akses"</strong> di atas.</div>
+            <div class="step-item">2️⃣ Di jendela login yang muncul, masukkan Email Anda (<strong>${toEmail}</strong>) dan Kode Aktivasi Unik: <strong>${activationCode}</strong>.</div>
+            <div class="step-item">3️⃣ Klik tombol <strong>"Buka Akses"</strong>. Seluruh video tutorial dan modul kelas akan langsung terbuka!</div>
           </div>
 
           <div class="paragraph" style="font-size: 12px; color: #64748b;">
