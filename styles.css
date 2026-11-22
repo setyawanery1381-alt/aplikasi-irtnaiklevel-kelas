@@ -986,8 +986,8 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
 /* 2. Responsif Navbar di Layar HP (320px - 768px) */
 @media (max-width: 768px) {
   .floating-pill-nav {
-    padding: 0.35rem 0.5rem !important;
-    gap: 0.25rem !important;
+    padding: 0.3rem 0.45rem !important;
+    gap: 0.2rem !important;
     border-radius: 1rem !important;
     margin-left: 0.25rem !important;
     margin-right: 0.25rem !important;
@@ -997,7 +997,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
     overflow: visible !important;
   }
   #mobileMenuBtn {
-    margin-right: 2px !important;
+    margin-right: 1px !important;
     flex-shrink: 0 !important;
   }
 }
@@ -1099,3 +1099,14 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
     overflow: visible !important;
   }
 }
+
+
+@media (max-width: 639px) {
+  .dynamic-brand-sub {
+    display: none !important;
+  }
+  .dynamic-brand-name {
+    font-size: 13px !important;
+  }
+}
+
