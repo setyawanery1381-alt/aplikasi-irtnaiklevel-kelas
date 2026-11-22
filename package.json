@@ -13,6 +13,8 @@
     "google-apps-script"
   ],
   "author": "IRT NAIK LEVEL",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jimp": "^1.7.0"
+  }
 }
-

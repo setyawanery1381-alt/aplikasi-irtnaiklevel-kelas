@@ -80,10 +80,10 @@ window.DEFAULT_COURSE_DATA = {
     "footerText": "Bisa masuk dengan email atau nomor HP terdaftar. Lupa password? Minta admin mereset."
   },
   "mentor": {
-    "name": "Tim Pembimbing IRT NAIK LEVEL",
+    "name": "Lia Naik Level",
     "role": "Komunitas & Mentor Edukasi AI",
     "badge": "Verified Community",
-    "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80",
+    "avatarUrl": "assets/foto_mentor_lia.jpg",
     "quote": "Kami percaya setiap Ibu memiliki potensi luar biasa. Teknologi AI bukan untuk menggantikan peran kita, melainkan menjadi sayap agar kita bisa berkarya dan mandiri secara finansial dari rumah.",
     "socialHandle": "@irtnaikkelas",
     "socialLink": "https://instagram.com/irtnaikkelas",

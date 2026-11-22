@@ -732,7 +732,7 @@ function renderMentor() {
   if (!mentor) return;
 
   const nameEl = document.getElementById('mentorName');
-  if (nameEl) nameEl.textContent = mentor.name || 'Tim Pembimbing IRT NAIK LEVEL';
+  if (nameEl) nameEl.textContent = mentor.name || 'Lia Naik Level';
 
   const roleEl = document.getElementById('mentorRole');
   if (roleEl) roleEl.textContent = mentor.role || 'Komunitas & Mentor Edukasi AI';
@@ -750,7 +750,7 @@ function renderMentor() {
   // Render Foto Founder / Avatar
   const avatarContainer = document.getElementById('mentorAvatarContainer');
   if (avatarContainer) {
-    const defaultMentorPhoto = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80";
+    const defaultMentorPhoto = "assets/foto_mentor_lia.jpg";
     const finalAvatar = (mentor.avatarUrl && mentor.avatarUrl.trim().length > 0) ? mentor.avatarUrl : defaultMentorPhoto;
     avatarContainer.className = 'w-44 h-44 sm:w-56 sm:h-56 rounded-3xl bg-slate-900 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-purple-500/30 group';
     avatarContainer.innerHTML = `
@@ -1566,7 +1566,7 @@ function loadLandingPageSettings() {
     courseData.mentor = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.mentor || {}));
   }
   const fName = document.getElementById('settFounderName');
-  if (fName) fName.value = courseData.mentor.name || 'Tim Pembimbing IRT NAIK LEVEL';
+  if (fName) fName.value = courseData.mentor.name || 'Lia Naik Level';
 
   const fRole = document.getElementById('settFounderRole');
   if (fRole) fRole.value = courseData.mentor.role || 'Komunitas & Mentor Edukasi AI';

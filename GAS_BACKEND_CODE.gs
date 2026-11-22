@@ -66,8 +66,8 @@ function setupSheets() {
     var nowStr = Utilities.formatDate(new Date(), "Asia/Jakarta", "dd MMM yyyy, HH:mm");
     sheetPengaturan.appendRow(["superadmin_username", "admin", "Username resmi superadmin pengelola kelas", nowStr]);
     sheetPengaturan.appendRow(["superadmin_password", "irtnaiklevel2026", "Password aman superadmin pengelola kelas", nowStr]);
-    sheetPengaturan.appendRow(["mentor_avatarUrl", "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80", "Foto profil mentor / founder (sinkron ke HP & Laptop)", nowStr]);
-    sheetPengaturan.appendRow(["mentor_name", "Tim Pembimbing IRT NAIK LEVEL", "Nama pembimbing resmi", nowStr]);
+    sheetPengaturan.appendRow(["mentor_avatarUrl", "assets/foto_mentor_lia.jpg", "Foto profil mentor / founder (sinkron ke HP & Laptop)", nowStr]);
+    sheetPengaturan.appendRow(["mentor_name", "Lia Naik Level", "Nama pembimbing resmi", nowStr]);
     sheetPengaturan.appendRow(["mentor_role", "Komunitas & Mentor Edukasi AI", "Peran pembimbing", nowStr]);
     sheetPengaturan.appendRow(["mentor_badge", "Verified Community", "Lencana resmi mentor", nowStr]);
     sheetPengaturan.appendRow(["course_price", "Rp 1", "Harga promo saat ini", nowStr]);
