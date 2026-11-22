@@ -4295,30 +4295,31 @@ function renderMemberTools() {
       const { activeCode, memberName, lastUpdated } = getActiveMemberInfo();
       const initials = (memberName || 'MB').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase() || 'MB';
       memberBarContainer.innerHTML = `
-        <div class="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/40 via-purple-900/20 to-[#14151c] border border-purple-500/30 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#1c1830] via-[#151324] to-[#0f0d1a] border border-purple-500/40 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-white">
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-purple-600/30 shrink-0">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-purple-600/30 shrink-0">
               ${initials}
             </div>
             <div>
               <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-xs text-slate-300">Selamat Belajar,</span>
-                <span class="text-sm font-bold text-white">${memberName}</span>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
-                  <i class="fa-solid fa-circle-check text-[9px]"></i> VIP AKTIF
+                <span class="text-xs text-slate-200">Selamat Belajar,</span>
+                <span class="text-sm font-extrabold text-white tracking-wide" style="color: #ffffff !important;">${memberName}</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1 shadow-sm">
+                  <i class="fa-solid fa-circle-check text-[9px] text-emerald-400"></i> VIP AKTIF
                 </span>
               </div>
-              <p class="text-[11px] text-slate-400 mt-0.5">
-                Kode Aktivasi: <span class="font-mono text-purple-300 font-bold">${activeCode || 'IRT-VIP'}</span>
-              </p>
+              <div class="text-xs text-slate-300 mt-1 flex items-center gap-1.5 flex-wrap">
+                <span>Kode Aktivasi:</span>
+                <span class="font-mono text-amber-300 font-black bg-amber-400/15 px-2.5 py-0.5 rounded border border-amber-400/40 tracking-wider shadow-inner" style="color: #ffd700 !important;">${activeCode || 'IRT-VIP'}</span>
+              </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 self-end sm:self-center">
-            <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/40 border border-white/10 text-xs font-mono text-slate-300">
+          <div class="flex items-center gap-2.5 self-start sm:self-center mt-1 sm:mt-0">
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/60 border border-white/10 text-xs font-mono text-slate-200">
               <i class="fa-regular fa-clock text-emerald-400 animate-pulse"></i>
-              <span>Waktu: <strong id="liveMemberClock" class="text-emerald-400 font-bold">${lastUpdated}</strong></span>
+              <span>Waktu: <strong id="liveMemberClock" class="text-emerald-300 font-bold" style="color: #34d399 !important;">${lastUpdated}</strong></span>
             </div>
-            <button onclick="handleMemberLogout()" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/10 text-slate-400 hover:text-rose-300 text-xs font-semibold transition-all inline-flex items-center gap-1.5 cursor-pointer active:scale-95" title="Kunci Akun / Keluar">
+            <button onclick="handleMemberLogout()" class="px-3.5 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 hover:text-rose-200 text-xs font-semibold transition-all inline-flex items-center gap-1.5 cursor-pointer active:scale-95" title="Kunci Akun / Keluar">
               <i class="fa-solid fa-arrow-right-from-bracket text-[10px]"></i> Keluar
             </button>
           </div>
@@ -4335,33 +4336,30 @@ function renderMemberTools() {
   if (notionHubContainer) {
     if (isMemberUnlocked) {
       notionHubContainer.innerHTML = `
-        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1c162b] via-[#14121d] to-[#0d0c12] border border-purple-500/40 shadow-2xl p-4 sm:p-6 md:p-8">
-          <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-          <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-pink-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
-          <div class="relative z-10 space-y-5">
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#18142a] via-[#131122] to-[#0d0c18] border border-purple-500/45 shadow-2xl p-4 sm:p-6 md:p-8 text-white max-w-full">
+          <div class="relative z-10 space-y-4 sm:space-y-5">
             <!-- Header Infografis & Aksi -->
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 text-pink-300 text-[11px] font-bold uppercase tracking-wider">
                   <i class="fa-solid fa-crown text-amber-400"></i> Silabus Resmi IRT Naik Level
                 </span>
-                <h3 class="font-heading text-xl sm:text-2xl md:text-3xl font-black text-white mt-1.5 tracking-tight">
+                <h3 class="font-heading text-lg sm:text-2xl md:text-3xl font-black text-white mt-2 tracking-tight" style="color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.6);">
                   Daftar Lengkap 60 Level Materi Animasi AI
                 </h3>
-                <p class="text-xs text-slate-400 mt-1">
+                <p class="text-xs sm:text-sm text-slate-200 mt-1 font-medium" style="color: #e2e8f0 !important;">
                   Kurikulum terstruktur dari nol hingga mahir membuat video animasi komersial & affiliate.
                 </p>
               </div>
 
               <!-- Shortcut Buttons -->
               <div class="flex items-center gap-2 shrink-0">
-                <button onclick="openSyllabusModal()" class="px-4 py-2.5 rounded-xl bg-purple-600/80 hover:bg-purple-600 text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center gap-2 cursor-pointer">
+                <button onclick="openSyllabusModal()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center gap-2 cursor-pointer">
                   <i class="fa-solid fa-list-ol"></i>
                   <span>Daftar Pustaka (0-60)</span>
                 </button>
-                <button onclick="openLightboxInfographic()" class="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border border-white/10" title="Perbesar Gambar Infografis">
-                  <i class="fa-solid fa-magnifying-glass-plus text-purple-400"></i>
+                <button onclick="openLightboxInfographic()" class="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border border-white/15" title="Perbesar Gambar Infografis">
+                  <i class="fa-solid fa-magnifying-glass-plus text-purple-300"></i>
                   <span class="hidden md:inline">Perbesar</span>
                 </button>
               </div>

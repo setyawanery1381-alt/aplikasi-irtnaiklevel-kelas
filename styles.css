@@ -107,7 +107,7 @@ h1, h2, h3, h4, .font-heading {
   font-family: var(--font-heading);
   letter-spacing: -0.025em;
   font-weight: 700;
-  color: var(--text-main);
+  color: inherit;
 }
 
 h1 {
@@ -932,9 +932,19 @@ body.member-portal-mode #mobilePublicNav {
 }
 
 body.member-portal-mode #navMemberActions,
-body.member-portal-mode #memberNavBadge,
 body.member-portal-mode #mobileMemberNav {
   display: flex !important;
+}
+
+@media (min-width: 1024px) {
+  body.member-portal-mode #memberNavBadge {
+    display: flex !important;
+  }
+}
+@media (max-width: 1023px) {
+  body.member-portal-mode #memberNavBadge {
+    display: none !important;
+  }
 }
 
 body.member-portal-mode #materi {
@@ -947,4 +957,156 @@ body.member-portal-mode #materi {
 
 #notionEmbedWrapper {
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* =========================================================================
+   SC-MOBILE-RESPONSIVE: PRESISI LAYAR HP & ZERO HORIZONTAL OVERFLOW
+   ========================================================================= */
+
+/* 1. Mencegah Total Pergeseran Layar ke Kanan/Kiri (Zero Horizontal Overflow) */
+html, body {
+  max-width: 100vw !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+  touch-action: pan-y pinch-zoom;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-w-6xl {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. Responsif Navbar di Layar HP (320px - 768px) */
+@media (max-width: 768px) {
+  .floating-pill-nav {
+    padding: 0.5rem 0.75rem !important;
+    gap: 0.5rem !important;
+    border-radius: 1rem !important;
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+    max-width: calc(100vw - 1rem) !important;
+  }
+  
+  /* Sembunyikan badge lebar di navbar mobile agar tidak memicu pergeseran */
+  #memberNavBadge {
+    display: none !important;
+  }
+  
+  /* Perampingan Logo & Brand di Mobile */
+  .dynamic-brand-name {
+    font-size: 0.8125rem !important; /* 13px */
+  }
+  .dynamic-brand-sub {
+    font-size: 0.5625rem !important; /* 9px */
+  }
+  
+  /* Perampingan Info Member di Navbar Mobile */
+  #navMemberActions .flex-col {
+    display: none !important;
+  }
+  #navMemberActions {
+    gap: 0.35rem !important;
+  }
+  #navMemberActions > div {
+    padding: 0.25rem 0.5rem !important;
+  }
+  
+  /* Tombol WhatsApp Mengambang Aman di Layar HP */
+  #waMentorContainer {
+    bottom: 1rem !important;
+    right: 1rem !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+  #waMentorPopup {
+    width: calc(100vw - 2rem) !important;
+    max-width: 320px !important;
+  }
+  
+  /* Padding Konten Portal Member Lebih Presisi di HP */
+  #materi {
+    padding-top: 1rem !important;
+    padding-bottom: 4rem !important;
+  }
+  #materi .max-w-7xl {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  /* Filter Pills Kategori di HP */
+  #memberCategoryFilters button {
+    font-size: 11px !important;
+    padding: 0.35rem 0.75rem !important;
+    white-space: normal !important;
+    text-align: center;
+    line-height: 1.35;
+  }
+}
+
+/* 3. Kontras Tinggi Tulisan di Kartu Dashboard Member (Mencegah Warna Menutup Teks) */
+#memberWelcomeBarContainer,
+#notionModuleHubContainer {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+#memberWelcomeBarContainer > div {
+  background: linear-gradient(135deg, #1c1830 0%, #151324 50%, #0f0d1a 100%) !important;
+  border: 1px solid rgba(168, 85, 247, 0.45) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 20px rgba(147, 51, 234, 0.15) !important;
+  color: #ffffff !important;
+}
+
+#notionModuleHubContainer > div {
+  background: linear-gradient(135deg, #18142a 0%, #131122 50%, #0d0c18 100%) !important;
+  border: 1px solid rgba(168, 85, 247, 0.45) !important;
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.6), 0 0 25px rgba(147, 51, 234, 0.15) !important;
+  color: #ffffff !important;
+}
+
+#notionModuleHubContainer h3,
+#notionModuleHubContainer .font-heading,
+#memberWelcomeBarContainer h3,
+#memberWelcomeBarContainer .font-heading {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important;
+  font-weight: 900 !important;
+}
+
+#notionModuleHubContainer p {
+  color: #e2e8f0 !important;
+  font-weight: 500 !important;
+}
+
+#memberWelcomeBarContainer span,
+#memberWelcomeBarContainer div,
+#memberWelcomeBarContainer p {
+  color: #e2e8f0;
+}
+
+#memberWelcomeBarContainer .text-white {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+/* Kode Aktivasi Tampil Kontras Terang Emas / Kuning Bercahaya */
+#memberWelcomeBarContainer .font-mono {
+  color: #ffd700 !important;
+  font-weight: 900 !important;
+  background: rgba(255, 215, 0, 0.15) !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(255, 215, 0, 0.35) !important;
+  letter-spacing: 0.05em !important;
+}
+
+#memberWelcomeBarContainer #liveMemberClock {
+  color: #34d399 !important;
+  font-weight: 800 !important;
 }
