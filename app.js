@@ -20,7 +20,7 @@ const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwMSZdBB7cKPVz5-UCm
  * Clean Animato.id Styling + Dark Mode + Editable Photo Cards
  */
 
-const STORAGE_KEY = "creator_class_data_v5";
+const STORAGE_KEY = "creator_class_data_v7";
 const THEME_KEY = 'IRT_NAIK_KELAS_THEME';
 
 // Current App State
@@ -203,6 +203,11 @@ function postDataToGas(payload) {
 }
 
 function initData() {
+  // Purge outdated caches with old 2.800+ or broken layouts
+  ['creator_class_data_v5', 'creator_class_data_v6', 'animatoCourseData', 'creator_class_data_v4'].forEach(k => {
+    try { localStorage.removeItem(k); } catch(e) {}
+  });
+
     // User requested price: Rp 1
     if (window.DEFAULT_COURSE_DATA && window.DEFAULT_COURSE_DATA.pricing) {
       window.DEFAULT_COURSE_DATA.pricing.promoPrice = 'Rp 1';
@@ -222,6 +227,35 @@ function initData() {
   if (saved) {
     try {
       courseData = JSON.parse(saved);
+      // Auto-enforce synced stats (1.834+), Mentor (Lia), and Tools
+      if (courseData.hero) {
+        courseData.hero.badge = "1.834+ Ibu Rumah Tangga Telah Bergabung";
+      }
+      if (courseData.mentor) {
+        courseData.mentor.name = "Lia Naik Level";
+        courseData.mentor.avatarUrl = "assets/foto_mentor_lia.jpg";
+        courseData.mentor.role = "Komunitas & Mentor Edukasi AI";
+        if (courseData.mentor.highlights && courseData.mentor.highlights[0]) {
+          courseData.mentor.highlights[0].value = "1.834";
+          courseData.mentor.highlights[0].label = "Alumni Belajar";
+        }
+      }
+      if (courseData.portalTools && Array.isArray(courseData.portalTools)) {
+        const skel = courseData.portalTools.find(t => t.id === 'lvl-4' || t.levelNum === 4);
+        if (skel && (!skel.toolUrl || skel.toolUrl.trim() === '')) {
+          skel.toolUrl = "https://viggle.ai";
+          skel.tools = [
+            { name: "Tools Skeleton AI (Viggle)", url: "https://viggle.ai" },
+            { name: "ChatGPT Generator Skeleton", url: "https://chatgpt.com" }
+          ];
+        }
+      }
+      if (courseData.pricing) {
+        courseData.pricing.normalPrice = "Rp 20.000";
+        courseData.pricing.originalPrice = "Rp 20.000";
+        courseData.pricing.promoPrice = "Rp 1";
+        courseData.pricing.price = "Rp 1";
+      }
       // Auto-normalize tool categories to official curriculum categories (Foto 1)
       if (courseData.portalTools && Array.isArray(courseData.portalTools)) {
         courseData.portalTools.forEach(t => {
@@ -491,7 +525,8 @@ function renderNavbar() {
   if (!courseData.brand) courseData.brand = {};
   const brandName = courseData.brand.name || "CREATOR CLASS";
   const brandTag = courseData.brand.tagline || courseData.brand.byline || "by IRT NAIK LEVEL";
-  const brandByline = courseData.brand.byline || "IRT NAIK LEVEL";
+  const rawByline = courseData.brand.byline || "IRT NAIK LEVEL";
+  const brandByline = rawByline.replace(/^by\s+/i, '');
 
   const brandNameEls = document.querySelectorAll('.dynamic-brand-name');
   brandNameEls.forEach(el => el.textContent = brandName);
@@ -673,7 +708,10 @@ function renderAudiences() {
     <div class="hairline-card rounded-3xl p-6 bg-white dark:bg-[#16161b] relative overflow-hidden flex flex-col justify-between group">
       <div>
         <div class="w-full h-44 rounded-2xl overflow-hidden mb-5 bg-purple-50 dark:bg-purple-950/20 border border-purple-100 dark:border-purple-900/30">
-          <img src="${aud.imageUrl}" alt="${aud.role}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+          <img src="${aud.imageUrl}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+          <div class="hidden w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-900/60 to-indigo-950/80">
+            <i class="fa-solid ${aud.icon || 'fa-user-graduate'} text-4xl text-purple-400/60"></i>
+          </div>
         </div>
         <div class="flex items-center gap-2 mb-2">
           <div class="w-7 h-7 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 flex items-center justify-center text-xs">
@@ -6762,4 +6800,25 @@ function openInstructionsModal(toolId) {
 function closeInstructionsModal() {
   const modal = document.getElementById('instructionsModal');
   if (modal) modal.classList.add('hidden');
+}
+
+
+// TOGGLE ADMIN PASSWORD VISIBILITY
+function toggleAdminPassVisibility(inputId, btn) {
+  const input = document.getElementById(inputId || 'modalAdminPass');
+  if (!input) return;
+  const icon = btn ? btn.querySelector('i') : null;
+  if (input.type === 'password') {
+    input.type = 'text';
+    if (icon) {
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    }
+  } else {
+    input.type = 'password';
+    if (icon) {
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  }
 }
