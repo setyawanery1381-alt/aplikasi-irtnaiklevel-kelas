@@ -40,7 +40,7 @@ window.DEFAULT_COURSE_DATA = {
     ]
   },
   "hero": {
-    "badge": "2.800+ Ibu Rumah Tangga Telah Bergabung",
+    "badge": "1.834+ Ibu Rumah Tangga Telah Bergabung",
     "title": "Belajar Animasi AI Untuk Pemula",
     "highlightText": "Bisa dari Rumah Sambil Urus Keluarga",
     "description": "Ubah ide cerita dan keseharian jadi video animasi bernilai tinggi untuk edukasi anak, promosi jualan online, dan konten media sosial tanpa perlu keahlian menggambar manual.",
@@ -51,11 +51,11 @@ window.DEFAULT_COURSE_DATA = {
   "pricing": {
     "classTitle": "Kelas Animasi AI untuk Pemula — IRT NAIK LEVEL",
     "subtitle": "Paket Lengkap Menghasilkan Karya & Cuan dari Rumah",
-    "normalPrice": "Rp 744.000",
+    "normalPrice": "Rp 20.000",
     "promoPrice": "Rp 1",
     "price": "Rp 1",
-    "originalPrice": "Rp 744.000",
-    "discountBadge": "HEMAT 86%",
+    "originalPrice": "Rp 20.000",
+    "discountBadge": "HEMAT 99%",
     "bonusValueTotal": "Rp 1.450.000",
     "benefits": [
       {
@@ -89,7 +89,7 @@ window.DEFAULT_COURSE_DATA = {
     "socialLink": "https://instagram.com/irtnaikkelas",
     "highlights": [
       {
-        "value": "2.800+",
+        "value": "1.834",
         "label": "Alumni Belajar"
       },
       {

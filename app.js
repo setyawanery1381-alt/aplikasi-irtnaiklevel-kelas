@@ -252,7 +252,7 @@ function initData() {
       if (!courseData.hero) courseData.hero = {};
       if (!courseData.pricing) courseData.pricing = {};
       if (!courseData.pricing.promoPrice) courseData.pricing.promoPrice = 'Rp 1';
-      if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 744.000";
+      if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 20.000";
 
       // Ensure portalTools has full 62 level curriculum & exact covers (auto-upgrade old cached localStorage)
       const hasOldFallback = courseData.portalTools && courseData.portalTools.some(t => (t.videos || []).some(v => v.url && v.url.includes('XiG2enHWrLQ')));
@@ -1029,7 +1029,7 @@ function syncEditorForm() {
   if (fClassTitle) fClassTitle.value = courseData.pricing.classTitle || 'Kelas Animasi AI untuk Pemula — IRT NAIK LEVEL';
 
   const fNormalPrice = document.getElementById('editNormalPrice');
-  if (fNormalPrice) fNormalPrice.value = courseData.pricing.normalPrice || courseData.pricing.originalPrice || 'Rp 744.000';
+  if (fNormalPrice) fNormalPrice.value = courseData.pricing.normalPrice || courseData.pricing.originalPrice || 'Rp 20.000';
 
   const fPromoPrice = document.getElementById('editPromoPrice');
   if (fPromoPrice) fPromoPrice.value = courseData.pricing.promoPrice || courseData.pricing.price || 'Rp 99.000';
@@ -1105,7 +1105,7 @@ function handleEditorSubmit(e) {
   const heroTitle = document.getElementById('editHeroTitle')?.value?.trim() || courseData.hero?.title || 'Belajar Animasi AI Untuk Pemula';
   const heroHighlight = document.getElementById('editHeroHighlight')?.value?.trim() || courseData.hero?.highlightText || 'Bisa dari Rumah Sambil Urus Keluarga';
   const classTitle = document.getElementById('editClassTitle')?.value?.trim() || courseData.pricing?.classTitle || 'Kelas Animasi AI untuk Pemula';
-  const normalPrice = document.getElementById('editNormalPrice')?.value?.trim() || courseData.pricing?.normalPrice || 'Rp 744.000';
+  const normalPrice = document.getElementById('editNormalPrice')?.value?.trim() || courseData.pricing?.normalPrice || 'Rp 20.000';
   const promoPrice = document.getElementById('editPromoPrice')?.value?.trim() || courseData.pricing?.promoPrice || 'Rp 99.000';
   const mentorName = document.getElementById('editMentorName')?.value?.trim() || courseData.mentor?.name || 'Sutradara Video Animasi AI';
 
@@ -1523,7 +1523,7 @@ function loadLandingPageSettings() {
   updateBrandLogoPreview(logoUrl);
 
   const hBadge = document.getElementById('settHeroBadge');
-  if (hBadge) hBadge.value = courseData.hero.badge || '2.800+ Ibu Rumah Tangga Telah Bergabung';
+  if (hBadge) hBadge.value = courseData.hero.badge || '1.834 Ibu Rumah Tangga Telah Bergabung';
 
   const hTitle = document.getElementById('settHeroTitle');
   if (hTitle) hTitle.value = courseData.hero.title || 'Belajar Animasi AI Untuk Pemula';
@@ -1535,7 +1535,7 @@ function loadLandingPageSettings() {
   if (price) price.value = courseData.pricing.promoPrice || courseData.pricing.price || 'Rp 99.000';
 
   const origPrice = document.getElementById('settOriginalPrice');
-  if (origPrice) origPrice.value = courseData.pricing.normalPrice || courseData.pricing.originalPrice || 'Rp 744.000';
+  if (origPrice) origPrice.value = courseData.pricing.normalPrice || courseData.pricing.originalPrice || 'Rp 20.000';
 
   const lynkUrl = document.getElementById('settLynkUrl');
   if (lynkUrl) lynkUrl.value = courseData.contact.lynkPaymentUrl || 'http://lynk.id/jawierjawa/5nwddoy5kxy9';

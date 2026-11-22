@@ -71,6 +71,8 @@ function setupSheets() {
     sheetPengaturan.appendRow(["mentor_role", "Komunitas & Mentor Edukasi AI", "Peran pembimbing", nowStr]);
     sheetPengaturan.appendRow(["mentor_badge", "Verified Community", "Lencana resmi mentor", nowStr]);
     sheetPengaturan.appendRow(["course_price", "Rp 1", "Harga promo saat ini", nowStr]);
+    sheetPengaturan.appendRow(["normal_price", "Rp 20.000", "Harga coret / normal", nowStr]);
+    sheetPengaturan.appendRow(["hero_badge", "1.834+ Ibu Rumah Tangga Telah Bergabung", "Badge jumlah peserta", nowStr]);
   }
 
   // Sheet 5: PortalTools (Simpan Revisi Tools & Materi dari Admin)

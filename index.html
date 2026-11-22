@@ -1177,7 +1177,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
           <span class="font-heading text-sm sm:text-base md:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight leading-none whitespace-nowrap dynamic-brand-name">
             CREATOR CLASS
           </span>
-          <span class="hidden sm:flex text-[9px] sm:text-[10px] tracking-wide mt-0.5 sm:mt-1 items-center gap-1 font-semibold leading-none whitespace-nowrap dynamic-brand-sub">
+          <span class="flex text-[8px] sm:text-[10px] tracking-tight sm:tracking-wide mt-0.5 items-center gap-0.5 sm:gap-1 font-semibold leading-none whitespace-nowrap dynamic-brand-sub">
             <span class="text-slate-400 dark:text-slate-400 font-normal italic lowercase">by</span>
             <span class="bg-gradient-to-r from-purple-600 via-pink-500 to-rose-400 dark:from-purple-400 dark:via-pink-300 dark:to-amber-300 bg-clip-text text-transparent font-extrabold tracking-wider uppercase dynamic-brand-byline">IRT NAIK LEVEL</span>
             <span class="text-[8px] sm:text-[9px]">✨</span>
@@ -1302,7 +1302,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
       <!-- Badge -->
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200/80 dark:border-purple-800/40 text-xs sm:text-sm font-semibold mb-6 shadow-xs">
         <span class="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></span>
-        <span id="heroBadge">2.800+ Ibu Rumah Tangga Telah Bergabung</span>
+        <span id="heroBadge">1.834 Ibu Rumah Tangga Telah Bergabung</span>
       </div>
 
       <!-- Main Headline -->
@@ -3201,7 +3201,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
 
             <div>
               <label class="block font-bold text-slate-300 mb-1">Badge Atas Hero</label>
-              <input type="text" id="settHeroBadge" oninput="autoSaveLandingPageSettings()" onchange="autoSaveLandingPageSettings()" placeholder="2.800+ Ibu Rumah Tangga Telah Bergabung" class="w-full px-3.5 py-2.5 rounded-xl bg-[#111217] border border-white/15 text-white focus:outline-none focus:border-purple-500">
+              <input type="text" id="settHeroBadge" oninput="autoSaveLandingPageSettings()" onchange="autoSaveLandingPageSettings()" placeholder="1.834 Ibu Rumah Tangga Telah Bergabung" class="w-full px-3.5 py-2.5 rounded-xl bg-[#111217] border border-white/15 text-white focus:outline-none focus:border-purple-500">
             </div>
 
             <div>
@@ -3477,7 +3477,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
               </div>
               <div>
                 <label class="block font-bold text-slate-300 mb-1">Harga Normal (Coret)</label>
-                <input type="text" id="settOriginalPrice" oninput="autoSaveLandingPageSettings()" onchange="autoSaveLandingPageSettings()" placeholder="Rp 744.000" class="w-full px-3.5 py-2.5 rounded-xl bg-[#111217] border border-white/15 text-slate-400 font-mono line-through focus:outline-none focus:border-purple-500">
+                <input type="text" id="settOriginalPrice" oninput="autoSaveLandingPageSettings()" onchange="autoSaveLandingPageSettings()" placeholder="Rp 20.000" class="w-full px-3.5 py-2.5 rounded-xl bg-[#111217] border border-white/15 text-slate-400 font-mono line-through focus:outline-none focus:border-purple-500">
               </div>
             </div>
 
@@ -4210,7 +4210,7 @@ window.DEFAULT_COURSE_DATA = {
     ]
   },
   "hero": {
-    "badge": "2.800+ Ibu Rumah Tangga Telah Bergabung",
+    "badge": "1.834+ Ibu Rumah Tangga Telah Bergabung",
     "title": "Belajar Animasi AI Untuk Pemula",
     "highlightText": "Bisa dari Rumah Sambil Urus Keluarga",
     "description": "Ubah ide cerita dan keseharian jadi video animasi bernilai tinggi untuk edukasi anak, promosi jualan online, dan konten media sosial tanpa perlu keahlian menggambar manual.",
@@ -4221,11 +4221,11 @@ window.DEFAULT_COURSE_DATA = {
   "pricing": {
     "classTitle": "Kelas Animasi AI untuk Pemula — IRT NAIK LEVEL",
     "subtitle": "Paket Lengkap Menghasilkan Karya & Cuan dari Rumah",
-    "normalPrice": "Rp 744.000",
+    "normalPrice": "Rp 20.000",
     "promoPrice": "Rp 1",
     "price": "Rp 1",
-    "originalPrice": "Rp 744.000",
-    "discountBadge": "HEMAT 86%",
+    "originalPrice": "Rp 20.000",
+    "discountBadge": "HEMAT 99%",
     "bonusValueTotal": "Rp 1.450.000",
     "benefits": [
       {
@@ -4259,7 +4259,7 @@ window.DEFAULT_COURSE_DATA = {
     "socialLink": "https://instagram.com/irtnaikkelas",
     "highlights": [
       {
-        "value": "2.800+",
+        "value": "1.834",
         "label": "Alumni Belajar"
       },
       {
@@ -7729,7 +7729,7 @@ function initData() {
       if (!courseData.hero) courseData.hero = {};
       if (!courseData.pricing) courseData.pricing = {};
       if (!courseData.pricing.promoPrice) courseData.pricing.promoPrice = 'Rp 1';
-      if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 744.000";
+      if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 20.000";
 
       // Ensure portalTools has full 62 level curriculum & exact covers (auto-upgrade old cached localStorage)
       const hasOldFallback = courseData.portalTools && courseData.portalTools.some(t => (t.videos || []).some(v => v.url && v.url.includes('XiG2enHWrLQ')));
@@ -8506,7 +8506,7 @@ function syncEditorForm() {
   if (fClassTitle) fClassTitle.value = courseData.pricing.classTitle || 'Kelas Animasi AI untuk Pemula — IRT NAIK LEVEL';
 
   const fNormalPrice = document.getElementById('editNormalPrice');
-  if (fNormalPrice) fNormalPrice.value = courseData.pricing.normalPrice || courseData.pricing.originalPrice || 'Rp 744.000';
+  if (fNormalPrice) fNormalPrice.value = courseData.pricing.normalPrice || courseData.pricing.originalPrice || 'Rp 20.000';
 
   const fPromoPrice = document.getElementById('editPromoPrice');
   if (fPromoPrice) fPromoPrice.value = courseData.pricing.promoPrice || courseData.pricing.price || 'Rp 99.000';
@@ -8582,7 +8582,7 @@ function handleEditorSubmit(e) {
   const heroTitle = document.getElementById('editHeroTitle')?.value?.trim() || courseData.hero?.title || 'Belajar Animasi AI Untuk Pemula';
   const heroHighlight = document.getElementById('editHeroHighlight')?.value?.trim() || courseData.hero?.highlightText || 'Bisa dari Rumah Sambil Urus Keluarga';
   const classTitle = document.getElementById('editClassTitle')?.value?.trim() || courseData.pricing?.classTitle || 'Kelas Animasi AI untuk Pemula';
-  const normalPrice = document.getElementById('editNormalPrice')?.value?.trim() || courseData.pricing?.normalPrice || 'Rp 744.000';
+  const normalPrice = document.getElementById('editNormalPrice')?.value?.trim() || courseData.pricing?.normalPrice || 'Rp 20.000';
   const promoPrice = document.getElementById('editPromoPrice')?.value?.trim() || courseData.pricing?.promoPrice || 'Rp 99.000';
   const mentorName = document.getElementById('editMentorName')?.value?.trim() || courseData.mentor?.name || 'Sutradara Video Animasi AI';
 
@@ -9000,7 +9000,7 @@ function loadLandingPageSettings() {
   updateBrandLogoPreview(logoUrl);
 
   const hBadge = document.getElementById('settHeroBadge');
-  if (hBadge) hBadge.value = courseData.hero.badge || '2.800+ Ibu Rumah Tangga Telah Bergabung';
+  if (hBadge) hBadge.value = courseData.hero.badge || '1.834 Ibu Rumah Tangga Telah Bergabung';
 
   const hTitle = document.getElementById('settHeroTitle');
   if (hTitle) hTitle.value = courseData.hero.title || 'Belajar Animasi AI Untuk Pemula';
@@ -9012,7 +9012,7 @@ function loadLandingPageSettings() {
   if (price) price.value = courseData.pricing.promoPrice || courseData.pricing.price || 'Rp 99.000';
 
   const origPrice = document.getElementById('settOriginalPrice');
-  if (origPrice) origPrice.value = courseData.pricing.normalPrice || courseData.pricing.originalPrice || 'Rp 744.000';
+  if (origPrice) origPrice.value = courseData.pricing.normalPrice || courseData.pricing.originalPrice || 'Rp 20.000';
 
   const lynkUrl = document.getElementById('settLynkUrl');
   if (lynkUrl) lynkUrl.value = courseData.contact.lynkPaymentUrl || 'http://lynk.id/jawierjawa/5nwddoy5kxy9';
