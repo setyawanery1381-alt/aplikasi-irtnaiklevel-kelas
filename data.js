@@ -45,7 +45,7 @@ window.DEFAULT_COURSE_DATA = {
     "highlightText": "Bisa dari Rumah Sambil Urus Keluarga",
     "description": "Ubah ide cerita dan keseharian jadi video animasi bernilai tinggi untuk edukasi anak, promosi jualan online, dan konten media sosial tanpa perlu keahlian menggambar manual.",
     "ctaPrimary": "Gabung Sekarang — Rp 1",
-    "ctaSecondary": "Lihat Proses Belajar ↓",
+    "ctaSecondary": "Lihat Silabus Materi ↓",
     "guaranteeText": "Sekali Bayar • Akses Selamanya • Modul Lengkap Pemula"
   },
   "pricing": {
