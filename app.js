@@ -4382,14 +4382,15 @@ function renderMemberTools() {
       primaryToolUrl = 'https://' + primaryToolUrl;
     }
 
-    // Markdown Prompt lines calculation
-    const promptText = t.markdownPrompt || (t.instructions && t.instructions.length > 0 ? t.instructions.join('\n') : t.desc);
-    const lineCount = promptText.split('\n').filter(l => l.trim().length > 0).length || 15;
+    const hasInstructions = t.instructions && t.instructions.length > 0;
+    const hasPrompt = !!t.markdownPrompt && t.markdownPrompt.trim().length > 0;
+    const promptLineCount = hasPrompt ? t.markdownPrompt.split('\n').filter(l => l.trim().length > 0).length : 0;
+    const instructionCount = hasInstructions ? t.instructions.length : 0;
 
     return `
       <div class="member-tool-card flex flex-col p-4 sm:p-5 group bg-white dark:bg-[#14151c] rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-2xl hover:border-purple-500/40 transition-all duration-300">
         <!-- Thumbnail & Badges -->
-        <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 mb-4 cursor-pointer" onclick="openPromptMarkdownModal('${t.id}')">
+        <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 mb-4 cursor-pointer" onclick="${hasPrompt ? `openPromptMarkdownModal('${t.id}')` : `openInstructionsModal('${t.id}')`}">
           <img src="${cover}" alt="${t.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
           
@@ -4400,14 +4401,14 @@ function renderMemberTools() {
             </span>
           </div>
 
-          <!-- Video / Prompt Pill -->
+          <!-- Video Pill -->
           ${hasVideo ? `
             <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-white flex items-center gap-1.5 border border-purple-500/30">
               <i class="fa-solid fa-circle-play text-purple-400 text-xs"></i> ${videoList.length} Video
             </div>
           ` : `
             <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-emerald-300 flex items-center gap-1.5 border border-emerald-500/30">
-              <i class="fa-solid fa-file-code text-xs"></i> Prompt MD
+              <i class="fa-solid fa-terminal text-xs"></i> Prompt MD
             </div>
           `}
         </div>
@@ -4431,28 +4432,35 @@ function renderMemberTools() {
             ${t.desc}
           </p>
 
-          <!-- Metadata Baris & Tanggal -->
+          <!-- Metadata Baris Prompt & Jumlah Instruksi -->
           <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono mb-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5">
             <span class="flex items-center gap-1.5">
-              <i class="fa-solid fa-file-code text-purple-400"></i> ${lineCount} Baris
+              <i class="fa-solid fa-terminal text-purple-400"></i> Prompt: ${promptLineCount} Baris
             </span>
             <span class="flex items-center gap-1.5">
-              <i class="fa-regular fa-calendar text-slate-500"></i> 22/11/2026
+              <i class="fa-solid fa-list-check text-blue-400"></i> ${instructionCount} Langkah
             </span>
           </div>
 
-          <!-- Action Buttons (2.1 Tonton Video, 2.2 Link Tools, 2.3 Prompt MD) -->
+          <!-- Action Buttons: Strict separation between Prompt MD, Instruksi, Video, Tools -->
           <div class="flex flex-col gap-2 pt-1">
-            <!-- 2.3 PROMPT MD (Bisa lihat & salin) -->
-            <button onclick="openPromptMarkdownModal('${t.id}')" class="w-full py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-700 active:scale-[0.98] text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center justify-center gap-2 cursor-pointer">
-              <i class="fa-solid fa-file-lines text-xs"></i>
-              <span>Prompt MD</span>
-            </button>
+            <!-- Row 1: Prompt MD & Instruksi (Terpisah Tegas) -->
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="openPromptMarkdownModal('${t.id}')" class="py-2.5 px-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 active:scale-[0.98] text-white text-xs font-bold transition-all shadow-md shadow-purple-600/30 flex items-center justify-center gap-1.5 cursor-pointer" title="Buka Naskah Prompt AI (Markdown)">
+                <i class="fa-solid fa-terminal text-[11px]"></i>
+                <span>Prompt MD</span>
+              </button>
 
-            <!-- 2.1 TONTON VIDEO & 2.2 LINK TOOLS -->
+              <button onclick="openInstructionsModal('${t.id}')" class="py-2.5 px-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 active:scale-[0.98] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Buka Panduan Langkah Praktik">
+                <i class="fa-solid fa-list-check text-[11px]"></i>
+                <span>Instruksi</span>
+              </button>
+            </div>
+
+            <!-- Row 2: Tonton Video & Link Tools -->
             <div class="flex items-center gap-2">
               ${hasVideo ? `
-                <button onclick="openVideoModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 active:scale-[0.98] text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Tonton Video Tutorial">
+                <button onclick="openVideoModal('${t.id}')" class="${hasTool ? 'flex-1' : 'w-full'} py-2 px-3 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 active:scale-[0.98] text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer" title="Tonton Video Tutorial">
                   <i class="fa-solid fa-circle-play text-[11px] text-purple-400"></i>
                   <span>Tonton Video ${videoList.length > 1 ? `(${videoList.length})` : ''}</span>
                 </button>
@@ -4460,12 +4468,12 @@ function renderMemberTools() {
 
               ${hasTool ? `
                 ${toolList.length > 1 ? `
-                  <button onclick="openToolPickerModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Link Tools ChatGPT">
+                  <button onclick="openToolPickerModal('${t.id}')" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Pilihan Tools AI">
                     <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
                     <span>Link Tools (${toolList.length})</span>
                   </button>
                 ` : `
-                  <a href="${primaryToolUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Link Tools ChatGPT">
+                  <a href="${primaryToolUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm" title="Buka Tool AI / Custom GPT">
                     <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
                     <span>Link Tools</span>
                   </a>
@@ -6494,4 +6502,81 @@ function clearMemberToolSearch() {
     handleMemberToolSearch('');
   }
   if (clearBtn) clearBtn.classList.add('hidden');
+}
+
+
+// =========================================================================
+// INSTRUCTIONS MODAL CONTROLLER (MENU INSTRUKSI TERPISAH)
+// =========================================================================
+function openInstructionsModal(toolId) {
+  const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA.portalTools || []);
+  const tool = tools.find(t => t.id === toolId);
+  if (!tool) return;
+
+  const modal = document.getElementById('instructionsModal');
+  const titleEl = document.getElementById('instModalTitle');
+  const catEl = document.getElementById('instModalCategory');
+  const countEl = document.getElementById('instModalStepCount');
+  const listEl = document.getElementById('instModalList');
+  const actionsEl = document.getElementById('instModalQuickActions');
+
+  if (titleEl) titleEl.textContent = tool.name;
+  if (catEl) catEl.textContent = tool.levelNum >= 0 ? `LEVEL ${tool.levelNum} • ${tool.category}` : tool.category;
+
+  const steps = tool.instructions && tool.instructions.length > 0 ? tool.instructions : [tool.desc || 'Ikuti instruksi sesuai video tutorial.'];
+  if (countEl) countEl.textContent = `${steps.length} Langkah`;
+
+  if (listEl) {
+    listEl.innerHTML = steps.map((step, idx) => `
+      <li class="p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3.5 hover:border-blue-500/40 transition-all">
+        <span class="w-7 h-7 rounded-xl bg-blue-500/20 text-blue-300 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 border border-blue-500/30">
+          ${idx + 1}
+        </span>
+        <div class="flex-1 leading-relaxed text-slate-200">
+          ${step.replace(/^\d+\.\s*/, '')}
+        </div>
+      </li>
+    `).join('');
+  }
+
+  // Quick Action Buttons in Instructions Modal
+  if (actionsEl) {
+    const hasPrompt = !!tool.markdownPrompt;
+    const hasTool = (tool.tools && tool.tools.length > 0) || (!!tool.toolUrl && !tool.toolUrl.includes('notion.so'));
+    const hasVideo = (tool.videos && tool.videos.length > 0) || !!tool.videoUrl;
+
+    let btns = '';
+    if (hasPrompt) {
+      btns += `
+        <button onclick="closeInstructionsModal(); openPromptMarkdownModal('${tool.id}')" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-purple-600/30 cursor-pointer">
+          <i class="fa-solid fa-terminal text-xs"></i>
+          <span>Buka Naskah Prompt MD</span>
+        </button>
+      `;
+    }
+    if (hasTool) {
+      btns += `
+        <button onclick="closeInstructionsModal(); ${(tool.tools && tool.tools.length > 1) ? `openToolPickerModal('${tool.id}')` : `window.open('${tool.toolUrl || tool.tools[0].url}', '_blank')`}" class="px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+          <span>Buka Link Tools AI</span>
+        </button>
+      `;
+    }
+    if (hasVideo) {
+      btns += `
+        <button onclick="closeInstructionsModal(); openVideoModal('${tool.id}')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-play text-xs text-purple-400"></i>
+          <span>Tonton Video Tutorial</span>
+        </button>
+      `;
+    }
+    actionsEl.innerHTML = btns;
+  }
+
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeInstructionsModal() {
+  const modal = document.getElementById('instructionsModal');
+  if (modal) modal.classList.add('hidden');
 }
