@@ -182,17 +182,41 @@ module.exports = async (req, res) => {
     };
 
     const lowerTitle = (itemTitle || '').toLowerCase();
-    const isPortalProduct = lowerTitle.includes('portal') || lowerTitle.includes('materi') || lowerTitle.includes('tools') || lowerTitle.includes('creator') || lowerTitle.includes('vip') || lowerTitle.includes('reseller');
-    const isIrtProduct = lowerTitle.includes('irt') || lowerTitle.includes('naik level') || lowerTitle.includes('bunda');
+    const rawString = JSON.stringify(body).toLowerCase();
+
+    // Deteksi produk PORTAL MATERI TOOLS (SangCreator)
+    // Termasuk produk: 'GASKEUN! Bangun WebApp dengan AI + Apps Script', URL '1zgn3ne1p5r0', dll.
+    const isPortalProduct = (
+      lowerTitle.includes('gaskeun') ||
+      lowerTitle.includes('webapp') ||
+      lowerTitle.includes('web app') ||
+      lowerTitle.includes('apps script') ||
+      lowerTitle.includes('portal') ||
+      lowerTitle.includes('materi') ||
+      lowerTitle.includes('tools') ||
+      lowerTitle.includes('sangcreator') ||
+      lowerTitle.includes('reseller') ||
+      rawString.includes('1zgn3ne1p5r0') ||
+      rawString.includes('jawierjawa')
+    );
+
+    // Deteksi produk KELAS IRT NAIK LEVEL
+    const isIrtProduct = (
+      lowerTitle.includes('irt') ||
+      lowerTitle.includes('naik level') ||
+      lowerTitle.includes('bunda') ||
+      lowerTitle.includes('animasi')
+    );
 
     let targets = [];
-    if (isPortalProduct && !isIrtProduct) {
+    if (isPortalProduct) {
+      // Pastikan HANYA ke Portal Materi Tools jika ini produk Portal / WebApp
       targets.push({ name: 'Portal Materi Tools', url: portalAppsScriptUrl });
-    } else if (isIrtProduct && !isPortalProduct) {
+    } else if (isIrtProduct) {
+      // Pastikan HANYA ke IRT Naik Level jika ini produk Kelas IRT
       targets.push({ name: 'IRT Naik Level', url: appsScriptUrl });
     } else {
-      // Jika nama produk umum atau tidak spesifik, teruskan ke kedua Google Apps Script
-      targets.push({ name: 'IRT Naik Level', url: appsScriptUrl });
+      // Fallback: Jika tidak terdeteksi spesifik, teruskan ke Portal Materi Tools sebagai default
       targets.push({ name: 'Portal Materi Tools', url: portalAppsScriptUrl });
     }
 
