@@ -391,7 +391,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-0",
     "levelNum": 0,
     "name": "LEVEL 0 UNTUK PEMULA",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "DOWNLOAD DULU APLIKASI DIATAS YA⤴️⤴️⤴️ MACAM MACAM KARAKTEE STYLE. JADI KALAU KAMU MAU BUAT ANIMASI KAMU BISA PILIH KARAKTER NYA SEPERTI DIBAWAH INI...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 0 UNTUK PEMULA.",
@@ -434,7 +434,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-1",
     "levelNum": 1,
     "name": "LEVEL 1- KARAKTER KONSISTEN/KARAKTER SHEET",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "jenis -jenis karakter style Klik disini ...",
     "instructions": [
       "Ketuk Tools Karakter Konsisten di bawah.",
@@ -474,7 +474,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-2",
     "levelNum": 2,
     "name": "LEVEL 2 -FAKTA MENARIK",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "Cara Menggunakan Tools Fakta Menarik Tutorial Animasi Clay ...",
     "instructions": [
       "Ketuk Tools Fakta Menarik di bawah.",
@@ -521,7 +521,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-3",
     "levelNum": 3,
     "name": "LEVEL 3 - 3D CARTOON",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "Cara Menggunakan Tools 3D Cartoon Tutorial Animasi 3D Cartoon...",
     "instructions": [
       "Ketuk Tools 3D Cartoon di bawah.",
@@ -561,7 +561,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-4",
     "levelNum": 4,
     "name": "LEVEL 4 - SKELETON",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "Cara Menggunakan Tools Skeleton AI Cara bikin Animasi  Skeleton sama dengan contoh pertama ...",
     "instructions": [
       "Ketuk Tools Skeleton AI di bawah.",
@@ -592,7 +592,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-5",
     "levelNum": 5,
     "name": "LEVEL 5 - TUTORIAL BIKIN POSTER",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "Tutorial bikin poster  Tutorial 2 ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 5 - TUTORIAL BIKIN POSTER.",
@@ -625,7 +625,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-6",
     "levelNum": 6,
     "name": "LEVEL 6 - Tutorial Voice Over Animasi",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "Video tutorial VOICE OVER VERSI IRT NAIK LEVEL 👈Buat voice disini Klik panah ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 6 - Tutorial Voice Over Animasi.",
@@ -656,7 +656,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-7",
     "levelNum": 7,
     "name": "LEVEL 7- FILM ANIMASI / FILM ROMANTIS/FILM PROFESI",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "Cara Menggunakan Tools Film Romantis AI Tutorial bikin film romantis ...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami alur penggunaan tools.",
@@ -693,7 +693,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-8",
     "levelNum": 8,
     "name": "LEVEL 8- GEMINI STORYBOOK",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "Cara buat story book  ( MUNGKIN TAMPILAN DI GEMININYA BERUBAH UBAH YA TIDAK SELALU SAMA, DICOBA AJA DULU CARI TULISAN GEM BARU COBA BUAT , KAMI USAHAKAN TUTORIA...",
     "instructions": [
       "Cara buat story book "
@@ -737,7 +737,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-9",
     "levelNum": 9,
     "name": "LEVEL 9 - Tutorial animasi ASMR",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "TONTON DULU VIDEO TURORIALNYA YA Cara Menggunakan Tools ASMR AI...",
     "instructions": [
       "Ketuk Tools ASMR AI di bawah.",
@@ -776,7 +776,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-10",
     "levelNum": 10,
     "name": "LEVEL 10 - OBJECT TALK",
-    "category": "Dasar Animasi AI",
+    "category": "01. Dasar Animasi AI (0–10)",
     "desc": "Cara Menggunakan Tools Object Talk Tutorial OBJECT TALK \n...",
     "instructions": [
       "Ketuk Tools Object Talk di bawah.",
@@ -814,7 +814,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-11",
     "levelNum": 11,
     "name": "LEVEL 11 - ANIMASI AMIGURUMI",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "Cara Menggunakan Tools Amigurumi AI Tutorial animasi amigurumi...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
@@ -845,7 +845,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-12",
     "levelNum": 12,
     "name": "LEVEL 12 - ANIMASI PPDB",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "Cara Menggunakan Tools PPDB AI Tools 1 PPDB...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
@@ -878,7 +878,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-13",
     "levelNum": 13,
     "name": "LEVEL 13 - TUTORIAL ANIMASI EDUKASI MENGGUNAKAN GEMINI",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "GANTI PEMBUATAN VIDEONYA KE FLOW SAJA KARENA GEMINI HARUS PRO. VIDOE TUTORIAL ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 13 - TUTORIAL ANIMASI EDUKASI MENGGUNAKAN GEMINI.",
@@ -933,7 +933,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-14",
     "levelNum": 14,
     "name": "LEVEL 14 - TUTORIAL LIPSING",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": " BIKIN LAGU + VIDEO CLIP Klik disini ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 14 - TUTORIAL LIPSING.",
@@ -958,7 +958,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-15",
     "levelNum": 15,
     "name": "LEVEL 15 - EDITING KONTEN ANIMASI DI CAPCUT",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "Tutorial menggabungkan Video...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 15 - EDITING KONTEN ANIMASI DI CAPCUT.",
@@ -988,7 +988,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-16",
     "levelNum": 16,
     "name": "LEVEL 16 - ALUR BISNIS PRODUK DIGITAL & ANIMASI AI dan TRIK PROMOSI",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "KALAU KAMU MAU BELAJAR ALUR BISNIS PRODUK DIGITAL DAN ANIMASI AI JANGAN SKIP YA SCROLL SAMPAI BAW AH DIBACA PELAN2 DI TONTON PELAN-PELAN SAMPAI PAHAM. CARA MENG...",
     "instructions": [
       "TUTORIAL BIKIN TOKO [LYNK.ID](http://LYNK.ID) & BONUS PRODUK DIGITAL SIAP JUAL",
@@ -1100,7 +1100,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-17",
     "levelNum": 17,
     "name": "LEVEL 17 - INFOGRAFIS PEMBELAJARAN",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "Video Tutorial Cara minta promt ke chatgpt ...",
     "instructions": [
       "Mata Pelajaran",
@@ -1190,7 +1190,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-18",
     "levelNum": 18,
     "name": "LEVEL 18 - TUTORIAL TIMELAPSE  AI",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "TUTORIAL TIMELAPSE AI 💜✨\nBelajar dari Nol Bersama IRT Naik Level\nMau bikin video rumah tua berubah jadi rumah mewah hanya dengan AI? 🏚️➡️🏡\nYuk, ikuti langkah...",
     "instructions": [
       "LANGKAH 2 — Buat Gambar BEFORE\nBuka Gemini atau ChatGPT.\nSalin prompt gambar BEFORE dari langkah pertama.\nGenerate gambar rumah tua.\nSimpan hasil gambarnya."
@@ -1222,7 +1222,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-19",
     "levelNum": 19,
     "name": "LEVEL 19 - CLONING VIDEO Cloning /analisis Video (1)",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "Upload video lalu tekan yg dibawah lalu masukkan video yang ingin di analisis  ChatGPT - Cloning Video By IRT Naik Level...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 19 - CLONING VIDEO Cloning /analisis Video (1).",
@@ -1253,7 +1253,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-20",
     "levelNum": 20,
     "name": "LEVEL 20 - CHEF ANIMASI",
-    "category": "Konten Kreatif & Editing",
+    "category": "02. Konten Kreatif & Editing (11–20)",
     "desc": "cara buat videonya sama dengan seperti tutorial lainnya. Dilengkapi 2 Tools AI Resep (Chef Animasi & Dapur Pintar).",
     "instructions": [
       "cara buat videonya sama dengan seperti tutorial lainnya",
@@ -1286,7 +1286,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-21",
     "levelNum": 21,
     "name": "LEVEL 21 - FILM ACTION",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "Tools Film Action  Tools disini...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 21 - FILM ACTION.",
@@ -1318,7 +1318,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-22",
     "levelNum": 22,
     "name": "LEVEL 22 - QUOTES KEHIDUPAN VIDEO BERGERAK",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "VERSI BARU VIRAL SOSMED PROMPT TEKS TO IMAGE TEMPEL KE CHATGPT SERTAKAN GAMBAR KAMU DAN QUOTES KAMU ....",
     "instructions": [
       "Rambut: [warna dan model rambut]",
@@ -1422,7 +1422,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-23",
     "levelNum": 23,
     "name": "LEVEL 23 - GIAND OBJECT",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "Cara Menggunakan Tools Giant Object AI Tools penghasil Prompt GIANT OBJECT ...",
     "instructions": [
       "Tonton terlebih dahulu video tutorial agar memahami cara menggunakan tools.",
@@ -1453,7 +1453,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-24",
     "levelNum": 24,
     "name": "LEVEL 24 - DESIGN UCAPAN",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "Design ucapan kamu disini ya  Cara Menggunakan Tools Design Ucapan...",
     "instructions": [
       "Ketuk Tools Design Ucapan di bawah.",
@@ -1484,7 +1484,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-25",
     "levelNum": 25,
     "name": "LEVEL 25 - PROMPT ESTETIK IRTNAIKLEVEL",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "Cara Menggunakan Tools Prompt Otomatis ChatGPT - TOOLS PENGHASIL PROMPT OTOMATIS...",
     "instructions": [
       "Ketuk Tools di bawah.",
@@ -1530,7 +1530,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-26",
     "levelNum": 26,
     "name": "LEVEL 26- CARA MEMBUAT LAGU DI GEMINI",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "VIDEO TUTORIAL ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 26- CARA MEMBUAT LAGU DI GEMINI.",
@@ -1560,7 +1560,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-27",
     "levelNum": 27,
     "name": "LEVEL 27 - ANIMASI MINIATUR",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "VIDEO TUTORIAL  Klik disini ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 27 - ANIMASI MINIATUR.",
@@ -1588,7 +1588,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-28",
     "levelNum": 28,
     "name": "LEVEL 28 - IKLAN PRODUK & MIRROR SELFIE AFFILIATE",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "MIRROR SELFIE AFFILIATE  PROMPT GAMBAR MIRROR SELFIE...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 28 - IKLAN PRODUK & MIRROR SELFIE AFFILIATE.",
@@ -1631,7 +1631,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-29",
     "levelNum": 29,
     "name": "LEVEL 29 - TINI WORLD RESCUE",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "TOOLS TINY  VIDEO TUTORIAL ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 29 - TINI WORLD RESCUE.",
@@ -1656,7 +1656,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-30",
     "levelNum": 30,
     "name": "LEVEL 30 - STORYBOARD IKLAN/ AFFILIATE PRODUK",
-    "category": "Konten Viral & Affiliate",
+    "category": "03. Konten Viral & Affiliate (21–30)",
     "desc": "Tutorial Cara bikin iklan dan iklan  Menu untuk  dengan AI  VIDEO TUTORIAL IKLAN ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 30 - STORYBOARD IKLAN/ AFFILIATE PRODUK.",
@@ -1695,7 +1695,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-31",
     "levelNum": 31,
     "name": "LEVEL 31 - CARA GENERATE DIGROK",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "Video tutorial ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 31 - CARA GENERATE DIGROK.",
@@ -1725,7 +1725,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-32",
     "levelNum": 32,
     "name": "LEVEL 32-DRAMA BUAH",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "TOOLS DRAMA BUAH  ChatGPT - DRAMA BUAH SAYUR ANTROPOMORFIK...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 32-DRAMA BUAH.",
@@ -1763,7 +1763,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-33",
     "levelNum": 33,
     "name": "LEVEL 33 - CARA MEMBUAT BUKU CERITA / EDUKASI PEMBELAJARAN ANAK MENGGUNAKAN AI",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "TUTORIAL  TOOLS GENERATOR ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 33 - CARA MEMBUAT BUKU CERITA / EDUKASI PEMBELAJARAN ANAK MENGGUNAKAN AI.",
@@ -1788,7 +1788,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-34",
     "levelNum": 34,
     "name": "LEVEL 34- CARA MENGGUNAKAN PIXVERSE AI",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "VIDEO TUTORIAL  Bisa juga login pakai email temporary...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 34- CARA MENGGUNAKAN PIXVERSE AI.",
@@ -1813,7 +1813,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-35",
     "levelNum": 35,
     "name": "LEVEL 35- ANIMASI PAKAI META AI",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "TUTORIAL  Klik disini ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 35- ANIMASI PAKAI META AI.",
@@ -1838,7 +1838,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-36",
     "levelNum": 36,
     "name": "LEVEL 36- TUTORIAL MEMBUAT IKLAN PROMOSI USAHA UMKM",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "Download Google Drive dibawah lalu tempel ke chatgpt ...",
     "instructions": [
       "Buat gambar storyboard realistis dan sinematik, terdiri dari 3 scene dalam satu gambar.",
@@ -1909,7 +1909,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-37",
     "levelNum": 37,
     "name": "LEVEL 37 - TUTORIAL CARA GENERATE VIOSTUDIO",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "VIDEO TUTORIAL CARA  BIAR DAPAT EXTRA KREDIT TAMBAHAN MASUKKAN Kode Voucher IRT100 AKSES WEB NYA DISINI.KETUK TANDA PANAH....",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 37 - TUTORIAL CARA GENERATE VIOSTUDIO.",
@@ -1934,7 +1934,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-37",
     "levelNum": 37,
     "name": "Level -37 TOOLS COZY MINIATUR",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "Tools PEMBUAT prompt cozy miniatur  Klik tanda panah  lalu klik lagi ...",
     "instructions": [
       "Pelajari materi dan konsep modul Level -37 TOOLS COZY MINIATUR.",
@@ -1959,7 +1959,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-38",
     "levelNum": 38,
     "name": "🩷LEVEL - 38 TUTORIAL ANIMASI FAKTA SEJARAH",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "Video TUTORIAL  Prompt nya :...",
     "instructions": [
       "Pelajari materi dan konsep modul 🩷LEVEL - 38 TUTORIAL ANIMASI FAKTA SEJARAH.",
@@ -1997,7 +1997,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-39",
     "levelNum": 39,
     "name": "LEVEL 39- TUTORIAL UNDANGAN PERNIKAHAN DENGAN AI",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "VIDEO TUTORIAL  PROMPT : BUATKAN GAMBAR STORYBOARD UNTUK UNDANGAN PERNIKAHAN  ANTARA BUDI DAN ANI. BUAT YANG MENARIK UNTUK 10 DETIK. BUAT KARAKTER 3D CARTOON PI...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 39- TUTORIAL UNDANGAN PERNIKAHAN DENGAN AI.",
@@ -2028,7 +2028,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-40",
     "levelNum": 40,
     "name": "LEVEL 40 - MEMBUAT DRAMA AI",
-    "category": "Drama AI & Promosi Usaha",
+    "category": "04. Drama AI & Promosi Usaha (31–40)",
     "desc": "Video tutorial  TOOLS GENERATOR KLIK DISINI 👇👇👇 ...",
     "instructions": [
       "Jenis Cerita",
@@ -2122,7 +2122,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-41",
     "levelNum": 41,
     "name": "🎊LEVEL 41- MEMBUAT KOMIK LEGENDA, DLL",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "Caranya ketik mulai di generator lalu isi dulu semua permintaan lalu setelah itu minta dibuatkan gambar per halaman. Ketuk Tools Generator  dibawah ini :...",
     "instructions": [
       "Pelajari materi dan konsep modul 🎊LEVEL 41- MEMBUAT KOMIK LEGENDA, DLL.",
@@ -2154,7 +2154,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-42",
     "levelNum": 42,
     "name": "LEVEL 42 -  DRACIN",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "TOOLS DRACIN  TUTORIAL DRACIN...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 42 -  DRACIN.",
@@ -2185,7 +2185,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-43",
     "levelNum": 43,
     "name": "Level - 43 DRAMA FOOD HEAD CREATOR",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "TOOLS KLIK DISINI  ChatGPT - 🍔 FOOD HEAD CREATOR by IRT NAIK LEVEL...",
     "instructions": [
       "Pelajari materi dan konsep modul Level - 43 DRAMA FOOD HEAD CREATOR.",
@@ -2223,7 +2223,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-44",
     "levelNum": 44,
     "name": "LEVEL 44 - TUTORIAL CARA BIKIN VIDEO MPLS PAKAI FLOW",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "VIDEO TUTORIAL  TOOLS CUSTOM ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 44 - TUTORIAL CARA BIKIN VIDEO MPLS PAKAI FLOW.",
@@ -2263,7 +2263,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-45",
     "levelNum": 45,
     "name": "🎊LEVEL 45- BANK TOOLS IRT NAIK LEVEL & AFFILIATE UNBOXING",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "Nanti tools tools tambahan siap pakai akan saya masukkan disini ya. Ditunggu saja  Masuk ke chatgpt lalu masukkan promptnimi...",
     "instructions": [
       "Pelajari materi dan konsep modul 🎊LEVEL 45- BANK TOOLS IRT NAIK LEVEL & AFFILIATE UNBOXING.",
@@ -2310,7 +2310,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-46",
     "levelNum": 46,
     "name": "LEVEL -46 MEMBUAT PEMBELAJARAN MENARIK PAKAI AI/ POP BOOK/LKPD/RPP/RPM",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "VIDEO TUTORIAL  TOOLS PENGHASIL PROMPT ...",
     "instructions": [
       "CARA PENGGUNAAN NYA KETUK TOOLSNYA LALU KETIK MULAI LALU PILIH JUDUL YANG MAU DIBUAT ."
@@ -2392,7 +2392,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-47",
     "levelNum": 47,
     "name": "LEVEL 47- BONUS WORKSHEET ANAK",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "KLIK / COPY LINK INI UNTUK MEMBUKA WORKSHEET ANAK :  https://drive.google.com/drive/folders/13eTB02UmZZLt-lFvZzG9JLmHiLryyF9V...",
     "instructions": [
       "CARA MEMBUAT COVERNYA : MASUK KE CHATGPT LALU BILANG BEGINI :"
@@ -2415,7 +2415,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-48",
     "levelNum": 48,
     "name": "LEVEL -48 CARA MEMBUAT GAMES INTERAKTIF ANAK",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "VIDEO TUTORIAL MASUK KE GEMINI KETUK TANDA + LALU PILIH CANVAS ,MASUKKAN PROMPT DIBAWAH INI : KAMU JUGA BISA GANTI GANTI PROMPTNYA SESUAI DENGAN MATA PELAJARAN ...",
     "instructions": [
       "HTML",
@@ -2533,7 +2533,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-49",
     "levelNum": 49,
     "name": "LEVEL - 49 EDU UNBOXING GENERATOR",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "VIDEO TUTORIAL  TOOLS PENGHASIL PROMPT KETUK /TULIS MULAI DIBAWAH INI ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL - 49 EDU UNBOXING GENERATOR.",
@@ -2571,7 +2571,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-50",
     "levelNum": 50,
     "name": "LEVEL -50 MEMBUAT ANIMASI KONSEP SENDIRI / PERSONAL BRANDING",
-    "category": "Edukasi, Guru & Produk Digital",
+    "category": "05. Edukasi, Guru & Produk (41–50)",
     "desc": "VIDEO TUTORIAL  AMBIL PROMPT NYA DI TOOLS DIBAWAH INI...",
     "instructions": [
       "CARA BUAT VIDEO ANIMASI UNTUK PERSONAL BRANDING"
@@ -2613,7 +2613,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-51",
     "levelNum": 51,
     "name": "Level -51 ANIMASI HOLOGRAM",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "AMBIL PROMPT DI TOOLS DIBAWAH INI DENGAN MENGETUK DAN KETIK KATA “MULAI” ChatGPT - IRT NAIK LEVEL — TEACHER HOLOGRAM AI...",
     "instructions": [
       "Pelajari materi dan konsep modul Level -51 ANIMASI HOLOGRAM.",
@@ -2651,7 +2651,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-52",
     "levelNum": 52,
     "name": "LEVEL -52 PODCAST - IRT NAIK LEVEL",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "TOOL CHATGPT PENGHASIL PROMPT ChatGPT - TOOLS PODCAST AI — IRT NAIK LEVEL 2...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL -52 PODCAST - IRT NAIK LEVEL.",
@@ -2696,7 +2696,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-53",
     "levelNum": 53,
     "name": "LEVEL -53 CARA BUAT WORKSHEET ANAK DENGAN AI",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "Tools chatgpt  klik dan ketuk “mulai” atau ketik manual “Mulai” untuk mendapatkan prompt  👇👇👇...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL -53 CARA BUAT WORKSHEET ANAK DENGAN AI.",
@@ -2735,7 +2735,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-54",
     "levelNum": 54,
     "name": "LEVEL 54- ANIMASI PETUALANGAN /EDUKASI",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "PROMPT NYA COPY DARI SINI LALU PASTEKAN KE CHATGPT KAMU. LALU KAMU TINGGAL UBAH KE JUDUL YANG KAMU MAU. buatkan prompt teks to image prompt image to video dan d...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 54- ANIMASI PETUALANGAN /EDUKASI.",
@@ -2766,7 +2766,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-55",
     "levelNum": 55,
     "name": "LEVEL 55- 100 IDE GPT untuk GURU by IRT NAIK LEVEL",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "100 IDE CHATGPT  KLIK TANDA PANAH UNTUK MELIHAT 100  IDE  ( PILIH SALAH SATU PASTEKAN KE CHATGPT SESUAI KEBUTUHAN BAPAK IBU GURU) ...",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 55- 100 IDE GPT untuk GURU by IRT NAIK LEVEL.",
@@ -2798,7 +2798,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-56",
     "levelNum": 56,
     "name": "LEVEL 56- MOTION CONTROL",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
     "instructions": [
       "Pelajari materi dan konsep modul LEVEL 56- MOTION CONTROL.",
@@ -2829,7 +2829,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-57",
     "levelNum": 57,
     "name": "Level 57- Animasi Joget Lucu",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "buka chatgpt lalu masukkan prompt dibawah :  Buatkan animasi viral joget lagu Jenna Jenna realistis seperti kucing asli kucing kampung lagi ngamen yang keliatan...",
     "instructions": [
       "Pelajari materi dan konsep modul Level 57- Animasi Joget Lucu.",
@@ -2862,7 +2862,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-58",
     "levelNum": 58,
     "name": "Level 58- 215 KODE RAHASIA AFFILIATE VIRAL",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "PROMPT DIBAWAH INI COPY KE CHATGPT TINGGAL UBAH KODE SESUAI KEBUTUHAN KAMU Buatkan gambar storyboard review produk tumbler dari foto yang saya upload menggunaka...",
     "instructions": [
       "\"/ootdmirror\" — Review outfit mirror selfie",
@@ -2988,7 +2988,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-59",
     "levelNum": 59,
     "name": "❤️LEVEL 59- BABY INTERVIEW",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
     "instructions": [
       "Buat gambar: \"Buatkan gambar Baby Interview dari ide nomor 1, bayi realistis super gemoy, rasio 9:16.\"",
@@ -3030,7 +3030,7 @@ const DEFAULT_COURSE_DATA = {
     "id": "lvl-60",
     "levelNum": 60,
     "name": "👽LEVEL 60-ANIMASI HORROR",
-    "category": "Materi Bonus & Update Terbaru",
+    "category": "06. Bonus & Update Terbaru (51–60)",
     "desc": "Modul Pembelajaran Resmi IRT Naik Level....",
     "instructions": [
       "Genre horor supernatural dan misteri.",

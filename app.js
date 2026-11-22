@@ -216,6 +216,15 @@ function initData() {
   if (saved) {
     try {
       courseData = JSON.parse(saved);
+      // Auto-normalize tool categories to official curriculum categories (Foto 1)
+      if (courseData.portalTools && Array.isArray(courseData.portalTools)) {
+        courseData.portalTools.forEach(t => {
+          if (!t.category || !OFFICIAL_CATEGORIES.includes(t.category)) {
+            t.category = getOfficialCategory(t.levelNum, t.name);
+          }
+        });
+      }
+
       if (!courseData.brand) courseData.brand = {};
       if (!courseData.brand.name) courseData.brand.name = "CREATOR CLASS";
       if (!courseData.brand.byline) courseData.brand.byline = "by IRT NAIK LEVEL";
@@ -1331,6 +1340,34 @@ function handleCheckoutSubmit(e) {
 let memberToolFilterCategory = 'all';
 let memberToolSearchQuery = '';
 let adminToolSearchQuery = '';
+let adminToolCategoryFilter = 'all';
+
+const OFFICIAL_CATEGORIES = [
+  '01. Dasar Animasi AI (0–10)',
+  '02. Konten Kreatif & Editing (11–20)',
+  '03. Konten Viral & Affiliate (21–30)',
+  '04. Drama AI & Promosi Usaha (31–40)',
+  '05. Edukasi, Guru & Produk (41–50)',
+  '06. Bonus & Update Terbaru (51–60)'
+];
+
+function getOfficialCategory(levelNum, name) {
+  let num = levelNum;
+  if (num === undefined || num === null || isNaN(num)) {
+    const m = (name || '').match(/LEVEL\s*(\d+)/i);
+    if (m) num = parseInt(m[1], 10);
+  }
+  if (num !== undefined && num !== null && !isNaN(num)) {
+    if (num <= 10) return '01. Dasar Animasi AI (0–10)';
+    if (num <= 20) return '02. Konten Kreatif & Editing (11–20)';
+    if (num <= 30) return '03. Konten Viral & Affiliate (21–30)';
+    if (num <= 40) return '04. Drama AI & Promosi Usaha (31–40)';
+    if (num <= 50) return '05. Edukasi, Guru & Produk (41–50)';
+    return '06. Bonus & Update Terbaru (51–60)';
+  }
+  return '01. Dasar Animasi AI (0–10)';
+}
+
 let logoClickCount = 0;
 let logoClickTimer = null;
 
@@ -2551,6 +2588,27 @@ function filterAdminTools(val) {
   renderAdminToolsTable();
 }
 
+function filterAdminCategory(val) {
+  adminToolCategoryFilter = val || 'all';
+  renderAdminToolsTable();
+}
+
+function updateToolCategoryDirectly(toolId, newCategory) {
+  const tool = (courseData.portalTools || []).find(t => t.id === toolId);
+  if (tool) {
+    tool.category = newCategory;
+    courseData.lastUpdated = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+    } catch (e) {}
+    renderAdminToolsTable();
+    if (typeof renderMemberTools === 'function') {
+      renderMemberTools();
+    }
+    showToast(`Kategori "${tool.name}" diubah ke "${newCategory}"`);
+  }
+}
+
 function renderAdminToolsTable() {
   const tbody = document.getElementById('adminToolsTableBody');
   const countEl = document.getElementById('totalToolsCount');
@@ -2560,16 +2618,27 @@ function renderAdminToolsTable() {
   if (countEl) countEl.textContent = tools.length;
 
   const filtered = tools.filter(t => {
+    // 1. Category Filter from Dropdown
+    if (adminToolCategoryFilter && adminToolCategoryFilter !== 'all') {
+      if (t.category !== adminToolCategoryFilter) return false;
+    }
+
+    // 2. Search query filter (supports level number e.g. "20", "level 20")
     if (!adminToolSearchQuery) return true;
-    const q = adminToolSearchQuery.toLowerCase();
-    return (t.name || '').toLowerCase().includes(q) || (t.category || '').toLowerCase().includes(q);
+    const q = adminToolSearchQuery.toLowerCase().trim();
+    const lvlMatch = q.match(/^(\d+)$/) || q.match(/^level\s*(\d+)$/i) || q.match(/^lvl\s*(\d+)$/i);
+    if (lvlMatch) {
+      const targetLvl = parseInt(lvlMatch[1], 10);
+      if (t.levelNum === targetLvl || t.id === `lvl-${targetLvl}`) return true;
+    }
+    return (t.name || '').toLowerCase().includes(q) || (t.category || '').toLowerCase().includes(q) || (t.desc || '').toLowerCase().includes(q);
   });
 
   if (filtered.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="6" class="py-8 text-center text-slate-600 dark:text-slate-300">
-          Belum ada tools materi. Klik tombol <strong>+ Tambah Tools</strong> di atas.
+        <td colspan="6" class="py-8 text-center text-slate-400">
+          Tidak ditemukan tools untuk pencarian / kategori ini.
         </td>
       </tr>
     `;
@@ -2580,9 +2649,10 @@ function renderAdminToolsTable() {
     const isOnline = t.status !== false;
     const cover = t.coverUrl || 'https://www.animato.id/cinema/asmr.webp';
     const views = t.views || 0;
+    const currentCategory = t.category || getOfficialCategory(t.levelNum, t.name);
 
     return `
-      <tr class="hover:bg-white/[0.02] transition-colors">
+      <tr class="hover:bg-white/[0.02] transition-colors border-b border-white/5">
         <!-- Drag Handle Icon -->
         <td class="py-3 px-4 text-center text-slate-500 font-mono text-sm cursor-grab select-none">
           ⋮⋮
@@ -2604,16 +2674,28 @@ function renderAdminToolsTable() {
                     <i class="fa-brands fa-youtube text-red-500"></i> ${(t.videos && t.videos.length > 1) ? `${t.videos.length} Video Tutor` : 'Video Tutor'}
                   </a>
                 ` : ''}
+                ${t.markdownPrompt ? `
+                  <a onclick="openPromptViewer('${t.id}')" class="text-[10px] text-emerald-400 hover:underline inline-flex items-center gap-1 cursor-pointer">
+                    <i class="fa-brands fa-markdown text-emerald-400"></i> Prompt MD
+                  </a>
+                ` : ''}
               </div>
             </div>
           </div>
         </td>
 
-        <!-- Kategori -->
+        <!-- Kategori (Pilihan ke Bawah / Dropdown Langsung di Baris Tabel) -->
         <td class="py-3 px-4">
-          <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold bg-[#222430] text-slate-300 border border-white/10">
-            ${t.category || 'Materi'}
-          </span>
+          <div class="relative inline-block w-full min-w-[210px] max-w-[260px]">
+            <select onchange="updateToolCategoryDirectly('${t.id}', this.value)" class="w-full text-[11px] font-semibold px-3 py-1.5 rounded-xl bg-[#1e202c] hover:bg-[#252837] text-purple-300 border border-white/10 focus:outline-none focus:border-purple-500 cursor-pointer appearance-none pr-7 transition-colors shadow-sm">
+              ${OFFICIAL_CATEGORIES.map(c => `
+                <option value="${c}" ${currentCategory === c ? 'selected' : ''} class="bg-[#14151c] text-white py-1">
+                  ${c}
+                </option>
+              `).join('')}
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[9px] pointer-events-none"></i>
+          </div>
         </td>
 
         <!-- Status Switch (ON/OFF) -->
@@ -2738,7 +2820,7 @@ function openAddToolModal() {
   document.getElementById('toolFormId').value = '';
   document.getElementById('toolEditorModalTitle').textContent = 'Tambah Tools Materi Baru';
   document.getElementById('toolFormName').value = '';
-  document.getElementById('toolFormCategory').value = 'ChatGPT';
+  document.getElementById('toolFormCategory').value = OFFICIAL_CATEGORIES[0];
   document.getElementById('toolFormStatus').value = 'true';
   document.getElementById('toolFormCoverUrl').value = 'https://www.animato.id/cinema/asmr.webp';
   previewToolCover('https://www.animato.id/cinema/asmr.webp');
@@ -2763,7 +2845,7 @@ function openEditToolModal(toolId) {
   document.getElementById('toolFormId').value = tool.id;
   document.getElementById('toolEditorModalTitle').textContent = 'Edit Tools: ' + tool.name;
   document.getElementById('toolFormName').value = tool.name || '';
-  document.getElementById('toolFormCategory').value = tool.category || 'ChatGPT';
+  document.getElementById('toolFormCategory').value = tool.category || getOfficialCategory(tool.levelNum, tool.name);
   document.getElementById('toolFormStatus').value = tool.status !== false ? 'true' : 'false';
   document.getElementById('toolFormCoverUrl').value = tool.coverUrl || '';
   previewToolCover(tool.coverUrl || 'https://www.animato.id/cinema/asmr.webp');
@@ -4341,12 +4423,12 @@ function renderMemberTools() {
   // 6 Official Categories matching Foto 2
   const categoryConfig = [
     { id: 'all', label: 'Semua (62)', short: 'Semua' },
-    { id: 'Dasar Animasi AI', label: '01. Dasar Animasi AI (0-10)', short: '01. Dasar (0-10)' },
-    { id: 'Konten Kreatif & Editing', label: '02. Konten Kreatif & Editing (11-20)', short: '02. Kreatif (11-20)' },
-    { id: 'Konten Viral & Affiliate', label: '03. Konten Viral & Affiliate (21-30)', short: '03. Affiliate (21-30)' },
-    { id: 'Drama AI & Promosi Usaha', label: '04. Drama AI & Promosi Usaha (31-40)', short: '04. Drama (31-40)' },
-    { id: 'Edukasi, Guru & Produk Digital', label: '05. Edukasi, Guru & Produk (41-50)', short: '05. Edukasi (41-50)' },
-    { id: 'Materi Bonus & Update Terbaru', label: '06. Bonus & Update Terbaru (51-60)', short: '06. Bonus (51-60)' }
+    { id: '01. Dasar Animasi AI (0–10)', label: '01. Dasar Animasi AI (0–10)', short: '01. Dasar (0-10)' },
+    { id: '02. Konten Kreatif & Editing (11–20)', label: '02. Konten Kreatif & Editing (11–20)', short: '02. Kreatif (11-20)' },
+    { id: '03. Konten Viral & Affiliate (21–30)', label: '03. Konten Viral & Affiliate (21–30)', short: '03. Affiliate (21-30)' },
+    { id: '04. Drama AI & Promosi Usaha (31–40)', label: '04. Drama AI & Promosi Usaha (31–40)', short: '04. Drama (31-40)' },
+    { id: '05. Edukasi, Guru & Produk (41–50)', label: '05. Edukasi, Guru & Produk (41–50)', short: '05. Edukasi (41-50)' },
+    { id: '06. Bonus & Update Terbaru (51–60)', label: '06. Bonus & Update Terbaru (51–60)', short: '06. Bonus (51-60)' }
   ];
 
   if (filtersContainer) {
@@ -4367,7 +4449,13 @@ function renderMemberTools() {
   // Enhanced Smart Filter: supports searching by exact Level Number (e.g. typing "20", "level 20", "lvl 20")
   const filtered = tools.filter(t => {
     if (t.status === false) return false;
-    if (memberToolFilterCategory !== 'all' && t.category !== memberToolFilterCategory) return false;
+    if (memberToolFilterCategory !== 'all') {
+      const cleanToolCat = (t.category || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const cleanFilterCat = memberToolFilterCategory.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (t.category !== memberToolFilterCategory && !cleanToolCat.includes(cleanFilterCat) && !cleanFilterCat.includes(cleanToolCat)) {
+        return false;
+      }
+    }
     
     if (memberToolSearchQuery && !memberToolSearchQuery.startsWith('@')) {
       const q = memberToolSearchQuery.trim().toLowerCase();
