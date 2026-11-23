@@ -2832,6 +2832,50 @@ function deleteTool(toolId) {
 }
 
 // ----------------------------------------------------
+
+// ----------------------------------------------------
+// DYNAMIC MULTI-TOOL ROW GENERATOR FOR TOOL EDITOR
+// ----------------------------------------------------
+function addToolLinkInputRow(title = '', url = '') {
+  const container = document.getElementById('toolLinksContainer');
+  if (!container) return;
+
+  const count = container.querySelectorAll('.tool-link-row').length + 1;
+  const defaultTitle = title || `Tools ${count}`;
+
+  const rowId = 'toolLinkRow_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+  const row = document.createElement('div');
+  row.id = rowId;
+  row.className = 'tool-link-row flex items-center gap-2 p-2 rounded-xl bg-[#161822] border border-white/10';
+
+  row.innerHTML = `
+    <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <input type="text" value="${defaultTitle}" placeholder="Nama Tools (Misal: ChatGPT Studio / Viggle AI)" class="tool-link-title px-3 py-1.5 rounded-lg bg-[#0e0f14] border border-white/10 text-white text-xs focus:outline-none focus:border-purple-500 font-medium">
+      <input type="url" value="${url || ''}" placeholder="Link Tools (https://...)" class="tool-link-url px-3 py-1.5 rounded-lg bg-[#0e0f14] border border-white/10 text-purple-300 font-mono text-[11px] focus:outline-none focus:border-purple-500">
+    </div>
+    <button type="button" onclick="removeToolLinkInputRow('${rowId}')" class="w-8 h-8 rounded-lg bg-rose-500/15 hover:bg-rose-500 text-rose-300 hover:text-white text-xs transition-colors shrink-0 flex items-center justify-center cursor-pointer" title="Hapus Tools Ini">
+      <i class="fa-solid fa-trash text-[11px]"></i>
+    </button>
+  `;
+
+  container.appendChild(row);
+}
+
+function removeToolLinkInputRow(rowId) {
+  const row = document.getElementById(rowId);
+  if (row) row.remove();
+}
+
+function updateCategoryDatalist() {
+  const datalist = document.getElementById('categoryDatalist');
+  if (!datalist) return;
+  const cats = [...new Set([
+    ...OFFICIAL_CATEGORIES,
+    ...(courseData.portalTools || []).map(t => t.category).filter(Boolean)
+  ])];
+  datalist.innerHTML = cats.map(c => `<option value="${c}"></option>`).join('');
+}
+
 // DYNAMIC MULTI-VIDEO ROW GENERATOR FOR TOOL EDITOR
 // ----------------------------------------------------
 function addToolVideoInputRow(title = '', url = '') {
@@ -2886,6 +2930,15 @@ function openAddToolModal() {
   document.getElementById('toolFormDesc').value = '';
   if (document.getElementById('toolFormMarkdownPrompt')) document.getElementById('toolFormMarkdownPrompt').value = '';
 
+  if (typeof updateCategoryDatalist === 'function') updateCategoryDatalist();
+
+  // Setup dynamic tools container with 1 initial row
+  const toolsContainer = document.getElementById('toolLinksContainer');
+  if (toolsContainer) {
+    toolsContainer.innerHTML = '';
+    addToolLinkInputRow('Tools 1 (ChatGPT Studio)', '');
+  }
+
   // Setup dynamic video container with 1 initial row
   const vidContainer = document.getElementById('toolVideosContainer');
   if (vidContainer) {
@@ -2912,6 +2965,25 @@ function openEditToolModal(toolId) {
   if (document.getElementById('toolFormMarkdownPrompt')) document.getElementById('toolFormMarkdownPrompt').value = tool.markdownPrompt || '';
   if (document.getElementById('toolFormInstructionsMd')) {
     document.getElementById('toolFormInstructionsMd').value = tool.instructionsMd || (tool.instructions ? tool.instructions.map((s, idx) => (idx + 1) + '. ' + s).join('\n') : '') || '';
+  }
+
+  if (typeof updateCategoryDatalist === 'function') updateCategoryDatalist();
+
+  // Setup dynamic tools container with existing tools
+  const toolsContainer = document.getElementById('toolLinksContainer');
+  if (toolsContainer) {
+    toolsContainer.innerHTML = '';
+    let toolList = [];
+    if (tool.tools && tool.tools.length > 0) {
+      toolList = tool.tools;
+    } else if (tool.toolUrl) {
+      toolList = [{ name: 'Tools AI Utama', url: tool.toolUrl }];
+    }
+    if (toolList.length > 0) {
+      toolList.forEach(t => addToolLinkInputRow(t.name || t.title || 'Tools AI', t.url));
+    } else {
+      addToolLinkInputRow('Tools 1 (ChatGPT Studio)', '');
+    }
   }
 
   // Setup dynamic video container with existing videos
@@ -2956,6 +3028,18 @@ function handleToolFormSubmit(e) {
   const markdownPrompt = document.getElementById('toolFormMarkdownPrompt') ? document.getElementById('toolFormMarkdownPrompt').value.trim() : '';
   const instructionsMd = document.getElementById('toolFormInstructionsMd') ? document.getElementById('toolFormInstructionsMd').value.trim() : '';
 
+  // Extract all tool link rows
+  const toolRows = document.querySelectorAll('.tool-link-row');
+  const toolLinks = [];
+  toolRows.forEach((row, idx) => {
+    const name = row.querySelector('.tool-link-title')?.value?.trim() || `Tools ${idx + 1}`;
+    const url = row.querySelector('.tool-link-url')?.value?.trim();
+    if (url) {
+      toolLinks.push({ name, title: name, url });
+    }
+  });
+  const mainToolUrl = toolLinks.length > 0 ? toolLinks[0].url : (toolUrl || '');
+
   // Extract all video rows
   const videoRows = document.querySelectorAll('.tool-video-row');
   const videos = [];
@@ -2981,7 +3065,8 @@ function handleToolFormSubmit(e) {
       existing.category = category;
       existing.status = status;
       existing.coverUrl = coverUrl;
-      existing.toolUrl = toolUrl;
+      existing.toolUrl = mainToolUrl;
+      existing.tools = toolLinks;
       existing.videos = videos;
       existing.videoUrl = mainVideoUrl;
       existing.desc = desc;
@@ -3001,7 +3086,8 @@ function handleToolFormSubmit(e) {
       category,
       status,
       coverUrl: coverUrl || 'https://www.animato.id/cinema/asmr.webp',
-      toolUrl,
+      toolUrl: mainToolUrl,
+      tools: toolLinks,
       videos,
       videoUrl: mainVideoUrl,
       desc,
@@ -4511,6 +4597,22 @@ function renderMemberTools() {
     { id: '05. Edukasi, Guru & Produk (41–50)', label: '05. Edukasi, Guru & Produk (41–50)', short: '05. Edukasi (41-50)' },
     { id: '06. Bonus & Update Terbaru (51–60)', label: '06. Bonus & Update Terbaru (51–60)', short: '06. Bonus (51-60)' }
   ];
+
+  // Dynamic custom categories typed by admin
+  const knownCatIds = new Set(categoryConfig.map(c => c.id.toLowerCase().replace(/[^a-z0-9]/g, '')));
+  tools.forEach(t => {
+    if (t.category && t.status !== false) {
+      const clean = t.category.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!knownCatIds.has(clean)) {
+        knownCatIds.add(clean);
+        categoryConfig.push({
+          id: t.category,
+          label: t.category,
+          short: t.category
+        });
+      }
+    }
+  });
 
   if (filtersContainer) {
     filtersContainer.innerHTML = categoryConfig.map(cat => {
