@@ -1,4 +1,86 @@
+
+window.INITIAL_COURSE_CATEGORIES = [
+  {
+    id: "cat-01",
+    name: "01. Dasar Animasi AI (0–10)",
+    slug: "dasar-animasi-ai-0-10",
+    desc: "Fondasi dasar membuat animasi AI dari nol untuk pemula & ibu rumah tangga.",
+    icon: "fa-graduation-cap",
+    color: "#8b5cf6",
+    order: 1,
+    status: true,
+    createdAt: "2026-11-24T00:00:00Z"
+  },
+  {
+    id: "cat-02",
+    name: "02. Konten Kreatif & Editing (11–20)",
+    slug: "konten-kreatif-editing-11-20",
+    desc: "Teknik editing CapCut, lip sync, cloning suara, dan video animasi menarik.",
+    icon: "fa-wand-magic-sparkles",
+    color: "#ec4899",
+    order: 2,
+    status: true,
+    createdAt: "2026-11-24T00:00:00Z"
+  },
+  {
+    id: "cat-03",
+    name: "03. Konten Viral & Affiliate (21–30)",
+    slug: "konten-viral-affiliate-21-30",
+    desc: "Formula konten video animasi viral TikTok, Reels, dan cuan dari affiliate.",
+    icon: "fa-fire",
+    color: "#f59e0b",
+    order: 3,
+    status: true,
+    createdAt: "2026-11-24T00:00:00Z"
+  },
+  {
+    id: "cat-04",
+    name: "04. Drama AI & Promosi Usaha (31–40)",
+    slug: "drama-ai-promosi-usaha-31-40",
+    desc: "Pembuatan animasi berseri, sinetron mini, dan promosi produk jualan UMKM.",
+    icon: "fa-masks-theater",
+    color: "#3b82f6",
+    order: 4,
+    status: true,
+    createdAt: "2026-11-24T00:00:00Z"
+  },
+  {
+    id: "cat-05",
+    name: "05. Edukasi, Guru & Produk (41–50)",
+    slug: "edukasi-guru-produk-41-50",
+    desc: "Animasi pembelajaran PAUD/TK, dongeng anak, dan produk digital edukasi.",
+    icon: "fa-book-open-reader",
+    color: "#10b981",
+    order: 5,
+    status: true,
+    createdAt: "2026-11-24T00:00:00Z"
+  },
+  {
+    id: "cat-06",
+    name: "06. Bonus & Update Terbaru (51–60)",
+    slug: "bonus-update-terbaru-51-60",
+    desc: "Materi lanjutan, update tools AI terbaru, dan aset eksklusif member.",
+    icon: "fa-gift",
+    color: "#a855f7",
+    order: 6,
+    status: true,
+    createdAt: "2026-11-24T00:00:00Z"
+  },
+  {
+    id: "cat-uncategorized",
+    name: "Belum Dikelompokkan",
+    slug: "belum-dikelompokkan",
+    desc: "Materi baru yang belum dimasukkan ke dalam modul kurikulum.",
+    icon: "fa-folder-open",
+    color: "#64748b",
+    order: 99,
+    status: true,
+    createdAt: "2026-11-24T00:00:00Z"
+  }
+];
+
 window.DEFAULT_COURSE_DATA = {
+  curriculumCategories: window.INITIAL_COURSE_CATEGORIES,
   "themeConfig": {
     "colorTheme": "obsidian",
     "customBg": "#0c0c0e",

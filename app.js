@@ -1529,6 +1529,8 @@ function switchPortalTab(tabName) {
   // Trigger specific tab renders
   if (tabName === 'tools') {
     renderAdminToolsTable();
+  } else if (tabName === 'categories') {
+    renderAdminCategoriesTable();
   } else if (tabName === 'dashboard') {
     renderPortalDashboard();
     if (typeof syncFromGasDatabase === 'function') syncFromGasDatabase(true);
@@ -2913,10 +2915,13 @@ function removeToolLinkInputRow(rowId) {
 function updateCategoryDatalist() {
   const datalist = document.getElementById('categoryDatalist');
   if (!datalist) return;
+  const catNames = (courseData.curriculumCategories || []).map(c => c.name).filter(Boolean);
+  const toolCats = (courseData.portalTools || []).map(t => t.category).filter(Boolean);
   const cats = [...new Set([
-    ...OFFICIAL_CATEGORIES,
-    ...(courseData.portalTools || []).map(t => t.category).filter(Boolean)
-  ])];
+    ...catNames,
+    ...toolCats,
+    ...OFFICIAL_CATEGORIES
+  ])].filter(c => c !== 'Belum Dikelompokkan');
   datalist.innerHTML = cats.map(c => `<option value="${c}"></option>`).join('');
 }
 
@@ -3097,6 +3102,25 @@ function handleToolFormSubmit(e) {
 
   const mainVideoUrl = videos.length > 0 ? videos[0].url : '';
 
+  // Match or create categoryId dynamically
+  let matchedCat = (courseData.curriculumCategories || []).find(c => (c.name && c.name.toLowerCase() === category.toLowerCase()) || c.id === category);
+  if (!matchedCat && category) {
+    matchedCat = {
+      id: 'cat-' + Date.now(),
+      name: category,
+      slug: category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+      desc: 'Modul materi ' + category,
+      icon: 'fa-folder',
+      color: '#8b5cf6',
+      order: (courseData.curriculumCategories || []).length + 1,
+      status: true,
+      createdAt: new Date().toISOString()
+    };
+    if (!courseData.curriculumCategories) courseData.curriculumCategories = [];
+    courseData.curriculumCategories.push(matchedCat);
+  }
+  const assignedCategoryId = matchedCat ? matchedCat.id : 'cat-uncategorized';
+
   if (!courseData.portalTools) {
     courseData.portalTools = [];
   }
@@ -3107,6 +3131,7 @@ function handleToolFormSubmit(e) {
     if (existing) {
       existing.name = name;
       existing.category = category;
+      existing.categoryId = assignedCategoryId;
       existing.status = status;
       existing.coverUrl = coverUrl;
       existing.toolUrl = mainToolUrl;
@@ -4467,6 +4492,18 @@ function handleMemberToolSearch(val) {
 
 function renderMemberTools() {
   const container = document.getElementById('memberToolsGrid');
+  const skilskulContainer = document.getElementById('skilskulClassPlayerContainer');
+
+  if (isMemberUnlocked) {
+    if (container) container.classList.add('hidden');
+    if (skilskulContainer) skilskulContainer.classList.remove('hidden');
+    initCourseCategoriesAndMigration();
+    renderSkilskulPlayer();
+    renderCurriculumAccordion();
+  } else {
+    if (skilskulContainer) skilskulContainer.classList.add('hidden');
+    if (container) container.classList.remove('hidden');
+  }
   const filtersContainer = document.getElementById('memberCategoryFilters');
   const memberBarContainer = document.getElementById('memberWelcomeBarContainer');
   if (!container) return;
@@ -6986,4 +7023,958 @@ function toggleAdminPassVisibility(inputId, btn) {
       icon.classList.add('fa-eye');
     }
   }
+}
+
+
+// =========================================================================
+// SKILSKUL LMS CLASS PLAYER & DINAMIS KATEGORI ENGINE
+// =========================================================================
+
+let currentActiveLessonId = 'lvl-0';
+let currentActiveVideoIndex = 0;
+let currentOpenCategoryId = 'cat-01';
+let isCurriculumListHidden = false;
+let currentActiveContentTab = 'prompt';
+
+// 1. DATA MIGRATION & INITIALIZATION
+function initCourseCategoriesAndMigration() {
+  if (!courseData.curriculumCategories || !Array.isArray(courseData.curriculumCategories) || courseData.curriculumCategories.length === 0) {
+    if (typeof window.INITIAL_COURSE_CATEGORIES !== 'undefined' && Array.isArray(window.INITIAL_COURSE_CATEGORIES)) {
+      courseData.curriculumCategories = JSON.parse(JSON.stringify(window.INITIAL_COURSE_CATEGORIES));
+    } else {
+      courseData.curriculumCategories = [
+        { id: "cat-01", name: "01. Dasar Animasi AI (0–10)", slug: "dasar-animasi-ai-0-10", desc: "Dasar animasi AI dari nol", icon: "fa-graduation-cap", color: "#8b5cf6", order: 1, status: true },
+        { id: "cat-02", name: "02. Konten Kreatif & Editing (11–20)", slug: "konten-kreatif-editing-11-20", desc: "Editing CapCut, lip sync, cloning suara", icon: "fa-wand-magic-sparkles", color: "#ec4899", order: 2, status: true },
+        { id: "cat-03", name: "03. Konten Viral & Affiliate (21–30)", slug: "konten-viral-affiliate-21-30", desc: "Konten viral TikTok, Reels, affiliate", icon: "fa-fire", color: "#f59e0b", order: 3, status: true },
+        { id: "cat-04", name: "04. Drama AI & Promosi Usaha (31–40)", slug: "drama-ai-promosi-usaha-31-40", desc: "Animasi berseri, sinetron mini, promosi UMKM", icon: "fa-masks-theater", color: "#3b82f6", order: 4, status: true },
+        { id: "cat-05", name: "05. Edukasi, Guru & Produk (41–50)", slug: "edukasi-guru-produk-41-50", desc: "Animasi pembelajaran PAUD/TK, dongeng anak", icon: "fa-book-open-reader", color: "#10b981", order: 5, status: true },
+        { id: "cat-06", name: "06. Bonus & Update Terbaru (51–60)", slug: "bonus-update-terbaru-51-60", desc: "Materi lanjutan & aset eksklusif", icon: "fa-gift", color: "#a855f7", order: 6, status: true },
+        { id: "cat-uncategorized", name: "Belum Dikelompokkan", slug: "belum-dikelompokkan", desc: "Materi baru yang belum dimasukkan modul", icon: "fa-folder-open", color: "#64748b", order: 99, status: true }
+      ];
+    }
+  }
+
+  // Ensure "Belum Dikelompokkan" exists
+  if (!courseData.curriculumCategories.some(c => c.id === 'cat-uncategorized' || c.slug === 'belum-dikelompokkan')) {
+    courseData.curriculumCategories.push({
+      id: "cat-uncategorized",
+      name: "Belum Dikelompokkan",
+      slug: "belum-dikelompokkan",
+      desc: "Materi baru yang belum dimasukkan modul",
+      icon: "fa-folder-open",
+      color: "#64748b",
+      order: 99,
+      status: true
+    });
+  }
+
+  // Ensure order property exists on all categories
+  courseData.curriculumCategories.forEach((cat, idx) => {
+    if (typeof cat.order !== 'number') cat.order = idx + 1;
+    if (cat.status === undefined) cat.status = true;
+  });
+
+  // Sort categories by order
+  courseData.curriculumCategories.sort((a, b) => a.order - b.order);
+
+  // Link tools to categoryId
+  const tools = courseData.portalTools || [];
+  const catOrderCounter = {};
+
+  tools.forEach(t => {
+    if (!t.categoryId || !courseData.curriculumCategories.some(c => c.id === t.categoryId)) {
+      let matchedCat = null;
+      if (t.category) {
+        const cleanOld = t.category.toLowerCase().replace(/[^a-z0-9]/g, '');
+        matchedCat = courseData.curriculumCategories.find(c => {
+          const cClean = (c && c.name) ? c.name.toLowerCase().replace(/[^a-z0-9]/g, '') : '';
+          return cClean === cleanOld || cleanOld.includes(cClean) || cClean.includes(cleanOld);
+        });
+      }
+      t.categoryId = matchedCat ? matchedCat.id : 'cat-uncategorized';
+    }
+
+    if (typeof t.orderInCategory !== 'number') {
+      catOrderCounter[t.categoryId] = (catOrderCounter[t.categoryId] || 0) + 1;
+      t.orderInCategory = catOrderCounter[t.categoryId];
+    }
+
+    const linkedCat = courseData.curriculumCategories.find(c => c.id === t.categoryId);
+    if (linkedCat) t.category = linkedCat.name;
+  });
+
+  return { toolCount: tools.length, categoryCount: courseData.curriculumCategories.length };
+}
+
+// 2. MEMBER PROGRESS TRACKING (PERSISTENT CHECKBOX PER USER)
+function getMemberProgressStorageKey() {
+  const activeEmail = (typeof getActiveMemberInfo === 'function') ? (getActiveMemberInfo().activeEmail || 'guest') : 'guest';
+  return 'irt_member_progress_' + activeEmail.toLowerCase().trim();
+}
+
+function getMemberProgress() {
+  try {
+    const raw = localStorage.getItem(getMemberProgressStorageKey());
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function isLessonCompleted(lessonId) {
+  const prog = getMemberProgress();
+  return !!prog[lessonId];
+}
+
+function toggleLessonProgress(lessonId, isCompleted, event) {
+  if (event) event.stopPropagation();
+  const prog = getMemberProgress();
+  prog[lessonId] = isCompleted;
+  try {
+    localStorage.setItem(getMemberProgressStorageKey(), JSON.stringify(prog));
+  } catch (e) {}
+
+  updateOverallProgressBadge();
+  renderCurriculumAccordion();
+
+  // Non-blocking sync to Google Sheets
+  if (typeof GAS_API_URL !== 'undefined' && GAS_API_URL) {
+    const activeInfo = (typeof getActiveMemberInfo === 'function') ? getActiveMemberInfo() : {};
+    fetch(GAS_API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'updateMemberProgress',
+        email: activeInfo.activeEmail || '',
+        code: activeInfo.activeCode || '',
+        lessonId: lessonId,
+        completed: isCompleted,
+        totalCompleted: Object.values(prog).filter(Boolean).length
+      })
+    }).catch(() => {});
+  }
+}
+
+function updateOverallProgressBadge() {
+  const tools = (courseData.portalTools || []).filter(t => t.status !== false);
+  const prog = getMemberProgress();
+  const completedCount = tools.filter(t => prog[t.id]).length;
+  const pct = tools.length > 0 ? Math.round((completedCount / tools.length) * 100) : 0;
+
+  const txtEl = document.getElementById('overallProgressText');
+  if (txtEl) {
+    txtEl.textContent = `${completedCount} / ${tools.length} Selesai (${pct}%)`;
+  }
+}
+
+// 3. ORDERED LESSONS LIST (FLATTENED FOR CROSS-CATEGORY NAVIGATION)
+function getOrderedLessonsList() {
+  const categories = (courseData.curriculumCategories || []).filter(c => c.status !== false).sort((a, b) => a.order - b.order);
+  const tools = (courseData.portalTools || []).filter(t => t.status !== false);
+  const ordered = [];
+
+  categories.forEach(cat => {
+    const catTools = tools.filter(t => t.categoryId === cat.id).sort((a, b) => (a.orderInCategory || 0) - (b.orderInCategory || 0));
+    catTools.forEach(t => ordered.push(t));
+  });
+
+  // Also include tools in uncategorized if not already
+  tools.forEach(t => {
+    if (!ordered.some(o => o.id === t.id)) ordered.push(t);
+  });
+
+  return ordered;
+}
+
+// 4. RENDER TOP ACTIVE LESSON PLAYER
+function renderSkilskulPlayer() {
+  const container = document.getElementById('skilskulClassPlayerContainer');
+  if (!container) return;
+
+  const orderedLessons = getOrderedLessonsList();
+  if (orderedLessons.length === 0) return;
+
+  let activeTool = orderedLessons.find(t => t.id === currentActiveLessonId);
+  if (!activeTool) {
+    activeTool = orderedLessons[0];
+    currentActiveLessonId = activeTool.id;
+  }
+
+  // Update current open category to match active lesson
+  if (activeTool.categoryId) {
+    currentOpenCategoryId = activeTool.categoryId;
+  }
+
+  // Category & Level Badges
+  const catBadge = document.getElementById('playerCategoryBadge');
+  if (catBadge) {
+    const catObj = (courseData.curriculumCategories || []).find(c => c.id === activeTool.categoryId);
+    catBadge.textContent = catObj ? catObj.name : (activeTool.category || 'Materi Kelas');
+    if (catObj && catObj.color) {
+      catBadge.style.borderColor = catObj.color + '60';
+      catBadge.style.color = catObj.color;
+    }
+  }
+
+  const lvlBadge = document.getElementById('playerLevelBadge');
+  if (lvlBadge) {
+    lvlBadge.textContent = activeTool.levelNum !== undefined ? `LEVEL ${activeTool.levelNum}` : (activeTool.tag || 'MATERI');
+  }
+
+  const titleEl = document.getElementById('playerLessonTitle');
+  if (titleEl) {
+    titleEl.textContent = activeTool.name || 'Materi Kelas';
+  }
+
+  // Quick Action Buttons (Tools, Mark Completed, Fullscreen)
+  const actionsEl = document.getElementById('playerLessonActions');
+  if (actionsEl) {
+    const isDone = isLessonCompleted(activeTool.id);
+    actionsEl.innerHTML = `
+      <button onclick="toggleLessonProgress('${activeTool.id}', ${!isDone})" class="px-3.5 py-1.5 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer ${
+        isDone 
+          ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' 
+          : 'bg-white/10 hover:bg-white/15 text-slate-200 border border-white/15'
+      }">
+        <i class="fa-solid ${isDone ? 'fa-circle-check text-emerald-400' : 'fa-circle text-slate-400'} text-xs"></i>
+        <span>${isDone ? 'Selesai Dipelajari' : 'Tandai Selesai'}</span>
+      </button>
+    `;
+  }
+
+  // Video Player Rendering
+  renderActiveLessonVideo(activeTool);
+
+  // Prev / Next Buttons State
+  const currentIndex = orderedLessons.findIndex(t => t.id === activeTool.id);
+  const btnPrev = document.getElementById('btnPrevLesson');
+  const btnNext = document.getElementById('btnNextLesson');
+  if (btnPrev) {
+    btnPrev.disabled = currentIndex <= 0;
+  }
+  if (btnNext) {
+    btnNext.disabled = currentIndex >= orderedLessons.length - 1;
+  }
+
+  // Content Tabs Rendering
+  renderActiveLessonContentTabs(activeTool);
+  updateOverallProgressBadge();
+}
+
+function renderActiveLessonVideo(tool) {
+  const box = document.getElementById('playerVideoBox');
+  const partsContainer = document.getElementById('playerVideoPartsContainer');
+  if (!box) return;
+
+  const videoList = (tool.videos && tool.videos.length > 0) 
+    ? tool.videos 
+    : (tool.videoUrl ? [{ title: 'Video Tutorial', url: tool.videoUrl }] : []);
+
+  if (currentActiveVideoIndex >= videoList.length) {
+    currentActiveVideoIndex = 0;
+  }
+
+  // Video Parts Switcher
+  if (partsContainer) {
+    if (videoList.length > 1) {
+      partsContainer.classList.remove('hidden');
+      partsContainer.innerHTML = videoList.map((v, idx) => {
+        const isActive = idx === currentActiveVideoIndex;
+        return `
+          <button onclick="switchLessonVideoPart(${idx})" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+            isActive 
+              ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30' 
+              : 'bg-white/10 hover:bg-white/15 text-slate-300 border border-white/15'
+          }">
+            <i class="fa-brands fa-youtube ${isActive ? 'text-slate-950' : 'text-red-400'}"></i>
+            <span>${v.title || 'Part ' + (idx + 1)}</span>
+          </button>
+        `;
+      }).join('');
+    } else {
+      partsContainer.classList.add('hidden');
+      partsContainer.innerHTML = '';
+    }
+  }
+
+  // Embed active video
+  if (videoList.length > 0) {
+    const rawUrl = videoList[currentActiveVideoIndex].url;
+    const embedUrl = getYoutubeEmbedUrl(rawUrl);
+
+    if (embedUrl) {
+      box.innerHTML = `
+        <iframe src="${embedUrl}?autoplay=0&rel=0&modestbranding=1" title="${tool.name}" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      `;
+    } else {
+      // Fallback direct video or cover
+      const cover = tool.coverUrl || 'assets/covers/' + tool.id + '.jpg';
+      box.innerHTML = `
+        <div class="relative w-full h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-[#1b1c28] to-[#0c0d12]">
+          <img src="${cover}" alt="${tool.name}" class="absolute inset-0 w-full h-full object-cover opacity-25">
+          <div class="relative z-10 space-y-3">
+            <div class="w-16 h-16 rounded-full bg-purple-600/30 border border-purple-500/40 text-purple-300 flex items-center justify-center text-2xl mx-auto shadow-lg">
+              <i class="fa-solid fa-play"></i>
+            </div>
+            <p class="text-sm font-bold text-white">${videoList[currentActiveVideoIndex].title || 'Video Tutorial'}</p>
+            <a href="${rawUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold inline-flex items-center gap-2 shadow-md">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Link Video
+            </a>
+          </div>
+        </div>
+      `;
+    }
+  } else {
+    // No video attached
+    const cover = tool.coverUrl || 'assets/covers/' + tool.id + '.jpg';
+    box.innerHTML = `
+      <div class="relative w-full h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-[#1b1c28] to-[#0c0d12]">
+        <img src="${cover}" alt="${tool.name}" class="absolute inset-0 w-full h-full object-cover opacity-20">
+        <div class="relative z-10 space-y-2 max-w-md">
+          <div class="w-14 h-14 rounded-2xl bg-purple-600/20 border border-purple-500/30 text-purple-300 flex items-center justify-center text-2xl mx-auto">
+            <i class="fa-solid fa-file-lines"></i>
+          </div>
+          <h4 class="text-base font-bold text-white">${tool.name}</h4>
+          <p class="text-xs text-slate-300">Modul ini berfokus pada Naskah Prompt Siap Pakai dan Instruksi Langkah demi Langkah di bawah.</p>
+        </div>
+      </div>
+    `;
+  }
+}
+
+function switchLessonVideoPart(partIndex) {
+  currentActiveVideoIndex = partIndex;
+  const orderedLessons = getOrderedLessonsList();
+  const activeTool = orderedLessons.find(t => t.id === currentActiveLessonId);
+  if (activeTool) renderActiveLessonVideo(activeTool);
+}
+
+function getYoutubeEmbedUrl(url) {
+  if (!url) return '';
+  let videoId = '';
+  if (url.includes('youtu.be/')) {
+    videoId = url.split('youtu.be/')[1].split('?')[0].split('&')[0];
+  } else if (url.includes('youtube.com/watch')) {
+    const urlParams = new URLSearchParams(url.split('?')[1]);
+    videoId = urlParams.get('v');
+  } else if (url.includes('youtube.com/embed/')) {
+    videoId = url.split('youtube.com/embed/')[1].split('?')[0].split('&')[0];
+  }
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+}
+
+// 5. RENDER CONTENT TABS (PROMPT MD / INSTRUCTIONS / TOOLS)
+function renderActiveLessonContentTabs(tool) {
+  // Tab 1: Prompt MD
+  const promptPane = document.getElementById('playerTabPane_prompt');
+  if (promptPane) {
+    if (tool.markdownPrompt && tool.markdownPrompt.trim().length > 0) {
+      const renderedHtml = (typeof renderCustomMarkdown === 'function') 
+        ? renderCustomMarkdown(tool.markdownPrompt) 
+        : `<pre class="whitespace-pre-wrap font-mono text-xs">${tool.markdownPrompt}</pre>`;
+
+      promptPane.innerHTML = `
+        <div class="flex items-center justify-between pb-3 border-b border-white/10 flex-wrap gap-2">
+          <span class="text-xs font-mono font-bold text-purple-300 flex items-center gap-2">
+            <i class="fa-solid fa-sparkles text-amber-400"></i> Naskah Prompt Siap Pakai (Markdown)
+          </span>
+          <button onclick="copyFullPromptText('${tool.id}')" class="px-3.5 py-1.5 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/40 text-purple-200 hover:text-white text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+            <i class="fa-solid fa-copy"></i> Salin Seluruh Prompt
+          </button>
+        </div>
+        <div class="prose prose-invert max-w-none text-xs sm:text-sm text-slate-200 leading-relaxed pt-2">
+          ${renderedHtml}
+        </div>
+      `;
+    } else {
+      promptPane.innerHTML = `
+        <div class="py-8 text-center text-slate-400 text-xs">
+          <i class="fa-solid fa-circle-info text-2xl mb-2 text-purple-400"></i>
+          <p>Materi ini tidak memiliki naskah prompt terpisah. Silakan ikuti video tutorial dan panduan instruksi.</p>
+        </div>
+      `;
+    }
+  }
+
+  // Tab 2: Instructions
+  const instPane = document.getElementById('playerTabPane_instructions');
+  if (instPane) {
+    const hasInstructionsMd = tool.instructionsMd && tool.instructionsMd.trim().length > 0;
+    const hasInstructionsArray = tool.instructions && tool.instructions.length > 0;
+
+    if (hasInstructionsMd || hasInstructionsArray) {
+      let instContent = '';
+      if (hasInstructionsMd) {
+        instContent = (typeof renderCustomMarkdown === 'function') ? renderCustomMarkdown(tool.instructionsMd) : `<div class="whitespace-pre-wrap">${tool.instructionsMd}</div>`;
+      } else {
+        instContent = `
+          <ol class="space-y-2 list-decimal list-inside text-xs sm:text-sm text-slate-200">
+            ${tool.instructions.map(step => `<li class="leading-relaxed">${step}</li>`).join('')}
+          </ol>
+        `;
+      }
+
+      instPane.innerHTML = `
+        <div class="pb-2 border-b border-white/10">
+          <span class="text-xs font-mono font-bold text-purple-300 flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-emerald-400"></i> Panduan Langkah demi Langkah
+          </span>
+        </div>
+        <div class="prose prose-invert max-w-none text-xs sm:text-sm text-slate-200 leading-relaxed pt-2">
+          ${instContent}
+        </div>
+      `;
+    } else {
+      instPane.innerHTML = `
+        <div class="py-8 text-center text-slate-400 text-xs">
+          <i class="fa-solid fa-circle-info text-2xl mb-2 text-purple-400"></i>
+          <p>Panduan langkah demi langkah tersedia langsung di dalam video tutorial di atas.</p>
+        </div>
+      `;
+    }
+  }
+
+  // Tab 3: Tools AI
+  const toolsPane = document.getElementById('playerTabPane_tools');
+  if (toolsPane) {
+    const toolList = (tool.tools && tool.tools.length > 0) 
+      ? tool.tools 
+      : (tool.toolUrl ? [{ name: 'Tools AI Utama', url: tool.toolUrl }] : []);
+
+    if (toolList.length > 0) {
+      toolsPane.innerHTML = `
+        <div class="pb-2 border-b border-white/10">
+          <span class="text-xs font-mono font-bold text-purple-300 flex items-center gap-2">
+            <i class="fa-solid fa-screwdriver-wrench text-amber-400"></i> Link Tools AI Praktik
+          </span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          ${toolList.map((t, idx) => `
+            <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 rounded-2xl bg-purple-950/40 hover:bg-purple-900/50 border border-purple-500/30 text-white font-medium text-xs transition-all hover:scale-[1.01] group">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-xl bg-purple-600/50 text-white font-mono font-bold text-xs flex items-center justify-center">${idx + 1}</span>
+                <span class="font-bold">${t.name || t.title || 'Buka Tools AI'}</span>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs text-purple-400 group-hover:text-purple-200 transition-colors"></i>
+            </a>
+          `).join('')}
+        </div>
+      `;
+    } else {
+      toolsPane.innerHTML = `
+        <div class="py-8 text-center text-slate-400 text-xs">
+          <i class="fa-solid fa-screwdriver-wrench text-2xl mb-2 text-purple-400"></i>
+          <p>Materi ini tidak memerlukan link tools khusus eksternal.</p>
+        </div>
+      `;
+    }
+  }
+}
+
+function switchPlayerContentTab(tabName) {
+  currentActiveContentTab = tabName;
+  const tabPrompt = document.getElementById('tabBtn_prompt');
+  const tabInst = document.getElementById('tabBtn_instructions');
+  const tabTools = document.getElementById('tabBtn_tools');
+
+  const panePrompt = document.getElementById('playerTabPane_prompt');
+  const paneInst = document.getElementById('playerTabPane_instructions');
+  const paneTools = document.getElementById('playerTabPane_tools');
+
+  // Reset all buttons
+  [tabPrompt, tabInst, tabTools].forEach(btn => {
+    if (!btn) return;
+    btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer bg-white/5 text-slate-300 hover:bg-white/10";
+  });
+
+  // Hide all panes
+  [panePrompt, paneInst, paneTools].forEach(pane => {
+    if (pane) pane.classList.add('hidden');
+  });
+
+  // Activate chosen
+  if (tabName === 'prompt' && tabPrompt && panePrompt) {
+    tabPrompt.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer bg-purple-600 text-white shadow-md";
+    panePrompt.classList.remove('hidden');
+  } else if (tabName === 'instructions' && tabInst && paneInst) {
+    tabInst.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer bg-purple-600 text-white shadow-md";
+    paneInst.classList.remove('hidden');
+  } else if (tabName === 'tools' && tabTools && paneTools) {
+    tabTools.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer bg-purple-600 text-white shadow-md";
+    paneTools.classList.remove('hidden');
+  }
+}
+
+// 6. RENDER ACCORDION "MATERI KELAS" (SINGLE-OPEN, PERSIS SKILSKUL VIDEO)
+function renderCurriculumAccordion() {
+  const container = document.getElementById('curriculumAccordionList');
+  if (!container) return;
+
+  const categories = (courseData.curriculumCategories || []).filter(c => c.status !== false).sort((a, b) => a.order - b.order);
+  const tools = (courseData.portalTools || []).filter(t => t.status !== false);
+  const prog = getMemberProgress();
+
+  container.innerHTML = categories.map(cat => {
+    const catTools = tools.filter(t => t.categoryId === cat.id).sort((a, b) => (a.orderInCategory || 0) - (b.orderInCategory || 0));
+    
+    // Hide empty category for students
+    if (catTools.length === 0) return '';
+
+    const completedInCat = catTools.filter(t => prog[t.id]).length;
+    const isCatOpen = currentOpenCategoryId === cat.id;
+    const isAllDone = completedInCat === catTools.length && catTools.length > 0;
+
+    return `
+      <div id="accordionCat_${cat.id}" class="curriculum-accordion-item rounded-2xl overflow-hidden border transition-all duration-300 ${
+        isCatOpen 
+          ? 'bg-[#181b28] border-purple-500/50 shadow-xl' 
+          : 'bg-[#0f1017] hover:bg-[#13141f] border-white/5 shadow-sm'
+      }">
+        <!-- Category Header (Accordion Toggle) -->
+        <div onclick="toggleCategoryAccordion('${cat.id}')" class="p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold transition-colors ${
+              isAllDone 
+                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' 
+                : 'bg-white/10 text-slate-300 border border-white/15'
+            }">
+              <i class="fa-solid ${isAllDone ? 'fa-check' : (cat.icon || 'fa-folder')}"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-white tracking-wide flex items-center gap-2">
+                <span>${cat.name}</span>
+                ${isAllDone ? '<span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">LENGKAP</span>' : ''}
+              </h3>
+              <p class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">
+                ${completedInCat} dari ${catTools.length} selesai
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-white/5 text-slate-300 border border-white/10">
+              ${catTools.length} Materi
+            </span>
+            <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform duration-300 ${isCatOpen ? 'rotate-180 text-purple-400' : ''}"></i>
+          </div>
+        </div>
+
+        <!-- Sub-materi List (Expanded when isCatOpen) -->
+        <div class="curriculum-submateri-list divide-y divide-white/5 px-2 pb-2 ${isCatOpen ? '' : 'hidden'}">
+          ${catTools.map(tool => {
+            const isActive = tool.id === currentActiveLessonId;
+            const isDone = isLessonCompleted(tool.id);
+            const hasVideo = (tool.videos && tool.videos.length > 0) || !!tool.videoUrl;
+            const hasPrompt = !!tool.markdownPrompt && tool.markdownPrompt.trim().length > 0;
+            const hasTools = (tool.tools && tool.tools.length > 0) || !!tool.toolUrl;
+
+            return `
+              <div id="submateriRow_${tool.id}" onclick="selectLesson('${tool.id}')" class="submateri-row min-h-[48px] p-3 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition-all duration-200 ${
+                isActive 
+                  ? 'bg-gradient-to-r from-purple-900/70 via-purple-900/50 to-indigo-950/60 border border-purple-500/60 shadow-lg text-white font-bold' 
+                  : 'hover:bg-white/5 text-slate-300'
+              }">
+                <!-- Left: Checkbox + Level Title -->
+                <div class="flex items-center gap-3 flex-1 min-w-0">
+                  <div onclick="event.stopPropagation()" class="flex items-center">
+                    <input type="checkbox" onchange="toggleLessonProgress('${tool.id}', this.checked, event)" ${isDone ? 'checked' : ''} class="w-4 h-4 rounded text-purple-600 focus:ring-purple-500 border-white/20 bg-black/40 cursor-pointer accent-purple-600">
+                  </div>
+                  <div class="flex items-center gap-2 min-w-0">
+                    ${isActive ? '<i class="fa-solid fa-circle-play text-amber-400 text-xs shrink-0 animate-pulse"></i>' : ''}
+                    <span class="text-xs sm:text-sm truncate ${isDone && !isActive ? 'line-through text-slate-500' : ''}">
+                      ${tool.name}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Right: Content Type Badges -->
+                <div class="flex items-center gap-1.5 shrink-0 text-[10px]">
+                  ${hasVideo ? '<i class="fa-brands fa-youtube text-red-400/90" title="Ada Video"></i>' : ''}
+                  ${hasPrompt ? '<i class="fa-solid fa-file-code text-purple-400" title="Ada Prompt MD"></i>' : ''}
+                  ${hasTools ? '<i class="fa-solid fa-screwdriver-wrench text-amber-400" title="Ada Link Tools"></i>' : ''}
+                  <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 ml-1"></i>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleCategoryAccordion(categoryId) {
+  if (currentOpenCategoryId === categoryId) {
+    currentOpenCategoryId = null; // collapse if already open
+  } else {
+    currentOpenCategoryId = categoryId; // single-open
+  }
+  renderCurriculumAccordion();
+}
+
+function selectLesson(lessonId, autoScroll = true) {
+  currentActiveLessonId = lessonId;
+  currentActiveVideoIndex = 0;
+  
+  const orderedLessons = getOrderedLessonsList();
+  const activeTool = orderedLessons.find(t => t.id === lessonId);
+  if (activeTool && activeTool.categoryId) {
+    currentOpenCategoryId = activeTool.categoryId;
+  }
+
+  renderSkilskulPlayer();
+  renderCurriculumAccordion();
+
+  if (autoScroll) {
+    const playerArea = document.getElementById('activeLessonPlayerArea');
+    if (playerArea) {
+      playerArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
+function goToPrevLesson() {
+  const ordered = getOrderedLessonsList();
+  const currentIndex = ordered.findIndex(t => t.id === currentActiveLessonId);
+  if (currentIndex > 0) {
+    selectLesson(ordered[currentIndex - 1].id, true);
+  }
+}
+
+function goToNextLesson() {
+  const ordered = getOrderedLessonsList();
+  const currentIndex = ordered.findIndex(t => t.id === currentActiveLessonId);
+  if (currentIndex >= 0 && currentIndex < ordered.length - 1) {
+    selectLesson(ordered[currentIndex + 1].id, true);
+  }
+}
+
+function scrollToActiveLesson() {
+  const ordered = getOrderedLessonsList();
+  const activeTool = ordered.find(t => t.id === currentActiveLessonId);
+  if (activeTool && activeTool.categoryId) {
+    currentOpenCategoryId = activeTool.categoryId;
+    renderCurriculumAccordion();
+  }
+
+  setTimeout(() => {
+    const activeRow = document.getElementById('submateriRow_' + currentActiveLessonId);
+    if (activeRow) {
+      activeRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      activeRow.classList.add('ring-2', 'ring-amber-400', 'scale-[1.01]');
+      setTimeout(() => {
+        activeRow.classList.remove('ring-2', 'ring-amber-400', 'scale-[1.01]');
+      }, 1500);
+    }
+  }, 100);
+}
+
+function toggleCurriculumVisibility() {
+  const list = document.getElementById('curriculumAccordionList');
+  const btn = document.getElementById('btnToggleCurriculum');
+  if (!list || !btn) return;
+
+  isCurriculumListHidden = !isCurriculumListHidden;
+  if (isCurriculumListHidden) {
+    list.classList.add('hidden');
+    btn.innerHTML = '<span>Tampilkan</span>';
+  } else {
+    list.classList.remove('hidden');
+    btn.innerHTML = '<span>Sembunyikan</span>';
+  }
+}
+
+function copyFullPromptText(toolId) {
+  const tool = (courseData.portalTools || []).find(t => t.id === toolId);
+  if (!tool || !tool.markdownPrompt) return;
+  navigator.clipboard.writeText(tool.markdownPrompt).then(() => {
+    showToast("Seluruh Naskah Prompt berhasil disalin ke clipboard!");
+  }).catch(() => {
+    showToast("Gagal menyalin naskah prompt.");
+  });
+}
+
+// 7. ADMIN PANEL: KELOLA KATEGORI TABLE & ACTIONS
+function renderAdminCategoriesTable() {
+  const tbody = document.getElementById('adminCategoriesTableBody');
+  const badge = document.getElementById('catCountBadge');
+  if (!tbody) return;
+
+  initCourseCategoriesAndMigration();
+  const categories = (courseData.curriculumCategories || []).sort((a, b) => a.order - b.order);
+  const tools = courseData.portalTools || [];
+
+  if (badge) {
+    badge.textContent = `${categories.length} Kategori`;
+  }
+
+  tbody.innerHTML = categories.map((cat, idx) => {
+    const toolCount = tools.filter(t => t.categoryId === cat.id).length;
+    const isUncat = cat.id === 'cat-uncategorized';
+    const isFirst = idx === 0;
+    const isLast = idx === categories.length - 1;
+
+    return `
+      <tr class="hover:bg-white/[0.02] transition-colors">
+        <!-- Urutan with Up/Down Buttons -->
+        <td class="px-4 py-3.5 text-center font-mono font-bold text-slate-400">
+          <div class="flex items-center justify-center gap-1.5">
+            <span class="w-6">${cat.order || (idx + 1)}</span>
+            <div class="flex flex-col gap-0.5">
+              <button onclick="moveCategoryOrder('${cat.id}', -1)" ${isFirst ? 'disabled' : ''} class="w-5 h-4 rounded bg-white/10 hover:bg-white/20 text-slate-300 flex items-center justify-center text-[9px] cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed">
+                ▲
+              </button>
+              <button onclick="moveCategoryOrder('${cat.id}', 1)" ${isLast ? 'disabled' : ''} class="w-5 h-4 rounded bg-white/10 hover:bg-white/20 text-slate-300 flex items-center justify-center text-[9px] cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed">
+                ▼
+              </button>
+            </div>
+          </div>
+        </td>
+
+        <!-- Nama Kategori & Deskripsi -->
+        <td class="px-4 py-3.5">
+          <div class="font-bold text-white text-xs sm:text-sm">${cat.name}</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">${cat.desc || 'Tanpa deskripsi'}</div>
+          <div class="text-[10px] font-mono text-purple-400/80 mt-1">slug: ${cat.slug || cat.id}</div>
+        </td>
+
+        <!-- Ikon & Warna -->
+        <td class="px-4 py-3.5 text-center">
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-xl bg-black/40 border border-white/10">
+            <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs" style="background-color: ${cat.color || '#8b5cf6'}25; color: ${cat.color || '#8b5cf6'}">
+              <i class="fa-solid ${cat.icon || 'fa-folder'}"></i>
+            </span>
+            <span class="font-mono text-[10px] text-slate-300">${cat.color || '#8b5cf6'}</span>
+          </div>
+        </td>
+
+        <!-- Total Materi -->
+        <td class="px-4 py-3.5 text-center">
+          <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold ${
+            toolCount > 0 ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : 'bg-slate-800 text-slate-400'
+          }">
+            ${toolCount} Materi
+          </span>
+        </td>
+
+        <!-- Status -->
+        <td class="px-4 py-3.5 text-center">
+          <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${
+            cat.status !== false ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+          }">
+            ${cat.status !== false ? 'Aktif' : 'Nonaktif'}
+          </span>
+        </td>
+
+        <!-- Aksi -->
+        <td class="px-4 py-3.5 text-center">
+          <div class="flex items-center justify-center gap-2">
+            <button onclick="openEditCategoryModal('${cat.id}')" class="px-2.5 py-1.5 rounded-lg bg-purple-600/20 hover:bg-purple-600/40 text-purple-300 border border-purple-500/30 text-xs font-bold transition-all cursor-pointer">
+              <i class="fa-solid fa-pen-to-square"></i> Edit
+            </button>
+            ${isUncat ? '' : `
+              <button onclick="handleCategoryDeletePrompt('${cat.id}')" class="px-2.5 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600/40 text-rose-300 border border-rose-500/30 text-xs font-bold transition-all cursor-pointer">
+                <i class="fa-solid fa-trash"></i> Hapus
+              </button>
+            `}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function openAddCategoryModal() {
+  document.getElementById('categoryModalTitle').textContent = 'Tambah Kategori Baru';
+  document.getElementById('catFormId').value = '';
+  document.getElementById('catFormName').value = '';
+  document.getElementById('catFormDesc').value = '';
+  document.getElementById('catFormIcon').value = 'fa-folder';
+  document.getElementById('catFormColor').value = '#8b5cf6';
+  document.getElementById('catFormColorHex').value = '#8b5cf6';
+  document.getElementById('catFormStatus').value = 'true';
+  openModal('categoryEditorModal');
+}
+
+function openEditCategoryModal(catId) {
+  const cat = (courseData.curriculumCategories || []).find(c => c.id === catId);
+  if (!cat) return;
+
+  document.getElementById('categoryModalTitle').textContent = 'Edit Kategori: ' + cat.name;
+  document.getElementById('catFormId').value = cat.id;
+  document.getElementById('catFormName').value = cat.name || '';
+  document.getElementById('catFormDesc').value = cat.desc || '';
+  document.getElementById('catFormIcon').value = cat.icon || 'fa-folder';
+  document.getElementById('catFormColor').value = cat.color || '#8b5cf6';
+  document.getElementById('catFormColorHex').value = cat.color || '#8b5cf6';
+  document.getElementById('catFormStatus').value = cat.status !== false ? 'true' : 'false';
+  openModal('categoryEditorModal');
+}
+
+function handleCategoryFormSubmit(e) {
+  e.preventDefault();
+  const id = document.getElementById('catFormId').value.trim();
+  const name = document.getElementById('catFormName').value.trim();
+  const desc = document.getElementById('catFormDesc').value.trim();
+  const icon = document.getElementById('catFormIcon').value.trim() || 'fa-folder';
+  const color = document.getElementById('catFormColor').value.trim() || '#8b5cf6';
+  const status = document.getElementById('catFormStatus').value === 'true';
+
+  if (!name) {
+    alert("Nama kategori tidak boleh kosong!");
+    return;
+  }
+
+  if (!courseData.curriculumCategories) courseData.curriculumCategories = [];
+
+  // Validation: unique name (case-insensitive)
+  const isDuplicate = courseData.curriculumCategories.some(c => c.name.toLowerCase() === name.toLowerCase() && c.id !== id);
+  if (isDuplicate) {
+    alert(`Nama kategori "${name}" sudah ada! Silakan gunakan nama lain.`);
+    return;
+  }
+
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+  if (id) {
+    // Edit existing
+    const existing = courseData.curriculumCategories.find(c => c.id === id);
+    if (existing) {
+      const oldName = existing.name;
+      existing.name = name;
+      existing.slug = slug;
+      existing.desc = desc;
+      existing.icon = icon;
+      existing.color = color;
+      existing.status = status;
+
+      // Update tools with old category name
+      (courseData.portalTools || []).forEach(t => {
+        if (t.categoryId === id) t.category = name;
+      });
+      showToast(`Kategori "${name}" berhasil diperbarui!`);
+    }
+  } else {
+    // Add new
+    const newCat = {
+      id: 'cat-' + Date.now(),
+      name,
+      slug,
+      desc,
+      icon,
+      color,
+      order: courseData.curriculumCategories.length + 1,
+      status,
+      createdAt: new Date().toISOString()
+    };
+    courseData.curriculumCategories.push(newCat);
+    showToast(`Kategori "${name}" berhasil ditambahkan!`);
+  }
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (err) {}
+
+  closeModal('categoryEditorModal');
+  renderAdminCategoriesTable();
+  if (typeof updateCategoryDatalist === 'function') updateCategoryDatalist();
+  if (typeof renderCurriculumAccordion === 'function') renderCurriculumAccordion();
+}
+
+function moveCategoryOrder(catId, direction) {
+  const categories = (courseData.curriculumCategories || []).sort((a, b) => a.order - b.order);
+  const index = categories.findIndex(c => c.id === catId);
+  if (index === -1) return;
+
+  const targetIndex = index + direction;
+  if (targetIndex < 0 || targetIndex >= categories.length) return;
+
+  // Swap
+  const temp = categories[index];
+  categories[index] = categories[targetIndex];
+  categories[targetIndex] = temp;
+
+  // Re-index orders
+  categories.forEach((c, idx) => {
+    c.order = idx + 1;
+  });
+
+  courseData.curriculumCategories = categories;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  renderAdminCategoriesTable();
+  if (typeof renderCurriculumAccordion === 'function') renderCurriculumAccordion();
+}
+
+function handleCategoryDeletePrompt(catId) {
+  if (catId === 'cat-uncategorized') {
+    alert("Kategori default 'Belum Dikelompokkan' tidak dapat dihapus!");
+    return;
+  }
+
+  const cat = (courseData.curriculumCategories || []).find(c => c.id === catId);
+  if (!cat) return;
+
+  const tools = courseData.portalTools || [];
+  const toolsInCat = tools.filter(t => t.categoryId === catId);
+
+  if (toolsInCat.length === 0) {
+    if (confirm(`Apakah Anda yakin ingin menghapus kategori "${cat.name}"?`)) {
+      courseData.curriculumCategories = courseData.curriculumCategories.filter(c => c.id !== catId);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+      } catch (e) {}
+      renderAdminCategoriesTable();
+      showToast(`Kategori "${cat.name}" berhasil dihapus!`);
+    }
+    return;
+  }
+
+  // Has tools: open safety reassign modal
+  document.getElementById('catDeleteTargetId').value = catId;
+  document.getElementById('catDeleteTargetName').textContent = `"${cat.name}"`;
+  document.getElementById('catDeleteWarningText').textContent = `Kategori ini masih berisi ${toolsInCat.length} materi aktif.`;
+
+  const select = document.getElementById('catReassignSelect');
+  if (select) {
+    const otherCats = courseData.curriculumCategories.filter(c => c.id !== catId);
+    select.innerHTML = otherCats.map(c => `
+      <option value="${c.id}" ${c.id === 'cat-uncategorized' ? 'selected' : ''}>${c.name}</option>
+    `).join('');
+  }
+
+  openModal('categoryDeleteModal');
+}
+
+function confirmCategoryDeleteWithReassign() {
+  const catId = document.getElementById('catDeleteTargetId').value;
+  const targetCatId = document.getElementById('catReassignSelect').value;
+
+  const cat = (courseData.curriculumCategories || []).find(c => c.id === catId);
+  const targetCat = (courseData.curriculumCategories || []).find(c => c.id === targetCatId);
+  if (!cat || !targetCat) return;
+
+  // Reassign all tools
+  let count = 0;
+  (courseData.portalTools || []).forEach(t => {
+    if (t.categoryId === catId) {
+      t.categoryId = targetCatId;
+      t.category = targetCat.name;
+      count++;
+    }
+  });
+
+  // Delete category
+  courseData.curriculumCategories = courseData.curriculumCategories.filter(c => c.id !== catId);
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  closeModal('categoryDeleteModal');
+  renderAdminCategoriesTable();
+  if (typeof renderCurriculumAccordion === 'function') renderCurriculumAccordion();
+  showToast(`${count} materi berhasil dipindahkan ke "${targetCat.name}", dan kategori "${cat.name}" telah dihapus!`);
 }
