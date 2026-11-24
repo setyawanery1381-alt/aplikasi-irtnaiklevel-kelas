@@ -598,25 +598,57 @@ function renderNavbar() {
 
 // 2. Render Hero
 function renderHero() {
+  if (!courseData.hero) courseData.hero = {};
+
   const badgeEl = document.getElementById('heroBadge');
-  if (badgeEl) badgeEl.textContent = courseData.hero.badge;
+  if (badgeEl) badgeEl.textContent = courseData.hero.badge || '1.834+ Ibu Rumah Tangga Telah Bergabung';
 
   const titleEl = document.getElementById('heroTitle');
   if (titleEl) {
-    titleEl.innerHTML = `${courseData.hero.title} <span class="block blue-pink-gradient-text">${courseData.hero.highlightText}</span>`;
+    const mainTitle = courseData.hero.title || 'Belajar Animasi AI Untuk Pemula';
+    const highlight = courseData.hero.highlightText !== undefined ? courseData.hero.highlightText : 'Bisa dari Rumah Sambil Urus Keluarga';
+    titleEl.innerHTML = `${mainTitle} ${highlight ? `<span id="heroTitleHighlight" class="block blue-pink-gradient-text">${highlight}</span>` : ''}`;
   }
 
   const descEl = document.getElementById('heroDesc');
-  if (descEl) descEl.textContent = courseData.hero.description;
+  if (descEl) descEl.textContent = courseData.hero.description || courseData.hero.desc || '';
 
   const ctaPrimaryEl = document.getElementById('heroCtaPrimary');
-  if (ctaPrimaryEl) ctaPrimaryEl.textContent = courseData.hero.ctaPrimary;
+  if (ctaPrimaryEl) {
+    const promoVal = courseData.pricing?.promoPrice || courseData.pricing?.price || 'Rp 1';
+    ctaPrimaryEl.textContent = courseData.hero.ctaPrimary || `Gabung Sekarang — ${promoVal}`;
+  }
 
   const ctaSecondaryEl = document.getElementById('heroCtaSecondary');
-  if (ctaSecondaryEl) ctaSecondaryEl.textContent = courseData.hero.ctaSecondary;
+  if (ctaSecondaryEl) ctaSecondaryEl.textContent = courseData.hero.ctaSecondary || 'Lihat Silabus Materi ↓';
 
-  const guaranteeEl = document.getElementById('heroGuarantee');
-  if (guaranteeEl) guaranteeEl.textContent = courseData.hero.guaranteeText;
+  const g1 = document.getElementById('heroGuarantee1');
+  if (g1) g1.textContent = courseData.hero.guarantee1 || 'Sekali Bayar';
+  const g2 = document.getElementById('heroGuarantee2');
+  if (g2) g2.textContent = courseData.hero.guarantee2 || 'Akses Selamanya';
+  const g3 = document.getElementById('heroGuarantee3');
+  if (g3) g3.textContent = courseData.hero.guarantee3 || 'Modul Lengkap Pemula';
+
+  // Render other sections headers
+  if (courseData.sectionHeaders) {
+    const kTitle = document.getElementById('kategoriSectionTitle');
+    if (kTitle && courseData.sectionHeaders.kategoriTitle) kTitle.textContent = courseData.sectionHeaders.kategoriTitle;
+    const kDesc = document.getElementById('kategoriSectionDesc');
+    if (kDesc && courseData.sectionHeaders.kategoriDesc) kDesc.textContent = courseData.sectionHeaders.kategoriDesc;
+
+    const prTitle = document.getElementById('pricingSectionTitle');
+    if (prTitle && courseData.sectionHeaders.pricingSectionTitle) prTitle.textContent = courseData.sectionHeaders.pricingSectionTitle;
+
+    const fTitle = document.getElementById('faqSectionTitle');
+    if (fTitle && courseData.sectionHeaders.faqTitle) fTitle.textContent = courseData.sectionHeaders.faqTitle;
+    const fDesc = document.getElementById('faqSectionDesc');
+    if (fDesc && courseData.sectionHeaders.faqDesc) fDesc.textContent = courseData.sectionHeaders.faqDesc;
+
+    const ctaBTitle = document.getElementById('ctaBottomTitle');
+    if (ctaBTitle && courseData.sectionHeaders.ctaBottomTitle) ctaBTitle.innerHTML = courseData.sectionHeaders.ctaBottomTitle;
+    const ctaBDesc = document.getElementById('ctaBottomDesc');
+    if (ctaBDesc && courseData.sectionHeaders.ctaBottomDesc) ctaBDesc.textContent = courseData.sectionHeaders.ctaBottomDesc;
+  }
 }
 
 // 3. Render Photo Category Cards Grid (Persis Animato.id)
@@ -1227,6 +1259,15 @@ function handleEditorSubmit(e) {
   // 2. Set update timestamp & persist
   updated.lastUpdated = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
   courseData = updated;
+  // Live re-render elements on page so user sees instant results
+  renderHero();
+  renderPricing();
+  renderCategories(null);
+  renderAudiences();
+  renderSteps();
+  renderFaqs();
+  renderNavbar();
+
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
   } catch (err) {}
@@ -1594,8 +1635,46 @@ function loadLandingPageSettings() {
   const hTitle = document.getElementById('settHeroTitle');
   if (hTitle) hTitle.value = courseData.hero.title || 'Belajar Animasi AI Untuk Pemula';
 
+  const hHighlight = document.getElementById('settHeroHighlight');
+  if (hHighlight) hHighlight.value = courseData.hero.highlightText !== undefined ? courseData.hero.highlightText : 'Bisa dari Rumah Sambil Urus Keluarga';
+
   const hDesc = document.getElementById('settHeroDesc');
   if (hDesc) hDesc.value = courseData.hero.description || courseData.hero.desc || 'Ubah ide cerita dan keseharian jadi video animasi bernilai tinggi untuk edukasi anak, promosi jualan online, dan konten media sosial tanpa perlu keahlian menggambar manual.';
+
+  const hCtaPrimary = document.getElementById('settHeroCtaPrimary');
+  if (hCtaPrimary) hCtaPrimary.value = courseData.hero.ctaPrimary || `Gabung Sekarang — ${courseData.pricing?.promoPrice || 'Rp 1'}`;
+
+  const hCtaSecondary = document.getElementById('settHeroCtaSecondary');
+  if (hCtaSecondary) hCtaSecondary.value = courseData.hero.ctaSecondary || 'Lihat Silabus Materi ↓';
+
+  const hG1 = document.getElementById('settHeroGuarantee1');
+  if (hG1) hG1.value = courseData.hero.guarantee1 || 'Sekali Bayar';
+  const hG2 = document.getElementById('settHeroGuarantee2');
+  if (hG2) hG2.value = courseData.hero.guarantee2 || 'Akses Selamanya';
+  const hG3 = document.getElementById('settHeroGuarantee3');
+  if (hG3) hG3.value = courseData.hero.guarantee3 || 'Modul Lengkap Pemula';
+
+  const katTitle = document.getElementById('settKategoriTitle');
+  if (katTitle) katTitle.value = courseData.sectionHeaders?.kategoriTitle || 'Konten Animasi yang bisa kamu buat';
+  const katDesc = document.getElementById('settKategoriDesc');
+  if (katDesc) katDesc.value = courseData.sectionHeaders?.kategoriDesc || 'Dari ide sederhana jadi cerita yang berkesan. Klik foto atau tombol + pada kartu untuk melihat deskripsi lengkap dan mengubah foto/isi.';
+
+  const prTitle = document.getElementById('settPricingSectionTitle');
+  if (prTitle) prTitle.value = courseData.sectionHeaders?.pricingSectionTitle || 'Siap bikin animasi pertamamu? Gabung sekarang.';
+  const prSub = document.getElementById('settPricingSubtitle');
+  if (prSub) prSub.value = courseData.pricing?.subtitle || courseData.sectionHeaders?.pricingSubtitle || 'Sekali beli, akses materi selamanya dan modul lengkap tanpa biaya langganan.';
+  const prClass = document.getElementById('settPricingClassTitle');
+  if (prClass) prClass.value = courseData.pricing?.classTitle || 'Kelas Animasi AI untuk Pemula — IRT NAIK LEVEL';
+
+  const faqTitle = document.getElementById('settFaqTitle');
+  if (faqTitle) faqTitle.value = courseData.sectionHeaders?.faqTitle || 'Tanya dulu. Mulai lebih yakin.';
+  const faqDesc = document.getElementById('settFaqDesc');
+  if (faqDesc) faqDesc.value = courseData.sectionHeaders?.faqDesc || 'Pertanyaan yang paling sering ditanyakan oleh calon peserta sebelum bergabung.';
+
+  const ctaBTitle = document.getElementById('settCtaBottomTitle');
+  if (ctaBTitle) ctaBTitle.value = courseData.sectionHeaders?.ctaBottomTitle || 'Idemu layak jadi karya. Mulai wujudkan hari ini.';
+  const ctaBDesc = document.getElementById('settCtaBottomDesc');
+  if (ctaBDesc) ctaBDesc.value = courseData.sectionHeaders?.ctaBottomDesc || 'Jangan biarkan imajinasi dan potensimu terpendam. Gabung bersama ribuan Ibu Rumah Tangga mandiri lainnya sekarang.';
 
   const price = document.getElementById('settPrice');
   if (price) price.value = courseData.pricing.promoPrice || courseData.pricing.price || 'Rp 99.000';
@@ -1955,11 +2034,52 @@ function executeSaveLandingPageSettings(isManual = false) {
   const hTitle = document.getElementById('settHeroTitle')?.value?.trim();
   if (hTitle) courseData.hero.title = hTitle;
 
+  const hHighlight = document.getElementById('settHeroHighlight')?.value;
+  if (hHighlight !== undefined) courseData.hero.highlightText = hHighlight.trim();
+
   const hDesc = document.getElementById('settHeroDesc')?.value?.trim();
   if (hDesc) {
     courseData.hero.description = hDesc;
     courseData.hero.desc = hDesc;
   }
+
+  const hCtaPrimary = document.getElementById('settHeroCtaPrimary')?.value;
+  if (hCtaPrimary !== undefined && hCtaPrimary.trim()) courseData.hero.ctaPrimary = hCtaPrimary.trim();
+
+  const hCtaSecondary = document.getElementById('settHeroCtaSecondary')?.value;
+  if (hCtaSecondary !== undefined && hCtaSecondary.trim()) courseData.hero.ctaSecondary = hCtaSecondary.trim();
+
+  const hG1 = document.getElementById('settHeroGuarantee1')?.value;
+  if (hG1 !== undefined && hG1.trim()) courseData.hero.guarantee1 = hG1.trim();
+  const hG2 = document.getElementById('settHeroGuarantee2')?.value;
+  if (hG2 !== undefined && hG2.trim()) courseData.hero.guarantee2 = hG2.trim();
+  const hG3 = document.getElementById('settHeroGuarantee3')?.value;
+  if (hG3 !== undefined && hG3.trim()) courseData.hero.guarantee3 = hG3.trim();
+
+  const katTitle = document.getElementById('settKategoriTitle')?.value?.trim();
+  if (katTitle) courseData.sectionHeaders.kategoriTitle = katTitle;
+  const katDesc = document.getElementById('settKategoriDesc')?.value?.trim();
+  if (katDesc) courseData.sectionHeaders.kategoriDesc = katDesc;
+
+  const prTitle = document.getElementById('settPricingSectionTitle')?.value?.trim();
+  if (prTitle) courseData.sectionHeaders.pricingSectionTitle = prTitle;
+  const prSub = document.getElementById('settPricingSubtitle')?.value?.trim();
+  if (prSub) {
+    courseData.sectionHeaders.pricingSubtitle = prSub;
+    if (courseData.pricing) courseData.pricing.subtitle = prSub;
+  }
+  const prClass = document.getElementById('settPricingClassTitle')?.value?.trim();
+  if (prClass && courseData.pricing) courseData.pricing.classTitle = prClass;
+
+  const faqTitle = document.getElementById('settFaqTitle')?.value?.trim();
+  if (faqTitle) courseData.sectionHeaders.faqTitle = faqTitle;
+  const faqDesc = document.getElementById('settFaqDesc')?.value?.trim();
+  if (faqDesc) courseData.sectionHeaders.faqDesc = faqDesc;
+
+  const ctaBTitle = document.getElementById('settCtaBottomTitle')?.value?.trim();
+  if (ctaBTitle) courseData.sectionHeaders.ctaBottomTitle = ctaBTitle;
+  const ctaBDesc = document.getElementById('settCtaBottomDesc')?.value?.trim();
+  if (ctaBDesc) courseData.sectionHeaders.ctaBottomDesc = ctaBDesc;
 
   const price = document.getElementById('settPrice')?.value?.trim();
   if (price) {
