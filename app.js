@@ -1578,18 +1578,23 @@ let logoClickCount = 0;
 let logoClickTimer = null;
 
 function handleBrandLogoClick(e) {
-  if (e) e.preventDefault();
+  if (e) {
+    if (typeof e.preventDefault === 'function') e.preventDefault();
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+  }
   logoClickCount++;
-  clearTimeout(logoClickTimer);
+  if (logoClickTimer) clearTimeout(logoClickTimer);
 
   if (logoClickCount === 1) {
-    showToast("Klik 2x lagi untuk membuka Portal Admin...");
+    if (typeof showToast === 'function') showToast("Ketuk 2x lagi untuk membuka Portal Admin...");
   } else if (logoClickCount === 2) {
-    showToast("Klik 1x lagi...");
+    if (typeof showToast === 'function') showToast("Ketuk 1x lagi...");
   } else if (logoClickCount >= 3) {
     logoClickCount = 0;
-    openPortalAdmin();
-    showToast("Membuka Portal Admin Pengelola...");
+    if (typeof openPortalAdmin === 'function') {
+      openPortalAdmin();
+    }
+    if (typeof showToast === 'function') showToast("Membuka Portal Admin Pengelola...");
     return;
   }
 
@@ -1598,17 +1603,35 @@ function handleBrandLogoClick(e) {
   }, 4500);
 }
 
+function handleBrandLogoTouch(e) {
+  if (e) {
+    if (typeof e.preventDefault === 'function') e.preventDefault();
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+  }
+  handleBrandLogoClick(null);
+}
+
 function handleDiscreetAdminClick() {
   openPortalAdmin();
 }
 
-function openLoginModal() {
+function openLoginModal(tab = 'member') {
   openModal('loginModal');
-  switchLoginModalTab('member');
-  toggleRedeemView(false);
-  renderRememberedAccounts();
+  const targetTab = (tab === 'admin') ? 'admin' : 'member';
+  if (typeof switchLoginModalTab === 'function') {
+    switchLoginModalTab(targetTab);
+  }
+  if (typeof toggleRedeemView === 'function') {
+    toggleRedeemView(false);
+  }
+  if (typeof renderRememberedAccounts === 'function') {
+    renderRememberedAccounts();
+  }
+  if (typeof renderLoginModalCustomization === 'function') {
+    renderLoginModalCustomization();
+  }
   const emailInput = document.getElementById('memberQuickEmailInput');
-  if (emailInput && !emailInput.value) {
+  if (emailInput && !emailInput.value && typeof getRememberedAccounts === 'function') {
     const remembered = getRememberedAccounts();
     if (remembered.length > 0) {
       emailInput.value = remembered[0].email;
@@ -5897,23 +5920,8 @@ function togglePasswordVisibility(inputId, iconId) {
 
 // toggleAdminDirectBox removed
 
-function openLoginModal(initialTab = 'masuk') {
-  openModal('loginModal');
-  switchAuthTab(initialTab);
-  renderLoginModalCustomization();
-
-  // Pre-fill if remembered
-  const idInput = document.getElementById('memberLoginIdentifier');
-  const passInput = document.getElementById('memberLoginPassword');
-  const rememberedEmail = localStorage.getItem('remembered_member_email') || localStorage.getItem('creator_class_member_email') || '';
-  const rememberedCode = localStorage.getItem('remembered_member_code') || '';
-
-  if (idInput && !idInput.value && rememberedEmail) {
-    idInput.value = rememberedEmail;
-  }
-  if (passInput && !passInput.value && rememberedCode && idInput && idInput.value.toLowerCase() === rememberedEmail.toLowerCase()) {
-    passInput.value = rememberedCode; // Displays as masked dots ********
-  }
+function openLegacyAuthModal(initialTab = 'masuk') {
+  openLoginModal(initialTab === 'admin' ? 'admin' : 'member');
 }
 
 function handleNewRegProofUpload(event) {
@@ -8795,4 +8803,46 @@ function confirmCategoryDeleteWithReassign() {
   renderAdminCategoriesTable();
   if (typeof renderCurriculumAccordion === 'function') renderCurriculumAccordion();
   showToast(`${count} materi berhasil dipindahkan ke "${targetCat.name}", dan kategori "${cat.name}" telah dihapus!`);
+}
+
+
+// =========================================================================
+// GLOBAL EXPORTS & DIRECT ADMIN SHORTCUTS
+// =========================================================================
+if (typeof window !== 'undefined') {
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.openLoginModal = openLoginModal;
+  window.switchLoginModalTab = switchLoginModalTab;
+  window.handleBrandLogoClick = handleBrandLogoClick;
+  window.handleBrandLogoTouch = handleBrandLogoTouch;
+  window.openPortalAdmin = openPortalAdmin;
+  window.closePortalAdmin = closePortalAdmin;
+  window.verifyAndOpenAdmin = verifyAndOpenAdmin;
+  window.switchPortalTab = switchPortalTab;
+  window.showToast = showToast;
+  window.toggleTheme = toggleTheme;
+  if (typeof openThemePickerModal === 'function') window.openThemePickerModal = openThemePickerModal;
+  if (typeof toggleRedeemView === 'function') window.toggleRedeemView = toggleRedeemView;
+  if (typeof renderRememberedAccounts === 'function') window.renderRememberedAccounts = renderRememberedAccounts;
+  if (typeof selectRememberedAccount === 'function') window.selectRememberedAccount = selectRememberedAccount;
+  if (typeof removeRememberedAccount === 'function') window.removeRememberedAccount = removeRememberedAccount;
+  if (typeof handleModalMemberLogin === 'function') window.handleModalMemberLogin = handleModalMemberLogin;
+  if (typeof handleRedeemAccess === 'function') window.handleRedeemAccess = handleRedeemAccess;
+  window.handleModalAdminLogin = verifyAndOpenAdmin;
+
+  // Auto trigger if URL has #admin or ?admin=true
+  try {
+    const hash = window.location.hash || '';
+    const search = window.location.search || '';
+    if (hash === '#admin' || hash === '#portal' || search.includes('admin=true')) {
+      setTimeout(() => {
+        if (typeof openPortalAdmin === 'function') openPortalAdmin();
+      }, 400);
+    } else if (hash === '#login' || search.includes('login=true')) {
+      setTimeout(() => {
+        if (typeof openLoginModal === 'function') openLoginModal();
+      }, 400);
+    }
+  } catch (e) {}
 }
