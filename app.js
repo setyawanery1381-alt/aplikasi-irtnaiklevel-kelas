@@ -9,14 +9,22 @@ function saveSuperadminCredentialsDirect() {
     return;
   }
   
+  // Dedicated persistent localStorage keys
+  localStorage.setItem('creator_class_superadmin_user', user);
+  localStorage.setItem('creator_class_superadmin_pass', pass);
+  
   if (!courseData.superadmin) courseData.superadmin = {};
   courseData.superadminUsername = user;
   courseData.superadminPassword = pass;
   courseData.superadmin.username = user;
   courseData.superadmin.password = pass;
   
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
   executeSaveLandingPageSettings(true);
-  showToast("Password superadmin berhasil diperbarui dan tersimpan!");
+  showToast("✅ Kredensial superadmin (" + user + ") berhasil diperbarui dan tersimpan!");
 }
 
 
@@ -224,6 +232,22 @@ function postDataToGas(payload) {
 }
 
 function initData() {
+  // Restore custom superadmin credentials if previously saved
+  try {
+    const savedAdminUser = localStorage.getItem('creator_class_superadmin_user');
+    const savedAdminPass = localStorage.getItem('creator_class_superadmin_pass');
+    if (savedAdminUser) {
+      if (!courseData.superadmin) courseData.superadmin = {};
+      courseData.superadminUsername = savedAdminUser;
+      courseData.superadmin.username = savedAdminUser;
+    }
+    if (savedAdminPass) {
+      if (!courseData.superadmin) courseData.superadmin = {};
+      courseData.superadminPassword = savedAdminPass;
+      courseData.superadmin.password = savedAdminPass;
+    }
+  } catch(e) {}
+
   // Purge outdated caches with old 2.800+ or broken layouts
   ['creator_class_data_v7', 'creator_class_data_v6', 'creator_class_data_v5', 'animatoCourseData', 'creator_class_data_v4'].forEach(k => {
     try { localStorage.removeItem(k); } catch(e) {}
@@ -852,8 +876,26 @@ function renderMentor() {
   const handleEl = document.getElementById('mentorHandle');
   if (handleEl) {
     const handleText = mentor.socialHandle || '@irtnaikkelas';
-    handleEl.innerHTML = `<i class="fa-brands fa-instagram text-base"></i><span>${handleText}</span>`;
-    handleEl.href = mentor.socialLink || `https://instagram.com/${handleText.replace('@', '')}`;
+    const handleSpan = document.getElementById('mentorHandleText');
+    if (handleSpan) {
+      handleSpan.textContent = handleText;
+    } else {
+      handleEl.innerHTML = `<i class="fa-brands fa-instagram text-base text-pink-500"></i><span>${handleText}</span>`;
+    }
+    handleEl.href = mentor.socialLink || (handleText.startsWith('http') ? handleText : `https://instagram.com/${handleText.replace('@', '')}`);
+  }
+
+  // Render TikTok Handle under mentor card (Foto 2)
+  const tiktokEl = document.getElementById('mentorTiktokHandle');
+  if (tiktokEl) {
+    const tiktokText = mentor.tiktokHandle || courseData.socialLinks?.tiktok || '@irtnaiklevel';
+    const tiktokSpan = document.getElementById('mentorTiktokHandleText');
+    if (tiktokSpan) {
+      tiktokSpan.textContent = tiktokText;
+    } else {
+      tiktokEl.innerHTML = `<i class="fa-brands fa-tiktok text-base text-cyan-400"></i><span>${tiktokText}</span>`;
+    }
+    tiktokEl.href = tiktokText.startsWith('http') ? tiktokText : `https://tiktok.com/@${tiktokText.replace('@', '')}`;
   }
 
   // Render Foto Founder / Avatar
@@ -1580,8 +1622,10 @@ function verifyAndOpenAdmin() {
   const user = (userInput ? userInput.value : '').trim().toLowerCase();
   const pass = (passInput ? passInput.value : '').trim().toLowerCase();
 
-  const currentAdminPass = (courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
-  const currentAdminUser = (courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
+  const savedPass = localStorage.getItem('creator_class_superadmin_pass');
+  const savedUser = localStorage.getItem('creator_class_superadmin_user');
+  const currentAdminPass = (savedPass || courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
+  const currentAdminUser = (savedUser || courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
   const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
   const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
 
@@ -1785,6 +1829,9 @@ function loadLandingPageSettings() {
   const fHandle = document.getElementById('settFounderHandle');
   if (fHandle) fHandle.value = courseData.mentor.socialHandle || '@irtnaikkelas';
 
+  const fTiktok = document.getElementById('settFounderTiktok');
+  if (fTiktok) fTiktok.value = courseData.mentor.tiktokHandle || courseData.socialLinks?.tiktok || '@irtnaiklevel';
+
   if (!courseData.socialLinks) {
     courseData.socialLinks = {
       instagram: courseData.mentor.socialLink || courseData.mentor.socialHandle || 'https://instagram.com/irtnaikkelas',
@@ -1830,26 +1877,42 @@ function handleFounderPhotoUpload(event) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
 
-  if (file.size > 2 * 1024 * 1024) {
-    alert("Ukuran file foto terlalu besar. Harap pilih gambar di bawah 2MB.");
+  // Max 10MB as requested by user (Foto 1)
+  if (file.size > 10 * 1024 * 1024) {
+    alert("Ukuran file foto terlalu besar. Harap pilih gambar di bawah 10MB.");
     event.target.value = '';
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const dataUrl = e.target.result;
-    if (!courseData.mentor) courseData.mentor = {};
-    courseData.mentor.avatarUrl = dataUrl;
+  // Compress using canvas to 800px width with 85% JPEG quality (ultra crisp & tiny storage footprint)
+  if (typeof compressImageToDataUrl === 'function') {
+    compressImageToDataUrl(file, 800, 0.85, function(dataUrl) {
+      if (!courseData.mentor) courseData.mentor = {};
+      courseData.mentor.avatarUrl = dataUrl;
 
-    const urlInput = document.getElementById('settFounderAvatarUrl');
-    if (urlInput) urlInput.value = dataUrl;
+      const urlInput = document.getElementById('settFounderAvatarUrl');
+      if (urlInput) urlInput.value = dataUrl;
 
-    updateFounderPhotoPreview(dataUrl);
-    autoSaveLandingPageSettings();
-    showToast("Foto founder berhasil diupload!");
-  };
-  reader.readAsDataURL(file);
+      updateFounderPhotoPreview(dataUrl);
+      if (typeof renderMentor === 'function') renderMentor();
+      autoSaveLandingPageSettings();
+      showToast("Foto founder berhasil diupload (Maks 10MB)! Rasio 1:1 tajam & tersimpan.");
+    });
+  } else {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      if (!courseData.mentor) courseData.mentor = {};
+      courseData.mentor.avatarUrl = dataUrl;
+      const urlInput = document.getElementById('settFounderAvatarUrl');
+      if (urlInput) urlInput.value = dataUrl;
+      updateFounderPhotoPreview(dataUrl);
+      if (typeof renderMentor === 'function') renderMentor();
+      autoSaveLandingPageSettings();
+      showToast("Foto founder berhasil diupload!");
+    };
+    reader.readAsDataURL(file);
+  }
 }
 
 function handleFounderPhotoUrlChange(val) {
@@ -4772,8 +4835,10 @@ function handleAdminLoginFromModal() {
   const user = (userInput ? userInput.value : '').trim().toLowerCase();
   const pass = (passInput ? passInput.value : '').trim().toLowerCase();
 
-  const currentAdminPass = (courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
-  const currentAdminUser = (courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
+  const savedPass = localStorage.getItem('creator_class_superadmin_pass');
+  const savedUser = localStorage.getItem('creator_class_superadmin_user');
+  const currentAdminPass = (savedPass || courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
+  const currentAdminUser = (savedUser || courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
   const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
   const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
 
@@ -7216,8 +7281,10 @@ function handleModalAdminLogin() {
   const user = (userInput ? userInput.value : '').trim().toLowerCase();
   const pass = (passInput ? passInput.value : '').trim().toLowerCase();
 
-  const currentAdminPass = (courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
-  const currentAdminUser = (courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
+  const savedPass = localStorage.getItem('creator_class_superadmin_pass');
+  const savedUser = localStorage.getItem('creator_class_superadmin_user');
+  const currentAdminPass = (savedPass || courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
+  const currentAdminUser = (savedUser || courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
   const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
   const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
 
