@@ -253,8 +253,10 @@ function initData() {
         courseData.hero.badge = "1.834+ Ibu Rumah Tangga Telah Bergabung";
       }
       if (courseData.mentor) {
-        courseData.mentor.name = "Lia Naik Level";
-        courseData.mentor.avatarUrl = "assets/foto_mentor_lia.jpg";
+        courseData.mentor.name = courseData.mentor.name || "Lia Naik Level";
+        if (!courseData.mentor.avatarUrl || courseData.mentor.avatarUrl.trim() === '') {
+          courseData.mentor.avatarUrl = "assets/foto_mentor_lia.jpg";
+        }
         courseData.mentor.role = "Komunitas & Mentor Edukasi AI";
         if (courseData.mentor.highlights && courseData.mentor.highlights[0]) {
           courseData.mentor.highlights[0].value = "1.834";
@@ -321,10 +323,10 @@ function initData() {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
         } catch (e) {}
       }
-      if (!courseData.portalMembers || courseData.portalMembers.length === 0) {
+      if (!courseData.portalMembers || (!courseData.isClearedMembers && courseData.portalMembers.length === 0)) {
         courseData.portalMembers = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.portalMembers || []));
       }
-      if (!courseData.portalPayments || courseData.portalPayments.length === 0 || !courseData.portalPayments[0].activationCode) {
+      if (!courseData.portalPayments || (!courseData.isCleanTrial && courseData.portalPayments.length === 0)) {
         courseData.portalPayments = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.portalPayments || []));
       }
       if (!courseData.contact) {
@@ -499,6 +501,19 @@ function initData() {
     if (!courseData.testimonials || !Array.isArray(courseData.testimonials) || courseData.testimonials.length === 0) {
       courseData.testimonials = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.testimonials || []));
     }
+    // Merge custom testimonials backup so they are NEVER lost on refresh
+    try {
+      const customList = JSON.parse(localStorage.getItem('creator_class_custom_testimonials') || '[]');
+      if (Array.isArray(customList) && customList.length > 0) {
+        const existingIds = new Set(courseData.testimonials.map(t => String(t.id)));
+        customList.forEach(ct => {
+          if (!existingIds.has(String(ct.id))) {
+            courseData.testimonials.unshift(ct);
+            existingIds.add(String(ct.id));
+          }
+        });
+      }
+    } catch (e) {}
   } catch (err) {
     console.warn("initData sync error:", err);
   }
@@ -2317,8 +2332,32 @@ function renderPortalDashboard() {
   const topList = document.getElementById('dashTopToolsList');
 
   if (dashTools) dashTools.textContent = tools.length;
-  if (dashMembers) dashMembers.textContent = members.length + 2835; // Total simulated
+  if (dashMembers) {
+    dashMembers.textContent = courseData.isCleanTrial ? members.length : (members.length + 2835);
+  }
   if (dashViews) dashViews.textContent = totalViews;
+
+  // Render Total Estimasi Omset dalam Rupiah penuh (Foto 6)
+  const omsetEl = document.getElementById('dashTotalOmset');
+  if (omsetEl) {
+    if (courseData.isCleanTrial) {
+      omsetEl.textContent = 'Rp 0';
+    } else {
+      const payments = courseData.portalPayments || [];
+      let sum = 0;
+      payments.forEach(p => {
+        if (p.status === 'Berhasil' || p.status === 'Aktif') {
+          const rawNum = typeof p.amount === 'number' ? p.amount : parseInt(String(p.amount || '').replace(/\D/g, ''), 10);
+          if (!isNaN(rawNum) && rawNum > 0) sum += rawNum;
+        }
+      });
+      if (sum === 0 && !courseData.isCleanTrial) {
+        omsetEl.textContent = 'Rp 559.400.000';
+      } else {
+        omsetEl.textContent = 'Rp ' + sum.toLocaleString('id-ID');
+      }
+    }
+  }
 
   if (topList) {
     const sorted = [...tools].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 4);
@@ -2348,6 +2387,191 @@ function renderPortalDashboard() {
 // ----------------------------------------------------
 let memberSearchQuery = '';
 
+
+// =========================================================================
+// CHECKBOX SELECT ALL & BULK DELETE HANDLERS (Foto 5)
+// =========================================================================
+
+// --- MEMBER TABLE BULK HANDLERS ---
+function toggleSelectAllMembers(checked) {
+  const checkboxes = document.querySelectorAll('.member-checkbox');
+  checkboxes.forEach(cb => cb.checked = checked);
+  updateSelectedMembersCount();
+}
+
+function updateSelectedMembersCount() {
+  const checkboxes = document.querySelectorAll('.member-checkbox:checked');
+  const count = checkboxes.length;
+  const countEl = document.getElementById('selectedMembersCount');
+  const btn = document.getElementById('btnBulkDeleteMembers');
+  if (countEl) countEl.textContent = count;
+  if (btn) {
+    if (count > 0) {
+      btn.classList.remove('hidden');
+      btn.classList.add('flex');
+    } else {
+      btn.classList.add('hidden');
+      btn.classList.remove('flex');
+    }
+  }
+}
+
+function executeBulkDeleteMembers() {
+  const checked = document.querySelectorAll('.member-checkbox:checked');
+  if (checked.length === 0) return;
+  const count = checked.length;
+  if (!confirm("Apakah Anda yakin ingin menghapus " + count + " member terpilih?\n\nData yang dihapus tidak akan muncul kembali.")) return;
+
+  const idsToDelete = new Set(Array.from(checked).map(cb => cb.value));
+  courseData.portalMembers = (courseData.portalMembers || []).filter(m => !idsToDelete.has(String(m.id)));
+  courseData.isClearedMembers = (courseData.portalMembers.length === 0);
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  const checkAll = document.getElementById('checkAllMembers');
+  if (checkAll) checkAll.checked = false;
+
+  renderPortalMembers();
+  renderPortalDashboard();
+  updateSelectedMembersCount();
+  showToast(count + " member berhasil dihapus secara permanen!");
+}
+
+function executeDeleteAllMembers() {
+  const total = (courseData.portalMembers || []).length;
+  if (total === 0) {
+    alert("Daftar member sudah kosong.");
+    return;
+  }
+  if (!confirm("⚠️ PERINGATAN HAPUS SEMUA:\n\nApakah Anda yakin ingin menghapus SELURUH (" + total + ") member?\n\nDaftar akan menjadi bersih (0) dan tidak akan muncul kembali setelah refresh.")) return;
+
+  courseData.portalMembers = [];
+  courseData.isClearedMembers = true;
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  const checkAll = document.getElementById('checkAllMembers');
+  if (checkAll) checkAll.checked = false;
+
+  renderPortalMembers();
+  renderPortalDashboard();
+  updateSelectedMembersCount();
+  showToast("Seluruh member berhasil dihapus!");
+}
+
+// --- TOOLS / MATERI TABLE BULK HANDLERS ---
+function toggleSelectAllTools(checked) {
+  const checkboxes = document.querySelectorAll('.tool-checkbox');
+  checkboxes.forEach(cb => cb.checked = checked);
+  updateSelectedToolsCount();
+}
+
+function updateSelectedToolsCount() {
+  const checkboxes = document.querySelectorAll('.tool-checkbox:checked');
+  const count = checkboxes.length;
+  const countEl = document.getElementById('selectedToolsCount');
+  const btn = document.getElementById('btnBulkDeleteTools');
+  if (countEl) countEl.textContent = count;
+  if (btn) {
+    if (count > 0) {
+      btn.classList.remove('hidden');
+      btn.classList.add('flex');
+    } else {
+      btn.classList.add('hidden');
+      btn.classList.remove('flex');
+    }
+  }
+}
+
+function executeBulkDeleteTools() {
+  const checked = document.querySelectorAll('.tool-checkbox:checked');
+  if (checked.length === 0) return;
+  const count = checked.length;
+  if (!confirm("Apakah Anda yakin ingin menghapus " + count + " materi/tools terpilih?\n\nMateri yang dihapus tidak akan muncul kembali setelah di-refresh.")) return;
+
+  const idsToDelete = new Set(Array.from(checked).map(cb => cb.value));
+  courseData.portalTools = (courseData.portalTools || []).filter(t => !idsToDelete.has(String(t.id)));
+  courseData.isClearedTools = (courseData.portalTools.length === 0);
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  const checkAll = document.getElementById('checkAllTools');
+  if (checkAll) checkAll.checked = false;
+
+  renderAdminToolsTable();
+  if (typeof renderCurriculumAccordion === 'function') renderCurriculumAccordion();
+  renderPortalDashboard();
+  updateSelectedToolsCount();
+  showToast(count + " materi berhasil dihapus secara permanen!");
+}
+
+function executeDeleteAllTools() {
+  const total = (courseData.portalTools || []).length;
+  if (total === 0) {
+    alert("Daftar materi sudah kosong.");
+    return;
+  }
+  if (!confirm("⚠️ PERINGATAN HAPUS SEMUA MATERI:\n\nApakah Anda yakin ingin menghapus SELURUH (" + total + ") materi?\n\nDaftar akan kosong (0) dan tidak akan muncul kembali setelah refresh.")) return;
+
+  courseData.portalTools = [];
+  courseData.isClearedTools = true;
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  const checkAll = document.getElementById('checkAllTools');
+  if (checkAll) checkAll.checked = false;
+
+  renderAdminToolsTable();
+  if (typeof renderCurriculumAccordion === 'function') renderCurriculumAccordion();
+  renderPortalDashboard();
+  updateSelectedToolsCount();
+  showToast("Seluruh materi berhasil dihapus!");
+}
+
+// --- RESET DATA TRIAL (GO-LIVE READY) ---
+function resetTrialDataClean() {
+  if (!confirm("⚠️ PERINGATAN RESET GO-LIVE:\n\nApakah Anda yakin ingin membersihkan SELURUH data simulasi/trial?\n• Total Estimasi Omset -> Rp 0\n• Riwayat Pembayaran -> 0 Transaksi\n• Daftar Member -> 0 Peserta\n• Total Views -> 0 Views\n\nSetelah direset, aplikasi siap 100% untuk transaksi member asli!")) return;
+
+  courseData.portalPayments = [];
+  courseData.portalMembers = [];
+  courseData.isCleanTrial = true;
+  courseData.isClearedMembers = true;
+  if (courseData.portalTools) {
+    courseData.portalTools.forEach(t => t.views = 0);
+  }
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  if (typeof postDataToGas === 'function') {
+    postDataToGas({ action: 'resetTrialData' });
+  }
+
+  renderPortalDashboard();
+  renderPortalMembers();
+  renderPortalPayments();
+  showToast("✨ Seluruh data trial telah dibersihkan! Website siap Go-Live.");
+}
+
+window.toggleSelectAllMembers = toggleSelectAllMembers;
+window.updateSelectedMembersCount = updateSelectedMembersCount;
+window.executeBulkDeleteMembers = executeBulkDeleteMembers;
+window.executeDeleteAllMembers = executeDeleteAllMembers;
+window.toggleSelectAllTools = toggleSelectAllTools;
+window.updateSelectedToolsCount = updateSelectedToolsCount;
+window.executeBulkDeleteTools = executeBulkDeleteTools;
+window.executeDeleteAllTools = executeDeleteAllTools;
+window.resetTrialDataClean = resetTrialDataClean;
+
 function renderPortalMembers() {
   const tbody = document.getElementById('portalMembersTableBody');
   const countEl = document.getElementById('totalMembersCount');
@@ -2370,6 +2594,9 @@ function renderPortalMembers() {
 
     return `
     <tr class="hover:bg-white/[0.02] transition-colors">
+      <td class="py-3 px-3 text-center">
+        <input type="checkbox" class="member-checkbox w-4 h-4 rounded border-white/20 bg-black/40 text-purple-600 focus:ring-0 cursor-pointer" value="${m.id}" onchange="updateSelectedMembersCount()">
+      </td>
       <td class="py-3 px-4 font-bold text-white flex items-center gap-2.5">
         <div class="w-7 h-7 rounded-full bg-purple-600/30 text-purple-300 font-bold flex items-center justify-center text-xs">
           ${m.name.charAt(0)}
@@ -2525,26 +2752,47 @@ function openAddMemberPrompt() {
   if (!name) return;
   const wa = prompt("Nomor WhatsApp (Contoh: 08123456789):");
   if (!wa) return;
-  const email = prompt("Email Aktif:");
+  const email = prompt("Email Aktif (opsional):") || 'member@irtnaikkelas.com';
 
-  if (!courseData.portalMembers) {
-    courseData.portalMembers = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.portalMembers || []));
-  }
+  if (!courseData.portalMembers) courseData.portalMembers = [];
+  courseData.isClearedMembers = false;
 
+  const actCode = 'IRT-ACT-' + Math.floor(1000 + Math.random() * 9000);
   const newMem = {
     id: 'mem-' + Date.now(),
     name,
-    email: email || 'member@irtnaikkelas.com',
+    email,
     wa,
     status: 'Aktif',
+    activationCode: actCode,
     date: 'Hari ini',
-    package: 'Kelas Animasi AI'
+    package: 'Kelas Animasi AI',
+    isManual: true
   };
 
   courseData.portalMembers.unshift(newMem);
-  saveData(courseData);
+  
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  // Kirim juga ke Google Sheets agar sinkron multi-perangkat
+  if (typeof postDataToGas === 'function') {
+    postDataToGas({
+      action: 'addMember',
+      id: newMem.id,
+      name: name,
+      email: email,
+      wa: wa,
+      status: 'Aktif',
+      activationCode: actCode,
+      package: 'Kelas Animasi AI'
+    });
+  }
+
   renderPortalMembers();
-  showToast(`Member baru "${name}" berhasil ditambahkan!`);
+  renderPortalDashboard();
+  showToast(`Member baru "${name}" (${actCode}) berhasil ditambahkan!`);
 }
 
 // ----------------------------------------------------
@@ -2969,8 +3217,11 @@ function renderAdminToolsTable() {
     return `
       <tr class="hover:bg-white/[0.02] transition-colors border-b border-white/5">
         <!-- Drag Handle Icon -->
-        <td class="py-3 px-4 text-center text-slate-500 font-mono text-sm cursor-grab select-none">
-          ⋮⋮
+        <td class="py-3 px-3 text-center">
+          <div class="flex items-center justify-center gap-1.5">
+            <span class="text-slate-500 font-mono text-sm cursor-grab select-none" title="Tahan & geser untuk urutkan">⋮⋮</span>
+            <input type="checkbox" class="tool-checkbox w-4 h-4 rounded border-white/20 bg-black/40 text-purple-600 focus:ring-0 cursor-pointer" value="${t.id}" onchange="updateSelectedToolsCount()">
+          </div>
         </td>
 
         <!-- Nama & Cover Foto -->
@@ -3583,6 +3834,136 @@ document.addEventListener('DOMContentLoaded', () => {
 // ----------------------------------------------------
 // TESTIMONIALS LOGIC (DUA VERSI: MEMBER WEB & ADMIN PORTAL)
 // ----------------------------------------------------
+
+// =========================================================================
+// IMAGE CANVAS COMPRESSION HELPER (Prevent Storage Quota & Ensure Persistence)
+// =========================================================================
+function compressImageToDataUrl(file, maxWidth, quality, callback) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      let width = img.width;
+      let height = img.height;
+      if (width > maxWidth) {
+        height = Math.round((height * maxWidth) / width);
+        width = maxWidth;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+      callback(compressedDataUrl);
+    };
+    img.onerror = function() {
+      callback(e.target.result);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ----------------------------------------------------
+// ADMIN TESTIMONIAL PHOTO HANDLERS (Foto 1)
+// ----------------------------------------------------
+function handleAdminTestiAvatarUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  compressImageToDataUrl(file, 200, 0.8, function(dataUrl) {
+    const hidden = document.getElementById('adminTestiAvatar');
+    if (hidden) hidden.value = dataUrl;
+    const img = document.getElementById('adminTestiAvatarPreviewImg');
+    const fallback = document.getElementById('adminTestiAvatarFallback');
+    const resetBtn = document.getElementById('adminTestiAvatarResetBtn');
+    if (img) { img.src = dataUrl; img.classList.remove('hidden'); }
+    if (fallback) fallback.classList.add('hidden');
+    if (resetBtn) resetBtn.classList.remove('hidden');
+    showToast("Foto profil member siap disimpan!");
+  });
+}
+
+function removeAdminTestiAvatar() {
+  const hidden = document.getElementById('adminTestiAvatar');
+  if (hidden) hidden.value = '';
+  const img = document.getElementById('adminTestiAvatarPreviewImg');
+  const fallback = document.getElementById('adminTestiAvatarFallback');
+  const resetBtn = document.getElementById('adminTestiAvatarResetBtn');
+  const fileInput = document.getElementById('adminTestiAvatarFile');
+  if (img) { img.src = ''; img.classList.add('hidden'); }
+  if (fallback) fallback.classList.remove('hidden');
+  if (resetBtn) resetBtn.classList.add('hidden');
+  if (fileInput) fileInput.value = '';
+}
+
+function handleAdminTestiPhotoProofUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  compressImageToDataUrl(file, 640, 0.75, function(dataUrl) {
+    const hidden = document.getElementById('adminTestiPhotoProof');
+    if (hidden) hidden.value = dataUrl;
+    const img = document.getElementById('adminTestiPhotoPreviewImg');
+    const fallback = document.getElementById('adminTestiPhotoFallback');
+    const resetBtn = document.getElementById('adminTestiPhotoResetBtn');
+    if (img) { img.src = dataUrl; img.classList.remove('hidden'); }
+    if (fallback) fallback.classList.add('hidden');
+    if (resetBtn) resetBtn.classList.remove('hidden');
+    showToast("Foto hasil karya siap disimpan!");
+  });
+}
+
+function removeAdminTestiPhotoProof() {
+  const hidden = document.getElementById('adminTestiPhotoProof');
+  if (hidden) hidden.value = '';
+  const img = document.getElementById('adminTestiPhotoPreviewImg');
+  const fallback = document.getElementById('adminTestiPhotoFallback');
+  const resetBtn = document.getElementById('adminTestiPhotoResetBtn');
+  if (img) { img.src = ''; img.classList.add('hidden'); }
+  if (fallback) fallback.classList.remove('hidden');
+  if (resetBtn) resetBtn.classList.add('hidden');
+}
+
+// ----------------------------------------------------
+// MEMBER TESTIMONIAL PHOTO HANDLERS (Foto 2)
+// ----------------------------------------------------
+function handleMemberTestiAvatarUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  compressImageToDataUrl(file, 200, 0.8, function(dataUrl) {
+    const hidden = document.getElementById('testiAvatarUrl');
+    if (hidden) hidden.value = dataUrl;
+    const img = document.getElementById('testiAvatarPreviewImg');
+    const fallback = document.getElementById('testiAvatarFallback');
+    const resetBtn = document.getElementById('testiAvatarResetBtn');
+    if (img) { img.src = dataUrl; img.classList.remove('hidden'); }
+    if (fallback) fallback.classList.add('hidden');
+    if (resetBtn) resetBtn.classList.remove('hidden');
+    showToast("Foto profil Anda siap!");
+  });
+}
+
+function removeMemberTestiAvatar() {
+  const hidden = document.getElementById('testiAvatarUrl');
+  if (hidden) hidden.value = '';
+  const img = document.getElementById('testiAvatarPreviewImg');
+  const fallback = document.getElementById('testiAvatarFallback');
+  const resetBtn = document.getElementById('testiAvatarResetBtn');
+  const fileInput = document.getElementById('testiAvatarFileInput');
+  if (img) { img.src = ''; img.classList.add('hidden'); }
+  if (fallback) fallback.classList.remove('hidden');
+  if (resetBtn) resetBtn.classList.add('hidden');
+  if (fileInput) fileInput.value = '';
+}
+
+window.handleAdminTestiAvatarUpload = handleAdminTestiAvatarUpload;
+window.removeAdminTestiAvatar = removeAdminTestiAvatar;
+window.handleAdminTestiPhotoProofUpload = handleAdminTestiPhotoProofUpload;
+window.removeAdminTestiPhotoProof = removeAdminTestiPhotoProof;
+window.handleMemberTestiAvatarUpload = handleMemberTestiAvatarUpload;
+window.removeMemberTestiAvatar = removeMemberTestiAvatar;
+
 function renderTestimonials() {
   const container = document.getElementById('testimonialsGrid');
   if (courseData.sectionHeaders) {
@@ -3654,15 +4035,17 @@ function renderTestimonials() {
 
 // VERSI 1: MEMBER MANUAL DARI WEB (MODAL + OPTIONAL PHOTO & VIDEO)
 function openMemberTestimonialModal() {
-  const memberName = getActiveMemberInfo() || localStorage.getItem('creator_class_member_name') || '';
+  const memberInfo = (typeof getActiveMemberInfo === 'function' ? getActiveMemberInfo() : null) || {};
+  const memberName = (typeof memberInfo === 'object' && memberInfo !== null ? memberInfo.memberName : memberInfo) || localStorage.getItem('creator_class_member_name') || '';
   const nameInput = document.getElementById('testiName');
   if (nameInput) {
-    if (memberName && !nameInput.value) {
-      nameInput.value = memberName;
-    }
+    nameInput.value = memberName || '';
   }
 
-  // Clear photo and video
+  // Reset member avatar preview
+  if (typeof removeMemberTestiAvatar === 'function') removeMemberTestiAvatar();
+
+  // Clear photo and video proof
   removeTestiPhotoProof();
   const vidInput = document.getElementById('testiVideoProofUrl');
   if (vidInput) vidInput.value = '';
@@ -3722,17 +4105,26 @@ function handleAddTestimonialSubmit(e) {
     return;
   }
 
+  const customAvatar = document.getElementById('testiAvatarUrl')?.value || '';
   const newTesti = {
     id: "testi-" + Date.now(),
     name: name,
     role: role || "Member CREATOR CLASS",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+    avatar: customAvatar || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
     rating: rating,
     story: story,
     tag: tag || "Kisah Member",
     photoProofUrl: photoProofUrl,
-    videoProofUrl: videoProofUrl
+    videoProofUrl: videoProofUrl,
+    isCustom: true
   };
+
+  // Double layer persistence: save to custom testimonials backup
+  try {
+    const customList = JSON.parse(localStorage.getItem('creator_class_custom_testimonials') || '[]');
+    customList.unshift(newTesti);
+    localStorage.setItem('creator_class_custom_testimonials', JSON.stringify(customList));
+  } catch (e) {}
 
   if (!courseData.testimonials) courseData.testimonials = [];
   courseData.testimonials.unshift(newTesti);
@@ -3868,8 +4260,29 @@ function openEditAdminTestimonialModal(id) {
   document.getElementById('adminTestiTag').value = t.tag || '';
   document.getElementById('adminTestiRating').value = String(t.rating || 5);
   document.getElementById('adminTestiAvatar').value = t.avatar || '';
+  const aImg = document.getElementById('adminTestiAvatarPreviewImg');
+  const aFall = document.getElementById('adminTestiAvatarFallback');
+  const aReset = document.getElementById('adminTestiAvatarResetBtn');
+  if (t.avatar) {
+    if (aImg) { aImg.src = t.avatar; aImg.classList.remove('hidden'); }
+    if (aFall) aFall.classList.add('hidden');
+    if (aReset) aReset.classList.remove('hidden');
+  } else {
+    if (typeof removeAdminTestiAvatar === 'function') removeAdminTestiAvatar();
+  }
+
   document.getElementById('adminTestiStory').value = t.story || '';
   document.getElementById('adminTestiPhotoProof').value = t.photoProofUrl || '';
+  const pImg = document.getElementById('adminTestiPhotoPreviewImg');
+  const pFall = document.getElementById('adminTestiPhotoFallback');
+  const pReset = document.getElementById('adminTestiPhotoResetBtn');
+  if (t.photoProofUrl) {
+    if (pImg) { pImg.src = t.photoProofUrl; pImg.classList.remove('hidden'); }
+    if (pFall) pFall.classList.add('hidden');
+    if (pReset) pReset.classList.remove('hidden');
+  } else {
+    if (typeof removeAdminTestiPhotoProof === 'function') removeAdminTestiPhotoProof();
+  }
   document.getElementById('adminTestiVideoProof').value = t.videoProofUrl || '';
   document.getElementById('adminTestiModalTitle').textContent = 'Edit Testimoni Alumni';
   openModal('adminTestimonialModal');
@@ -3905,6 +4318,19 @@ function saveAdminTestimonialModal(event) {
   const story = document.getElementById('adminTestiStory').value.trim();
   const photoProofUrl = document.getElementById('adminTestiPhotoProof').value.trim();
   const videoProofUrl = document.getElementById('adminTestiVideoProof').value.trim();
+
+  // Double layer persistence
+  try {
+    const customList = JSON.parse(localStorage.getItem('creator_class_custom_testimonials') || '[]');
+    const existingIdx = customList.findIndex(item => String(item.id) === String(id));
+    const savedItem = { id: id || ("testi-" + Date.now()), name, role, tag: tag || "Kisah Alumni", rating, avatar, story, photoProofUrl, videoProofUrl, isCustom: true };
+    if (existingIdx !== -1) {
+      customList[existingIdx] = savedItem;
+    } else {
+      customList.unshift(savedItem);
+    }
+    localStorage.setItem('creator_class_custom_testimonials', JSON.stringify(customList));
+  } catch (e) {}
 
   if (!courseData.testimonials) courseData.testimonials = [];
 
