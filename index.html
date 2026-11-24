@@ -1522,7 +1522,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="hairline-card rounded-3xl p-8 sm:p-12 bg-white dark:bg-[#16161b] flex flex-col md:flex-row items-center gap-10">
         <!-- Mentor Visual / Avatar -->
-        <div id="mentorAvatarContainer" class="w-44 h-44 sm:w-56 sm:h-56 rounded-3xl bg-gradient-to-tr from-purple-800 via-purple-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-white dark:border-white/10">
+        <div id="mentorAvatarContainer" class="w-48 h-48 sm:w-60 sm:h-60 aspect-square rounded-3xl bg-gradient-to-tr from-purple-800 via-purple-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-white dark:border-white/10">
           <div class="text-center p-4">
             <i class="fa-solid fa-hands-holding-child text-6xl text-purple-200 mb-2"></i>
             <div class="text-xs font-mono font-bold tracking-widest text-purple-200">IRT NAIK LEVEL</div>
@@ -1726,13 +1726,13 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
               IRT NAIK LEVEL
             </span>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed mb-4">
+          <p id="footerDescText" class="text-xs text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed mb-4">
             Komunitas & platform edukasi animasi AI pertama di Indonesia yang didedikasikan untuk Ibu Rumah Tangga dan perempuan mandiri.
           </p>
           <div class="flex items-center gap-3 text-slate-400">
-            <a href="https://instagram.com" class="hover:text-purple-600 text-base"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://tiktok.com" class="hover:text-purple-600 text-base"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://youtube.com" class="hover:text-purple-600 text-base"><i class="fa-brands fa-youtube"></i></a>
+            <a id="footerSocialInstagram" href="https://instagram.com/irtnaikkelas" target="_blank" rel="noopener noreferrer" class="hover:text-purple-600 text-base transition-colors" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a id="footerSocialTiktok" href="https://tiktok.com/@irtnaiklevel" target="_blank" rel="noopener noreferrer" class="hover:text-purple-600 text-base transition-colors" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a id="footerSocialYoutube" href="https://youtube.com/@irtnaiklevel" target="_blank" rel="noopener noreferrer" class="hover:text-purple-600 text-base transition-colors" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </div>
 
@@ -3648,35 +3648,6 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
             </div>
           </div>
 
-          <!-- CARD 4: KELOLA ALUR BELAJAR (5 MODUL) -->
-          <div class="p-5 sm:p-6 rounded-2xl bg-[#14151c] border border-white/10 space-y-4">
-            <div class="flex items-center gap-2 pb-2 border-b border-white/10">
-              <i class="fa-solid fa-list-check text-purple-400"></i>
-              <div>
-                <h3 class="text-sm font-bold text-white">Kelola Konten "Alur Belajar"</h3>
-                <p class="text-[11px] text-slate-400">Atur judul kurikulum dan rincian materi 5 modul belajar.</p>
-              </div>
-            </div>
-
-            <div class="space-y-3">
-              <div>
-                <label class="block font-bold text-slate-300 mb-1">Judul Seksi "Alur Belajar"</label>
-                <input type="text" id="settProsesTitle" oninput="autoSaveLandingPageSettings()" placeholder="Pelajari prosesnya. Satu langkah dulu." class="w-full px-3.5 py-2 rounded-xl bg-[#111217] border border-white/15 text-white focus:outline-none focus:border-purple-500 font-medium">
-              </div>
-              <div>
-                <label class="block font-bold text-slate-300 mb-1">Deskripsi Seksi "Alur Belajar"</label>
-                <textarea id="settProsesDesc" rows="2" oninput="autoSaveLandingPageSettings()" placeholder="Belajar alurnya, bukan hanya tools-nya..." class="w-full px-3.5 py-2 rounded-xl bg-[#111217] border border-white/15 text-white focus:outline-none focus:border-purple-500"></textarea>
-              </div>
-            </div>
-
-            <div class="pt-2">
-              <label class="block font-bold text-slate-300 mb-2">5 Modul Pembelajaran:</label>
-              <div id="settStepsListContainer" class="space-y-3">
-                <!-- Rendered by renderAdminStepsList() -->
-              </div>
-            </div>
-          </div>
-
           <!-- CARD 5: KELOLA TESTIMONI & KARYA ALUMNI (VERSI ADMIN) -->
           <div class="lg:col-span-2 p-5 sm:p-6 rounded-2xl bg-[#14151c] border border-white/10 space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
@@ -3739,7 +3710,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
               <div class="space-y-2">
                 <label class="block font-bold text-slate-300 text-xs">Foto Founder / Mentor</label>
                 <div class="flex flex-col items-center p-4 rounded-xl bg-[#0e0f14] border border-white/10 text-center">
-                  <div id="settFounderPreviewBox" class="w-32 h-32 rounded-2xl bg-gradient-to-tr from-purple-800 to-indigo-600 border border-white/20 overflow-hidden flex items-center justify-center relative mb-3 shadow-lg">
+                  <div id="settFounderPreviewBox" class="w-32 h-32 aspect-square rounded-2xl bg-gradient-to-tr from-purple-800 to-indigo-600 border border-white/20 overflow-hidden flex items-center justify-center relative mb-3 shadow-lg">
                     <img id="settFounderPreviewImg" src="" alt="Founder" class="hidden w-full h-full object-cover">
                     <div id="settFounderFallbackIcon" class="text-center p-2 text-purple-200">
                       <i class="fa-solid fa-hands-holding-child text-3xl mb-1"></i>
@@ -3782,6 +3753,43 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
                     <label class="block font-bold text-slate-300 text-xs mb-1">Username Instagram / Sosmed</label>
                     <input type="text" id="settFounderHandle" oninput="autoSaveLandingPageSettings()" placeholder="@irtnaikkelas" class="w-full px-3.5 py-2 rounded-xl bg-[#111217] border border-white/15 text-white text-xs focus:outline-none focus:border-purple-500">
                   </div>
+                </div>
+
+                <!-- Input Media Sosial Manual (Instagram, TikTok, YouTube) -->
+                <div class="pt-3 border-t border-white/10 space-y-2.5">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-share-nodes text-purple-400 text-xs"></i>
+                    <span class="text-xs font-bold text-slate-200 uppercase tracking-wider">Tautan Media Sosial Resmi (Bisa Diklik di Footer & Profil)</span>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    <div>
+                      <label class="block text-[11px] font-semibold text-slate-300 mb-1">
+                        <i class="fa-brands fa-instagram text-pink-400 mr-1"></i> Link Instagram
+                      </label>
+                      <input type="text" id="settSocialInstagram" oninput="autoSaveLandingPageSettings()" placeholder="https://instagram.com/irtnaikkelas" class="w-full px-3 py-1.5 rounded-xl bg-[#111217] border border-white/15 text-white text-xs focus:outline-none focus:border-purple-500">
+                    </div>
+                    <div>
+                      <label class="block text-[11px] font-semibold text-slate-300 mb-1">
+                        <i class="fa-brands fa-tiktok text-cyan-400 mr-1"></i> Link TikTok
+                      </label>
+                      <input type="text" id="settSocialTiktok" oninput="autoSaveLandingPageSettings()" placeholder="https://tiktok.com/@irtnaiklevel" class="w-full px-3 py-1.5 rounded-xl bg-[#111217] border border-white/15 text-white text-xs focus:outline-none focus:border-purple-500">
+                    </div>
+                    <div>
+                      <label class="block text-[11px] font-semibold text-slate-300 mb-1">
+                        <i class="fa-brands fa-youtube text-red-500 mr-1"></i> Link YouTube
+                      </label>
+                      <input type="text" id="settSocialYoutube" oninput="autoSaveLandingPageSettings()" placeholder="https://youtube.com/@irtnaiklevel" class="w-full px-3 py-1.5 rounded-xl bg-[#111217] border border-white/15 text-white text-xs focus:outline-none focus:border-purple-500">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Kelola Teks Deskripsi Footer -->
+                <div class="pt-3 border-t border-white/10">
+                  <label class="block font-bold text-slate-300 text-xs mb-1">
+                    <i class="fa-solid fa-align-left text-purple-400 mr-1"></i> Teks Deskripsi Footer
+                  </label>
+                  <textarea id="settFooterDesc" rows="2" oninput="autoSaveLandingPageSettings()" placeholder="Komunitas & platform edukasi animasi AI pertama di Indonesia..." class="w-full px-3.5 py-2 rounded-xl bg-[#111217] border border-white/15 text-white text-xs leading-relaxed focus:outline-none focus:border-purple-500"></textarea>
+                  <p class="text-[10px] text-slate-400 mt-1">Teks pengantar di bagian bawah (footer) website, di atas logo medsos.</p>
                 </div>
 
                 <div>
@@ -4648,6 +4656,12 @@ window.DEFAULT_COURSE_DATA = {
     "description": "Masuk untuk mengakses kelas & aplikasi Anda.",
     "footerText": "Bisa masuk dengan email atau nomor HP terdaftar. Lupa password? Minta admin mereset."
   },
+  "socialLinks": {
+    "instagram": "https://instagram.com/irtnaikkelas",
+    "tiktok": "https://tiktok.com/@irtnaiklevel",
+    "youtube": "https://youtube.com/@irtnaiklevel"
+  },
+  "footerDesc": "Komunitas & platform edukasi animasi AI pertama di Indonesia yang didedikasikan untuk Ibu Rumah Tangga dan perempuan mandiri.",
   "mentor": {
     "name": "Lia Naik Level",
     "role": "Komunitas & Mentor Edukasi AI",
@@ -8903,9 +8917,9 @@ function renderMentor() {
   if (avatarContainer) {
     const defaultMentorPhoto = "assets/foto_mentor_lia.jpg";
     const finalAvatar = (mentor.avatarUrl && mentor.avatarUrl.trim().length > 0) ? mentor.avatarUrl : defaultMentorPhoto;
-    avatarContainer.className = 'w-44 h-44 sm:w-56 sm:h-56 rounded-3xl bg-slate-900 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-purple-500/30 group';
+    avatarContainer.className = 'w-48 h-48 sm:w-60 sm:h-60 aspect-square rounded-3xl bg-slate-900 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-purple-500/30 group';
     avatarContainer.innerHTML = `
-      <img src="${finalAvatar}" alt="${mentor.name || 'Mentor IRT Naik Level'}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" onerror="this.src='${defaultMentorPhoto}'">
+      <img src="${finalAvatar}" alt="${mentor.name || 'Mentor IRT Naik Level'}" class="w-full h-full aspect-square object-cover object-center group-hover:scale-105 transition-transform duration-500" style="image-rendering: auto;" onerror="this.src='${defaultMentorPhoto}'">
       <div class="absolute bottom-3 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono text-emerald-400 border border-emerald-400/30 flex items-center gap-1.5 shadow-sm">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${mentor.badge || 'Verified Community'}
       </div>
@@ -9049,9 +9063,57 @@ function renderFaqs() {
 }
 
 // 10. Render Footer
+function formatSocialLink(val, platform) {
+  if (!val || !val.trim()) return '#';
+  val = val.trim();
+  if (val.startsWith('http://') || val.startsWith('https://')) return val;
+  const clean = val.replace('@', '');
+  if (platform === 'instagram') return 'https://instagram.com/' + clean;
+  if (platform === 'tiktok') return 'https://tiktok.com/@' + clean;
+  if (platform === 'youtube') return 'https://youtube.com/' + (clean.startsWith('@') ? clean : '@' + clean);
+  return 'https://' + val;
+}
+
 function renderFooter() {
   const yearEl = document.getElementById('footerYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Render Footer Description
+  const footerDescEl = document.getElementById('footerDescText');
+  if (footerDescEl) {
+    const desc = (courseData.footerDesc && courseData.footerDesc.trim()) ||
+                 (courseData.brand && courseData.brand.footerDesc && courseData.brand.footerDesc.trim()) ||
+                 'Komunitas & platform edukasi animasi AI pertama di Indonesia yang didedikasikan untuk Ibu Rumah Tangga dan perempuan mandiri.';
+    footerDescEl.textContent = desc;
+  }
+
+  // Render Social Links
+  const social = courseData.socialLinks || {};
+  const mentor = courseData.mentor || {};
+
+  const igEl = document.getElementById('footerSocialInstagram');
+  if (igEl) {
+    const igLink = formatSocialLink(social.instagram || mentor.socialLink || mentor.socialHandle || '@irtnaikkelas', 'instagram');
+    igEl.href = igLink;
+    igEl.setAttribute('target', '_blank');
+    igEl.setAttribute('rel', 'noopener noreferrer');
+  }
+
+  const ttEl = document.getElementById('footerSocialTiktok');
+  if (ttEl) {
+    const ttLink = formatSocialLink(social.tiktok || '@irtnaiklevel', 'tiktok');
+    ttEl.href = ttLink;
+    ttEl.setAttribute('target', '_blank');
+    ttEl.setAttribute('rel', 'noopener noreferrer');
+  }
+
+  const ytEl = document.getElementById('footerSocialYoutube');
+  if (ytEl) {
+    const ytLink = formatSocialLink(social.youtube || '@irtnaiklevel', 'youtube');
+    ytEl.href = ytLink;
+    ytEl.setAttribute('target', '_blank');
+    ytEl.setAttribute('rel', 'noopener noreferrer');
+  }
 }
 
 // =========================================================================
@@ -9779,6 +9841,27 @@ function loadLandingPageSettings() {
   const fHandle = document.getElementById('settFounderHandle');
   if (fHandle) fHandle.value = courseData.mentor.socialHandle || '@irtnaikkelas';
 
+  if (!courseData.socialLinks) {
+    courseData.socialLinks = {
+      instagram: courseData.mentor.socialLink || courseData.mentor.socialHandle || 'https://instagram.com/irtnaikkelas',
+      tiktok: 'https://tiktok.com/@irtnaiklevel',
+      youtube: 'https://youtube.com/@irtnaiklevel'
+    };
+  }
+  const settIg = document.getElementById('settSocialInstagram');
+  if (settIg) settIg.value = courseData.socialLinks.instagram || 'https://instagram.com/irtnaikkelas';
+
+  const settTt = document.getElementById('settSocialTiktok');
+  if (settTt) settTt.value = courseData.socialLinks.tiktok || 'https://tiktok.com/@irtnaiklevel';
+
+  const settYt = document.getElementById('settSocialYoutube');
+  if (settYt) settYt.value = courseData.socialLinks.youtube || 'https://youtube.com/@irtnaiklevel';
+
+  const settFootDesc = document.getElementById('settFooterDesc');
+  if (settFootDesc) {
+    settFootDesc.value = courseData.footerDesc || 'Komunitas & platform edukasi animasi AI pertama di Indonesia yang didedikasikan untuk Ibu Rumah Tangga dan perempuan mandiri.';
+  }
+
   const fQuote = document.getElementById('settFounderQuote');
   if (fQuote) fQuote.value = courseData.mentor.quote || '';
 
@@ -10191,8 +10274,27 @@ function executeSaveLandingPageSettings(isManual = false) {
   const fHandle = document.getElementById('settFounderHandle')?.value?.trim();
   if (fHandle) {
     courseData.mentor.socialHandle = fHandle;
-    courseData.mentor.socialLink = `https://instagram.com/${fHandle.replace('@', '')}`;
+    courseData.mentor.socialLink = fHandle.startsWith('http') ? fHandle : `https://instagram.com/${fHandle.replace('@', '')}`;
   }
+
+  if (!courseData.socialLinks) courseData.socialLinks = {};
+  const sIg = document.getElementById('settSocialInstagram')?.value?.trim();
+  if (sIg !== undefined) {
+    courseData.socialLinks.instagram = sIg;
+    if (!fHandle && sIg) courseData.mentor.socialLink = sIg;
+  }
+  const sTt = document.getElementById('settSocialTiktok')?.value?.trim();
+  if (sTt !== undefined) courseData.socialLinks.tiktok = sTt;
+  const sYt = document.getElementById('settSocialYoutube')?.value?.trim();
+  if (sYt !== undefined) courseData.socialLinks.youtube = sYt;
+
+  const sFooterDesc = document.getElementById('settFooterDesc')?.value?.trim();
+  if (sFooterDesc !== undefined) {
+    courseData.footerDesc = sFooterDesc;
+    if (!courseData.brand) courseData.brand = {};
+    courseData.brand.footerDesc = sFooterDesc;
+  }
+  if (typeof renderFooter === 'function') renderFooter();
 
   const fQuote = document.getElementById('settFounderQuote')?.value?.trim();
   if (fQuote) courseData.mentor.quote = fQuote;
@@ -11943,8 +12045,23 @@ function renderAdminAudiencesList() {
           <input type="text" value="${aud.role || ''}" oninput="updateAdminAudienceField(${index}, 'role', this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-[#161822] border border-white/10 text-white font-bold focus:outline-none focus:border-purple-500">
         </div>
         <div>
-          <label class="block text-[10px] text-slate-400 mb-0.5">URL Gambar Ilustrasi</label>
-          <input type="url" value="${aud.imageUrl || ''}" oninput="updateAdminAudienceField(${index}, 'imageUrl', this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-[#161822] border border-white/10 text-purple-300 font-mono text-[10px] focus:outline-none focus:border-purple-500">
+          <label class="block text-[10px] text-slate-400 mb-1">Foto Ilustrasi (Upload Langsung)</label>
+          <div class="flex items-center gap-2">
+            <div class="w-12 h-12 rounded-lg bg-[#161822] border border-white/15 overflow-hidden flex-shrink-0 flex items-center justify-center">
+              ${aud.imageUrl ? `<img src="${aud.imageUrl}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-image text-slate-500 text-sm"></i>`}
+            </div>
+            <div class="flex-1 flex items-center gap-1.5">
+              <label class="cursor-pointer px-2.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-[11px] font-semibold transition-all shadow-xs flex items-center gap-1.5">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Upload Foto
+                <input type="file" accept="image/*" class="hidden" onchange="handleAudiencePhotoUpload(event, ${index})">
+              </label>
+              ${aud.imageUrl ? `
+                <button type="button" onclick="removeAudiencePhoto(${index})" class="px-2 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-400 text-[11px] font-medium border border-red-500/30 transition-all" title="Hapus Gambar">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              ` : ''}
+            </div>
+          </div>
         </div>
       </div>
       <div>
@@ -11954,6 +12071,48 @@ function renderAdminAudiencesList() {
     </div>
   `).join('');
 }
+
+function handleAudiencePhotoUpload(event, index) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("Ukuran file foto terlalu besar. Harap pilih gambar di bawah 2MB.");
+    event.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    if (!courseData.audiences) {
+      courseData.audiences = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.audiences || []));
+    }
+    if (courseData.audiences[index]) {
+      courseData.audiences[index].imageUrl = dataUrl;
+      renderAdminAudiencesList();
+      renderAudiences();
+      autoSaveLandingPageSettings();
+      showToast("Foto sasaran #" + (index + 1) + " berhasil diupload!");
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeAudiencePhoto(index) {
+  if (!courseData.audiences) {
+    courseData.audiences = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.audiences || []));
+  }
+  if (courseData.audiences[index]) {
+    courseData.audiences[index].imageUrl = '';
+    renderAdminAudiencesList();
+    renderAudiences();
+    autoSaveLandingPageSettings();
+    showToast("Foto sasaran #" + (index + 1) + " dihapus.");
+  }
+}
+window.handleAudiencePhotoUpload = handleAudiencePhotoUpload;
+window.removeAudiencePhoto = removeAudiencePhoto;
 
 function updateAdminAudienceField(index, field, value) {
   if (!courseData.audiences) courseData.audiences = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.audiences || []));

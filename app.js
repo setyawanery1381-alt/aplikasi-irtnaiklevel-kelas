@@ -846,9 +846,9 @@ function renderMentor() {
   if (avatarContainer) {
     const defaultMentorPhoto = "assets/foto_mentor_lia.jpg";
     const finalAvatar = (mentor.avatarUrl && mentor.avatarUrl.trim().length > 0) ? mentor.avatarUrl : defaultMentorPhoto;
-    avatarContainer.className = 'w-44 h-44 sm:w-56 sm:h-56 rounded-3xl bg-slate-900 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-purple-500/30 group';
+    avatarContainer.className = 'w-48 h-48 sm:w-60 sm:h-60 aspect-square rounded-3xl bg-slate-900 text-white flex items-center justify-center shrink-0 shadow-xl relative overflow-hidden border-2 border-purple-500/30 group';
     avatarContainer.innerHTML = `
-      <img src="${finalAvatar}" alt="${mentor.name || 'Mentor IRT Naik Level'}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" onerror="this.src='${defaultMentorPhoto}'">
+      <img src="${finalAvatar}" alt="${mentor.name || 'Mentor IRT Naik Level'}" class="w-full h-full aspect-square object-cover object-center group-hover:scale-105 transition-transform duration-500" style="image-rendering: auto;" onerror="this.src='${defaultMentorPhoto}'">
       <div class="absolute bottom-3 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono text-emerald-400 border border-emerald-400/30 flex items-center gap-1.5 shadow-sm">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${mentor.badge || 'Verified Community'}
       </div>
@@ -992,9 +992,57 @@ function renderFaqs() {
 }
 
 // 10. Render Footer
+function formatSocialLink(val, platform) {
+  if (!val || !val.trim()) return '#';
+  val = val.trim();
+  if (val.startsWith('http://') || val.startsWith('https://')) return val;
+  const clean = val.replace('@', '');
+  if (platform === 'instagram') return 'https://instagram.com/' + clean;
+  if (platform === 'tiktok') return 'https://tiktok.com/@' + clean;
+  if (platform === 'youtube') return 'https://youtube.com/' + (clean.startsWith('@') ? clean : '@' + clean);
+  return 'https://' + val;
+}
+
 function renderFooter() {
   const yearEl = document.getElementById('footerYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Render Footer Description
+  const footerDescEl = document.getElementById('footerDescText');
+  if (footerDescEl) {
+    const desc = (courseData.footerDesc && courseData.footerDesc.trim()) ||
+                 (courseData.brand && courseData.brand.footerDesc && courseData.brand.footerDesc.trim()) ||
+                 'Komunitas & platform edukasi animasi AI pertama di Indonesia yang didedikasikan untuk Ibu Rumah Tangga dan perempuan mandiri.';
+    footerDescEl.textContent = desc;
+  }
+
+  // Render Social Links
+  const social = courseData.socialLinks || {};
+  const mentor = courseData.mentor || {};
+
+  const igEl = document.getElementById('footerSocialInstagram');
+  if (igEl) {
+    const igLink = formatSocialLink(social.instagram || mentor.socialLink || mentor.socialHandle || '@irtnaikkelas', 'instagram');
+    igEl.href = igLink;
+    igEl.setAttribute('target', '_blank');
+    igEl.setAttribute('rel', 'noopener noreferrer');
+  }
+
+  const ttEl = document.getElementById('footerSocialTiktok');
+  if (ttEl) {
+    const ttLink = formatSocialLink(social.tiktok || '@irtnaiklevel', 'tiktok');
+    ttEl.href = ttLink;
+    ttEl.setAttribute('target', '_blank');
+    ttEl.setAttribute('rel', 'noopener noreferrer');
+  }
+
+  const ytEl = document.getElementById('footerSocialYoutube');
+  if (ytEl) {
+    const ytLink = formatSocialLink(social.youtube || '@irtnaiklevel', 'youtube');
+    ytEl.href = ytLink;
+    ytEl.setAttribute('target', '_blank');
+    ytEl.setAttribute('rel', 'noopener noreferrer');
+  }
 }
 
 // =========================================================================
@@ -1722,6 +1770,27 @@ function loadLandingPageSettings() {
   const fHandle = document.getElementById('settFounderHandle');
   if (fHandle) fHandle.value = courseData.mentor.socialHandle || '@irtnaikkelas';
 
+  if (!courseData.socialLinks) {
+    courseData.socialLinks = {
+      instagram: courseData.mentor.socialLink || courseData.mentor.socialHandle || 'https://instagram.com/irtnaikkelas',
+      tiktok: 'https://tiktok.com/@irtnaiklevel',
+      youtube: 'https://youtube.com/@irtnaiklevel'
+    };
+  }
+  const settIg = document.getElementById('settSocialInstagram');
+  if (settIg) settIg.value = courseData.socialLinks.instagram || 'https://instagram.com/irtnaikkelas';
+
+  const settTt = document.getElementById('settSocialTiktok');
+  if (settTt) settTt.value = courseData.socialLinks.tiktok || 'https://tiktok.com/@irtnaiklevel';
+
+  const settYt = document.getElementById('settSocialYoutube');
+  if (settYt) settYt.value = courseData.socialLinks.youtube || 'https://youtube.com/@irtnaiklevel';
+
+  const settFootDesc = document.getElementById('settFooterDesc');
+  if (settFootDesc) {
+    settFootDesc.value = courseData.footerDesc || 'Komunitas & platform edukasi animasi AI pertama di Indonesia yang didedikasikan untuk Ibu Rumah Tangga dan perempuan mandiri.';
+  }
+
   const fQuote = document.getElementById('settFounderQuote');
   if (fQuote) fQuote.value = courseData.mentor.quote || '';
 
@@ -2134,8 +2203,27 @@ function executeSaveLandingPageSettings(isManual = false) {
   const fHandle = document.getElementById('settFounderHandle')?.value?.trim();
   if (fHandle) {
     courseData.mentor.socialHandle = fHandle;
-    courseData.mentor.socialLink = `https://instagram.com/${fHandle.replace('@', '')}`;
+    courseData.mentor.socialLink = fHandle.startsWith('http') ? fHandle : `https://instagram.com/${fHandle.replace('@', '')}`;
   }
+
+  if (!courseData.socialLinks) courseData.socialLinks = {};
+  const sIg = document.getElementById('settSocialInstagram')?.value?.trim();
+  if (sIg !== undefined) {
+    courseData.socialLinks.instagram = sIg;
+    if (!fHandle && sIg) courseData.mentor.socialLink = sIg;
+  }
+  const sTt = document.getElementById('settSocialTiktok')?.value?.trim();
+  if (sTt !== undefined) courseData.socialLinks.tiktok = sTt;
+  const sYt = document.getElementById('settSocialYoutube')?.value?.trim();
+  if (sYt !== undefined) courseData.socialLinks.youtube = sYt;
+
+  const sFooterDesc = document.getElementById('settFooterDesc')?.value?.trim();
+  if (sFooterDesc !== undefined) {
+    courseData.footerDesc = sFooterDesc;
+    if (!courseData.brand) courseData.brand = {};
+    courseData.brand.footerDesc = sFooterDesc;
+  }
+  if (typeof renderFooter === 'function') renderFooter();
 
   const fQuote = document.getElementById('settFounderQuote')?.value?.trim();
   if (fQuote) courseData.mentor.quote = fQuote;
@@ -3886,8 +3974,23 @@ function renderAdminAudiencesList() {
           <input type="text" value="${aud.role || ''}" oninput="updateAdminAudienceField(${index}, 'role', this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-[#161822] border border-white/10 text-white font-bold focus:outline-none focus:border-purple-500">
         </div>
         <div>
-          <label class="block text-[10px] text-slate-400 mb-0.5">URL Gambar Ilustrasi</label>
-          <input type="url" value="${aud.imageUrl || ''}" oninput="updateAdminAudienceField(${index}, 'imageUrl', this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-[#161822] border border-white/10 text-purple-300 font-mono text-[10px] focus:outline-none focus:border-purple-500">
+          <label class="block text-[10px] text-slate-400 mb-1">Foto Ilustrasi (Upload Langsung)</label>
+          <div class="flex items-center gap-2">
+            <div class="w-12 h-12 rounded-lg bg-[#161822] border border-white/15 overflow-hidden flex-shrink-0 flex items-center justify-center">
+              ${aud.imageUrl ? `<img src="${aud.imageUrl}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-image text-slate-500 text-sm"></i>`}
+            </div>
+            <div class="flex-1 flex items-center gap-1.5">
+              <label class="cursor-pointer px-2.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-[11px] font-semibold transition-all shadow-xs flex items-center gap-1.5">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Upload Foto
+                <input type="file" accept="image/*" class="hidden" onchange="handleAudiencePhotoUpload(event, ${index})">
+              </label>
+              ${aud.imageUrl ? `
+                <button type="button" onclick="removeAudiencePhoto(${index})" class="px-2 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-400 text-[11px] font-medium border border-red-500/30 transition-all" title="Hapus Gambar">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              ` : ''}
+            </div>
+          </div>
         </div>
       </div>
       <div>
@@ -3897,6 +4000,48 @@ function renderAdminAudiencesList() {
     </div>
   `).join('');
 }
+
+function handleAudiencePhotoUpload(event, index) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("Ukuran file foto terlalu besar. Harap pilih gambar di bawah 2MB.");
+    event.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    if (!courseData.audiences) {
+      courseData.audiences = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.audiences || []));
+    }
+    if (courseData.audiences[index]) {
+      courseData.audiences[index].imageUrl = dataUrl;
+      renderAdminAudiencesList();
+      renderAudiences();
+      autoSaveLandingPageSettings();
+      showToast("Foto sasaran #" + (index + 1) + " berhasil diupload!");
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeAudiencePhoto(index) {
+  if (!courseData.audiences) {
+    courseData.audiences = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.audiences || []));
+  }
+  if (courseData.audiences[index]) {
+    courseData.audiences[index].imageUrl = '';
+    renderAdminAudiencesList();
+    renderAudiences();
+    autoSaveLandingPageSettings();
+    showToast("Foto sasaran #" + (index + 1) + " dihapus.");
+  }
+}
+window.handleAudiencePhotoUpload = handleAudiencePhotoUpload;
+window.removeAudiencePhoto = removeAudiencePhoto;
 
 function updateAdminAudienceField(index, field, value) {
   if (!courseData.audiences) courseData.audiences = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.audiences || []));

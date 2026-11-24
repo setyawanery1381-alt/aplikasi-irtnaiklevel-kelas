@@ -160,6 +160,12 @@ window.DEFAULT_COURSE_DATA = {
     "description": "Masuk untuk mengakses kelas & aplikasi Anda.",
     "footerText": "Bisa masuk dengan email atau nomor HP terdaftar. Lupa password? Minta admin mereset."
   },
+  "socialLinks": {
+    "instagram": "https://instagram.com/irtnaikkelas",
+    "tiktok": "https://tiktok.com/@irtnaiklevel",
+    "youtube": "https://youtube.com/@irtnaiklevel"
+  },
+  "footerDesc": "Komunitas & platform edukasi animasi AI pertama di Indonesia yang didedikasikan untuk Ibu Rumah Tangga dan perempuan mandiri.",
   "mentor": {
     "name": "Lia Naik Level",
     "role": "Komunitas & Mentor Edukasi AI",
