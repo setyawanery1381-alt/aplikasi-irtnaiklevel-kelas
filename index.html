@@ -3138,6 +3138,54 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+          <!-- CARD KREDENSIAL SUPERADMIN (UBAH USERNAME & PASSWORD) -->
+          <div class="col-span-1 lg:col-span-2 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#171524] via-[#14141d] to-[#12131a] border border-amber-500/40 shadow-xl space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg border border-amber-500/30">
+                  <i class="fa-solid fa-key"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    Kredensial Superadmin
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">Pengelola Kelas</span>
+                  </h3>
+                  <p class="text-[11px] text-slate-400">Atur username dan password untuk login ke portal admin ini. Password dapat diubah sewaktu-waktu dan langsung sinkron ke Google Sheets.</p>
+                </div>
+              </div>
+              <button type="button" onclick="saveSuperadminCredentialsDirect()" class="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition-all shadow-md shadow-amber-500/20 flex items-center gap-1.5 cursor-pointer active:scale-95 shrink-0">
+                <i class="fa-solid fa-floppy-disk"></i> Simpan Password
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-bold text-slate-300 mb-1">Username Superadmin</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                    <i class="fa-solid fa-user-shield text-xs"></i>
+                  </span>
+                  <input type="text" id="settSuperadminUser" oninput="autoSaveLandingPageSettings()" placeholder="admin" value="admin" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#0e0f14] border border-white/15 text-white focus:outline-none focus:border-amber-400 font-mono text-xs">
+                </div>
+                <p class="text-[10px] text-slate-500 mt-1">Username login superadmin (default: admin)</p>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-300 mb-1">Password Superadmin</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                  </span>
+                  <input type="password" id="settSuperadminPass" oninput="autoSaveLandingPageSettings()" placeholder="irtnaiklevel2026" value="irtnaiklevel2026" class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-[#0e0f14] border border-white/15 text-white focus:outline-none focus:border-amber-400 font-mono text-xs">
+                  <button type="button" onclick="togglePasswordVisibility('settSuperadminPass', this)" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white transition-colors cursor-pointer" title="Lihat/Sembunyikan Password">
+                    <i class="fa-regular fa-eye text-xs"></i>
+                  </button>
+                </div>
+                <p class="text-[10px] text-slate-500 mt-1">Password resmi superadmin (default: irtnaiklevel2026)</p>
+              </div>
+            </div>
+          </div>
+
           <!-- CARD 1: IDENTITAS BRAND & HEADER -->
           <div class="p-5 sm:p-6 rounded-2xl bg-[#14151c] border border-white/10 space-y-4">
             <div class="flex items-center gap-2 pb-2 border-b border-white/10">
@@ -7670,6 +7718,27 @@ window.DEFAULT_COURSE_DATA = {
 
 // === APP.JS ===
 
+// Simpan Kredensial Superadmin (Bisa Diganti di Pengaturan)
+function saveSuperadminCredentialsDirect() {
+  const user = document.getElementById('settSuperadminUser')?.value?.trim() || 'admin';
+  const pass = document.getElementById('settSuperadminPass')?.value?.trim() || 'irtnaiklevel2026';
+  
+  if (!pass) {
+    alert("Password tidak boleh kosong!");
+    return;
+  }
+  
+  if (!courseData.superadmin) courseData.superadmin = {};
+  courseData.superadminUsername = user;
+  courseData.superadminPassword = pass;
+  courseData.superadmin.username = user;
+  courseData.superadmin.password = pass;
+  
+  executeSaveLandingPageSettings(true);
+  showToast("Password superadmin berhasil diperbarui dan tersimpan!");
+}
+
+
 function updateAllLynkLinks() {
   const targetUrl = (courseData.contact && courseData.contact.lynkPaymentUrl) || "http://lynk.id/jawierjawa/5nwddoy5kxy9";
   const checkoutBtn = document.getElementById('checkoutLynkBtnLink');
@@ -9123,8 +9192,10 @@ function verifyAndOpenAdmin() {
   const user = (userInput ? userInput.value : '').trim().toLowerCase();
   const pass = (passInput ? passInput.value : '').trim().toLowerCase();
 
-  const validUsers = ['admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
-  const validPass = ['irtnaiklevek2026', 'irtnaiklevel2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
+  const currentAdminPass = (courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
+  const currentAdminUser = (courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
+  const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
+  const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
 
   if (validPass.includes(pass) && (validUsers.includes(user) || !user || user.length > 0)) {
     closeModal('loginModal');
@@ -9292,6 +9363,12 @@ function loadLandingPageSettings() {
   const fAvatarUrl = document.getElementById('settFounderAvatarUrl');
   if (fAvatarUrl) fAvatarUrl.value = courseData.mentor.avatarUrl || '';
   updateFounderPhotoPreview(courseData.mentor.avatarUrl || '');
+
+  // Load Superadmin Credentials
+  const sUser = document.getElementById('settSuperadminUser');
+  if (sUser) sUser.value = courseData.superadminPassword ? (courseData.superadminUsername || 'admin') : (courseData.superadmin?.username || 'admin');
+  const sPass = document.getElementById('settSuperadminPass');
+  if (sPass) sPass.value = courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026';
 
   renderAdminAudiencesList();
   renderAdminStepsList();
@@ -9660,6 +9737,19 @@ function executeSaveLandingPageSettings(isManual = false) {
   const fAvatarUrl = document.getElementById('settFounderAvatarUrl')?.value?.trim();
   if (fAvatarUrl !== undefined) courseData.mentor.avatarUrl = fAvatarUrl;
 
+  const sUser = document.getElementById('settSuperadminUser')?.value?.trim();
+  if (sUser) {
+    courseData.superadminUsername = sUser;
+    if (!courseData.superadmin) courseData.superadmin = {};
+    courseData.superadmin.username = sUser;
+  }
+  const sPass = document.getElementById('settSuperadminPass')?.value?.trim();
+  if (sPass) {
+    courseData.superadminPassword = sPass;
+    if (!courseData.superadmin) courseData.superadmin = {};
+    courseData.superadmin.password = sPass;
+  }
+
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
   } catch (err) {
@@ -9682,7 +9772,9 @@ function executeSaveLandingPageSettings(isManual = false) {
             mentor_badge: courseData.mentor ? (courseData.mentor.badge || '') : '',
             mentor_quote: courseData.mentor ? (courseData.mentor.quote || '') : '',
             course_price: courseData.pricing?.promoPrice || 'Rp 1',
-            brand_name: courseData.brand?.name || 'CREATOR CLASS'
+            brand_name: courseData.brand?.name || 'CREATOR CLASS',
+            superadmin_username: courseData.superadminUsername || courseData.superadmin?.username || 'admin',
+            superadmin_password: courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026'
           }
         })
       }).catch(e => console.warn('Sync live settings warning:', e));
@@ -11680,8 +11772,10 @@ function handleAdminLoginFromModal() {
   const user = (userInput ? userInput.value : '').trim().toLowerCase();
   const pass = (passInput ? passInput.value : '').trim().toLowerCase();
 
-  const validUsers = ['admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
-  const validPass = ['irtnaiklevek2026', 'irtnaiklevel2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
+  const currentAdminPass = (courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
+  const currentAdminUser = (courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
+  const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
+  const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
 
   if (pass && validPass.includes(pass) && (validUsers.includes(user) || !user || user.length > 0)) {
     closeModal('loginModal');
@@ -14053,8 +14147,10 @@ function handleModalAdminLogin() {
   const user = (userInput ? userInput.value : '').trim().toLowerCase();
   const pass = (passInput ? passInput.value : '').trim().toLowerCase();
 
-  const validUsers = ['admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
-  const validPass = ['irtnaiklevek2026', 'irtnaiklevel2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
+  const currentAdminPass = (courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
+  const currentAdminUser = (courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
+  const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
+  const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
 
   if (pass && validPass.includes(pass) && (validUsers.includes(user) || !user || user.length > 0)) {
     closeModal('loginModal');
