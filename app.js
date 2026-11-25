@@ -2480,7 +2480,7 @@ function renderPortalDashboard() {
 
   if (dashTools) dashTools.textContent = tools.length;
   if (dashMembers) {
-    dashMembers.textContent = courseData.isCleanTrial ? members.length : (members.length + 2835);
+    dashMembers.textContent = members.length;
   }
   if (dashViews) dashViews.textContent = totalViews;
 
