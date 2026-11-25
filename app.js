@@ -2727,6 +2727,49 @@ window.executeBulkDeleteTools = executeBulkDeleteTools;
 window.executeDeleteAllTools = executeDeleteAllTools;
 window.resetTrialDataClean = resetTrialDataClean;
 
+
+function sendMemberActivationViaWa(memberId) {
+  const members = courseData.portalMembers || [];
+  const m = members.find(item => String(item.id) === String(memberId));
+  if (!m) { alert("Data member tidak ditemukan."); return; }
+
+  if (!m.activationCode) {
+    m.activationCode = 'IRT-ACT-' + Math.floor(1000 + Math.random() * 9000);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData)); } catch (e) {}
+  }
+
+  const targetWa = formatWaForUrl(m.wa || '081319894236');
+  const activationMsg = getActivationMessageText(m);
+  const waUrl = `https://wa.me/${targetWa}?text=${encodeURIComponent(activationMsg)}`;
+  window.open(waUrl, '_blank');
+  showToast(`Membuka WhatsApp untuk mengirim kode (${m.activationCode}) ke ${m.name}...`);
+}
+
+function copyMemberActivationToClipboard(memberId) {
+  const members = courseData.portalMembers || [];
+  const m = members.find(item => String(item.id) === String(memberId));
+  if (!m) { alert("Data member tidak ditemukan."); return; }
+
+  if (!m.activationCode) {
+    m.activationCode = 'IRT-ACT-' + Math.floor(1000 + Math.random() * 9000);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData)); } catch (e) {}
+  }
+
+  const msg = getActivationMessageText(m);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(msg).then(() => {
+      showToast(`Pesan & Kode Aktivasi (${m.activationCode}) berhasil disalin!`);
+    }).catch(() => {
+      prompt("Salin pesan aktivasi berikut:", msg);
+    });
+  } else {
+    prompt("Salin pesan aktivasi berikut:", msg);
+  }
+}
+
+window.sendMemberActivationViaWa = sendMemberActivationViaWa;
+window.copyMemberActivationToClipboard = copyMemberActivationToClipboard;
+
 function renderPortalMembers() {
   const tbody = document.getElementById('portalMembersTableBody');
   const countEl = document.getElementById('totalMembersCount');
@@ -2774,7 +2817,16 @@ function renderPortalMembers() {
         </span>
       </td>
       <td class="py-3 px-4">
-        <div class="flex items-center gap-1.5">
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <button onclick="sendMemberActivationViaWa('${m.id}')" class="px-2 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer" title="Kirim Kode Aktivasi ke WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i> WA
+          </button>
+          <button onclick="resendActivationEmail('${m.email}', '${m.activationCode || 'IRT-ACT-7842'}', '${encodeURIComponent(m.name)}')" class="px-2 py-1 rounded-lg bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer" title="Kirim Kode Aktivasi ke Email">
+            <i class="fa-solid fa-envelope"></i> Email
+          </button>
+          <button onclick="copyMemberActivationToClipboard('${m.id}')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white border border-white/10 text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer" title="Salin Pesan & Kode Aktivasi">
+            <i class="fa-regular fa-copy"></i> Salin
+          </button>
           <button onclick="handleAdminResetDevice('${m.email}')" class="px-2 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-semibold transition-all flex items-center gap-1" title="Reset Perangkat Member">
             <i class="fa-solid fa-rotate-left"></i> Reset Device
           </button>
