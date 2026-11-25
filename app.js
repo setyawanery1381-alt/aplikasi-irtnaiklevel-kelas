@@ -235,6 +235,10 @@ async function syncFromGasDatabase(silent = false) {
       if (cloudSettings.landing_state) {
         try {
           const ls = JSON.parse(cloudSettings.landing_state);
+          const localTs = Number(courseData.landingStateUpdatedAt || 0);
+          const cloudTs = Number(ls.updatedAt || 0);
+          if (cloudTs > 0 && cloudTs > localTs) {
+            courseData.landingStateUpdatedAt = cloudTs;
           if (ls.hero) courseData.hero = ls.hero;
           if (ls.mentor) courseData.mentor = ls.mentor;
           if (ls.socialLinks) courseData.socialLinks = ls.socialLinks;
@@ -255,6 +259,7 @@ async function syncFromGasDatabase(silent = false) {
             if (!ls.brand.logoUrl && keepLogo) courseData.brand.logoUrl = keepLogo;
           }
           if (typeof renderAll === 'function') renderAll();
+          }
         } catch (e) {}
       }
       if (!courseData.portalPayments) courseData.portalPayments = [];
@@ -435,7 +440,7 @@ function postDataToGas(payload) {
 }
 
 
-function pushCloudSyncSettings(extraObj = {}) {
+function pushCloudSyncSettings(extraObj = {}, includeLanding = false) {
   if (typeof GAS_API_URL === 'undefined' || !GAS_API_URL) return;
   try {
     let deletedArr = Array.isArray(courseData.deletedCodes) ? [...courseData.deletedCodes] : [];
@@ -458,8 +463,13 @@ function pushCloudSyncSettings(extraObj = {}) {
       cleared_payments: courseData.isClearedPayments ? 'true' : 'false',
       clean_trial: courseData.isCleanTrial ? 'true' : 'false',
       clean_trial_ts: String(courseData.cleanTrialTimestamp || 0),
-      manual_members: JSON.stringify(manualMembers),
-      landing_state: JSON.stringify({
+      manual_members: JSON.stringify(manualMembers)
+    }, extraObj);
+    if (includeLanding) {
+      courseData.landingStateUpdatedAt = Date.now();
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData)); } catch(e) {}
+      settingsPayload.landing_state = JSON.stringify({
+        updatedAt: courseData.landingStateUpdatedAt,
         brand: courseData.brand ? { ...courseData.brand, logoUrl: (courseData.brand.logoUrl && courseData.brand.logoUrl.length < 25000) ? courseData.brand.logoUrl : '' } : undefined,
         hero: courseData.hero,
         mentor: courseData.mentor,
@@ -471,8 +481,8 @@ function pushCloudSyncSettings(extraObj = {}) {
         themeConfig: courseData.themeConfig,
         testimonials: (courseData.testimonials || []).slice(0, 20),
         audiences: courseData.audiences
-      })
-    }, extraObj);
+      });
+    }
 
     fetch(GAS_API_URL, {
       method: 'POST',
@@ -1652,7 +1662,7 @@ function handleEditorSubmit(e) {
   // 3. Immediately render all components
   renderAll();
   showToast("✅ Seketika tersimpan! Semua perubahan landing page telah terupdate.");
-  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings({}, true);
 }
 
 function exportConfigJSON() {
@@ -5024,7 +5034,7 @@ function handleAddTestimonialSubmit(e) {
   renderTestimonials();
   renderAdminTestimonialsTable();
   showToast("🎉 Terima kasih! Testimoni & hasil karya Anda langsung tayang!");
-  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings({}, true);
 }
 
 // ----------------------------------------------------
@@ -5120,10 +5130,10 @@ function toggleTakedownTestimonial(id) {
 
   if (t.isTakedown) {
     showToast("⛔ Testimoni berhasil di-takedown dari website!");
-  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings({}, true);
   } else {
     showToast("✅ Testimoni berhasil ditayangkan kembali!");
-  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings({}, true);
   }
 }
 
@@ -5274,7 +5284,7 @@ function deleteTestimonial(id) {
   renderAdminTestimonialsTable();
   renderTestimonials();
   showToast("✅ Seketika dihapus! Testimoni telah dihapus dari landing page.");
-  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings({}, true);
 }
 
 // ----------------------------------------------------
