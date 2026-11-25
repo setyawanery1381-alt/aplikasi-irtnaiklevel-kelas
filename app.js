@@ -575,6 +575,7 @@ function renderAll() {
   renderTools();
   renderPricing();
   renderFaqs();
+  if (typeof renderTestimonials === 'function') renderTestimonials();
   renderFooter();
   syncEditorForm();
   renderAdminToolsTable();
@@ -4306,6 +4307,12 @@ function toggleTakedownTestimonial(id) {
   t.isTakedown = !t.isTakedown;
 
   try {
+    const customList = JSON.parse(localStorage.getItem('creator_class_custom_testimonials') || '[]');
+    const cIdx = customList.findIndex(item => String(item.id) === String(id));
+    if (cIdx !== -1) {
+      customList[cIdx].isTakedown = t.isTakedown;
+      localStorage.setItem('creator_class_custom_testimonials', JSON.stringify(customList));
+    }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
   } catch (err) {
     console.warn("Storage save error:", err);
@@ -4457,6 +4464,9 @@ function deleteTestimonial(id) {
   courseData.testimonials = courseData.testimonials.filter(item => String(item.id) !== String(id));
 
   try {
+    const customList = JSON.parse(localStorage.getItem('creator_class_custom_testimonials') || '[]');
+    const filteredCustom = customList.filter(item => String(item.id) !== String(id));
+    localStorage.setItem('creator_class_custom_testimonials', JSON.stringify(filteredCustom));
     localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
   } catch (err) {
     console.warn("Storage save error:", err);
