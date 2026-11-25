@@ -128,14 +128,100 @@ async function syncFromGasDatabase(silent = false) {
   if (syncText) syncText.textContent = 'Menyinkronkan...';
 
   try {
-    const res = await fetch(GAS_API_URL + '?action=getAll&_t=' + Date.now(), {
-      method: 'GET',
-      headers: { 'Accept': 'application/json' },
-      cache: 'no-store'
-    });
+    const [res, resSettings] = await Promise.all([
+      fetch(GAS_API_URL + '?action=getAll&_t=' + Date.now(), {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        cache: 'no-store'
+      }),
+      fetch(GAS_API_URL + '?action=getSettings&_t=' + Date.now(), {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        cache: 'no-store'
+      }).catch(() => null)
+    ]);
     const result = await res.json();
+    let cloudSettings = {};
+    if (resSettings) {
+      try {
+        const sJson = await resSettings.json();
+        if (sJson && sJson.success && sJson.settings) cloudSettings = sJson.settings;
+      } catch (e) {}
+    }
 
     if (result && result.success) {
+      if (cloudSettings.deleted_members) {
+        try {
+          const cloudDel = JSON.parse(cloudSettings.deleted_members);
+          if (Array.isArray(cloudDel) && cloudDel.length > 0) {
+            if (!courseData.deletedCodes) courseData.deletedCodes = [];
+            courseData.deletedCodes = [...new Set([...courseData.deletedCodes, ...cloudDel])];
+            const localDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
+            localStorage.setItem('creator_class_deleted_members', JSON.stringify([...new Set([...localDel, ...cloudDel])]));
+          }
+        } catch (e) {}
+      }
+      if (cloudSettings.cleared_members === 'true') courseData.isClearedMembers = true;
+      if (cloudSettings.deleted_payments) {
+        try {
+          const cloudDelPay = JSON.parse(cloudSettings.deleted_payments);
+          if (Array.isArray(cloudDelPay) && cloudDelPay.length > 0) {
+            if (!courseData.deletedPaymentIds) courseData.deletedPaymentIds = [];
+            courseData.deletedPaymentIds = [...new Set([...courseData.deletedPaymentIds, ...cloudDelPay])];
+            const localDelPay = JSON.parse(localStorage.getItem('creator_class_deleted_payments') || '[]');
+            localStorage.setItem('creator_class_deleted_payments', JSON.stringify([...new Set([...localDelPay, ...cloudDelPay])]));
+          }
+        } catch (e) {}
+      }
+      if (cloudSettings.cleared_payments === 'true') courseData.isClearedPayments = true;
+      if (cloudSettings.clean_trial === 'true') courseData.isCleanTrial = true;
+      if (cloudSettings.clean_trial_ts && Number(cloudSettings.clean_trial_ts) > 0) {
+        courseData.cleanTrialTimestamp = Math.max(courseData.cleanTrialTimestamp || 0, Number(cloudSettings.clean_trial_ts));
+      }
+      if (cloudSettings.manual_members) {
+        try {
+          const cloudManual = JSON.parse(cloudSettings.manual_members);
+          if (Array.isArray(cloudManual)) {
+            if (!courseData.portalMembers) courseData.portalMembers = [];
+            cloudManual.forEach(cm => {
+              if (!courseData.portalMembers.some(m => String(m.id) === String(cm.id))) {
+                courseData.portalMembers.push(cm);
+              }
+            });
+          }
+        } catch (e) {}
+      }
+      if (cloudSettings.superadmin_username && cloudSettings.superadmin_password) {
+        localStorage.setItem('creator_class_superadmin_user', cloudSettings.superadmin_username);
+        localStorage.setItem('creator_class_superadmin_pass', cloudSettings.superadmin_password);
+        courseData.superadminUsername = cloudSettings.superadmin_username;
+        courseData.superadminPassword = cloudSettings.superadmin_password;
+      }
+      if (cloudSettings.landing_state) {
+        try {
+          const ls = JSON.parse(cloudSettings.landing_state);
+          if (ls.hero) courseData.hero = ls.hero;
+          if (ls.mentor) courseData.mentor = ls.mentor;
+          if (ls.socialLinks) courseData.socialLinks = ls.socialLinks;
+          if (ls.footerDesc !== undefined) courseData.footerDesc = ls.footerDesc;
+          if (ls.sectionHeaders) courseData.sectionHeaders = ls.sectionHeaders;
+          if (ls.pricing) courseData.pricing = ls.pricing;
+          if (ls.contact) courseData.contact = ls.contact;
+          if (ls.themeConfig) {
+            courseData.themeConfig = ls.themeConfig;
+            if (typeof applyThemeConfig === 'function') applyThemeConfig(ls.themeConfig);
+          }
+          if (Array.isArray(ls.testimonials)) courseData.testimonials = ls.testimonials;
+          if (Array.isArray(ls.audiences)) courseData.audiences = ls.audiences;
+          if (ls.brand) {
+            if (!courseData.brand) courseData.brand = {};
+            const keepLogo = courseData.brand.logoUrl;
+            courseData.brand = { ...courseData.brand, ...ls.brand };
+            if (!ls.brand.logoUrl && keepLogo) courseData.brand.logoUrl = keepLogo;
+          }
+          if (typeof renderAll === 'function') renderAll();
+        } catch (e) {}
+      }
       if (!courseData.portalPayments) courseData.portalPayments = [];
       if (!courseData.portalMembers) courseData.portalMembers = [];
       if (result.webhookLogs) {
@@ -276,6 +362,61 @@ function postDataToGas(payload) {
     console.warn('postDataToGas exception:', e);
   }
 }
+
+
+function pushCloudSyncSettings(extraObj = {}) {
+  if (typeof GAS_API_URL === 'undefined' || !GAS_API_URL) return;
+  try {
+    let deletedArr = Array.isArray(courseData.deletedCodes) ? [...courseData.deletedCodes] : [];
+    try {
+      const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
+      if (Array.isArray(storedDel)) deletedArr = [...new Set([...deletedArr, ...storedDel])];
+    } catch (e) {}
+
+    let deletedPayArr = Array.isArray(courseData.deletedPaymentIds) ? [...courseData.deletedPaymentIds] : [];
+    try {
+      const storedDelPay = JSON.parse(localStorage.getItem('creator_class_deleted_payments') || '[]');
+      if (Array.isArray(storedDelPay)) deletedPayArr = [...new Set([...deletedPayArr, ...storedDelPay])];
+    } catch (e) {}
+
+    const manualMembers = (courseData.portalMembers || []).filter(m => m.isManual);
+    const settingsPayload = Object.assign({
+      deleted_members: JSON.stringify(deletedArr),
+      cleared_members: courseData.isClearedMembers ? 'true' : 'false',
+      deleted_payments: JSON.stringify(deletedPayArr),
+      cleared_payments: courseData.isClearedPayments ? 'true' : 'false',
+      clean_trial: courseData.isCleanTrial ? 'true' : 'false',
+      clean_trial_ts: String(courseData.cleanTrialTimestamp || 0),
+      manual_members: JSON.stringify(manualMembers),
+      landing_state: JSON.stringify({
+        brand: courseData.brand ? { ...courseData.brand, logoUrl: (courseData.brand.logoUrl && courseData.brand.logoUrl.length < 25000) ? courseData.brand.logoUrl : '' } : undefined,
+        hero: courseData.hero,
+        mentor: courseData.mentor,
+        socialLinks: courseData.socialLinks,
+        footerDesc: courseData.footerDesc,
+        sectionHeaders: courseData.sectionHeaders,
+        pricing: courseData.pricing,
+        contact: courseData.contact,
+        themeConfig: courseData.themeConfig,
+        testimonials: (courseData.testimonials || []).slice(0, 20),
+        audiences: courseData.audiences
+      })
+    }, extraObj);
+
+    fetch(GAS_API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        action: 'saveSettings',
+        settings: settingsPayload
+      })
+    }).catch(err => console.warn('pushCloudSyncSettings warn:', err));
+  } catch (e) {
+    console.warn('pushCloudSyncSettings exception:', e);
+  }
+}
+window.pushCloudSyncSettings = pushCloudSyncSettings;
 
 function initData() {
   // Restore custom superadmin credentials if previously saved
@@ -1441,6 +1582,7 @@ function handleEditorSubmit(e) {
   // 3. Immediately render all components
   renderAll();
   showToast("✅ Seketika tersimpan! Semua perubahan landing page telah terupdate.");
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
 }
 
 function exportConfigJSON() {
@@ -4667,6 +4809,7 @@ function handleAddTestimonialSubmit(e) {
   renderTestimonials();
   renderAdminTestimonialsTable();
   showToast("🎉 Terima kasih! Testimoni & hasil karya Anda langsung tayang!");
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
 }
 
 // ----------------------------------------------------
@@ -4762,8 +4905,10 @@ function toggleTakedownTestimonial(id) {
 
   if (t.isTakedown) {
     showToast("⛔ Testimoni berhasil di-takedown dari website!");
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
   } else {
     showToast("✅ Testimoni berhasil ditayangkan kembali!");
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
   }
 }
 
@@ -4914,6 +5059,7 @@ function deleteTestimonial(id) {
   renderAdminTestimonialsTable();
   renderTestimonials();
   showToast("✅ Seketika dihapus! Testimoni telah dihapus dari landing page.");
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
 }
 
 // ----------------------------------------------------
