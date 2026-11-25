@@ -424,6 +424,9 @@ async function syncFromGasDatabase(silent = false) {
 
 // Function to post background data to GAS
 function postDataToGas(payload) {
+  if (payload && ['deleteMembers', 'deletePayments', 'resetTrialData', 'saveTool', 'addMember'].includes(payload.action)) {
+    payload.adminPass = localStorage.getItem('creator_class_superadmin_pass') || (courseData && courseData.superadminPassword) || 'irtnaiklevel2026';
+  }
   try {
     fetch(GAS_API_URL, {
       method: 'POST',
@@ -468,7 +471,7 @@ function pushCloudSyncSettings(extraObj = {}, includeLanding = false) {
     if (includeLanding) {
       courseData.landingStateUpdatedAt = Date.now();
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData)); } catch(e) {}
-      settingsPayload.landing_state = JSON.stringify({
+      let lsObj = {
         updatedAt: courseData.landingStateUpdatedAt,
         brand: courseData.brand ? { ...courseData.brand, logoUrl: (courseData.brand.logoUrl && courseData.brand.logoUrl.length < 25000) ? courseData.brand.logoUrl : '' } : undefined,
         hero: courseData.hero,
@@ -481,7 +484,13 @@ function pushCloudSyncSettings(extraObj = {}, includeLanding = false) {
         themeConfig: courseData.themeConfig,
         testimonials: (courseData.testimonials || []).slice(0, 20),
         audiences: courseData.audiences
-      });
+      };
+      let lsStr = JSON.stringify(lsObj);
+      if (lsStr.length > 45000 && Array.isArray(lsObj.audiences)) {
+        lsObj.audiences = lsObj.audiences.map(a => ({ ...a, imageUrl: (a.imageUrl && a.imageUrl.length > 8000) ? '' : a.imageUrl }));
+        lsStr = JSON.stringify(lsObj);
+      }
+      settingsPayload.landing_state = lsStr;
     }
 
     fetch(GAS_API_URL, {
@@ -541,7 +550,7 @@ function initData() {
       courseData = JSON.parse(saved);
       // Auto-enforce synced stats (1.834+), Mentor (Lia), and Tools
       if (courseData.hero) {
-        courseData.hero.badge = "1.834+ Ibu Rumah Tangga Telah Bergabung";
+        if (!courseData.hero.badge) courseData.hero.badge = "1.834+ Ibu Rumah Tangga Telah Bergabung";
       }
       if (courseData.mentor) {
         courseData.mentor.name = courseData.mentor.name || "Lia Naik Level";
@@ -565,10 +574,10 @@ function initData() {
         }
       }
       if (courseData.pricing) {
-        courseData.pricing.normalPrice = "Rp 20.000";
-        courseData.pricing.originalPrice = "Rp 20.000";
-        courseData.pricing.promoPrice = "Rp 1";
-        courseData.pricing.price = "Rp 1";
+        if (!courseData.pricing.normalPrice) courseData.pricing.normalPrice = "Rp 20.000";
+        if (!courseData.pricing.originalPrice) courseData.pricing.originalPrice = "Rp 20.000";
+        if (!courseData.pricing.promoPrice) courseData.pricing.promoPrice = "Rp 1";
+        if (!courseData.pricing.price) courseData.pricing.price = "Rp 1";
       }
       // Auto-normalize tool categories to official curriculum categories (Foto 1)
       if (courseData.portalTools && Array.isArray(courseData.portalTools)) {
@@ -1933,9 +1942,10 @@ function verifyAndOpenAdmin() {
   const currentAdminPass = (savedPass || courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
   const currentAdminUser = (savedUser || courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
   const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
-  const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
+  const validPass = [currentAdminPass];
 
   if (validPass.includes(pass) && (validUsers.includes(user) || !user || user.length > 0)) {
+    sessionStorage.setItem('creator_class_admin_authed', 'true');
     closeModal('loginModal');
     openPortalAdmin();
     showToast("Berhasil masuk ke Portal Admin IRT NAIK LEVEL!");
@@ -1945,6 +1955,15 @@ function verifyAndOpenAdmin() {
 }
 
 function openPortalAdmin() {
+  if (sessionStorage.getItem('creator_class_admin_authed') !== 'true') {
+    if (typeof openLoginModal === 'function') {
+      openLoginModal();
+      if (typeof switchLoginModalTab === 'function') switchLoginModalTab('admin');
+      if (typeof switchAuthTab === 'function') switchAuthTab('admin');
+      showToast("🔐 Silakan masukkan Username & Password Admin.");
+    }
+    return;
+  }
   const overlay = document.getElementById('portalAdminModal');
   if (overlay) {
     overlay.style.display = 'flex';
@@ -2735,12 +2754,19 @@ window.refreshAdminDashboardData = refreshAdminDashboardData;
 if (typeof window !== 'undefined' && !window._creatorAdminAutoPoll) {
   window._creatorAdminAutoPoll = setInterval(function() {
     const portal = document.getElementById('portalAdminModal');
-    if (portal && (portal.style.display === 'flex' || portal.classList.contains('active'))) {
-      if (typeof syncFromGasDatabase === 'function') {
+    if (typeof syncFromGasDatabase === 'function') {
+      const isAdminOpen = portal && (portal.style.display === 'flex' || portal.classList.contains('active'));
+      if (isAdminOpen || !window._lastPublicSync || (Date.now() - window._lastPublicSync > 30000)) {
+        window._lastPublicSync = Date.now();
         syncFromGasDatabase(true);
       }
     }
   }, 15000);
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible' && typeof syncFromGasDatabase === 'function') {
+      syncFromGasDatabase(true);
+    }
+  });
 }
 
 if (typeof window !== 'undefined' && !window._creatorStorageListenerAttached) {
@@ -3108,8 +3134,24 @@ function renderPortalMembers() {
     return m.name.toLowerCase().includes(q) || m.email.toLowerCase().includes(q) || m.wa.includes(q);
   });
 
+  if (typeof window._memberPage !== 'number') window._memberPage = 1;
+  const pageSizeM = 50;
+  const totalPagesM = Math.max(1, Math.ceil(filtered.length / pageSizeM));
+  if (window._memberPage > totalPagesM) window._memberPage = totalPagesM;
+  const startM = (window._memberPage - 1) * pageSizeM;
+  const pagedMembers = filtered.slice(startM, startM + pageSizeM);
+
+  const pagBarM = document.getElementById('membersPaginationBar');
+  if (pagBarM) {
+    if (filtered.length > pageSizeM) {
+      pagBarM.innerHTML = `<span>Menampilkan ${startM + 1}–${Math.min(startM + pageSizeM, filtered.length)} dari ${filtered.length} member</span><div class="flex items-center gap-2"><button type="button" onclick="window._memberPage=Math.max(1,window._memberPage-1);renderPortalMembers();" ${window._memberPage<=1?'disabled':''} class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-30 text-white">Sebelumnya</button><span class="font-mono">Hal ${window._memberPage}/${totalPagesM}</span><button type="button" onclick="window._memberPage=Math.min(${totalPagesM},window._memberPage+1);renderPortalMembers();" ${window._memberPage>=totalPagesM?'disabled':''} class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-30 text-white">Berikutnya</button></div>`;
+    } else {
+      pagBarM.innerHTML = `<span>Total ${filtered.length} member ditampilkan</span>`;
+    }
+  }
+
   const todayStr = new Date().toISOString().slice(0, 10);
-  tbody.innerHTML = filtered.map(m => {
+  tbody.innerHTML = pagedMembers.map(m => {
     const todayDevs = (m.devices || []).filter(d => d.date === todayStr);
     const devCount = todayDevs.length;
     const isOverLimit = devCount > 3 || (courseData.securityAlerts || []).some(a => a.memberEmail === m.email);
@@ -3706,8 +3748,24 @@ function renderPortalPayments() {
     return { badgeClass, iconClass };
   };
 
+  if (typeof window._paymentPage !== 'number') window._paymentPage = 1;
+  const pageSizeP = 50;
+  const totalPagesP = Math.max(1, Math.ceil(filtered.length / pageSizeP));
+  if (window._paymentPage > totalPagesP) window._paymentPage = totalPagesP;
+  const startP = (window._paymentPage - 1) * pageSizeP;
+  const pagedPayments = filtered.slice(startP, startP + pageSizeP);
+
+  const pagBarP = document.getElementById('paymentsPaginationBar');
+  if (pagBarP) {
+    if (filtered.length > pageSizeP) {
+      pagBarP.innerHTML = `<span>Menampilkan ${startP + 1}–${Math.min(startP + pageSizeP, filtered.length)} dari ${filtered.length} transaksi</span><div class="flex items-center gap-2"><button type="button" onclick="window._paymentPage=Math.max(1,window._paymentPage-1);renderPortalPayments();" ${window._paymentPage<=1?'disabled':''} class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-30 text-white">Sebelumnya</button><span class="font-mono">Hal ${window._paymentPage}/${totalPagesP}</span><button type="button" onclick="window._paymentPage=Math.min(${totalPagesP},window._paymentPage+1);renderPortalPayments();" ${window._paymentPage>=totalPagesP?'disabled':''} class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-30 text-white">Berikutnya</button></div>`;
+    } else {
+      pagBarP.innerHTML = `<span>Total ${filtered.length} transaksi ditampilkan</span>`;
+    }
+  }
+
   if (tbody) {
-    tbody.innerHTML = filtered.map(p => {
+    tbody.innerHTML = pagedPayments.map(p => {
       const isLunas = p.status === 'Lunas & Teraktivasi' || p.status === 'Lunas' || (p.status || '').toLowerCase().includes('lunas');
       const waClean = formatWaForUrl(p.wa || '081319894236');
       const actCode = p.activationCode || 'IRT-ACT-7842';
@@ -3773,7 +3831,7 @@ function renderPortalPayments() {
   }
 
   if (mobileList) {
-    mobileList.innerHTML = filtered.map(p => {
+    mobileList.innerHTML = pagedPayments.map(p => {
       const isLunas = p.status === 'Lunas & Teraktivasi' || p.status === 'Lunas' || (p.status || '').toLowerCase().includes('lunas');
       const waClean = formatWaForUrl(p.wa || '081319894236');
       const actCode = p.activationCode || 'IRT-ACT-7842';
@@ -5688,9 +5746,10 @@ function handleAdminLoginFromModal() {
   const currentAdminPass = (savedPass || courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
   const currentAdminUser = (savedUser || courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
   const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
-  const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
+  const validPass = [currentAdminPass];
 
   if (pass && validPass.includes(pass) && (validUsers.includes(user) || !user || user.length > 0)) {
+    sessionStorage.setItem('creator_class_admin_authed', 'true');
     closeModal('loginModal');
     openPortalAdmin();
     showToast("Berhasil masuk ke Portal Admin IRT NAIK LEVEL!");
@@ -6778,8 +6837,9 @@ function handleNewAuthLogin() {
   const _savedAdminUser = (localStorage.getItem('creator_class_superadmin_user') || courseData.superadminUsername || 'admin').trim().toLowerCase();
   const _savedAdminPass = (localStorage.getItem('creator_class_superadmin_pass') || courseData.superadminPassword || 'irtnaiklevel2026').trim().toLowerCase();
   const validAdminUsers = [_savedAdminUser, 'admin', 'superadmin', 'irtadmin', 'owner', 'irtnaiklevel'];
-  const validAdminPass = [_savedAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'admin123', 'admin', 'irtnaiklevel', '123456'];
+  const validAdminPass = [_savedAdminPass];
   if (validAdminUsers.includes(rawId.toLowerCase()) && validAdminPass.includes(rawPass.toLowerCase())) {
+    sessionStorage.setItem('creator_class_admin_authed', 'true');
     closeModal('loginModal');
     openPortalAdmin();
     showToast("Berhasil masuk ke Portal Admin!");
@@ -8123,9 +8183,10 @@ function handleModalAdminLogin() {
   const currentAdminPass = (savedPass || courseData.superadminPassword || courseData.superadmin?.password || 'irtnaiklevel2026').trim().toLowerCase();
   const currentAdminUser = (savedUser || courseData.superadminUsername || courseData.superadmin?.username || 'admin').trim().toLowerCase();
   const validUsers = [currentAdminUser, 'admin', 'superadmin', 'super_admin', 'super admin', 'irtadmin', 'owner', 'irtnaiklevel', 'irtnaiklevek', 'lia', 'sangcreator', ''];
-  const validPass = [currentAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'irtnaiklevel', 'irtnaiklevek', 'admin123', 'admin', '123456'];
+  const validPass = [currentAdminPass];
 
   if (pass && validPass.includes(pass) && (validUsers.includes(user) || !user || user.length > 0)) {
+    sessionStorage.setItem('creator_class_admin_authed', 'true');
     closeModal('loginModal');
     openPortalAdmin();
     showToast("Berhasil masuk ke Portal Admin IRT NAIK LEVEL!");

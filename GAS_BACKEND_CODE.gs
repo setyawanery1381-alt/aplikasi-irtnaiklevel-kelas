@@ -180,6 +180,22 @@ function doGet(e) {
 // =========================================================================
 // 3. ENDPOINT POST (TERIMA PENDAFTARAN, WEBHOOK LYNK, & UPDATE ADMIN)
 // =========================================================================
+function verifyGasAdminPass(ss, providedPass) {
+  if (!providedPass) return false;
+  var sheetPeng = ss.getSheetByName("Pengaturan");
+  var storedPass = "irtnaiklevel2026";
+  if (sheetPeng && sheetPeng.getLastRow() > 1) {
+    var rows = sheetPeng.getRange(2, 1, sheetPeng.getLastRow() - 1, 2).getValues();
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i][0] === "superadmin_password" && rows[i][1]) {
+        storedPass = String(rows[i][1]);
+        break;
+      }
+    }
+  }
+  return String(providedPass).trim().toLowerCase() === String(storedPass).trim().toLowerCase();
+}
+
 function doPost(e) {
   setupSheets();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -598,6 +614,7 @@ function doPost(e) {
     }
 
     if (action === 'deleteMembers') {
+      if (data.adminPass !== undefined && !verifyGasAdminPass(ss, data.adminPass)) { result.success = false; result.message = 'Unauthorized'; return createJsonResponse(result); }
       var sheetMemDel = ss.getSheetByName("Member");
       var delIds = (data.ids || []).map(function(x){ return String(x).toLowerCase(); });
       if (sheetMemDel && sheetMemDel.getLastRow() > 1 && delIds.length > 0) {
@@ -616,6 +633,7 @@ function doPost(e) {
     }
 
     if (action === 'deletePayments') {
+      if (data.adminPass !== undefined && !verifyGasAdminPass(ss, data.adminPass)) { result.success = false; result.message = 'Unauthorized'; return createJsonResponse(result); }
       var sheetPayDel = ss.getSheetByName("Pembayaran");
       var delPayIds = (data.ids || []).map(function(x){ return String(x).toLowerCase(); });
       if (sheetPayDel && sheetPayDel.getLastRow() > 1 && delPayIds.length > 0) {
@@ -632,6 +650,7 @@ function doPost(e) {
     }
 
     if (action === 'resetTrialData') {
+      if (data.adminPass !== undefined && !verifyGasAdminPass(ss, data.adminPass)) { result.success = false; result.message = 'Unauthorized'; return createJsonResponse(result); }
       var sMem = ss.getSheetByName("Member");
       if (sMem && sMem.getLastRow() > 1) sMem.deleteRows(2, sMem.getLastRow() - 1);
       var sPay = ss.getSheetByName("Pembayaran");
