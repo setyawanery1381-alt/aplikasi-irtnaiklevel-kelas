@@ -778,12 +778,15 @@ function sendActivationEmail(toEmail, memberName, activationCode) {
 
           <div class="code-card">
             <div class="code-label">KODE AKTIVASI AKSES KELAS ANDA</div>
-            <div class="code-display">${activationCode}</div>
-            <div style="font-size: 11px; color: #94a3b8; margin-top: 10px;">(Gunakan kode di atas untuk membuka seluruh modul materi di website)</div>
+            <div class="code-display" style="user-select: all; -webkit-user-select: all; cursor: pointer;">${activationCode}</div>
+            <div style="margin-top: 12px;">
+              <a href="${fullActivationUrl}&autocopy=1" target="_blank" style="display: inline-block; padding: 8px 16px; border-radius: 10px; background: rgba(168, 85, 247, 0.22); border: 1px solid rgba(168, 85, 247, 0.5); color: #e9d5ff; font-size: 12px; font-weight: 700; text-decoration: none;">&#128203; Salin Kode &amp; Isi Otomatis di Website</a>
+            </div>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 10px;">(Ketuk kode di atas untuk menyalin cepat, atau klik tombol di bawah untuk langsung buka website)</div>
           </div>
 
           <div style="text-align: center; margin: 26px 0;">
-            <a href="${fullActivationUrl}" target="_blank" class="btn">🚀 Buka Website & Masukkan Kode Akses</a>
+            <a href="${fullActivationUrl}&autocopy=1" target="_blank" class="btn">&#128273; Buka Website &amp; Masukkan Kode Akses</a>
           </div>
 
           <div class="steps">

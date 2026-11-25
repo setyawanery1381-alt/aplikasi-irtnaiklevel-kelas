@@ -2468,6 +2468,31 @@ function updateAutoSaveStatusBadge(state) {
 // ----------------------------------------------------
 // DASHBOARD TAB RENDERER
 // ----------------------------------------------------
+
+async function refreshAdminDashboardData() {
+  const icon = document.getElementById('dashRefreshIcon');
+  const txt = document.getElementById('dashRefreshText');
+  if (icon) icon.classList.add('fa-spin');
+  if (txt) txt.textContent = 'Menyegarkan...';
+  try {
+    if (typeof syncFromGasDatabase === 'function') {
+      await syncFromGasDatabase(true);
+    }
+    if (typeof renderPortalDashboard === 'function') renderPortalDashboard();
+    if (typeof renderPortalMembers === 'function') renderPortalMembers();
+    if (typeof renderPortalPayments === 'function') renderPortalPayments();
+    if (typeof renderPortalMonitoring === 'function') renderPortalMonitoring();
+    if (typeof renderAdminToolsTable === 'function') renderAdminToolsTable();
+    showToast("✅ Data Dashboard, Member & Pembayaran berhasil disegarkan!");
+  } catch (e) {
+    showToast("⚠️ Gagal menyegarkan dari server, menampilkan data lokal.");
+  } finally {
+    if (icon) icon.classList.remove('fa-spin');
+    if (txt) txt.textContent = 'Segarkan Data';
+  }
+}
+window.refreshAdminDashboardData = refreshAdminDashboardData;
+
 function renderPortalDashboard() {
   const tools = courseData.portalTools || [];
   const members = courseData.portalMembers || (window.DEFAULT_COURSE_DATA.portalMembers || []);
@@ -4265,6 +4290,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const codeFromUrl = urlParams.get('code');
 
     if (isRedeemMode) {
+      if (codeFromUrl && navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          navigator.clipboard.writeText(codeFromUrl).then(() => {
+            setTimeout(() => showToast("📋 Kode Aktivasi (" + codeFromUrl + ") otomatis disalin & terisi!"), 500);
+          }).catch(() => {});
+        } catch (e) {}
+      }
       // Sesuai instruksi: Setelah member dapat kode via WA/email, saat link diklik WAJIB masukkan kode unik & email dulu (TIDAK BOLEH langsung tembus web)!
       isMemberUnlocked = false;
       localStorage.removeItem('creator_class_member_unlocked');

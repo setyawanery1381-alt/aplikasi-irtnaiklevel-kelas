@@ -2977,10 +2977,16 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
             <h1 class="text-2xl font-bold text-white tracking-tight">Dashboard Ringkasan</h1>
             <p class="text-xs text-slate-400 mt-1">Pantau statistik materi, member aktif, dan omset pendaftaran kelas.</p>
           </div>
-          <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono font-semibold flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Sistem Real-Time Online
-          </span>
+          <div class="flex items-center gap-2 flex-wrap">
+            <button type="button" onclick="refreshAdminDashboardData()" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-md shadow-purple-600/25 active:scale-95" title="Segarkan data member baru, pembayaran, omset, dan statistik tanpa keluar dashboard">
+              <i id="dashRefreshIcon" class="fa-solid fa-arrows-rotate"></i>
+              <span id="dashRefreshText">Segarkan Data</span>
+            </button>
+            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Sistem Real-Time Online
+            </span>
+          </div>
         </div>
 
         <!-- 4 Metric Cards -->
@@ -10660,6 +10666,31 @@ function updateAutoSaveStatusBadge(state) {
 // ----------------------------------------------------
 // DASHBOARD TAB RENDERER
 // ----------------------------------------------------
+
+async function refreshAdminDashboardData() {
+  const icon = document.getElementById('dashRefreshIcon');
+  const txt = document.getElementById('dashRefreshText');
+  if (icon) icon.classList.add('fa-spin');
+  if (txt) txt.textContent = 'Menyegarkan...';
+  try {
+    if (typeof syncFromGasDatabase === 'function') {
+      await syncFromGasDatabase(true);
+    }
+    if (typeof renderPortalDashboard === 'function') renderPortalDashboard();
+    if (typeof renderPortalMembers === 'function') renderPortalMembers();
+    if (typeof renderPortalPayments === 'function') renderPortalPayments();
+    if (typeof renderPortalMonitoring === 'function') renderPortalMonitoring();
+    if (typeof renderAdminToolsTable === 'function') renderAdminToolsTable();
+    showToast("✅ Data Dashboard, Member & Pembayaran berhasil disegarkan!");
+  } catch (e) {
+    showToast("⚠️ Gagal menyegarkan dari server, menampilkan data lokal.");
+  } finally {
+    if (icon) icon.classList.remove('fa-spin');
+    if (txt) txt.textContent = 'Segarkan Data';
+  }
+}
+window.refreshAdminDashboardData = refreshAdminDashboardData;
+
 function renderPortalDashboard() {
   const tools = courseData.portalTools || [];
   const members = courseData.portalMembers || (window.DEFAULT_COURSE_DATA.portalMembers || []);
@@ -12457,6 +12488,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const codeFromUrl = urlParams.get('code');
 
     if (isRedeemMode) {
+      if (codeFromUrl && navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          navigator.clipboard.writeText(codeFromUrl).then(() => {
+            setTimeout(() => showToast("📋 Kode Aktivasi (" + codeFromUrl + ") otomatis disalin & terisi!"), 500);
+          }).catch(() => {});
+        } catch (e) {}
+      }
       // Sesuai instruksi: Setelah member dapat kode via WA/email, saat link diklik WAJIB masukkan kode unik & email dulu (TIDAK BOLEH langsung tembus web)!
       isMemberUnlocked = false;
       localStorage.removeItem('creator_class_member_unlocked');
