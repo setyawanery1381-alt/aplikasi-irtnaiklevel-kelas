@@ -174,14 +174,22 @@ async function syncFromGasDatabase(silent = false) {
           };
         });
 
-        // Filter transaksi lama jika sudah di-reset untuk Go-Live
+        let deletedPayList = Array.isArray(courseData.deletedPaymentIds) ? [...courseData.deletedPaymentIds] : [];
+        try {
+          const storedDelPay = JSON.parse(localStorage.getItem('creator_class_deleted_payments') || '[]');
+          if (Array.isArray(storedDelPay)) deletedPayList = deletedPayList.concat(storedDelPay);
+        } catch (e) {}
+        const deletedPaySet = new Set(deletedPayList.map(x => String(x).trim().toLowerCase()).filter(Boolean));
+
+        // Filter transaksi terhapus & transaksi lama jika sudah di-reset untuk Go-Live
         const activePayments = formattedPayments.filter(p => {
+          if (deletedPaySet.has(String(p.id || '').trim().toLowerCase())) return false;
           if (cleanTs > 0 && p.rawTimestamp > 0 && p.rawTimestamp <= cleanTs) return false;
-          if (courseData.isCleanTrial && cleanTs > 0 && p.rawTimestamp === 0) return false;
+          if ((courseData.isCleanTrial || courseData.isClearedPayments) && cleanTs > 0 && p.rawTimestamp === 0) return false;
           return true;
         });
         activePayments.sort((a, b) => b.rawTimestamp - a.rawTimestamp);
-        if (!courseData.isCleanTrial || activePayments.length > 0) {
+        if ((!courseData.isCleanTrial && !courseData.isClearedPayments) || activePayments.length > 0) {
           courseData.portalPayments = activePayments;
         }
       }
@@ -3101,100 +3109,293 @@ function sendActivationCodeViaWa(paymentId) {
   if (typeof renderPortalDashboard === "function") renderPortalDashboard();
 }
 
+let paymentSearchQuery = '';
+
+function filterPortalPayments(val) {
+  paymentSearchQuery = (val || '').trim();
+  renderPortalPayments();
+}
+window.filterPortalPayments = filterPortalPayments;
+
+function toggleSelectAllPayments(checked) {
+  document.querySelectorAll('.payment-checkbox').forEach(cb => {
+    cb.checked = checked;
+  });
+  const desktopAll = document.getElementById('checkAllPayments');
+  const mobileAll = document.getElementById('checkAllPaymentsMobile');
+  if (desktopAll) desktopAll.checked = checked;
+  if (mobileAll) mobileAll.checked = checked;
+  updateSelectedPaymentsCount();
+}
+window.toggleSelectAllPayments = toggleSelectAllPayments;
+
+function updateSelectedPaymentsCount() {
+  const checkedIds = new Set(Array.from(document.querySelectorAll('.payment-checkbox:checked')).map(cb => cb.value));
+  const count = checkedIds.size;
+  const countEl = document.getElementById('selectedPaymentsCount');
+  const btn = document.getElementById('btnBulkDeletePayments');
+  if (countEl) countEl.textContent = count;
+  if (btn) {
+    if (count > 0) {
+      btn.classList.remove('hidden');
+      btn.classList.add('inline-flex');
+    } else {
+      btn.classList.add('hidden');
+      btn.classList.remove('inline-flex');
+    }
+  }
+}
+window.updateSelectedPaymentsCount = updateSelectedPaymentsCount;
+
+function persistDeletedPaymentIds(ids) {
+  if (!courseData.deletedPaymentIds) courseData.deletedPaymentIds = [];
+  let stored = [];
+  try {
+    stored = JSON.parse(localStorage.getItem('creator_class_deleted_payments') || '[]');
+  } catch (e) {}
+  ids.forEach(id => {
+    if (id) {
+      const s = String(id).trim();
+      courseData.deletedPaymentIds.push(s);
+      stored.push(s);
+    }
+  });
+  courseData.deletedPaymentIds = [...new Set(courseData.deletedPaymentIds)];
+  try {
+    localStorage.setItem('creator_class_deleted_payments', JSON.stringify([...new Set(stored)]));
+  } catch (e) {}
+}
+
+function deletePaymentFromPortal(paymentId) {
+  const payments = courseData.portalPayments || [];
+  const p = payments.find(item => String(item.id) === String(paymentId));
+  if (!p) return;
+  if (!confirm(`Hapus riwayat pembayaran "${p.name}" (${p.id})?\n\nData yang dihapus tidak akan muncul lagi setelah refresh atau di perangkat lain.`)) return;
+
+  persistDeletedPaymentIds([p.id]);
+  courseData.portalPayments = payments.filter(item => String(item.id) !== String(paymentId));
+  courseData.isClearedPayments = (courseData.portalPayments.length === 0);
+
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData)); } catch (e) {}
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+
+  renderPortalPayments();
+  renderPortalDashboard();
+  showToast(`Transaksi "${p.id}" berhasil dihapus!`);
+}
+window.deletePaymentFromPortal = deletePaymentFromPortal;
+
+function executeBulkDeletePayments() {
+  const ids = [...new Set(Array.from(document.querySelectorAll('.payment-checkbox:checked')).map(cb => cb.value))];
+  if (ids.length === 0) return;
+  if (!confirm(`Hapus ${ids.length} riwayat pembayaran terpilih?\n\nData yang dihapus tidak akan muncul kembali setelah refresh.`)) return;
+
+  const idSet = new Set(ids.map(String));
+  persistDeletedPaymentIds(ids);
+  courseData.portalPayments = (courseData.portalPayments || []).filter(p => !idSet.has(String(p.id)));
+  courseData.isClearedPayments = (courseData.portalPayments.length === 0);
+
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData)); } catch (e) {}
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+
+  toggleSelectAllPayments(false);
+  renderPortalPayments();
+  renderPortalDashboard();
+  showToast(`${ids.length} transaksi pembayaran berhasil dihapus!`);
+}
+window.executeBulkDeletePayments = executeBulkDeletePayments;
+
+function executeDeleteAllPayments() {
+  const payments = courseData.portalPayments || [];
+  if (payments.length === 0) {
+    alert("Riwayat pembayaran sudah kosong.");
+    return;
+  }
+  if (!confirm(`⚠️ PERINGATAN HAPUS SEMUA:\n\nYakin ingin menghapus SELURUH (${payments.length}) riwayat pembayaran?\n\nData tidak akan muncul lagi setelah refresh.`)) return;
+
+  persistDeletedPaymentIds(payments.map(p => p.id));
+  courseData.portalPayments = [];
+  courseData.isClearedPayments = true;
+  courseData.cleanTrialTimestamp = Date.now();
+
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData)); } catch (e) {}
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+
+  toggleSelectAllPayments(false);
+  renderPortalPayments();
+  renderPortalDashboard();
+  showToast("Seluruh riwayat pembayaran berhasil dihapus!");
+}
+window.executeDeleteAllPayments = executeDeleteAllPayments;
+
 function renderPortalPayments() {
   const tbody = document.getElementById('portalPaymentsTableBody');
-  if (!tbody) return;
+  const mobileList = document.getElementById('portalPaymentsMobileList');
+  const countEl = document.getElementById('totalPaymentsCount');
+  if (!tbody && !mobileList) return;
 
-  const payments = courseData.portalPayments || (window.DEFAULT_COURSE_DATA.portalPayments || []);
+  const payments = courseData.portalPayments || [];
+  const filtered = payments.filter(p => {
+    if (!paymentSearchQuery) return true;
+    const q = paymentSearchQuery.toLowerCase();
+    return String(p.id || '').toLowerCase().includes(q) ||
+           String(p.name || '').toLowerCase().includes(q) ||
+           String(p.email || '').toLowerCase().includes(q) ||
+           String(p.wa || '').toLowerCase().includes(q) ||
+           String(p.activationCode || '').toLowerCase().includes(q);
+  });
 
-  tbody.innerHTML = payments.map(p => {
-    const isLunas = p.status === 'Lunas & Teraktivasi' || p.status === 'Lunas';
-    const waClean = formatWaForUrl(p.wa || '081319894236');
-    const actCode = p.activationCode || 'IRT-ACT-7842';
+  if (countEl) countEl.textContent = filtered.length;
 
-    return `
-      <tr class="hover:bg-white/[0.02] transition-colors">
-        <td class="py-3 px-4 font-mono text-purple-400 font-bold whitespace-nowrap">${p.id}</td>
-        <td class="py-3 px-4">
-          <div class="font-bold text-white">${p.name}</div>
-          <div class="text-[11px] text-slate-400 flex items-center gap-2 mt-0.5">
-            <span>${p.email || '-'}</span>
-            <span>•</span>
+  if (filtered.length === 0) {
+    if (tbody) {
+      tbody.innerHTML = `<tr><td colspan="6" class="py-10 text-center text-slate-400">Belum ada riwayat transaksi pembayaran.</td></tr>`;
+    }
+    if (mobileList) {
+      mobileList.innerHTML = `<div class="p-6 rounded-2xl bg-[#14151c] border border-white/10 text-center text-xs text-slate-400">Belum ada riwayat transaksi pembayaran.</div>`;
+    }
+    updateSelectedPaymentsCount();
+    return;
+  }
+
+  const getStatusMeta = (p) => {
+    const st = (p.status || '').toLowerCase();
+    let badgeClass = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+    let iconClass = 'fa-clock';
+    if (st.includes('otomatis') || st.includes('teraktivasi') || st === 'lunas') {
+      badgeClass = 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30';
+      iconClass = 'fa-circle-check';
+    } else if (st.includes('menunggu registrasi')) {
+      badgeClass = 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30';
+      iconClass = 'fa-user-clock';
+    } else if (st.includes('perlu dicek') || st.includes('kurang')) {
+      badgeClass = 'bg-rose-500/15 text-rose-300 border-rose-500/30';
+      iconClass = 'fa-triangle-exclamation';
+    }
+    return { badgeClass, iconClass };
+  };
+
+  if (tbody) {
+    tbody.innerHTML = filtered.map(p => {
+      const isLunas = p.status === 'Lunas & Teraktivasi' || p.status === 'Lunas' || (p.status || '').toLowerCase().includes('lunas');
+      const waClean = formatWaForUrl(p.wa || '081319894236');
+      const actCode = p.activationCode || 'IRT-ACT-7842';
+      const { badgeClass, iconClass } = getStatusMeta(p);
+
+      return `
+        <tr class="hover:bg-white/[0.02] transition-colors">
+          <td class="py-2.5 px-2.5 text-center align-middle">
+            <input type="checkbox" class="payment-checkbox w-4 h-4 rounded border-white/20 bg-black/40 text-purple-600 focus:ring-0 cursor-pointer" value="${p.id}" onchange="updateSelectedPaymentsCount()">
+          </td>
+          <td class="py-2.5 px-2.5 align-middle">
+            <div class="font-mono text-purple-400 font-bold text-[11px] leading-tight">${p.id}</div>
+            <div class="font-mono font-bold text-emerald-400 text-[11px] mt-0.5">${p.amount}</div>
+            <span class="inline-block mt-0.5 px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20 font-mono text-[9px]">${p.method || 'Lynk Payment'}</span>
+          </td>
+          <td class="py-2.5 px-2.5 align-middle max-w-[210px]">
+            <div class="font-bold text-white text-xs truncate">${p.name}</div>
+            <div class="text-[10px] text-slate-400 truncate mt-0.5">${p.email || '-'}</div>
+            <a href="https://wa.me/${waClean}" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center gap-1 font-mono text-[10px] mt-0.5">
+              <i class="fa-brands fa-whatsapp"></i> ${p.wa || '-'}
+            </a>
+          </td>
+          <td class="py-2.5 px-2.5 text-center align-middle">
+            ${p.proofImage ? `
+              <button onclick="viewPaymentProof('${p.id}')" class="inline-flex items-center gap-1 px-2 py-1.5 rounded-lg bg-white/5 hover:bg-purple-600/30 border border-white/10 text-slate-300 hover:text-white text-[10px] font-semibold transition-all cursor-pointer" title="Lihat Bukti Transfer">
+                <i class="fa-solid fa-receipt text-purple-400"></i>
+                <span>Lihat</span>
+              </button>
+            ` : `<span class="text-slate-500 text-[10px] italic">-</span>`}
+          </td>
+          <td class="py-2.5 px-2.5 align-middle">
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-bold inline-flex items-center gap-1 border ${badgeClass}">
+              <i class="fa-solid ${iconClass} text-[8px]"></i>
+              ${p.status}
+            </span>
+            <div class="mt-1 flex items-center gap-1.5 flex-wrap">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#1a1b24] border border-purple-500/30 font-mono text-[10px] text-purple-300 font-bold select-all" title="Klik untuk salin kode aktivasi">
+                <i class="fa-solid fa-key text-[9px] text-purple-400"></i> ${actCode}
+              </span>
+              <span class="text-[9px] text-slate-500">${p.date || ''}</span>
+            </div>
+          </td>
+          <td class="py-2.5 px-2.5 text-center align-middle">
+            <div class="flex items-center justify-center gap-1 flex-wrap">
+              <button onclick="sendActivationCodeViaWa('${p.id}')" class="px-2 py-1.5 rounded-lg ${isLunas ? 'bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white' : 'bg-emerald-600 hover:bg-emerald-700 text-white'} text-[10px] font-bold transition-all inline-flex items-center gap-1 cursor-pointer" title="Kirim Kode via WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WA</span>
+              </button>
+              <button onclick="resendActivationEmail('${p.email}', '${actCode}', '${encodeURIComponent(p.name)}')" class="px-2 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white text-[10px] font-bold transition-all inline-flex items-center gap-1 border border-indigo-500/30 cursor-pointer" title="Kirim Ulang Kode ke Email">
+                <i class="fa-solid fa-envelope"></i>
+              </button>
+              <button onclick="copyActivationMsgToClipboard('${p.id}')" class="px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white text-[10px] font-bold transition-all inline-flex items-center gap-1 cursor-pointer" title="Salin Pesan Aktivasi">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+              <button onclick="deletePaymentFromPortal('${p.id}')" class="px-2 py-1.5 rounded-lg bg-rose-500/15 hover:bg-rose-600 text-rose-400 hover:text-white text-[10px] font-bold transition-all inline-flex items-center gap-1 border border-rose-500/30 cursor-pointer" title="Hapus Transaksi Ini">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  if (mobileList) {
+    mobileList.innerHTML = filtered.map(p => {
+      const isLunas = p.status === 'Lunas & Teraktivasi' || p.status === 'Lunas' || (p.status || '').toLowerCase().includes('lunas');
+      const waClean = formatWaForUrl(p.wa || '081319894236');
+      const actCode = p.activationCode || 'IRT-ACT-7842';
+      const { badgeClass, iconClass } = getStatusMeta(p);
+
+      return `
+        <div class="p-3.5 rounded-2xl bg-[#14151c] border border-white/10 space-y-2.5 text-xs shadow-md">
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-start gap-2.5">
+              <input type="checkbox" class="payment-checkbox mt-1 w-4 h-4 rounded border-white/20 bg-black/40 text-purple-600 focus:ring-0 cursor-pointer" value="${p.id}" onchange="updateSelectedPaymentsCount()">
+              <div>
+                <div class="font-bold text-white text-sm">${p.name}</div>
+                <div class="font-mono text-[10px] text-purple-400 font-bold">${p.id} • <span class="text-emerald-400">${p.amount}</span></div>
+              </div>
+            </div>
+            <button onclick="deletePaymentFromPortal('${p.id}')" class="px-2 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-600 text-rose-400 hover:text-white text-[11px] border border-rose-500/30" title="Hapus">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-[11px] text-slate-400">
+            <span class="truncate max-w-[200px]">${p.email || '-'}</span>
             <a href="https://wa.me/${waClean}" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center gap-1 font-mono">
-              <i class="fa-brands fa-whatsapp text-xs"></i> ${p.wa || '-'}
+              <i class="fa-brands fa-whatsapp"></i> ${p.wa || '-'}
             </a>
           </div>
-        </td>
-        <td class="py-3 px-4 whitespace-nowrap">
-          <div class="font-mono font-bold text-emerald-400">${p.amount}</div>
-          <span class="inline-block mt-0.5 px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-300 border border-purple-500/20 font-mono text-[10px]">
-            ${p.method || 'Lynk Payment'}
-          </span>
-        </td>
-        <td class="py-3 px-4 text-center whitespace-nowrap">
-          ${p.proofImage ? `
-            <button onclick="viewPaymentProof('${p.id}')" class="group relative inline-block p-1 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all" title="Klik untuk lihat bukti transfer Lynk">
-              <img src="${p.proofImage}" alt="Bukti" class="w-9 h-9 object-cover rounded-lg">
-              <span class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                <i class="fa-solid fa-magnifying-glass text-white text-[10px]"></i>
-              </span>
-            </button>
-          ` : `
-            <span class="text-slate-500 text-xs italic">-</span>
-          `}
-        </td>
-        <td class="py-3 px-4 text-center whitespace-nowrap">
-          ${(() => {
-            const st = (p.status || '').toLowerCase();
-            let badgeClass = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
-            let iconClass = 'fa-clock';
-            if (st.includes('otomatis') || st.includes('teraktivasi') || st === 'lunas') {
-              badgeClass = 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30';
-              iconClass = 'fa-circle-check';
-            } else if (st.includes('menunggu registrasi')) {
-              badgeClass = 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30';
-              iconClass = 'fa-user-clock';
-            } else if (st.includes('perlu dicek') || st.includes('kurang')) {
-              badgeClass = 'bg-rose-500/15 text-rose-300 border-rose-500/30';
-              iconClass = 'fa-triangle-exclamation';
-            }
-            return `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold inline-flex items-center gap-1 border ${badgeClass}">
-              <i class="fa-solid ${iconClass} text-[9px]"></i>
-              ${p.status}
-            </span>`;
-          })()}
-          <div class="text-[10px] text-slate-500 mt-1">${p.date}</div>
-        </td>
-        <td class="py-3 px-4 whitespace-nowrap">
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1a1b24] border border-purple-500/30 font-mono text-xs text-purple-300 font-bold select-all" title="Klik untuk salin kode aktivasi">
-            <i class="fa-solid fa-key text-[10px] text-purple-400"></i>
-            <span>${actCode}</span>
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold inline-flex items-center gap-1 border ${badgeClass}">
+              <i class="fa-solid ${iconClass} text-[9px]"></i> ${p.status}
+            </span>
+            <span class="px-2 py-0.5 rounded bg-[#1a1b24] border border-purple-500/30 font-mono text-[10px] text-purple-300 font-bold select-all">
+              <i class="fa-solid fa-key text-[9px] mr-1"></i>${actCode}
+            </span>
           </div>
-        </td>
-        <td class="py-3 px-4 text-center whitespace-nowrap">
-          <div class="flex items-center justify-center gap-1.5">
-            <button onclick="sendActivationCodeViaWa('${p.id}')" class="px-3 py-1.5 rounded-xl ${isLunas ? 'bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white' : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/25'} text-xs font-bold transition-all flex items-center gap-1.5" title="Kirim / Kirim Ulang Kode Aktivasi ke WhatsApp Member">
-              <i class="fa-brands fa-whatsapp text-sm"></i>
-              <span>${isLunas ? 'Kirim Ulang WA' : 'Kirim Kode WA'}</span>
+          <div class="grid grid-cols-4 gap-1.5 pt-2 border-t border-white/10">
+            <button onclick="sendActivationCodeViaWa('${p.id}')" class="py-1.5 rounded-lg ${isLunas ? 'bg-slate-800 text-slate-200' : 'bg-emerald-600 text-white'} text-[11px] font-bold flex items-center justify-center gap-1">
+              <i class="fa-brands fa-whatsapp"></i> WA
             </button>
-            <button onclick="resendActivationEmail('${p.email}', '${actCode}', '${encodeURIComponent(p.name)}')" class="px-2.5 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white text-xs font-bold transition-all flex items-center gap-1.5 border border-indigo-500/30" title="Kirim Ulang Kode Akses ke Email Member">
-              <i class="fa-solid fa-envelope text-xs"></i>
-              <span class="hidden xl:inline">Kirim Email</span>
+            <button onclick="resendActivationEmail('${p.email}', '${actCode}', '${encodeURIComponent(p.name)}')" class="py-1.5 rounded-lg bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 text-[11px] font-bold flex items-center justify-center gap-1">
+              <i class="fa-solid fa-envelope"></i> Email
             </button>
-            <button onclick="copyActivationMsgToClipboard('${p.id}')" class="p-1.5 px-2.5 rounded-xl bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white text-xs font-bold transition-all flex items-center gap-1" title="Salin Teks Balasan WA Lengkap">
-              <i class="fa-regular fa-copy"></i>
-              <span class="hidden sm:inline">Salin</span>
+            <button onclick="copyActivationMsgToClipboard('${p.id}')" class="py-1.5 rounded-lg bg-slate-800 text-slate-300 text-[11px] font-bold flex items-center justify-center gap-1">
+              <i class="fa-regular fa-copy"></i> Salin
             </button>
-            ${p.proofImage ? `
-              <button onclick="viewPaymentProof('${p.id}')" class="px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold border border-white/10 transition-colors" title="Lihat Detail Bukti">
-                <i class="fa-solid fa-receipt"></i>
-              </button>
-            ` : ''}
+            <button onclick="viewPaymentProof('${p.id}')" class="py-1.5 rounded-lg bg-white/5 text-slate-300 border border-white/10 text-[11px] font-bold flex items-center justify-center gap-1">
+              <i class="fa-solid fa-receipt"></i> Bukti
+            </button>
           </div>
-        </td>
-      </tr>
-    `;
-  }).join('');
+        </div>
+      `;
+    }).join('');
+  }
+
+  updateSelectedPaymentsCount();
 }
 
 // ----------------------------------------------------
