@@ -143,7 +143,16 @@ async function syncFromGasDatabase(silent = false) {
         if (typeof renderPortalWebhookLogs === 'function') renderPortalWebhookLogs();
       }
 
-      // A. Ambil & Format Pembayaran dari Sheets (Google Sheets sebagai Sumber Kebenaran Utama)
+      // Helper: Gabungkan daftar ID/Email/Kode yang sudah dihapus permanen oleh Admin
+      let deletedList = Array.isArray(courseData.deletedCodes) ? [...courseData.deletedCodes] : [];
+      try {
+        const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
+        if (Array.isArray(storedDel)) deletedList = deletedList.concat(storedDel);
+      } catch (e) {}
+      const deletedSet = new Set(deletedList.map(x => String(x).trim().toLowerCase()).filter(Boolean));
+      const cleanTs = courseData.cleanTrialTimestamp || 0;
+
+      // A. Ambil & Format Pembayaran dari Sheets (hormati reset trial & data terhapus)
       const sheetPayments = result.payments || [];
       if (sheetPayments.length > 0) {
         const formattedPayments = sheetPayments.map(sp => {
@@ -165,9 +174,16 @@ async function syncFromGasDatabase(silent = false) {
           };
         });
 
-        // Urutkan transaksi terbaru selalu berada paling atas
-        formattedPayments.sort((a, b) => b.rawTimestamp - a.rawTimestamp);
-        courseData.portalPayments = formattedPayments;
+        // Filter transaksi lama jika sudah di-reset untuk Go-Live
+        const activePayments = formattedPayments.filter(p => {
+          if (cleanTs > 0 && p.rawTimestamp > 0 && p.rawTimestamp <= cleanTs) return false;
+          if (courseData.isCleanTrial && cleanTs > 0 && p.rawTimestamp === 0) return false;
+          return true;
+        });
+        activePayments.sort((a, b) => b.rawTimestamp - a.rawTimestamp);
+        if (!courseData.isCleanTrial || activePayments.length > 0) {
+          courseData.portalPayments = activePayments;
+        }
       }
 
       // B. Ambil & Format Member dari Sheets
@@ -189,8 +205,30 @@ async function syncFromGasDatabase(silent = false) {
           };
         });
 
-        formattedMembers.sort((a, b) => b.rawTimestamp - a.rawTimestamp);
-        courseData.portalMembers = formattedMembers;
+        // Filter member yang sudah dihapus admin atau dibersihkan saat reset Go-Live
+        const filteredSheetMembers = formattedMembers.filter(m => {
+          if (deletedSet.has(String(m.id || '').trim().toLowerCase())) return false;
+          if (deletedSet.has(String(m.email || '').trim().toLowerCase())) return false;
+          if (deletedSet.has(String(m.activationCode || '').trim().toLowerCase())) return false;
+          if (cleanTs > 0 && m.rawTimestamp > 0 && m.rawTimestamp <= cleanTs) return false;
+          if (courseData.isClearedMembers && cleanTs > 0 && m.rawTimestamp === 0) return false;
+          return true;
+        });
+
+        // Pertahankan member manual lokal yang belum masuk ke Sheets
+        const existingManual = (courseData.portalMembers || []).filter(lm => {
+          if (!lm.isManual) return false;
+          const lmEmail = String(lm.email || '').toLowerCase();
+          const lmCode = String(lm.activationCode || '').toLowerCase();
+          if (deletedSet.has(String(lm.id || '').toLowerCase()) || deletedSet.has(lmEmail) || deletedSet.has(lmCode)) return false;
+          return !filteredSheetMembers.some(sm => (lmCode && sm.activationCode.toLowerCase() === lmCode) || (lmEmail && lmEmail !== 'member@irtnaikkelas.com' && sm.email.toLowerCase() === lmEmail));
+        });
+
+        const mergedMembers = [...existingManual, ...filteredSheetMembers];
+        mergedMembers.sort((a, b) => (b.rawTimestamp || 0) - (a.rawTimestamp || 0));
+        if (!courseData.isClearedMembers || mergedMembers.length > 0) {
+          courseData.portalMembers = mergedMembers;
+        }
       }
 
       // Simpan data sinkron terbaru ke localStorage
@@ -2510,6 +2548,17 @@ function executeBulkDeleteMembers() {
   if (!confirm("Apakah Anda yakin ingin menghapus " + count + " member terpilih?\n\nData yang dihapus tidak akan muncul kembali.")) return;
 
   const idsToDelete = new Set(Array.from(checked).map(cb => cb.value));
+  const toRemove = (courseData.portalMembers || []).filter(m => idsToDelete.has(String(m.id)));
+  if (!courseData.deletedCodes) courseData.deletedCodes = [];
+  try {
+    const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
+    toRemove.forEach(m => {
+      if (m.id) { courseData.deletedCodes.push(String(m.id)); storedDel.push(String(m.id)); }
+      if (m.email) { courseData.deletedCodes.push(m.email.toLowerCase()); storedDel.push(m.email.toLowerCase()); }
+      if (m.activationCode) { courseData.deletedCodes.push(m.activationCode.toUpperCase()); storedDel.push(m.activationCode.toUpperCase()); }
+    });
+    localStorage.setItem('creator_class_deleted_members', JSON.stringify([...new Set(storedDel)]));
+  } catch (e) {}
   courseData.portalMembers = (courseData.portalMembers || []).filter(m => !idsToDelete.has(String(m.id)));
   courseData.isClearedMembers = (courseData.portalMembers.length === 0);
 
@@ -2534,8 +2583,19 @@ function executeDeleteAllMembers() {
   }
   if (!confirm("⚠️ PERINGATAN HAPUS SEMUA:\n\nApakah Anda yakin ingin menghapus SELURUH (" + total + ") member?\n\nDaftar akan menjadi bersih (0) dan tidak akan muncul kembali setelah refresh.")) return;
 
+  if (!courseData.deletedCodes) courseData.deletedCodes = [];
+  try {
+    const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
+    (courseData.portalMembers || []).forEach(m => {
+      if (m.id) { courseData.deletedCodes.push(String(m.id)); storedDel.push(String(m.id)); }
+      if (m.email) { courseData.deletedCodes.push(m.email.toLowerCase()); storedDel.push(m.email.toLowerCase()); }
+      if (m.activationCode) { courseData.deletedCodes.push(m.activationCode.toUpperCase()); storedDel.push(m.activationCode.toUpperCase()); }
+    });
+    localStorage.setItem('creator_class_deleted_members', JSON.stringify([...new Set(storedDel)]));
+  } catch (e) {}
   courseData.portalMembers = [];
   courseData.isClearedMembers = true;
+  courseData.cleanTrialTimestamp = Date.now();
 
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
@@ -2781,9 +2841,16 @@ function deleteMemberFromPortal(memberId) {
   if (confirm(`Yakin ingin MENGHAPUS member "${mem.name}" (${mem.email})?\n\nKode aktivasi (${mem.activationCode || 'IRT-ACT-XXXX'}) akan dicabut dan member tersebut tidak akan bisa lagi mengakses website kelas.`)) {
     // Track in deletedCodes list so demo/fallback can never authenticate them
     if (!courseData.deletedCodes) courseData.deletedCodes = [];
+    if (mem.id) courseData.deletedCodes.push(String(mem.id));
     if (mem.activationCode) courseData.deletedCodes.push(mem.activationCode.toUpperCase());
     if (mem.email) courseData.deletedCodes.push(mem.email.toLowerCase());
-    if (mem.name) courseData.deletedCodes.push(mem.name.toLowerCase());
+    try {
+      const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
+      if (mem.id) storedDel.push(String(mem.id));
+      if (mem.activationCode) storedDel.push(mem.activationCode.toUpperCase());
+      if (mem.email) storedDel.push(mem.email.toLowerCase());
+      localStorage.setItem('creator_class_deleted_members', JSON.stringify([...new Set(storedDel)]));
+    } catch (e) {}
 
     // Remove from portalMembers
     courseData.portalMembers = (courseData.portalMembers || []).filter(m => m.id !== memberId);
@@ -4527,15 +4594,13 @@ function handleAudiencePhotoUpload(event, index) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
 
-  if (file.size > 2 * 1024 * 1024) {
-    alert("Ukuran file foto terlalu besar. Harap pilih gambar di bawah 2MB.");
+  if (file.size > 10 * 1024 * 1024) {
+    alert("Ukuran file foto terlalu besar. Harap pilih gambar di bawah 10MB.");
     event.target.value = '';
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const dataUrl = e.target.result;
+  const applyAudPhoto = function(dataUrl) {
     if (!courseData.audiences) {
       courseData.audiences = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA.audiences || []));
     }
@@ -4544,10 +4609,17 @@ function handleAudiencePhotoUpload(event, index) {
       renderAdminAudiencesList();
       renderAudiences();
       autoSaveLandingPageSettings();
-      showToast("Foto sasaran #" + (index + 1) + " berhasil diupload!");
+      showToast("Foto kartu #" + (index + 1) + " berhasil diupload (Maks 10MB)!");
     }
   };
-  reader.readAsDataURL(file);
+
+  if (typeof compressImageToDataUrl === 'function') {
+    compressImageToDataUrl(file, 800, 0.85, applyAudPhoto);
+  } else {
+    const reader = new FileReader();
+    reader.onload = function(e) { applyAudPhoto(e.target.result); };
+    reader.readAsDataURL(file);
+  }
 }
 
 function removeAudiencePhoto(index) {
