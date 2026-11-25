@@ -235,7 +235,7 @@ async function syncFromGasDatabase(silent = false) {
         const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
         if (Array.isArray(storedDel)) deletedList = deletedList.concat(storedDel);
       } catch (e) {}
-      const deletedSet = new Set(deletedList.map(x => String(x).trim().toLowerCase()).filter(Boolean));
+      const deletedSet = new Set(deletedList.map(x => String(x).trim().toLowerCase()).filter(x => x && !x.includes('@')));
       const cleanTs = courseData.cleanTrialTimestamp || 0;
 
       // A. Ambil & Format Pembayaran dari Sheets (hormati reset trial & data terhapus)
@@ -302,7 +302,7 @@ async function syncFromGasDatabase(silent = false) {
         // Filter member yang sudah dihapus admin atau dibersihkan saat reset Go-Live
         const filteredSheetMembers = formattedMembers.filter(m => {
           if (deletedSet.has(String(m.id || '').trim().toLowerCase())) return false;
-          if (deletedSet.has(String(m.email || '').trim().toLowerCase())) return false;
+          // Email allowed for new registrations/invoices
           if (deletedSet.has(String(m.activationCode || '').trim().toLowerCase())) return false;
           if (cleanTs > 0 && m.rawTimestamp > 0 && m.rawTimestamp <= cleanTs) return false;
           if (courseData.isClearedMembers && cleanTs > 0 && m.rawTimestamp === 0) return false;
@@ -2617,6 +2617,20 @@ async function refreshAdminDashboardData() {
   if (icon) icon.classList.add('fa-spin');
   if (txt) txt.textContent = 'Menyegarkan...';
   try {
+    // Baca ulang klik materi & log real-time terbaru dari localStorage (misal dari tab member lain)
+    try {
+      const viewMap = JSON.parse(localStorage.getItem('creator_class_tool_views') || '{}');
+      if (Array.isArray(courseData.portalTools)) {
+        courseData.portalTools.forEach(t => {
+          if (typeof viewMap[t.id] === 'number') t.views = viewMap[t.id];
+        });
+      }
+      const savedLogs = JSON.parse(localStorage.getItem('creator_class_realtime_logs') || '[]');
+      if (Array.isArray(savedLogs) && savedLogs.length > 0) {
+        courseData.portalMonitoring = savedLogs;
+      }
+    } catch (e) {}
+
     if (typeof syncFromGasDatabase === 'function') {
       await syncFromGasDatabase(true);
     }
@@ -2634,6 +2648,32 @@ async function refreshAdminDashboardData() {
   }
 }
 window.refreshAdminDashboardData = refreshAdminDashboardData;
+
+// Auto-sync views & monitoring logs across browser tabs without reload
+if (typeof window !== 'undefined' && !window._creatorStorageListenerAttached) {
+  window._creatorStorageListenerAttached = true;
+  window.addEventListener('storage', function(ev) {
+    if (ev.key === 'creator_class_tool_views' || ev.key === 'creator_class_realtime_logs') {
+      try {
+        const viewMap = JSON.parse(localStorage.getItem('creator_class_tool_views') || '{}');
+        if (Array.isArray(courseData.portalTools)) {
+          courseData.portalTools.forEach(t => {
+            if (typeof viewMap[t.id] === 'number') {
+              t.views = viewMap[t.id];
+              document.querySelectorAll('.tool-view-count-' + t.id).forEach(el => { el.textContent = t.views; });
+            }
+          });
+        }
+        const savedLogs = JSON.parse(localStorage.getItem('creator_class_realtime_logs') || '[]');
+        if (Array.isArray(savedLogs)) courseData.portalMonitoring = savedLogs;
+        if (typeof renderPortalDashboard === 'function') renderPortalDashboard();
+        if (typeof renderPortalMonitoring === 'function') renderPortalMonitoring();
+        if (typeof renderAdminToolsTable === 'function') renderAdminToolsTable();
+      } catch (e) {}
+    }
+  });
+}
+
 
 function renderPortalDashboard() {
   const tools = courseData.portalTools || [];
@@ -2737,7 +2777,7 @@ function executeBulkDeleteMembers() {
     const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
     toRemove.forEach(m => {
       if (m.id) { courseData.deletedCodes.push(String(m.id)); storedDel.push(String(m.id)); }
-      if (m.email) { courseData.deletedCodes.push(m.email.toLowerCase()); storedDel.push(m.email.toLowerCase()); }
+      
       if (m.activationCode) { courseData.deletedCodes.push(m.activationCode.toUpperCase()); storedDel.push(m.activationCode.toUpperCase()); }
     });
     localStorage.setItem('creator_class_deleted_members', JSON.stringify([...new Set(storedDel)]));
@@ -2771,7 +2811,7 @@ function executeDeleteAllMembers() {
     const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
     (courseData.portalMembers || []).forEach(m => {
       if (m.id) { courseData.deletedCodes.push(String(m.id)); storedDel.push(String(m.id)); }
-      if (m.email) { courseData.deletedCodes.push(m.email.toLowerCase()); storedDel.push(m.email.toLowerCase()); }
+      
       if (m.activationCode) { courseData.deletedCodes.push(m.activationCode.toUpperCase()); storedDel.push(m.activationCode.toUpperCase()); }
     });
     localStorage.setItem('creator_class_deleted_members', JSON.stringify([...new Set(storedDel)]));
@@ -3078,12 +3118,12 @@ function deleteMemberFromPortal(memberId) {
     if (!courseData.deletedCodes) courseData.deletedCodes = [];
     if (mem.id) courseData.deletedCodes.push(String(mem.id));
     if (mem.activationCode) courseData.deletedCodes.push(mem.activationCode.toUpperCase());
-    if (mem.email) courseData.deletedCodes.push(mem.email.toLowerCase());
+    
     try {
       const storedDel = JSON.parse(localStorage.getItem('creator_class_deleted_members') || '[]');
       if (mem.id) storedDel.push(String(mem.id));
       if (mem.activationCode) storedDel.push(mem.activationCode.toUpperCase());
-      if (mem.email) storedDel.push(mem.email.toLowerCase());
+      
       localStorage.setItem('creator_class_deleted_members', JSON.stringify([...new Set(storedDel)]));
     } catch (e) {}
 
