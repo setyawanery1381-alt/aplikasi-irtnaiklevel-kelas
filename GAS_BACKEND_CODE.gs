@@ -198,6 +198,56 @@ function doPost(e) {
     // =====================================================================
     // AKSI BARU: SIMPAN PENGATURAN LANDING PAGE SECARA LIVE
     // =====================================================================
+    // =====================================================================
+    // AKSI BARU: CATAT KLIK MATERI & LOG AKTIVITAS REAL-TIME LINTAS DEVICE
+    // =====================================================================
+    if (action === 'trackClick') {
+      if (sheetPengaturan) {
+        var toolId = String(data.toolId || '');
+        var viewMap = {};
+        var logsArr = [];
+        var viewRow = -1;
+        var logRow = -1;
+        var lastR = sheetPengaturan.getLastRow();
+        if (lastR > 1) {
+          var rows = sheetPengaturan.getRange(2, 1, lastR - 1, 2).getValues();
+          for (var r = 0; r < rows.length; r++) {
+            if (rows[r][0] === 'tool_views') {
+              viewRow = r + 2;
+              try { viewMap = JSON.parse(rows[r][1] || '{}'); } catch(ex) {}
+            } else if (rows[r][0] === 'realtime_logs') {
+              logRow = r + 2;
+              try { logsArr = JSON.parse(rows[r][1] || '[]'); } catch(ex) {}
+            }
+          }
+        }
+        if (toolId) {
+          viewMap[toolId] = (Number(viewMap[toolId]) || 0) + 1;
+        }
+        if (data.logEntry) {
+          logsArr.unshift(data.logEntry);
+          if (logsArr.length > 50) logsArr = logsArr.slice(0, 50);
+        }
+        var viewJson = JSON.stringify(viewMap);
+        var logJson = JSON.stringify(logsArr);
+        if (viewRow > 0) {
+          sheetPengaturan.getRange(viewRow, 2).setValue(viewJson);
+          sheetPengaturan.getRange(viewRow, 4).setValue(nowStr);
+        } else {
+          sheetPengaturan.appendRow(['tool_views', viewJson, 'Real-Time Views', nowStr]);
+        }
+        if (logRow > 0) {
+          sheetPengaturan.getRange(logRow, 2).setValue(logJson);
+          sheetPengaturan.getRange(logRow, 4).setValue(nowStr);
+        } else {
+          sheetPengaturan.appendRow(['realtime_logs', logJson, 'Real-Time Logs', nowStr]);
+        }
+        result.tool_views = viewMap;
+      }
+      result.message = "Klik materi & log aktivitas tercatat!";
+      return createJsonResponse(result);
+    }
+
     if (action === 'saveSettings') {
       var settings = data.settings || {};
       var keys = Object.keys(settings);

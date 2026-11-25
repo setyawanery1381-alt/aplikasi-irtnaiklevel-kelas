@@ -8381,9 +8381,20 @@ async function syncFromGasDatabase(silent = false) {
         try {
           const tv = JSON.parse(cloudSettings.tool_views);
           if (tv && typeof tv === 'object') {
-            localStorage.setItem('creator_class_tool_views', JSON.stringify(tv));
+            const localTv = JSON.parse(localStorage.getItem('creator_class_tool_views') || '{}');
+            const isClean = cloudSettings.clean_trial === 'true' && Object.keys(tv).length === 0;
+            const mergedTv = isClean ? {} : { ...localTv };
+            if (!isClean) {
+              Object.keys(tv).forEach(k => {
+                mergedTv[k] = Math.max(Number(mergedTv[k]) || 0, Number(tv[k]) || 0);
+              });
+            }
+            localStorage.setItem('creator_class_tool_views', JSON.stringify(mergedTv));
             if (Array.isArray(courseData.portalTools)) {
-              courseData.portalTools.forEach(t => { t.views = typeof tv[t.id] === 'number' ? tv[t.id] : 0; });
+              courseData.portalTools.forEach(t => {
+                t.views = typeof mergedTv[t.id] === 'number' ? mergedTv[t.id] : 0;
+                document.querySelectorAll('.tool-view-count-' + t.id).forEach(el => { el.textContent = t.views; });
+              });
             }
           }
         } catch (e) {}
@@ -8588,6 +8599,8 @@ async function syncFromGasDatabase(silent = false) {
       if (typeof renderPortalPayments === 'function') renderPortalPayments();
       if (typeof renderPortalMembers === 'function') renderPortalMembers();
       if (typeof renderPortalDashboard === 'function') renderPortalDashboard();
+      if (typeof renderPortalMonitoring === 'function') renderPortalMonitoring();
+      if (typeof renderAdminToolsTable === 'function') renderAdminToolsTable();
 
       if (syncText) syncText.textContent = 'Google Sheets Sinkron (' + (courseData.portalPayments.length) + ' data)';
       if (!silent) showToast('Data dari Google Sheets berhasil disinkronkan!');
@@ -10905,6 +10918,19 @@ async function refreshAdminDashboardData() {
 window.refreshAdminDashboardData = refreshAdminDashboardData;
 
 // Auto-sync views & monitoring logs across browser tabs without reload
+
+// Auto-poll Google Sheets setiap 15 detik saat Portal Admin terbuka agar klik member dari HP langsung masuk otomatis
+if (typeof window !== 'undefined' && !window._creatorAdminAutoPoll) {
+  window._creatorAdminAutoPoll = setInterval(function() {
+    const portal = document.getElementById('portalAdminModal');
+    if (portal && (portal.style.display === 'flex' || portal.classList.contains('active'))) {
+      if (typeof syncFromGasDatabase === 'function') {
+        syncFromGasDatabase(true);
+      }
+    }
+  }, 15000);
+}
+
 if (typeof window !== 'undefined' && !window._creatorStorageListenerAttached) {
   window._creatorStorageListenerAttached = true;
   window.addEventListener('storage', function(ev) {
@@ -12048,6 +12074,28 @@ function trackMaterialClick(toolId, actionLabel = 'Membuka Materi') {
     || 'Pengunjung / Member';
 
   logRealtimeActivity(`Member ${memberName} mengakses ${t.name} (${actionLabel})`, 'fa-play text-purple-400');
+
+  // Kirim klik & log ke Google Sheets agar langsung masuk ke Dashboard Admin di laptop/device lain
+  try {
+    const viewMap = JSON.parse(localStorage.getItem('creator_class_tool_views') || '{}');
+    const latestLog = (courseData.portalMonitoring && courseData.portalMonitoring[0]) || null;
+    if (typeof postDataToGas === 'function') {
+      postDataToGas({
+        action: 'trackClick',
+        toolId: t.id,
+        toolName: t.name,
+        memberName: memberName,
+        actionLabel: actionLabel,
+        logEntry: latestLog
+      });
+    }
+    if (typeof pushCloudSyncSettings === 'function') {
+      pushCloudSyncSettings({
+        tool_views: JSON.stringify(viewMap),
+        realtime_logs: JSON.stringify((courseData.portalMonitoring || []).slice(0, 30))
+      });
+    }
+  } catch (e) {}
 
   if (typeof renderPortalDashboard === 'function') renderPortalDashboard();
 }
