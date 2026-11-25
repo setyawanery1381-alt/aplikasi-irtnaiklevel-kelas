@@ -9,6 +9,12 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    try {
+      var _savedTheme = localStorage.getItem('IRT_NAIK_KELAS_THEME');
+      if (_savedTheme !== 'light') document.documentElement.classList.add('dark');
+    } catch (e) {}
+  </script>
+  <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -3222,7 +3228,7 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
           </div>
           <div class="p-4 rounded-2xl bg-[#14151c] border border-white/10">
             <div class="text-xs text-slate-400 mb-1">Akses Harian</div>
-            <div class="text-lg font-bold text-white font-mono">342 Request / Jam</div>
+            <div id="monitoringDailyRequests" class="text-lg font-bold text-white font-mono">0 Aktivitas</div>
             <div class="text-[11px] text-purple-400 mt-1">Tingkat keberhasilan 100%</div>
           </div>
         </div>
@@ -8605,6 +8611,20 @@ function initData() {
     courseData = JSON.parse(JSON.stringify(window.DEFAULT_COURSE_DATA));
   }
 
+  // Restore real material click counts (default 0) and real-time logs
+  try {
+    const viewMap = JSON.parse(localStorage.getItem('creator_class_tool_views') || '{}');
+    if (Array.isArray(courseData.portalTools)) {
+      courseData.portalTools.forEach(t => {
+        t.views = typeof viewMap[t.id] === 'number' ? viewMap[t.id] : (t.views || 0);
+      });
+    }
+    const savedLogs = JSON.parse(localStorage.getItem('creator_class_realtime_logs') || '[]');
+    if (Array.isArray(savedLogs) && savedLogs.length > 0 && (!courseData.portalMonitoring || courseData.portalMonitoring.length === 0)) {
+      courseData.portalMonitoring = savedLogs;
+    }
+  } catch (e) {}
+
   // Ensure deletedCodes is initialized
   if (!courseData.deletedCodes) courseData.deletedCodes = [];
 
@@ -10656,26 +10676,20 @@ function renderPortalDashboard() {
   }
   if (dashViews) dashViews.textContent = totalViews;
 
-  // Render Total Estimasi Omset dalam Rupiah penuh (Foto 6)
+  // Render Total Estimasi Omset real-time dari pembayaran terverifikasi / lunas
   const omsetEl = document.getElementById('dashTotalOmset');
   if (omsetEl) {
-    if (courseData.isCleanTrial) {
-      omsetEl.textContent = 'Rp 0';
-    } else {
-      const payments = courseData.portalPayments || [];
-      let sum = 0;
-      payments.forEach(p => {
-        if (p.status === 'Berhasil' || p.status === 'Aktif') {
-          const rawNum = typeof p.amount === 'number' ? p.amount : parseInt(String(p.amount || '').replace(/\D/g, ''), 10);
-          if (!isNaN(rawNum) && rawNum > 0) sum += rawNum;
-        }
-      });
-      if (sum === 0 && !courseData.isCleanTrial) {
-        omsetEl.textContent = 'Rp 559.400.000';
-      } else {
-        omsetEl.textContent = 'Rp ' + sum.toLocaleString('id-ID');
+    const payments = courseData.portalPayments || [];
+    let sum = 0;
+    payments.forEach(p => {
+      const st = String(p.status || '').toLowerCase();
+      if (st.includes('lunas') || st.includes('berhasil') || st.includes('aktif') || st.includes('teraktivasi') || st.includes('otomatis')) {
+        const cleanStr = String(p.amount || '0').split('(')[0];
+        const rawNum = typeof p.amount === 'number' ? p.amount : parseInt(cleanStr.replace(/\D/g, ''), 10);
+        if (!isNaN(rawNum) && rawNum > 0) sum += rawNum;
       }
-    }
+    });
+    omsetEl.textContent = 'Rp ' + sum.toLocaleString('id-ID');
   }
 
   if (topList) {
@@ -11640,27 +11654,105 @@ function renderPortalPayments() {
 // ----------------------------------------------------
 // MONITORING TAB RENDERER
 // ----------------------------------------------------
+
+// =========================================================================
+// REAL-TIME ACTIVITY LOGGING & REAL MATERIAL VIEW TRACKING
+// =========================================================================
+function logRealtimeActivity(text, icon = 'fa-bolt text-purple-400') {
+  if (!courseData.portalMonitoring) courseData.portalMonitoring = [];
+  const timeStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' WIB';
+  const entry = {
+    id: 'log-' + Date.now() + '-' + Math.floor(Math.random() * 100),
+    text: text,
+    time: timeStr,
+    timestamp: Date.now(),
+    icon: icon
+  };
+  courseData.portalMonitoring.unshift(entry);
+  if (courseData.portalMonitoring.length > 50) {
+    courseData.portalMonitoring = courseData.portalMonitoring.slice(0, 50);
+  }
+  try {
+    localStorage.setItem('creator_class_realtime_logs', JSON.stringify(courseData.portalMonitoring));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  if (typeof renderPortalMonitoring === 'function') renderPortalMonitoring();
+}
+
+function trackMaterialClick(toolId, actionLabel = 'Membuka Materi') {
+  const tools = courseData.portalTools || [];
+  const t = tools.find(item => String(item.id) === String(toolId));
+  if (!t) return;
+
+  t.views = (Number(t.views) || 0) + 1;
+
+  // Persist view counts in dedicated map so they survive reload/sync
+  try {
+    const viewMap = JSON.parse(localStorage.getItem('creator_class_tool_views') || '{}');
+    viewMap[t.id] = t.views;
+    localStorage.setItem('creator_class_tool_views', JSON.stringify(viewMap));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
+  } catch (e) {}
+
+  // Update badge in DOM immediately
+  document.querySelectorAll('.tool-view-count-' + t.id).forEach(el => {
+    el.textContent = t.views;
+  });
+
+  // Identify active member or visitor
+  const memberInfo = (typeof getActiveMemberInfo === 'function' ? getActiveMemberInfo() : null) || {};
+  const memberName = (typeof memberInfo === 'object' && memberInfo.memberName)
+    || localStorage.getItem('creator_class_member_name')
+    || localStorage.getItem('creator_class_member_email')
+    || 'Pengunjung / Member';
+
+  logRealtimeActivity(`Member ${memberName} mengakses ${t.name} (${actionLabel})`, 'fa-play text-purple-400');
+
+  if (typeof renderPortalDashboard === 'function') renderPortalDashboard();
+}
+
+window.logRealtimeActivity = logRealtimeActivity;
+window.trackMaterialClick = trackMaterialClick;
+
 function renderPortalMonitoring() {
   const logEl = document.getElementById('monitoringActivityLog');
+  const reqEl = document.getElementById('monitoringDailyRequests');
+
+  let logs = courseData.portalMonitoring || [];
+  if (logs.length === 0) {
+    try {
+      const savedLogs = JSON.parse(localStorage.getItem('creator_class_realtime_logs') || '[]');
+      if (Array.isArray(savedLogs) && savedLogs.length > 0) {
+        logs = savedLogs;
+        courseData.portalMonitoring = logs;
+      }
+    } catch (e) {}
+  }
+
+  if (reqEl) {
+    reqEl.textContent = logs.length + ' Aktivitas Tercatat';
+  }
+
   if (!logEl) return;
 
-  const customLogs = courseData.portalMonitoring || [];
-  const defaultEvents = [
-    { text: "Member Bunda Rina memutar video tutorial SC11 (ASMR)", time: "1 menit yang lalu", icon: "fa-play text-purple-400" },
-    { text: "Akses link SANGCREATOR ASMR Studio oleh peserta #2839", time: "4 menit yang lalu", icon: "fa-link text-blue-400" },
-    { text: "Pembayaran QRIS Rp 99.000 sukses diverifikasi sistem", time: "12 menit yang lalu", icon: "fa-circle-check text-emerald-400" },
-    { text: "Member Siti Rahmawati berhasil aktivasi akun materi", time: "42 menit yang lalu", icon: "fa-user-check text-emerald-400" }
-  ];
-
-  const logEvents = [...customLogs, ...defaultEvents];
-
-  logEl.innerHTML = logEvents.map(ev => `
-    <div class="flex items-center justify-between p-3 rounded-xl bg-[#181a24] border border-white/5">
-      <div class="flex items-center gap-3">
-        <i class="fa-solid ${ev.icon} text-xs"></i>
-        <span class="text-slate-200 text-xs">${ev.text}</span>
+  if (logs.length === 0) {
+    logEl.innerHTML = `
+      <div class="p-6 rounded-xl bg-[#181a24] border border-white/5 text-center text-xs text-slate-400">
+        <i class="fa-solid fa-satellite-dish text-purple-400 text-lg mb-2 block"></i>
+        Belum ada aktivitas member tercatat. Aktivitas akan muncul otomatis secara real-time saat member login, menonton video, atau membuka materi.
       </div>
-      <span class="text-[10px] text-slate-500 font-mono shrink-0">${ev.time}</span>
+    `;
+    return;
+  }
+
+  logEl.innerHTML = logs.map(ev => `
+    <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#181a24] border border-white/5">
+      <div class="flex items-center gap-3 min-w-0">
+        <i class="fa-solid ${ev.icon || 'fa-bolt text-purple-400'} text-xs shrink-0"></i>
+        <span class="text-slate-200 text-xs truncate">${ev.text}</span>
+      </div>
+      <span class="text-[10px] text-slate-400 font-mono shrink-0">${ev.time || ''}</span>
     </div>
   `).join('');
 }
@@ -13846,7 +13938,7 @@ function renderSingleMemberToolCard(t) {
             ${t.levelNum >= 0 ? 'LEVEL ' + t.levelNum : 'MODUL'}
           </span>
           <span class="text-[10px] text-slate-500 font-mono flex items-center gap-1">
-            <i class="fa-solid fa-eye text-[9px]"></i> ${t.views || 35}x
+            <i class="fa-solid fa-eye text-[9px]"></i> <span class="tool-view-count-${t.id}">${t.views || 0}</span>x
           </span>
         </div>
 
@@ -14261,6 +14353,7 @@ let currentVideoTool = null;
 let currentVideoIndex = 0;
 
 function openVideoModal(toolId, videoIndex = 0) {
+  trackMaterialClick(toolId, 'Tonton Video');
   const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA.portalTools || []);
   const tool = tools.find(t => t.id === toolId);
   if (!tool) return;
@@ -14375,6 +14468,7 @@ function trackToolView(toolId) {
 }
 
 function openToolExternal(toolId) {
+  trackMaterialClick(toolId, 'Buka Tools');
   const tool = (courseData.portalTools || []).find(t => t.id === toolId);
   if (!tool || !tool.toolUrl) {
     alert("Link tools belum ditentukan oleh pengelola.");
@@ -16003,6 +16097,7 @@ function renderSimpleMarkdown(md) {
 }
 
 function openPromptMarkdownModal(toolId) {
+  trackMaterialClick(toolId, 'Prompt MD');
   const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA.portalTools || []);
   const tool = tools.find(t => t.id === toolId);
   if (!tool) return;
@@ -16282,6 +16377,7 @@ function clearMemberToolSearch() {
 // INSTRUCTIONS MODAL CONTROLLER (MENU INSTRUKSI TERPISAH)
 // =========================================================================
 function openInstructionsModal(toolId) {
+  trackMaterialClick(toolId, 'Instruksi & Panduan');
   const tools = courseData.portalTools || (window.DEFAULT_COURSE_DATA.portalTools || []);
   const tool = tools.find(t => t.id === toolId);
   if (!tool) return;
