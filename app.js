@@ -3173,6 +3173,7 @@ function deletePaymentFromPortal(paymentId) {
   if (!confirm(`Hapus riwayat pembayaran "${p.name}" (${p.id})?\n\nData yang dihapus tidak akan muncul lagi setelah refresh atau di perangkat lain.`)) return;
 
   persistDeletedPaymentIds([p.id]);
+  if (typeof postDataToGas === 'function') postDataToGas({ action: 'deletePayments', ids: [p.id] });
   courseData.portalPayments = payments.filter(item => String(item.id) !== String(paymentId));
   courseData.isClearedPayments = (courseData.portalPayments.length === 0);
 
@@ -3192,6 +3193,7 @@ function executeBulkDeletePayments() {
 
   const idSet = new Set(ids.map(String));
   persistDeletedPaymentIds(ids);
+  if (typeof postDataToGas === 'function') postDataToGas({ action: 'deletePayments', ids: ids });
   courseData.portalPayments = (courseData.portalPayments || []).filter(p => !idSet.has(String(p.id)));
   courseData.isClearedPayments = (courseData.portalPayments.length === 0);
 

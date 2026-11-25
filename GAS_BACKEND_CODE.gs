@@ -510,7 +510,72 @@ function doPost(e) {
     // =====================================================================
     // AKSI 6: ADMIN UPDATE STATUS MANUAL
     // =====================================================================
-    else if (action === 'updateMemberStatus') {
+    else // =====================================================================
+    // AKSI BARU: TAMBAH MEMBER MANUAL, HAPUS MEMBER, HAPUS PEMBAYARAN, RESET TRIAL
+    // =====================================================================
+    if (action === 'addMember') {
+      var sheetMemberAdd = ss.getSheetByName("Member");
+      if (sheetMemberAdd) {
+        sheetMemberAdd.appendRow([
+          nowStr,
+          data.id || ('mem-' + new Date().getTime()),
+          data.name || 'Member',
+          data.email || '-',
+          data.wa || '-',
+          data.status || 'Aktif',
+          data.activationCode || ('IRT-ACT-' + Math.floor(1000 + Math.random() * 9000)),
+          data.package || 'Kelas Animasi AI',
+          '[]'
+        ]);
+      }
+      result.message = "Member berhasil ditambahkan ke Google Sheets!";
+      return createJsonResponse(result);
+    }
+
+    if (action === 'deleteMembers') {
+      var sheetMemDel = ss.getSheetByName("Member");
+      var delIds = (data.ids || []).map(function(x){ return String(x).toLowerCase(); });
+      if (sheetMemDel && sheetMemDel.getLastRow() > 1 && delIds.length > 0) {
+        var rows = sheetMemDel.getDataRange().getValues();
+        for (var r = rows.length - 1; r >= 1; r--) {
+          var rowId = String(rows[r][1] || '').toLowerCase();
+          var rowEmail = String(rows[r][3] || '').toLowerCase();
+          var rowCode = String(rows[r][6] || '').toLowerCase();
+          if (delIds.indexOf(rowId) !== -1 || delIds.indexOf(rowEmail) !== -1 || delIds.indexOf(rowCode) !== -1) {
+            sheetMemDel.deleteRow(r + 1);
+          }
+        }
+      }
+      result.message = "Member terpilih berhasil dihapus dari Google Sheets!";
+      return createJsonResponse(result);
+    }
+
+    if (action === 'deletePayments') {
+      var sheetPayDel = ss.getSheetByName("Pembayaran");
+      var delPayIds = (data.ids || []).map(function(x){ return String(x).toLowerCase(); });
+      if (sheetPayDel && sheetPayDel.getLastRow() > 1 && delPayIds.length > 0) {
+        var pRows = sheetPayDel.getDataRange().getValues();
+        for (var pr = pRows.length - 1; pr >= 1; pr--) {
+          var pInv = String(pRows[pr][1] || '').toLowerCase();
+          if (delPayIds.indexOf(pInv) !== -1) {
+            sheetPayDel.deleteRow(pr + 1);
+          }
+        }
+      }
+      result.message = "Pembayaran terpilih berhasil dihapus dari Google Sheets!";
+      return createJsonResponse(result);
+    }
+
+    if (action === 'resetTrialData') {
+      var sMem = ss.getSheetByName("Member");
+      if (sMem && sMem.getLastRow() > 1) sMem.deleteRows(2, sMem.getLastRow() - 1);
+      var sPay = ss.getSheetByName("Pembayaran");
+      if (sPay && sPay.getLastRow() > 1) sPay.deleteRows(2, sPay.getLastRow() - 1);
+      result.message = "Seluruh data trial Member & Pembayaran di Google Sheets telah dibersihkan!";
+      return createJsonResponse(result);
+    }
+
+    if (action === 'updateMemberStatus') {
       var targetCode = (data.activationCode || data.code || '').trim().toUpperCase();
       var targetEmail = (data.email || '').trim().toLowerCase();
       var newStatus = data.status || 'Aktif';
