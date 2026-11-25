@@ -2860,10 +2860,16 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
               <i class="fa-solid fa-file-export"></i>
               <span>Export JSON</span>
             </button>
-            <button onclick="openAddToolModal()" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-lg shadow-purple-600/30 flex items-center gap-2 transition-all">
-              <i class="fa-solid fa-plus"></i>
-              <span>+ Tambah Tools</span>
+            <div class="flex items-center gap-2">
+            <button id="btnBulkDeleteTools" onclick="executeBulkDeleteTools()" class="hidden px-3.5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-lg shadow-rose-600/30 items-center gap-1.5 transition-all">
+              <i class="fa-solid fa-trash"></i>
+              <span>Hapus Terpilih (<span id="selectedToolsCount">0</span>)</span>
             </button>
+            <button onclick="openAddToolModal()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-lg shadow-purple-600/30 flex items-center gap-2 transition-all">
+              <i class="fa-solid fa-plus"></i>
+              <span>+ Tambah Tools Baru</span>
+            </button>
+          </div>
           </div>
         </div>
 
@@ -3041,20 +3047,12 @@ section, header, footer, main, .floating-pill-nav, .container, .max-w-7xl, .max-
           <div class="p-5 rounded-2xl bg-[#14151c] border border-white/10 space-y-4">
             <h3 class="text-sm font-bold text-white">Aksi Cepat Pengelola</h3>
             <div class="space-y-2">
-              <div class="flex items-center gap-2">
-            <button id="btnBulkDeleteTools" onclick="executeBulkDeleteTools()" class="hidden px-3.5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-lg shadow-rose-600/30 items-center gap-1.5 transition-all">
-              <i class="fa-solid fa-trash"></i>
-              <span>Hapus Terpilih (<span id="selectedToolsCount">0</span>)</span>
-            </button>
-            <button onclick="executeDeleteAllTools()" class="px-3.5 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold flex items-center gap-1.5 transition-all" title="Hapus seluruh materi">
-              <i class="fa-solid fa-trash-can"></i>
-              <span>Hapus Semua</span>
-            </button>
-            <button onclick="openAddToolModal()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-lg shadow-purple-600/30 flex items-center gap-2 transition-all">
-              <i class="fa-solid fa-plus"></i>
-              <span>+ Tambah Tools / Materi Baru</span>
-            </button>
-          </div>
+              <button onclick="openAddToolModal()" class="w-full py-2.5 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold flex items-center gap-2 transition-all shadow-lg shadow-purple-600/20">
+                <i class="fa-solid fa-plus"></i> + Tambah Tools Baru
+              </button>
+              <button onclick="resetTrialDataClean()" class="w-full py-2.5 px-3 rounded-xl bg-rose-500/15 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/30 text-xs font-bold flex items-center gap-2 transition-all shadow-sm" title="Bersihkan seluruh omset, pembayaran, dan member trial untuk Go-Live">
+                <i class="fa-solid fa-broom"></i> Bersihkan Data Trial (Go-Live Ready)
+              </button>
               <button onclick="switchPortalTab('member')" class="w-full py-2.5 px-3 rounded-xl bg-[#1e202a] hover:bg-[#282b38] text-slate-200 text-xs font-semibold flex items-center gap-2 border border-white/10 transition-all">
                 <i class="fa-solid fa-users"></i> Lihat Data Member
               </button>
