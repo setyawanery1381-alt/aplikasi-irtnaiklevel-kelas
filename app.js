@@ -1641,8 +1641,8 @@ function openLoginModal(tab = 'member') {
 }
 
 function verifyAndOpenAdmin() {
-  const userInput = document.getElementById('adminUserInput');
-  const passInput = document.getElementById('adminPassInput');
+  const userInput = document.getElementById('adminUserInput') || document.getElementById('modalAdminUser');
+  const passInput = document.getElementById('adminPassInput') || document.getElementById('modalAdminPass');
   const user = (userInput ? userInput.value : '').trim().toLowerCase();
   const pass = (passInput ? passInput.value : '').trim().toLowerCase();
 
@@ -5958,8 +5958,10 @@ function handleNewAuthLogin() {
   const rawPass = (passwordInput ? passwordInput.value : '').trim();
 
   // Admin Check
-  const validAdminUsers = ['admin', 'irtadmin', 'owner', 'irtnaiklevel'];
-  const validAdminPass = ['admin123', 'admin', 'irtnaiklevel', '123456'];
+  const _savedAdminUser = (localStorage.getItem('creator_class_superadmin_user') || courseData.superadminUsername || 'admin').trim().toLowerCase();
+  const _savedAdminPass = (localStorage.getItem('creator_class_superadmin_pass') || courseData.superadminPassword || 'irtnaiklevel2026').trim().toLowerCase();
+  const validAdminUsers = [_savedAdminUser, 'admin', 'superadmin', 'irtadmin', 'owner', 'irtnaiklevel'];
+  const validAdminPass = [_savedAdminPass, 'irtnaiklevel2026', 'irtnaiklevek2026', 'admin123', 'admin', 'irtnaiklevel', '123456'];
   if (validAdminUsers.includes(rawId.toLowerCase()) && validAdminPass.includes(rawPass.toLowerCase())) {
     closeModal('loginModal');
     openPortalAdmin();
@@ -8839,7 +8841,7 @@ if (typeof window !== 'undefined') {
   if (typeof removeRememberedAccount === 'function') window.removeRememberedAccount = removeRememberedAccount;
   if (typeof handleModalMemberLogin === 'function') window.handleModalMemberLogin = handleModalMemberLogin;
   if (typeof handleRedeemAccess === 'function') window.handleRedeemAccess = handleRedeemAccess;
-  window.handleModalAdminLogin = verifyAndOpenAdmin;
+  if (typeof handleModalAdminLogin === 'function') window.handleModalAdminLogin = handleModalAdminLogin;
 
   // Auto trigger if URL has #admin or ?admin=true
   try {
