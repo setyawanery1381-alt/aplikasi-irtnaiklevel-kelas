@@ -8372,7 +8372,31 @@ async function syncFromGasDatabase(silent = false) {
         } catch (e) {}
       }
       if (cloudSettings.cleared_payments === 'true') courseData.isClearedPayments = true;
-      if (cloudSettings.clean_trial === 'true') courseData.isCleanTrial = true;
+      if (cloudSettings.clean_trial === 'true') {
+        courseData.isCleanTrial = true;
+        if (Array.isArray(result.payments) && result.payments.length === 0) courseData.portalPayments = [];
+        if (Array.isArray(result.members) && result.members.length === 0) courseData.portalMembers = [];
+      }
+      if (cloudSettings.tool_views) {
+        try {
+          const tv = JSON.parse(cloudSettings.tool_views);
+          if (tv && typeof tv === 'object') {
+            localStorage.setItem('creator_class_tool_views', JSON.stringify(tv));
+            if (Array.isArray(courseData.portalTools)) {
+              courseData.portalTools.forEach(t => { t.views = typeof tv[t.id] === 'number' ? tv[t.id] : 0; });
+            }
+          }
+        } catch (e) {}
+      }
+      if (cloudSettings.realtime_logs) {
+        try {
+          const rl = JSON.parse(cloudSettings.realtime_logs);
+          if (Array.isArray(rl)) {
+            courseData.portalMonitoring = rl;
+            localStorage.setItem('creator_class_realtime_logs', JSON.stringify(rl));
+          }
+        } catch (e) {}
+      }
       if (cloudSettings.clean_trial_ts && Number(cloudSettings.clean_trial_ts) > 0) {
         courseData.cleanTrialTimestamp = Math.max(courseData.cleanTrialTimestamp || 0, Number(cloudSettings.clean_trial_ts));
       }
@@ -8438,7 +8462,10 @@ async function syncFromGasDatabase(silent = false) {
 
       // A. Ambil & Format Pembayaran dari Sheets (hormati reset trial & data terhapus)
       const sheetPayments = result.payments || [];
-      if (sheetPayments.length > 0) {
+      if (Array.isArray(result.payments)) {
+        if (sheetPayments.length === 0 && !courseData.portalPayments.some(p => p.isManual)) {
+          courseData.portalPayments = [];
+        }
         const formattedPayments = sheetPayments.map(sp => {
           const invoiceId = sp['No Invoice'] || '';
           const code = sp['Kode Aktivasi'] || '';
@@ -8508,7 +8535,10 @@ async function syncFromGasDatabase(silent = false) {
 
       // B. Ambil & Format Member dari Sheets
       const sheetMembers = result.members || [];
-      if (sheetMembers.length > 0) {
+      if (Array.isArray(result.members)) {
+        if (sheetMembers.length === 0 && !courseData.portalMembers.some(m => m.isManual)) {
+          courseData.portalMembers = [];
+        }
         const formattedMembers = sheetMembers.map(sm => {
           const code = (sm['Kode Aktivasi'] || '').toUpperCase();
           const rawTime = sm['Timestamp'] ? new Date(sm['Timestamp']).getTime() : 0;
@@ -8631,7 +8661,6 @@ function pushCloudSyncSettings(extraObj = {}) {
 
     fetch(GAS_API_URL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         action: 'saveSettings',
@@ -11138,15 +11167,31 @@ function resetTrialDataClean() {
 
   courseData.portalPayments = [];
   courseData.portalMembers = [];
+  courseData.portalMonitoring = [];
   courseData.isCleanTrial = true;
   courseData.isClearedMembers = true;
+  courseData.isClearedPayments = true;
+  courseData.cleanTrialTimestamp = Date.now();
   if (courseData.portalTools) {
     courseData.portalTools.forEach(t => t.views = 0);
   }
 
   try {
+    localStorage.setItem('creator_class_tool_views', '{}');
+    localStorage.setItem('creator_class_realtime_logs', '[]');
     localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
   } catch (e) {}
+
+  if (typeof pushCloudSyncSettings === 'function') {
+    pushCloudSyncSettings({
+      clean_trial: 'true',
+      cleared_members: 'true',
+      cleared_payments: 'true',
+      clean_trial_ts: String(courseData.cleanTrialTimestamp),
+      tool_views: '{}',
+      realtime_logs: '[]'
+    });
+  }
 
   if (typeof postDataToGas === 'function') {
     postDataToGas({ action: 'resetTrialData' });
