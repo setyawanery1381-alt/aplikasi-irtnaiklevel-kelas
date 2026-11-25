@@ -528,7 +528,22 @@ function doPost(e) {
           '[]'
         ]);
       }
-      result.message = "Member berhasil ditambahkan ke Google Sheets!";
+      var sheetBayarAdd = ss.getSheetByName("Pembayaran");
+      if (sheetBayarAdd) {
+        sheetBayarAdd.appendRow([
+          nowStr,
+          'INV-MAN-' + Math.floor(100000 + Math.random() * 900000),
+          data.name || 'Member',
+          data.email || '-',
+          data.wa || '-',
+          'Rp 1',
+          'Input Manual Admin',
+          'Lunas & Teraktivasi',
+          '-',
+          data.activationCode || ''
+        ]);
+      }
+      result.message = "Member & Pembayaran berhasil ditambahkan ke Google Sheets!";
       return createJsonResponse(result);
     }
 

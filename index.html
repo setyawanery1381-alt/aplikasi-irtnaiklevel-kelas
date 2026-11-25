@@ -8472,9 +8472,37 @@ async function syncFromGasDatabase(silent = false) {
           if ((courseData.isCleanTrial || courseData.isClearedPayments) && cleanTs > 0 && p.rawTimestamp === 0) return false;
           return true;
         });
-        activePayments.sort((a, b) => b.rawTimestamp - a.rawTimestamp);
-        if ((!courseData.isCleanTrial && !courseData.isClearedPayments) || activePayments.length > 0) {
-          courseData.portalPayments = activePayments;
+        // Pertahankan pembayaran manual lokal & buat otomatis jika ada member manual belum masuk pembayaran
+        const existingManualPays = (courseData.portalPayments || []).filter(lp => lp.isManual && !deletedPaySet.has(String(lp.id || '').toLowerCase()));
+        const promoPriceSync = (courseData.pricing && (courseData.pricing.promoPrice || courseData.pricing.price)) || 'Rp 1';
+        (courseData.portalMembers || []).forEach(m => {
+          if (m.isManual) {
+            const mCode = String(m.activationCode || '').toLowerCase();
+            const hasInSheet = activePayments.some(ap => mCode && String(ap.activationCode || '').toLowerCase() === mCode);
+            const hasInManual = existingManualPays.some(mp => mCode && String(mp.activationCode || '').toLowerCase() === mCode);
+            const genId = 'INV-MAN-' + String(m.id || '').replace(/\D/g, '').slice(-6);
+            if (!hasInSheet && !hasInManual && !deletedPaySet.has(genId.toLowerCase())) {
+              existingManualPays.push({
+                id: genId || ('INV-MAN-' + Math.floor(100000 + Math.random() * 900000)),
+                activationCode: m.activationCode || 'IRT-ACT-9082',
+                name: m.name,
+                email: m.email || '-',
+                wa: m.wa || '-',
+                amount: promoPriceSync,
+                method: 'Input Manual Admin',
+                status: 'Lunas & Teraktivasi',
+                date: m.date || 'Hari ini',
+                rawTimestamp: Date.now(),
+                isManual: true
+              });
+            }
+          }
+        });
+
+        const mergedPayments = [...existingManualPays.filter(mp => !activePayments.some(ap => mp.activationCode && String(ap.activationCode || '').toLowerCase() === String(mp.activationCode).toLowerCase())), ...activePayments];
+        mergedPayments.sort((a, b) => (b.rawTimestamp || 0) - (a.rawTimestamp || 0));
+        if ((!courseData.isCleanTrial && !courseData.isClearedPayments) || mergedPayments.length > 0) {
+          courseData.portalPayments = mergedPayments;
         }
       }
 
@@ -11398,10 +11426,33 @@ function openAddMemberPrompt() {
   };
 
   courseData.portalMembers.unshift(newMem);
-  
+
+  // Tambahkan otomatis ke Riwayat Pembayaran & Transaksi agar sinkron dengan Omset
+  const promoPrice = (courseData.pricing && (courseData.pricing.promoPrice || courseData.pricing.price)) || 'Rp 1';
+  const invId = 'INV-MAN-' + Math.floor(100000 + Math.random() * 900000);
+  const newPay = {
+    id: invId,
+    activationCode: actCode,
+    name: name,
+    email: email,
+    wa: wa,
+    amount: promoPrice,
+    method: 'Input Manual Admin',
+    status: 'Lunas & Teraktivasi',
+    date: 'Hari ini',
+    rawTimestamp: Date.now(),
+    isManual: true
+  };
+  if (!courseData.portalPayments) courseData.portalPayments = [];
+  courseData.portalPayments.unshift(newPay);
+  courseData.isClearedPayments = false;
+
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(courseData));
   } catch (e) {}
+
+  if (typeof pushCloudSyncSettings === 'function') pushCloudSyncSettings();
+  if (typeof renderPortalPayments === 'function') renderPortalPayments();
 
   // Kirim juga ke Google Sheets agar sinkron multi-perangkat
   if (typeof postDataToGas === 'function') {
@@ -11699,6 +11750,37 @@ function renderPortalPayments() {
   const mobileList = document.getElementById('portalPaymentsMobileList');
   const countEl = document.getElementById('totalPaymentsCount');
   if (!tbody && !mobileList) return;
+
+  // Pastikan setiap member manual yang belum ada di pembayaran ikut ditampilkan
+  if (!courseData.portalPayments) courseData.portalPayments = [];
+  let deletedPaySetRender = new Set();
+  try {
+    const storedDelPay = JSON.parse(localStorage.getItem('creator_class_deleted_payments') || '[]');
+    deletedPaySetRender = new Set(storedDelPay.map(x => String(x).trim().toLowerCase()));
+  } catch (e) {}
+  const promoPriceR = (courseData.pricing && (courseData.pricing.promoPrice || courseData.pricing.price)) || 'Rp 1';
+  (courseData.portalMembers || []).forEach(m => {
+    if (m.isManual) {
+      const mCode = String(m.activationCode || '').toLowerCase();
+      const genId = 'INV-MAN-' + String(m.id || '').replace(/\D/g, '').slice(-6);
+      const exists = courseData.portalPayments.some(p => (mCode && String(p.activationCode || '').toLowerCase() === mCode) || String(p.id).toLowerCase() === genId.toLowerCase());
+      if (!exists && !deletedPaySetRender.has(genId.toLowerCase())) {
+        courseData.portalPayments.unshift({
+          id: genId,
+          activationCode: m.activationCode || 'IRT-ACT-0000',
+          name: m.name,
+          email: m.email || '-',
+          wa: m.wa || '-',
+          amount: promoPriceR,
+          method: 'Input Manual Admin',
+          status: 'Lunas & Teraktivasi',
+          date: m.date || 'Hari ini',
+          rawTimestamp: Date.now(),
+          isManual: true
+        });
+      }
+    }
+  });
 
   const payments = courseData.portalPayments || [];
   const filtered = payments.filter(p => {
